@@ -133,7 +133,13 @@ public class Drive extends RobotPart {
 //            deltaPower[i] = Math.max(0, deltaPower[i] - decel);
         }
     }
+    public void newMove(double f, double t) {
 
+        fr.setPower(f - t);
+        br.setPower(f - t);
+        fl.setPower(f + t);
+        bl.setPower(f + t);
+    }
     public void moveSmooth(double f, double s, double t) {
 
 

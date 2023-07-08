@@ -36,8 +36,8 @@ import static global.Modes.Height.*;
 import static teleutil.button.Button.*;
 import static teleutil.TeleTrack.*;
 
-@TeleOp(name = "TerraOp", group = "TeleOp")
-public class TerraOp extends Tele {
+@TeleOp(name = "NithinOp", group = "TeleOp")
+public class NithinOp extends Tele {
 
     @Override
     public void initTele() {
@@ -131,7 +131,7 @@ public class TerraOp extends Tele {
     @Override
     public void loopTele() {
 
-        drive.moveSmooth(gph1.ry, gph1.rx, gph1.lx);
+        drive.newMove(gph1.ry, gph1.lx);
         lift.move(gph2.ry);
 
         log.show("DriveMode", driveMode.get());
