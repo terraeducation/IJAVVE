@@ -130,7 +130,7 @@ public class NithinOp extends Tele {
     @Override
     public void loopTele() {
 
-        drive.newMove(gph1.ry, gph1.lx);
+        drive.newMove(gph1.ly, gph1.lx);
         lift.move(gph2.ry);
 
         log.show("DriveMode", driveMode.get());
