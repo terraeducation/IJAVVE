@@ -67,7 +67,7 @@ public class TerraAuto7 extends AutoFramework {
 
 
         // Pre-loaded cone move
-        addSegment(1.0, mecanumDefaultWayPoint, 0, 100, 0);
+        addSegment(1.0, DefaultWP, 0, 100, 0);
         addConcurrentAutoModule(BackwardFirst);
         // Pre-loaded cone place
         addTimedSetpoint(1.0, 0.65, 1.2, -6.5, 138, 40);
@@ -82,16 +82,16 @@ public class TerraAuto7 extends AutoFramework {
                 case 4: x = 1.0;  s = 3.0;   break;
             }
             // Move to pick
-            addSegment(0.8, mecanumDefaultWayPoint, 18-x, 128 + s, 80);
-            addSegment(0.8, mecanumDefaultWayPoint, 52-x, 125 + s, 87);
+            addSegment(0.8, DefaultWP, 18-x, 128 + s, 80);
+            addSegment(0.8, DefaultWP, 52-x, 125 + s, 87);
             addTimedWaypoint( 0.2, 0.2, 66-x, 126 + s, 87);
             // Pick
             addConcurrentAutoModuleWithCancel(Grab);
             addTimedWaypoint( 0.3, 0.3, 60-x, 126 + s, 89);
             // Move to place
             addConcurrentAutoModuleWithCancel(Backward(4));
-            addSegment(0.8, mecanumDefaultWayPoint, 30-x, 124 + s, 75);
-            addSegment(0.8, mecanumDefaultWayPoint, 15-x, 137 + s, 47);
+            addSegment(0.8, DefaultWP, 30-x, 124 + s, 75);
+            addSegment(0.8, DefaultWP, 15-x, 137 + s, 47);
             // Place
             addTimedSetpoint(1.0, 0.8, 0.6, -9 - x, 143 + s, 53);
             addConcurrentAutoModuleWithCancel(Forward(i+1 == 5 ? 0 : i+1), 0.1);
@@ -125,7 +125,7 @@ public class TerraAuto7 extends AutoFramework {
 //            odometry.setPoseUsingOffset(new Pose(point, 0));
 ////            odometry.setCurrentPoint(point); odometry.setCurrentPoint(point);
 //        });
-        addSegment(1.0, mecanumDefaultWayPoint, -225.0, y+11, -93);
+        addSegment(1.0, DefaultWP, -225.0, y+11, -93);
         // First cone pick up
         addTimedWaypoint(0.2, 0.2, -240, y+15, -93);
         addConcurrentAutoModule(Grab);

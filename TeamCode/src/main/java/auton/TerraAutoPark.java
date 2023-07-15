@@ -11,14 +11,9 @@ import elements.FieldPlacement;
 import elements.FieldSide;
 import elements.GameItems;
 import geometry.position.Pose;
-import robotparts.RobotPart;
-import util.Timer;
 
-import static global.General.bot;
 import static global.General.fieldPlacement;
 import static global.General.fieldSide;
-import static global.General.log;
-import static global.Modes.Height.HIGH;
 
 public class TerraAutoPark extends AutoFramework {
 
@@ -36,10 +31,10 @@ public class TerraAutoPark extends AutoFramework {
     @Override
     public void define() {
 
-        addSegment(0.5, mecanumDefaultWayPoint, 0, 90, 0);
-        addSegment(0.5, mecanumDefaultWayPoint, 7, 80, 45);
-        addSegment(0.5, mecanumDefaultWayPoint, -7, 70, 90);
-        addSegment(0.5, mecanumDefaultWayPoint, -40, 70, 90);
+        addSegment(0.5, DefaultWP, 0, 90, 0);
+        addSegment(0.5, DefaultWP, 7, 80, 45);
+        addSegment(0.5, DefaultWP, -7, 70, 90);
+        addSegment(0.5, DefaultWP, -40, 70, 90);
 
         customFlipped(() -> {
             addTimedSetpoint(1.0,0.5,1.5, -68,81,56);
@@ -54,10 +49,10 @@ public class TerraAutoPark extends AutoFramework {
         customCase(() -> {
             addTimedSetpoint(1.0, 0.5,1.0, -57, 70, 0);
         }, () -> {
-            addSegment(0.5, noStopNewSetPoint, 0, 70, 90);
+            addSegment(0.5, nStopNewSP, 0, 70, 90);
             addTimedSetpoint(1.0, 0.5,1.0, 0, 70, 0);
         }, () -> {
-            addSegment(0.5, noStopNewSetPoint, 58, 70, 90);
+            addSegment(0.5, nStopNewSP, 58, 70, 90);
             addTimedSetpoint(1.0, 0.5,1.0, 58, 70, 0);
         });
         addPause(0.1);

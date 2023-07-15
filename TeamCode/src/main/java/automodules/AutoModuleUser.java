@@ -1,25 +1,11 @@
 package automodules;
 
-import java.util.ArrayList;
-
-import automodules.stage.Main;
-import automodules.stage.Stage;
 import automodules.stage.Stop;
-import elements.Field;
-import geometry.framework.Point;
-import geometry.position.Pose;
 import robot.RobotUser;
 import robotparts.RobotPart;
 import teleutil.independent.Independent;
 import teleutil.independent.Machine;
-import util.codeseg.CodeSeg;
-import util.condition.Expectation;
-import util.condition.Magnitude;
-import util.template.Iterator;
-import util.template.Precision;
 
-import static global.General.bot;
-import static global.General.fault;
 import static global.Modes.*;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
@@ -252,13 +238,13 @@ public interface AutoModuleUser extends RobotUser{
         @Override
         public void define() {
             double x = 0.0;
-            if(i==0){ addSegment(0.3, 0.1, mecanumNonstopSetPoint, x, 5.0, 0.0);}
+            if(i==0){ addSegment(0.3, 0.1, NonstopSP, x, 5.0, 0.0);}
             addConcurrentAutoModuleWithCancel(BackwardCycle, 0.25);
             addWaypoint(0.4, x, -38, 0);
-            addSegment(0.3, 0.1, mecanumNonstopSetPoint, x+0.5, -44.0, 0.0);
+            addSegment(0.3, 0.1, NonstopSP, x+0.5, -44.0, 0.0);
             addConcurrentAutoModuleWithCancel(ForwardCycle, 0.1);
             addWaypoint(0.4, x+0.5, -8, 0);
-            addSegment(0.3, 0.1, mecanumNonstopSetPoint, x, 2.0, 0.0);
+            addSegment(0.3, 0.1, NonstopSP, x, 2.0, 0.0);
         }
 
         @Override
@@ -274,7 +260,7 @@ public interface AutoModuleUser extends RobotUser{
     .addIndependent(new Independent() {
         @Override
         public void define() {
-            addSegment(0.4, 0.5, mecanumNonstopSetPoint, 0, 0.0, 0);
+            addSegment(0.4, 0.5, NonstopSP, 0, 0.0, 0);
         }
     });
 
@@ -312,11 +298,11 @@ public interface AutoModuleUser extends RobotUser{
             .addIndependentWithPause(new Independent() {
                 @Override
                 public void define() {
-                    addSegment(0.2, 0.2, mecanumNonstopSetPoint, 0.0, 6.0, 0.0);
+                    addSegment(0.2, 0.2, NonstopSP, 0.0, 6.0, 0.0);
                     addConcurrentAutoModuleWithCancel(BackwardCycleMiddle, 0.15);
                     addWaypoint(0.8,-2,-15,-5.0);
-                    addSegment(1.0, 0.4, mecanumNonstopSetPoint, -31, -36.0, -50.0);
-                    addSegment(0.4, 0.4, mecanumNonstopSetPoint, -37, -42.0, -50.0);
+                    addSegment(1.0, 0.4, NonstopSP, -31, -36.0, -50.0);
+                    addSegment(0.4, 0.4, NonstopSP, -37, -42.0, -50.0);
                 }
             })
             .addIndependentWithPause(new Independent() {
@@ -324,11 +310,11 @@ public interface AutoModuleUser extends RobotUser{
                 public void define() {
                     addConcurrentAutoModuleWithCancel(ForwardCycleMiddle, 0.2);
                     addWaypoint(0.6, -32.0, 0.0, -21.0);
-                    addSegment(0.5, 0.34, mecanumNonstopSetPoint, -27.0, 26.0, -25.0);
+                    addSegment(0.5, 0.34, NonstopSP, -27.0, 26.0, -25.0);
                     addConcurrentAutoModuleWithCancel(BackwardCycleLow, 0.15);
                     addWaypoint(1.0, -25.0, 15.0, 0.0);
                     addWaypoint(1.0, -30.0, -5.0, -45);
-                    addSegment(1.1, 0.4, mecanumNonstopSetPoint, -100.0, -45.0, -50);
+                    addSegment(1.1, 0.4, NonstopSP, -100.0, -45.0, -50);
                 }
             })
             .addIndependentWithPause(new Independent() {
@@ -339,18 +325,18 @@ public interface AutoModuleUser extends RobotUser{
                     addWaypoint(1.0, -50.0, -20.0, -70);
                     addWaypoint(0.4, -40.0, -10.0, 0.0);
                     addWaypoint(0.4, -27.0, 6.0, 0.0);
-                    addSegment(0.6, 0.34, mecanumNonstopSetPoint, -27.0, 26.0, -25.0);
+                    addSegment(0.6, 0.34, NonstopSP, -27.0, 26.0, -25.0);
                     addConcurrentAutoModuleWithCancel(BackwardCycleLow2, 0.15);
-                    addSegment(0.7, 0.3, mecanumNonstopSetPoint, -25.0, 26.0, -57.0);
-                    addSegment(0.4, 0.4, mecanumNonstopSetPoint, -35.0, 9.0, -57.0);
+                    addSegment(0.7, 0.3, NonstopSP, -25.0, 26.0, -57.0);
+                    addSegment(0.4, 0.4, NonstopSP, -35.0, 9.0, -57.0);
                 }
             })
             .addIndependent(new Independent() {
                 @Override
                 public void define() {
                     addConcurrentAutoModuleWithCancel(ForwardCycleLow,0.15);
-                    addSegment(0.4, 0.4, mecanumNonstopSetPoint, -25.0, 26.0, -57.0);
-                    addSegment(0.8, 0.35, mecanumNonstopSetPoint, -27.0, 10.0, 0.0);
+                    addSegment(0.4, 0.4, NonstopSP, -25.0, 26.0, -57.0);
+                    addSegment(0.8, 0.35, NonstopSP, -27.0, 10.0, 0.0);
                 }
             });
         ;

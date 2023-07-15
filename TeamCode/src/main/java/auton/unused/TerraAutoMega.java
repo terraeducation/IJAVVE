@@ -1,32 +1,12 @@
 package auton.unused;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
 import automodules.AutoModule;
-import automodules.stage.Main;
-import automodules.stage.Stage;
 import autoutil.AutoFramework;
-import autoutil.reactors.MecanumJunctionReactor2;
-import autoutil.reactors.Reactor;
 import elements.Case;
-import elements.Field;
-import elements.FieldPlacement;
-import elements.FieldSide;
-import elements.GameItems;
-import elements.Robot;
-import geometry.framework.Point;
-import geometry.position.Pose;
 import robotparts.RobotPart;
 import util.ExceptionCatcher;
-import util.template.Mode;
 
-import static global.General.bot;
-import static global.General.fieldPlacement;
-import static global.General.fieldSide;
-import static global.General.log;
 import static global.Modes.Height.HIGH;
-import static global.Modes.Height.LOW;
-import static global.Modes.Height.MIDDLE;
 
 public class TerraAutoMega extends AutoFramework {
 
@@ -34,7 +14,7 @@ public class TerraAutoMega extends AutoFramework {
 
     @Override
     public void initialize() {
-        setConfig(mecanumNonstopConfig);
+        setConfig(NonstopConfig);
 
         outtake.changeArmPosition("start", 0.03);
 
@@ -91,16 +71,16 @@ public class TerraAutoMega extends AutoFramework {
                 case 4: x = 1.0;  s = 3.0;   break;
             }
             // Move to pick
-            addSegment(0.8, mecanumDefaultWayPoint, 18-x, 128 + s, 80);
-            addSegment(0.8, mecanumDefaultWayPoint, 52-x, 125 + s, 87);
+            addSegment(0.8, DefaultWP, 18-x, 128 + s, 80);
+            addSegment(0.8, DefaultWP, 52-x, 125 + s, 87);
             addTimedWaypoint( 0.2, 0.2, 66-x, 126 + s, 87);
             // Pick
             addConcurrentAutoModuleWithCancel(Grab);
             addTimedWaypoint( 0.3, 0.3, 60-x, 126 + s, 89);
             // Move to place
             addConcurrentAutoModuleWithCancel(Backward(4));
-            addSegment(0.9, mecanumDefaultWayPoint, 30-x, 124 + s, 75);
-            addSegment(0.9, mecanumDefaultWayPoint, 15-x, 137 + s, 47);
+            addSegment(0.9, DefaultWP, 30-x, 124 + s, 75);
+            addSegment(0.9, DefaultWP, 15-x, 137 + s, 47);
             // Place
             addTimedSetpoint(1.0, 0.8, 0.4, -9 - x, 143 + s, 53);
             addConcurrentAutoModuleWithCancel(Forward(i+1 == 5 ? 0 : i+1));
@@ -117,16 +97,16 @@ public class TerraAutoMega extends AutoFramework {
 
 
         // Move to other side
-        addSegment(1.0, mecanumDefaultWayPoint, -214.0, y+11, -93);
-        addSegment(0.2, mecanumDefaultWayPoint,  -231.0, y+15, -93);
+        addSegment(1.0, DefaultWP, -214.0, y+11, -93);
+        addSegment(0.2, DefaultWP,  -231.0, y+15, -93);
 //        // First cone pick up
         addTimedWaypoint(0.2, 0.1, -236, y+15, -93);
         addConcurrentAutoModule(Grab);
         addTimedWaypoint(0.3, 0.3, -233, y+15, -93);
         // First cone move to place
         addConcurrentAutoModuleWithCancel(Backward(4));
-        addSegment(0.9, mecanumDefaultWayPoint, -200, y+12, -85);
-        addSegment(0.9, mecanumDefaultWayPoint, -180, y+17, -52);
+        addSegment(0.9, DefaultWP, -200, y+12, -85);
+        addSegment(0.9, DefaultWP, -180, y+17, -52);
         // First cone place
         addTimedSetpoint(1.0, 0.8, 0.4, -160, y+22, -52);
         addConcurrentAutoModuleWithCancel(Forward(1));
@@ -139,16 +119,16 @@ public class TerraAutoMega extends AutoFramework {
                 case 3: x = 0.0; s = 2.5;  break;
             }
             // Move to pick
-            addSegment(0.8, mecanumDefaultWayPoint,  -186, y+16+s, -65);
-            addSegment(0.8, mecanumDefaultWayPoint, -223, y+10+s, -93);
+            addSegment(0.8, DefaultWP,  -186, y+16+s, -65);
+            addSegment(0.8, DefaultWP, -223, y+10+s, -93);
             // Pick
             addTimedWaypoint(0.2, 0.2, -235, y+10+s, -93);
             addConcurrentAutoModule(Grab);
             addTimedWaypoint(0.3, 0.3, -231, y+10+s, -93);
             // Move to place
             addConcurrentAutoModuleWithCancel(Backward(5));
-            addSegment(0.9, mecanumDefaultWayPoint, -200, y+10+s, -85);
-            addSegment(0.9, mecanumDefaultWayPoint, -180, y+15+s, -52);
+            addSegment(0.9, DefaultWP, -200, y+10+s, -85);
+            addSegment(0.9, DefaultWP, -180, y+15+s, -52);
             // Place
             addTimedSetpoint(1.0, 0.8, 0.4, -160, y+21+s, -52);
             addConcurrentAutoModuleWithCancel(Forward(i+1 == (caseDetected.equals(Case.SECOND) ? 3 : 2) ? 5 : i+2));

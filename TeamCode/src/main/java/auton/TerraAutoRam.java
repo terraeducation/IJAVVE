@@ -12,12 +12,10 @@ import elements.FieldSide;
 import elements.GameItems;
 import geometry.position.Pose;
 import robotparts.RobotPart;
-import util.Timer;
 
 import static global.General.bot;
 import static global.General.fieldPlacement;
 import static global.General.fieldSide;
-import static global.General.log;
 import static global.Modes.Height.HIGH;
 
 public class TerraAutoRam extends AutoFramework {
@@ -26,7 +24,7 @@ public class TerraAutoRam extends AutoFramework {
     boolean normal = false;
 
     public static void normalInit(AutoFramework auto){
-        auto.setConfig(mecanumNonstopConfig);
+        auto.setConfig(NonstopConfig);
         bot.saveLocationOnField();
         lift.maintain();
         outtake.closeClaw();
@@ -53,13 +51,13 @@ public class TerraAutoRam extends AutoFramework {
 
     public static void signal(AutoFramework f){
         f.customSide(() -> {
-            f.addSegment(0.8, mecanumDefaultWayPoint, 0, 30, 0);
-            f.addSegment(0.5, mecanumDefaultWayPoint, -3,90,-30);
-            f.addSegment(1.0, noStopNewHaltSetPoint, 11, 123, -30);
+            f.addSegment(0.8, DefaultWP, 0, 30, 0);
+            f.addSegment(0.5, DefaultWP, -3,90,-30);
+            f.addSegment(1.0, nStopNewHaltSP, 11, 123, -30);
         }, () -> {
-            f.addSegment(0.8, mecanumDefaultWayPoint, 0, 30, 0);
-            f.addSegment(0.5, mecanumDefaultWayPoint, -3,90,-30);
-            f.addSegment(1.0, noStopNewHaltSetPoint, 11, 123, -30);
+            f.addSegment(0.8, DefaultWP, 0, 30, 0);
+            f.addSegment(0.5, DefaultWP, -3,90,-30);
+            f.addSegment(1.0, nStopNewHaltSP, 11, 123, -30);
         });
     }
 
@@ -68,16 +66,16 @@ public class TerraAutoRam extends AutoFramework {
 
         if(!normal) {
             signal(this);
-            addSegment(0.6, mecanumDefaultWayPoint, 5, 105, -30);
+            addSegment(0.6, DefaultWP, 5, 105, -30);
         }else{
             addTimedSetpoint(1.0, 0.4, 0.6, 0, 40, -90);
-            addSegment(0.5, mecanumDefaultWayPoint, 0, 70, 0);
+            addSegment(0.5, DefaultWP, 0, 70, 0);
             addTimedSetpoint(1.0, 0.5, 0.8, -20, 100, 0);
         }
 
         customNumber(5, i -> {
             addTimedSetpoint(1.0, 0.5,1.5,2, 70, 0);
-            addSegment(1.5, 1.0, mecanumNonstopSetPoint, 2, 155, 0);
+            addSegment(1.5, 1.0, NonstopSP, 2, 155, 0);
             addCustomCode(() -> {
                 if (odometry.getY() < -155) {
                     halt[0] = true;
@@ -99,7 +97,7 @@ public class TerraAutoRam extends AutoFramework {
         });
         addConcurrentAutoModuleWithCancel(Forward, 1.2);
         addTimedSetpoint(1.0, 0.4, 1.0, 0, 120, 0);
-        addSegment(0.5, noStopNewSetPoint, 0, 73, 0);
+        addSegment(0.5, nStopNewSP, 0, 73, 0);
         customCase(() -> {
             addTimedSetpoint(1.0, 0.5,2.0,-58, 73, 0);
         }, () -> {

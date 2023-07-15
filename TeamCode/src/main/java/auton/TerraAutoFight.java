@@ -4,21 +4,16 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import automodules.AutoModule;
 import autoutil.AutoFramework;
-import elements.Case;
 import elements.Field;
 import elements.FieldPlacement;
 import elements.FieldSide;
 import elements.GameItems;
 import geometry.position.Pose;
-import robotparts.RobotPart;
-import util.User;
 import util.template.Precision;
 
 import static global.General.bot;
 import static global.General.fieldPlacement;
 import static global.General.fieldSide;
-import static global.General.log;
-import static global.Modes.Height.HIGH;
 
 public class TerraAutoFight extends AutoFramework {
 
@@ -64,7 +59,7 @@ public class TerraAutoFight extends AutoFramework {
             TerraAutoRam.signal(this);
         }else{
             addTimedSetpoint(1.0, 0.4, 0.6, 0, 40, -90);
-            addSegment(0.5, mecanumDefaultWayPoint, 0, 70, 0);
+            addSegment(0.5, DefaultWP, 0, 70, 0);
             addTimedSetpoint(1.0, 0.5, 0.6, 0, 100, 0);
         }
 
@@ -103,18 +98,18 @@ public class TerraAutoFight extends AutoFramework {
             });
 
 
-            addSegment(0.7, mecanumDefaultWayPoint, 18+x, 129+y, 90);
+            addSegment(0.7, DefaultWP, 18+x, 129+y, 90);
             customFlipped(() -> {
-                addSegment(0.6, mecanumDefaultWayPoint, 50+x, 127+y, 90);
+                addSegment(0.6, DefaultWP, 50+x, 127+y, 90);
                 double ang = 90;
                 if(i > 2){
                     ang = 88.5;
                 }
-                addSegment(0.35, slowDownStopSetPoint, 68+x, 127+y, ang);
+                addSegment(0.35, sloDownStopSP, 68+x, 127+y, ang);
                 addTimedSetpoint(1.0, 0.1,0.1, 72+x, 127+y, ang);
             }, () -> {
-                addSegment(0.6, mecanumDefaultWayPoint, 52+x, 127+y, 90);
-                addSegment(0.35, slowDownStopSetPoint, 70+x, 127+y, 90);
+                addSegment(0.6, DefaultWP, 52+x, 127+y, 90);
+                addSegment(0.35, sloDownStopSP, 70+x, 127+y, 90);
                 addTimedSetpoint(1.0, 0.1,0.1, 73+x, 127+y, 90);
             });
             // Increase number to make exit more likely
@@ -152,7 +147,7 @@ public class TerraAutoFight extends AutoFramework {
                 bot.addAutoModuleWithCancel(GrabBack);
                 pause(0.43);
             });
-            addSegment(0.6, mecanumDefaultWayPoint, 20+x, 129+y, 85);
+            addSegment(0.6, DefaultWP, 20+x, 129+y, 85);
             addTimedSetpoint(1.0, 0.4, 0.4, -9+x, 132+y, 55);
             addConcurrentAutoModuleWithCancel(TerraAutoRam.BackwardFirst);
             customFlipped(() -> {
@@ -164,7 +159,7 @@ public class TerraAutoFight extends AutoFramework {
         });
         addBreakpointReturn();
         addCustomCode(outtake::openClaw);
-        addSegment(0.5, mecanumDefaultWayPoint, 18, 127, 90);
+        addSegment(0.5, DefaultWP, 18, 127, 90);
         addConcurrentAutoModule(new AutoModule(outtake.stage(0.2, 0.1), outtake.stageOpenComp(0.0),  lift.stageLift(1.0,  -0.5)));
         customCase(() -> {
             addTimedSetpoint(1.0, 0.7, 0.8, -58, 127, 90);

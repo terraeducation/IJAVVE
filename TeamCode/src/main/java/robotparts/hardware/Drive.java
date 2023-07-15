@@ -1,24 +1,15 @@
 package robotparts.hardware;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
 import static java.lang.Math.abs;
 
 import automodules.AutoModule;
 import automodules.stage.Stage;
-import automodules.stage.Stop;
-import autoutil.reactors.MecanumJunctionReactor2;
-import geometry.position.Pose;
 import geometry.position.Vector;
-import global.Modes;
-import math.linearalgebra.Vector3D;
 import math.misc.Logistic;
 import math.polynomial.Linear;
 import robotparts.RobotPart;
 import robotparts.electronics.ElectronicType;
 import robotparts.electronics.continuous.CMotor;
-import robotparts.electronics.positional.PServo;
-import teleutil.TeleTrack;
 import util.Timer;
 import util.codeseg.ReturnCodeSeg;
 import util.template.Precision;
