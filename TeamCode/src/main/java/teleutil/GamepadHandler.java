@@ -17,7 +17,7 @@ import teleutil.button.ButtonHandler;
 import teleutil.button.main.OnPressEventHandler;
 import teleutil.button.toggle.OnTurnOffEventHandler;
 import teleutil.button.toggle.OnTurnOnEventHandler;
-import teleutil.independent.Independent;
+//import teleutil.independent.Independent;
 //import teleutil.independent.Machine;
 import util.codeseg.CodeSeg;
 import util.codeseg.ReturnCodeSeg;

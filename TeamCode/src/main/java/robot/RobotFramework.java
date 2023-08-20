@@ -14,7 +14,7 @@ import global.General;
 import math.polynomial.Linear;
 import robotparts.RobotPart;
 import robotparts.electronics.input.IEncoder;
-import teleutil.independent.Independent;
+//import teleutil.independent.Independent;
 //import teleutil.independent.IndependentFunctions;
 //import teleutil.independent.Machine;
 //import util.TerraThread;

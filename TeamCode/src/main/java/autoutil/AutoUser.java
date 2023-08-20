@@ -48,9 +48,9 @@ public interface AutoUser {
     AutoSegment<?, ?> sloDownStopSP = new AutoSegment<>(sloDownStopReact, lineGen);
     AutoSegment<?, ?> sloSP = new AutoSegment<>(slow, lineGen);
 
-//    AutoConfig DefaultConfig = new AutoConfig(DefaultSP, DefaultWP);
-//    AutoConfig NonstopConfig = new AutoConfig(NonstopSP, NonstopWP);
-//    AutoConfig nStopNewConfig = new AutoConfig(nStopNewSP, DefaultWP);
+    AutoConfig DefaultConfig = new AutoConfig(DefaultSP, DefaultWP);
+    AutoConfig NonstopConfig = new AutoConfig(NonstopSP, NonstopWP);
+    AutoConfig nStopNewConfig = new AutoConfig(nStopNewSP, DefaultWP);
 
 
 
