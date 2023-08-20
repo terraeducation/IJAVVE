@@ -25,8 +25,8 @@ public abstract class Independent extends AutoFramework {
     /**
      * Set to default config, can be overriden, reset should exit
      */
-//    @Override
-//    public final void initialize() { setConfig(DefaultConfig); shouldExit = false; }
+    @Override
+    public final void initialize() { setConfig(DefaultConfig); shouldExit = false; }
 
     /**
      * Add should exit to the exit condition

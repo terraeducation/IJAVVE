@@ -12,7 +12,7 @@ import util.codeseg.ExceptionCodeSeg;
 import util.template.Precision;
 
 import static global.General.hardwareMap;
-//import static robot.RobotFramework.odometryThread;
+import static robot.RobotFramework.odometryThread;
 
 public class NewOdometry extends RobotPart {
 
@@ -31,7 +31,7 @@ public class NewOdometry extends RobotPart {
         yOdo = hardwareMap.get(DcMotor.class, "fl");
         y2Odo = hardwareMap.get(DcMotor.class, "br");
         reset();
-//        odometryThread.setExecutionCode(odometryUpdateCode);
+        odometryThread.setExecutionCode(odometryUpdateCode);
     }
 
     public void update(){

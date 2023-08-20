@@ -19,7 +19,7 @@ public class Robot{
     static {
         plane.add(new Rect(new Point(-halfWidth,-halfLength), new Point(halfWidth,halfLength)));
         plane.add(new Pose());
-//        plane.add(new PolyLine(new Point(-clawWidth/2.0, (distanceToCone+(GameItems.Cone.baseWidth/2.0))), new Point(-clawWidth/4.0, length/2.0 + 1), new Point(clawWidth/4.0, length/2.0 + 1), new Point(clawWidth/2.0, distanceToCone+(GameItems.Cone.baseWidth/2.0))));
+        plane.add(new PolyLine(new Point(-clawWidth/2.0, (distanceToCone+(GameItems.Cone.baseWidth/2.0))), new Point(-clawWidth/4.0, length/2.0 + 1), new Point(clawWidth/4.0, length/2.0 + 1), new Point(clawWidth/2.0, distanceToCone+(GameItems.Cone.baseWidth/2.0))));
         plane.add(new Circle(new Point(0,-30), 6));
         plane.add(new Circle(new Point(0, 26), 8));
     }

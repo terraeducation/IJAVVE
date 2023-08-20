@@ -29,7 +29,7 @@ public class TerraOp extends Tele {
         outtake.changeArmPosition("start", 0.0);
 //        outtake.armr.changePosition("flipped", 0.82);
 
-//        MachineCycle.reset();
+        MachineCycle.reset();
 
         /**
          * Gamepad 1 Normal
@@ -72,8 +72,8 @@ public class TerraOp extends Tele {
         gph1.link(RIGHT_BUMPER, () -> lift.adjustHolderTarget(2.5));
         gph1.link(LEFT_BUMPER, () -> lift.adjustHolderTarget(-2.5));
 
-//        gph1.link(RIGHT_TRIGGER, () -> bot.isMachineNotRunning(), () -> {if(lift.stackedMode < 5){ lift.stacked = true; bot.addAutoModuleWithCancel(AutoModuleUser.ForwardStackTele(lift.stackedMode)); lift.stackedMode++;}else{lift.stackedMode = 0; }} , () -> {if(MachineCycle.isRunning()){ bot.pauseOrPlayMachine(); }else{ bot.skipToNextMachine(); }});
-//        gph1.link(LEFT_TRIGGER, () -> bot.isMachineNotRunning(), () -> {if(!driveMode.modeIs(SLOW)){driveMode.set(SLOW);}else{driveMode.set(MEDIUM);}}, () -> bot.skipToLastMachine());
+        gph1.link(RIGHT_TRIGGER, () -> bot.isMachineNotRunning(), () -> {if(lift.stackedMode < 5){ lift.stacked = true; bot.addAutoModuleWithCancel(AutoModuleUser.ForwardStackTele(lift.stackedMode)); lift.stackedMode++;}else{lift.stackedMode = 0; }} , () -> {if(MachineCycle.isRunning()){ bot.pauseOrPlayMachine(); }else{ bot.skipToNextMachine(); }});
+        gph1.link(LEFT_TRIGGER, () -> bot.isMachineNotRunning(), () -> {if(!driveMode.modeIs(SLOW)){driveMode.set(SLOW);}else{driveMode.set(MEDIUM);}}, () -> bot.skipToLastMachine());
 
         /**
          * Gamepad 1 Automated
