@@ -10,16 +10,16 @@ public class PurePursuitTest extends AutoUnitTest {
 
     @Override
     protected void start() {
-        setAuto(new AutoFramework() {
-            @Override
-            public void define() {
-                setConfig(DefaultConfig);
-            }
-
-            @Override
-            public void initialize() {
-                addWaypoint(0, 40, 0);
-            }
-        });
+//        setAuto(new AutoFramework() {
+//            @Override
+//            public void define() {
+//                setConfig(DefaultConfig);
+//            }
+//
+//            @Override
+//            public void initialize() {
+//                addWaypoint(0, 40, 0);
+//            }
+//        });
     }
 }

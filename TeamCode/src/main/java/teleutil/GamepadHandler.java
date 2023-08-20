@@ -18,7 +18,7 @@ import teleutil.button.main.OnPressEventHandler;
 import teleutil.button.toggle.OnTurnOffEventHandler;
 import teleutil.button.toggle.OnTurnOnEventHandler;
 import teleutil.independent.Independent;
-import teleutil.independent.Machine;
+//import teleutil.independent.Machine;
 import util.codeseg.CodeSeg;
 import util.codeseg.ReturnCodeSeg;
 import util.condition.DecisionList;
@@ -101,13 +101,13 @@ public class GamepadHandler {
     public void link(Button b, AutoModule list) { link(b, () -> bot.addAutoModule(list), Modes.GamepadMode.NORMAL); }
     public void link(Button b, DecisionList decisionList){ link(b,  decisionList::check, Modes.GamepadMode.NORMAL); }
     public void link(Button b, OutputList outputList){ link(b, () -> bot.addAutoModule(outputList.check()), Modes.GamepadMode.NORMAL); }
-    public void link(Button b, Independent independent){ link(b, () -> bot.addIndependent(independent), Modes.GamepadMode.NORMAL); }
-    public void link(Button b, Machine machine){ link(b, () -> bot.addMachine(machine), Modes.GamepadMode.NORMAL); }
+//    public void link(Button b, Independent independent){ link(b, () -> bot.addIndependent(independent), Modes.GamepadMode.NORMAL); }
+//    public void link(Button b, Machine machine){ link(b, () -> bot.addMachine(machine), Modes.GamepadMode.NORMAL); }
     public void link(Button b, AutoModule list, Modes.GamepadMode mode) { link(b, () -> bot.addAutoModule(list), mode); }
     public void link(Button b, DecisionList decisionList, Modes.GamepadMode mode){  link(b, decisionList::check, mode); }
     public void link(Button b, OutputList outputList, Modes.GamepadMode mode){ link(b, () -> bot.addAutoModule(outputList.check()), mode); }
-    public void link(Button b, Independent independent, Modes.GamepadMode mode){ link(b, () -> bot.addIndependent(independent), mode); }
-    public void link(Button b, Machine machine, Modes.GamepadMode mode){ link(b, () -> bot.addMachine(machine), mode);}
+//    public void link(Button b, Independent independent, Modes.GamepadMode mode){ link(b, () -> bot.addIndependent(independent), mode); }
+//    public void link(Button b, Machine machine, Modes.GamepadMode mode){ link(b, () -> bot.addMachine(machine), mode);}
     public void link(Button b, CodeSeg codeSeg, Modes.GamepadMode mode) { link(b, OnPressEventHandler.class, codeSeg, mode); }
     public void link(Button b, ReturnCodeSeg<Boolean> condition, AutoModule one, AutoModule two){ link(b, () -> {if(condition.run()){bot.addAutoModule(one);}else{bot.addAutoModule(two);}}); }
     public void link(Button b, ReturnCodeSeg<Boolean> condition, CodeSeg one, CodeSeg two){ link(b, () -> {if(condition.run()){one.run();}else{two.run();}});}

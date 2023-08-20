@@ -12,7 +12,7 @@ import geometry.framework.Point;
 import geometry.position.Line;
 import geometry.polygons.PolyLine;
 import geometry.position.Pose;
-import teleutil.independent.Machine;
+//import teleutil.independent.Machine;
 
 public class AutoSimulator extends Drawer{
 
@@ -74,7 +74,7 @@ public class AutoSimulator extends Drawer{
     public static double currentTime = 0;
     public static ElapsedTime timer = new ElapsedTime();
 
-    private static void setAuto(Machine machine, Pose startPose){ setAuto(machine.getAutoPlane(startPose), startPose); }
+//    private static void setAuto(Machine machine, Pose startPose){ setAuto(machine.getAutoPlane(startPose), startPose); }
     private static void setAuto(AutoFramework auto){ auto.setup(); setAuto(auto.getAutoPlane(), auto.getStartPose()); }
 
     private static void setAuto(CoordinatePlane auto, Pose start) {

@@ -18,7 +18,7 @@ import util.ExceptionCatcher;
 import util.codeseg.ExceptionCodeSeg;
 import util.template.Iterator;
 
-import static robot.RobotFramework.odometryThread;
+//import static robot.RobotFramework.odometryThread;
 
 public abstract class Odometry extends RobotPart {
     protected final ArrayList<IEncoder> encoders = new ArrayList<>();
@@ -33,7 +33,7 @@ public abstract class Odometry extends RobotPart {
         setConstantObjects();
 //        resetObjects();
         reset();
-        odometryThread.setExecutionCode(odometryUpdateCode);
+//        odometryThread.setExecutionCode(odometryUpdateCode);
     }
 
     protected final void addEncoders(IEncoder... encoders){ this.encoders.addAll(Arrays.asList(encoders)); }
