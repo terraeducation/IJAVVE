@@ -1,6 +1,6 @@
 package unittests.tele.sensor;
 
-//import autoutil.vision.JunctionScannerAll;
+import autoutil.vision.JunctionScannerAll;
 import geometry.framework.CoordinatePlane;
 import geometry.position.Pose;
 import geometry.position.Vector;
@@ -15,13 +15,13 @@ import static global.General.gph1;
 public class JunctionScannerTest extends TeleUnitTest {
 
 //    private final Pose target = new Pose(0,18.5, -5);
-//    private final JunctionScannerAll junctionScanner = new JunctionScannerAll();
+    private final JunctionScannerAll junctionScanner = new JunctionScannerAll();
 
     @Override
     public void init() {
-//        camera.setScanner(junctionScanner);
-//        camera.start(true);
-//        JunctionScannerAll.resume();
+        camera.setScanner(junctionScanner);
+        camera.start(true);
+        JunctionScannerAll.resume();
 //        gph1.link(Button.B, BackwardAllTele);
 //        gph1.link(Button.Y, ForwardAll);
     }
@@ -29,7 +29,7 @@ public class JunctionScannerTest extends TeleUnitTest {
 
     private Pose startOdometryPose = new Pose();
     private Pose startJunctionPose = new Pose();
-//    private Pose startTarget = JunctionScannerAll.getTarget();
+    private Pose startTarget = JunctionScannerAll.getTarget();
     private final Linear yCurve = new Linear(0.022, 0.05);
     private final Linear hCurve = new Linear(0.004, 0.05);
     private Pose error = new Pose();
@@ -38,7 +38,7 @@ public class JunctionScannerTest extends TeleUnitTest {
 
     @Override
     protected void loop() {
-//        junctionScanner.message();
+        junctionScanner.message();
 //
 //        drive.moveSmooth(gph1.ry, gph1.rx, gph1.lx);
 //
@@ -94,8 +94,8 @@ public class JunctionScannerTest extends TeleUnitTest {
 
     }
 
-//    @Override
-//    public void stop() {
-//        camera.halt();
-//    }
+    @Override
+    public void stop() {
+        camera.halt();
+    }
 }

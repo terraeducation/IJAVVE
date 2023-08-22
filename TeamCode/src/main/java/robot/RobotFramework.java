@@ -14,10 +14,10 @@ import global.General;
 import math.polynomial.Linear;
 import robotparts.RobotPart;
 import robotparts.electronics.input.IEncoder;
-//import teleutil.independent.Independent;
-//import teleutil.independent.IndependentFunctions;
-//import teleutil.independent.Machine;
-//import util.TerraThread;
+import teleutil.independent.Independent;
+import teleutil.independent.IndependentFunctions;
+import teleutil.independent.Machine;
+import util.TerraThread;
 import util.User;
 import util.template.Iterator;
 import util.template.Precision;
@@ -40,19 +40,19 @@ public class RobotFramework {
      * The terrathread robotFunctionsThread is used for running robotfunction related tasks,
      * it is usually not necessary to access this directly
      */
-    //public static TerraThread robotFunctionsThread;
+    public static TerraThread robotFunctionsThread;
     /**
      * The odometry thread is used to update odometry
      */
-    //public static TerraThread odometryThread;
+    public static TerraThread odometryThread;
     /**
      * Background thread
      */
-//    public static TerraThread backgroundThread;
+    public static TerraThread backgroundThread;
     /**
      * Independent thread
      */
-//    public static TerraThread independentThread;
+    public static TerraThread independentThread;
     /**
      * rfsHandler is used for running rfs code. Stages can be added to the queue
      */
@@ -66,9 +66,9 @@ public class RobotFramework {
     /**
      * Independent Handler
      */
-//    public IndependentFunctions indHandler;
+    public IndependentFunctions indHandler;
 
-//    public Machine machine;
+    public Machine machine;
 
     /**
      * Configs object, stores all configs
@@ -81,20 +81,20 @@ public class RobotFramework {
      */
     protected RobotFramework(){
         allRobotParts = new ArrayList<>();
-//        TerraThread.resetAllThreads();
+        TerraThread.resetAllThreads();
         configs.setCurrentConfig();
         localPlane = new CoordinatePlane();
         rfsHandler = new RobotFunctions();
         backHandler = new BackgroundFunctions();
-//        indHandler = new IndependentFunctions();
-//        machine = new Machine();
-//        robotFunctionsThread = new TerraThread("RobotFunctionsThread", Constants.ROBOT_FUNCTIONS_REFRESH_RATE);
-//        odometryThread = new TerraThread("OdometryThread", Constants.ODOMETRY_THREAD_REFRESH_RATE);
-//        backgroundThread = new TerraThread("BackgroundThread", Constants.BACKGROUND_THREAD_REFRESH_RATE);
-//        independentThread = new TerraThread("IndependentThread", Constants.INDEPENDENT_THREAD_REFRESH_RATE);
+        indHandler = new IndependentFunctions();
+        machine = new Machine();
+        robotFunctionsThread = new TerraThread("RobotFunctionsThread", Constants.ROBOT_FUNCTIONS_REFRESH_RATE);
+        odometryThread = new TerraThread("OdometryThread", Constants.ODOMETRY_THREAD_REFRESH_RATE);
+        backgroundThread = new TerraThread("BackgroundThread", Constants.BACKGROUND_THREAD_REFRESH_RATE);
+        independentThread = new TerraThread("IndependentThread", Constants.INDEPENDENT_THREAD_REFRESH_RATE);
         rfsHandler.init();
         backHandler.init();
-//        indHandler.init();
+        indHandler.init();
     }
 
     /**
@@ -106,7 +106,7 @@ public class RobotFramework {
         setUser(mainUser);
         IEncoder.setEncoderReadingAuto();
         Iterator.forAll(allRobotParts, RobotPart::init);
-//        TerraThread.startAllThreads();
+        TerraThread.startAllThreads();
         gameTime.reset();
     }
 
@@ -119,16 +119,16 @@ public class RobotFramework {
 
     public void update(){
         checkAccess(mainUser);
-//        TerraThread.checkAllThreadsForExceptions();
-//        machine.update();
+        TerraThread.checkAllThreadsForExceptions();
+        machine.update();
     }
     /**
      * the stop method stops updating threads, and halts the robot
      * @link halt
      */
     public void stop(){
-//        cancelAll();
-//        TerraThread.stopUpdatingAllThreads();
+        cancelAll();
+        TerraThread.stopUpdatingAllThreads();
         halt();
     }
 
@@ -173,18 +173,18 @@ public class RobotFramework {
      */
     public void cancelAutoModules(){ rfsHandler.emptyQueue(); setUserMainAndHalt();  }
     public void cancelBackgroundTasks(){  backHandler.emptyTaskList(); setUserMainAndHalt(); }
-//    public void cancelIndependents(){ indHandler.stopCurrentIndependent(); setUserMainAndHalt(); }
-//    public void cancelMovements(){ rfsHandler.emptyQueue(); indHandler.stopCurrentIndependent(); machine.cancel(); setUserMainAndHalt(); }
-//    public void cancelAll(){ cancelMovements(); cancelBackgroundTasks();  }
+    public void cancelIndependents(){ indHandler.stopCurrentIndependent(); setUserMainAndHalt(); }
+    public void cancelMovements(){ rfsHandler.emptyQueue(); indHandler.stopCurrentIndependent(); machine.cancel(); setUserMainAndHalt(); }
+    public void cancelAll(){ cancelMovements(); cancelBackgroundTasks();  }
 
-//    public boolean isMachineNotRunning(){ return !machine.isRunning(); }
-//    public Machine getMachine(){ return machine; }
-////    public boolean isIndependentRunning(){ return bot.indHandler.isIndependentRunning(); }
-////    public Independent getIndependent(){ return bot.indHandler.getCurrentIndependent(); }
-//    public void pauseOrPlayMachine(){ machine.pauseOrPlay(); }
-//    public void skipToNextMachine(){ machine.skipToNext(); }
-//    public void skipToLastMachine(){ machine.skipToLast(); }
-//    public void skipToLastImmediate(){ machine.skipToLastImmediate(); }
+    public boolean isMachineNotRunning(){ return !machine.isRunning(); }
+    public Machine getMachine(){ return machine; }
+    public boolean isIndependentRunning(){ return bot.indHandler.isIndependentRunning(); }
+    public Independent getIndependent(){ return bot.indHandler.getCurrentIndependent(); }
+    public void pauseOrPlayMachine(){ machine.pauseOrPlay(); }
+    public void skipToNextMachine(){ machine.skipToNext(); }
+    public void skipToLastMachine(){ machine.skipToLast(); }
+    public void skipToLastImmediate(){ machine.skipToLastImmediate(); }
 
     /**
      * Set the user to main and halt all of the robot parts that aren't the main user
@@ -213,13 +213,13 @@ public class RobotFramework {
      * Add an independent to run
      * @param independent
      */
-//    public void addIndependent(Independent independent){ indHandler.runIndependent(independent); }
+    public void addIndependent(Independent independent){ indHandler.runIndependent(independent); }
 
     /**
      * Add a machine to run
      * @param machine
      */
-//    public void addMachine(Machine machine){ this.machine = machine; this.machine.activate(); }
+    public void addMachine(Machine machine){ this.machine = machine; this.machine.activate(); }
 
     /**
      * Get the battery voltage

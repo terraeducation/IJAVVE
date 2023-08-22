@@ -13,7 +13,7 @@ import automodules.stage.Stage;
 import util.template.Iterator;
 
 import static global.General.*;
-//import static robot.RobotFramework.robotFunctionsThread;
+import static robot.RobotFramework.robotFunctionsThread;
 
 public class RobotFunctions {
 
@@ -63,10 +63,10 @@ public class RobotFunctions {
                     s.runOnStop();
                     rfsQueue.poll();
                 } else if (s.isPause()) {
-//                    robotFunctionsThread.setStatus(Status.IDLE);
+                    robotFunctionsThread.setStatus(Status.IDLE);
                 }
             } else {
-//                robotFunctionsThread.setStatus(Status.IDLE);
+                robotFunctionsThread.setStatus(Status.IDLE);
             }
         }
     };
@@ -79,7 +79,7 @@ public class RobotFunctions {
     public void resume() {
         if (!rfsQueue.isEmpty() && rfsQueue.peek().isPause()) {
             rfsQueue.poll();
-//            robotFunctionsThread.setStatus(Status.ACTIVE);
+            robotFunctionsThread.setStatus(Status.ACTIVE);
         }
     }
 
@@ -89,7 +89,7 @@ public class RobotFunctions {
      */
     public void init(){
         addToQueue(new Stage(true));
-//        robotFunctionsThread.setExecutionCode(updateCode);
+        robotFunctionsThread.setExecutionCode(updateCode);
     }
 
     /**
@@ -100,8 +100,8 @@ public class RobotFunctions {
     public final void addAutoModule(AutoModule autoModule){
         autoModule.runStartCode();
         synchronized (rfsQueue) {
-//            if (rfsQueue.isEmpty()) { robotFunctionsThread.setStatus(Status.ACTIVE); }
-//            rfsQueue.addAll(autoModule.getStages());
+            if (rfsQueue.isEmpty()) { robotFunctionsThread.setStatus(Status.ACTIVE); }
+            rfsQueue.addAll(autoModule.getStages());
         }
     }
 
@@ -112,7 +112,7 @@ public class RobotFunctions {
      */
     public final void addToQueue(Stage s) {
         synchronized (rfsQueue) {
-//            if (rfsQueue.isEmpty()) { robotFunctionsThread.setStatus(Status.ACTIVE); }
+            if (rfsQueue.isEmpty()) { robotFunctionsThread.setStatus(Status.ACTIVE); }
             rfsQueue.add(s);
         }
     }

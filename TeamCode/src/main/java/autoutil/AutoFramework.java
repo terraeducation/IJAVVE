@@ -122,23 +122,23 @@ public abstract class AutoFramework extends Auto implements AutoUser {
         scannerAfterInit = scanner;
     }
 
-//    public void scan(boolean view){
-//        scanning = true;
-//        caseScanner = new CaseScannerBar();
-//        camera.setScanner(caseScanner);
-//        camera.start(view);
-//    }
+    public void scan(boolean view){
+        scanning = true;
+        caseScanner = new CaseScannerBar();
+        camera.setScanner(caseScanner);
+        camera.start(view);
+    }
 
-//    @Override
-//    public final void initAuto() {
-//        initialize();
-//        if(scanning){
-//            while (!isStarted() && !isStopRequested()){ caseDetected = caseScanner.getCase(); caseScanner.log(); log.showTelemetry(); }
-//            if(haltCameraAfterInit) { camera.halt(); }else{ camera.setScanner(scannerAfterInit); }
-//        }
-//        setup();
-//        createSegments();
-//    }
+    @Override
+    public final void initAuto() {
+        initialize();
+        if(scanning){
+            while (!isStarted() && !isStopRequested()){ caseDetected = caseScanner.getCase(); caseScanner.log(); log.showTelemetry(); }
+            if(haltCameraAfterInit) { camera.halt(); }else{ camera.setScanner(scannerAfterInit); }
+        }
+        setup();
+        createSegments();
+    }
 
     public abstract void initialize();
 
@@ -259,10 +259,10 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 
     public void setStartPose(Pose start){ startPose = start.getCopy(); }
 
-//    @Override
-//    public void stopAuto() {
-//        if(scanning && !haltCameraAfterInit){ camera.halt(); }
-//    }
+    @Override
+    public void stopAuto() {
+        if(scanning && !haltCameraAfterInit){ camera.halt(); }
+    }
 
 
     public static void wait(double time){

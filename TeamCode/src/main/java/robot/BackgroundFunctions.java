@@ -8,7 +8,7 @@ import util.condition.Status;
 import util.template.Iterator;
 
 import static global.General.bot;
-//import static robot.RobotFramework.backgroundThread;
+import static robot.RobotFramework.backgroundThread;
 
 public class BackgroundFunctions {
     /**
@@ -38,11 +38,11 @@ public class BackgroundFunctions {
                 synchronized (tasks) { Iterator.forAll(tasks, BackgroundTask::run); }
                 removeCompletedTasks();
             } else {
-//                backgroundThread.setStatus(Status.IDLE);
+                backgroundThread.setStatus(Status.IDLE);
             }
         };
-//        backgroundThread.setExecutionCode(updateCode);
-//        backgroundThread.setStatus(Status.ACTIVE);
+        backgroundThread.setExecutionCode(updateCode);
+        backgroundThread.setStatus(Status.ACTIVE);
     }
 
     /**

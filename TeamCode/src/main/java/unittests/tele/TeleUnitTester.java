@@ -3,7 +3,7 @@ package unittests.tele;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-//import autoutil.vision.JunctionScanner;
+import autoutil.vision.JunctionScanner;
 import elements.FieldPlacement;
 import elements.FieldSide;
 import teleop.Tele;
@@ -24,7 +24,7 @@ import unittests.tele.framework.PhysicsTest;
 import unittests.tele.framework.SelectorTest;
 import unittests.tele.framework.StorageTest;
 import unittests.tele.framework.SynchroniserTest;
-//import unittests.tele.framework.ThreadTest;
+import unittests.tele.framework.ThreadTest;
 import unittests.tele.framework.movement.OdometryTest;
 import unittests.tele.other.GeometryTest;
 import unittests.tele.sensor.DistanceTest;
@@ -63,9 +63,10 @@ public class TeleUnitTester extends Tele implements UnitTester{
 //        add(new PhysicsTest());
 //        add(new SelectorTest());
 //        add(new StorageTest());
-        add(new SynchroniserTest());
+//        add(new SynchroniserTest());
 //        add(new ThreadTest());
-        add(new BackgroundTest());
+//        add(new BackgroundTest());
+
         add(new OdometryTest());
 
 

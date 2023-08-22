@@ -19,16 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import autoutil.generators.Generator;
-//import autoutil.vision.Scanner;
-//import elements.Field;
+import autoutil.vision.Scanner;
+import elements.Field;
 import geometry.framework.Point;
 import geometry.position.Pose;
 import global.General;
 import robotparts.Electronic;
 import util.template.Iterator;
 
-//import static global.Constants.VUFORIA_KEY;
-//import static global.Constants.VUFORIA_TARGET_HEIGHT_CM;
+import static global.Constants.VUFORIA_KEY;
+import static global.Constants.VUFORIA_TARGET_HEIGHT_CM;
 import static global.General.cameraMonitorViewId;
 import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
@@ -106,7 +106,7 @@ public class ICamera extends Electronic {
      * Set the scanner for the camera
      * @param scanner
      */
-//    public void setScanner(Scanner scanner){ camera.setPipeline(scanner); }
+    public void setScanner(Scanner scanner){ camera.setPipeline(scanner); }
 
     /**
      * Start the camera (with true for viewing)
@@ -141,7 +141,7 @@ public class ICamera extends Electronic {
             camera = OpenCvCameraFactory.getInstance().createVuforiaPassthrough(vuforia, parameters);
         }
 
-//        parameters.vuforiaLicenseKey = VUFORIA_KEY;
+        parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraName = name;
         parameters.useExtendedTracking = false;
 
@@ -151,13 +151,13 @@ public class ICamera extends Electronic {
         allTrackables = new ArrayList<>();
         allTrackables.addAll(targets);
 
-//        float halfField = (float) (Field.width *10*0.5);
-//        float oneAndHalfTile = (float) (Field.tileWidth*10*1.5);
-//        float mmTargetHeight = (float) (VUFORIA_TARGET_HEIGHT_CM*10);
-//        identifyTarget(0, "Red Audience Wall",   -halfField,  -oneAndHalfTile, mmTargetHeight, 90, 0,  90);
-//        identifyTarget(1, "Red Rear Wall",        halfField,  -oneAndHalfTile, mmTargetHeight, 90, 0, -90);
-//        identifyTarget(2, "Blue Audience Wall",  -halfField,   oneAndHalfTile, mmTargetHeight, 90, 0,  90);
-//        identifyTarget(3, "Blue Rear Wall",       halfField,   oneAndHalfTile, mmTargetHeight, 90, 0, -90);
+        float halfField = (float) (Field.width *10*0.5);
+        float oneAndHalfTile = (float) (Field.tileWidth*10*1.5);
+        float mmTargetHeight = (float) (VUFORIA_TARGET_HEIGHT_CM*10);
+        identifyTarget(0, "Red Audience Wall",   -halfField,  -oneAndHalfTile, mmTargetHeight, 90, 0,  90);
+        identifyTarget(1, "Red Rear Wall",        halfField,  -oneAndHalfTile, mmTargetHeight, 90, 0, -90);
+        identifyTarget(2, "Blue Audience Wall",  -halfField,   oneAndHalfTile, mmTargetHeight, 90, 0,  90);
+        identifyTarget(3, "Blue Rear Wall",       halfField,   oneAndHalfTile, mmTargetHeight, 90, 0, -90);
 
         OpenGLMatrix cameraLocationOnRobot = OpenGLMatrix
                 .translation((float) cameraLocation.getY(), (float) -cameraLocation.getX(), (float) cameraHeightFromField)

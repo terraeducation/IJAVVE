@@ -52,10 +52,10 @@ public class Drive extends RobotPart {
 //        bl = create("bl", ElectronicType.CMOTOR_FORWARD);
 
 
-        fr = create("fr", ElectronicType.CMOTOR_REVERSE);
-        br = create("br", ElectronicType.CMOTOR_REVERSE);
-        fl = create("fl", ElectronicType.CMOTOR_FORWARD);
-        bl = create("bl", ElectronicType.CMOTOR_FORWARD);
+        fr = create("fr", ElectronicType.CMOTOR_REVERSE_FLOAT);
+        br = create("br", ElectronicType.CMOTOR_REVERSE_FLOAT);
+        fl = create("fl", ElectronicType.CMOTOR_FORWARD_FLOAT);
+        bl = create("bl", ElectronicType.CMOTOR_FORWARD_FLOAT);
 
 //
 //        retract = create("ret", ElectronicType.PSERVO_FORWARD);
@@ -135,33 +135,33 @@ public class Drive extends RobotPart {
 
 
 
-//        if(!bot.indHandler.isIndependentRunning()) {
-//            Logistic rt = new Logistic(Logistic.LogisticParameterType.RP_K, 0.12, 1.0);
-//            Logistic rm = new Logistic(Logistic.LogisticParameterType.RP_K, 0.05, 5.0);
-//            Linear rx = new Linear(1.0, 0.4, 1.0);
-//
-//            if (!driveMode.modeIs(SLOW)) {
-//                if (precision.isInputTrueForTime(Math.abs(f) > 0.9, 0.5) && Math.abs(f) > 0.9) {
-//                    driveMode.set(FAST);
-//                } else {
-//                    driveMode.set(MEDIUM);
-//                }
-//            }
+        if(!bot.indHandler.isIndependentRunning()) {
+            Logistic rt = new Logistic(Logistic.LogisticParameterType.RP_K, 0.12, 1.0);
+            Logistic rm = new Logistic(Logistic.LogisticParameterType.RP_K, 0.05, 5.0);
+            Linear rx = new Linear(1.0, 0.4, 1.0);
 
-//            if (driveMode.modeIs(SLOW)) {
-//                drive.move(rm.fodd(f * 0.4), noStrafeLock || !Precision.range(s, 0.7) ? rm.fodd(s) * 0.3 : 0.0, rt.fodd(t * 0.6));
-//            } else if (driveMode.modeIs(MEDIUM)) {
-//                if (precision2.isInputTrueForTime(Math.abs(t) > 0.9, 0.6) && Math.abs(t) > 0.9) {
-//                    drive.move(rm.fodd(f * 0.7) * (t != 0 ? rx.feven(t) : 1.0), !Precision.range(s, 0.7) ? rm.fodd(s * 0.7) : 0.0, rt.fodd(t * 0.85));
-//                } else {
-//                    drive.move(rm.fodd(f * 0.7) * (t != 0 ? rx.feven(t) : 1.0), !Precision.range(s, 0.7) ? rm.fodd(s * 0.7) : 0.0, 0.6 * rt.fodd(t * 0.85));
+            if (!driveMode.modeIs(SLOW)) {
+                if (precision.isInputTrueForTime(Math.abs(f) > 0.9, 0.5) && Math.abs(f) > 0.9) {
+                    driveMode.set(FAST);
+                } else {
+                    driveMode.set(MEDIUM);
+                }
+            }
+
+            if (driveMode.modeIs(SLOW)) {
+                drive.move(rm.fodd(f * 0.4), noStrafeLock || !Precision.range(s, 0.7) ? rm.fodd(s) * 0.3 : 0.0, rt.fodd(t * 0.6));
+            } else if (driveMode.modeIs(MEDIUM)) {
+                if (precision2.isInputTrueForTime(Math.abs(t) > 0.9, 0.6) && Math.abs(t) > 0.9) {
+                    drive.move(rm.fodd(f * 0.7) * (t != 0 ? rx.feven(t) : 1.0), !Precision.range(s, 0.7) ? rm.fodd(s * 0.7) : 0.0, rt.fodd(t * 0.85));
+                } else {
+                    drive.move(rm.fodd(f * 0.7) * (t != 0 ? rx.feven(t) : 1.0), !Precision.range(s, 0.7) ? rm.fodd(s * 0.7) : 0.0, 0.6 * rt.fodd(t * 0.85));
+                }
 //                }
-////                }
-////                drive.move(rm.fodd(f * 0.7) * (t != 0 ? rx.feven(t) : 1.0), !Precision.range(s, 0.7) ? rm.fodd(s * 0.7) : 0.0, 0.6 * rt.fodd(t * 0.85));
-//            } else {
-//                drive.move(rm.fodd(f) * (t != 0 ? rx.feven(t) : 1.0), 0.0, rt.fodd(t * 0.8));
-//            }
-//        }
+//                drive.move(rm.fodd(f * 0.7) * (t != 0 ? rx.feven(t) : 1.0), !Precision.range(s, 0.7) ? rm.fodd(s * 0.7) : 0.0, 0.6 * rt.fodd(t * 0.85));
+            } else {
+                drive.move(rm.fodd(f) * (t != 0 ? rx.feven(t) : 1.0), 0.0, rt.fodd(t * 0.8));
+            }
+        }
 
 
 

@@ -27,7 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-//import elements.Field;
+import elements.Field;
 import elements.Robot;
 import geometry.circles.Circle;
 import geometry.framework.CoordinatePlane;
@@ -62,8 +62,8 @@ public abstract class Drawer extends JPanel {
     public static final int fieldHeight = height-35;
 
     public static final double sideOffset = 3;
-//    public static final double fieldSize = Field.width;
-//    private static final double drawFieldScale = (fieldSize - (2*sideOffset))/fieldSize;
+    public static final double fieldSize = Field.width;
+    private static final double drawFieldScale = (fieldSize - (2*sideOffset))/fieldSize;
     public static boolean shouldExit = false;
     public static int step = 0;
     public static boolean lastStep = false;
@@ -121,9 +121,9 @@ public abstract class Drawer extends JPanel {
         coordinatePlane.toPoses(p -> p.rotateOrientation(90));
         coordinatePlane.reflectPoses();
         coordinatePlane.reflectY();
-//        coordinatePlane.translate(sideOffset, fieldSize+sideOffset);
-//        coordinatePlane.scaleX(((double) fieldWidth)/fieldSize *  drawFieldScale);
-//        coordinatePlane.scaleY(((double) fieldHeight)/fieldSize * drawFieldScale);
+        coordinatePlane.translate(sideOffset, fieldSize+sideOffset);
+        coordinatePlane.scaleX(((double) fieldWidth)/fieldSize *  drawFieldScale);
+        coordinatePlane.scaleY(((double) fieldHeight)/fieldSize * drawFieldScale);
     }
 
     public static GeometryObject convertToField(GeometryObject object){
