@@ -26,7 +26,7 @@ public class StorageTest extends TeleUnitTest {
         storage.addItem("Fl", 1.0f);
         storage.addItem("Do", 2.0d);
         storage.addItem("Bo", true);
-        storage.addItem("FieldSide", fieldSide);
+        storage.addItem("FieldSide", FieldSide.RED.toString());
         ArrayList<Double> input = new ArrayList<>();
         input.add(1.0);
         input.add(2.0);

@@ -48,7 +48,7 @@ public class TeleUnitTester extends Tele implements UnitTester{
         /**
          * Framework
          */
-
+        clearAll();
 //        Works as of 4.23.0
 //        add(new AccessTest());
 //        add(new AutoModuleInitialTest());
