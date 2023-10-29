@@ -1,4 +1,4 @@
-## Terrabats 14525 Official Repository
+## 14525 Official Repository
 
 This repository contains the source code for the TerraBats CENTERSTAGE (2023-2024) competition season.  
 
