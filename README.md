@@ -1,7 +1,7 @@
 ## Terrabats 14525 Official Repository
 
-This repository contains the code for the POWER PLAY (2022-2023) competition season.  
-This base for this repository is from the FTC SDK at [https://github.com/FIRST-Tech-Challenge/FtcRobotController](https://github.com/FIRST-Tech-Challenge/FtcRobotController)
+This repository contains the source code for the TerraBats CENTERSTAGE (2023-2024) competition season.  
+
 
 ## Contact Us
 
