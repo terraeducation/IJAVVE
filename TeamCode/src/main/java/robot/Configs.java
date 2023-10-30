@@ -17,13 +17,13 @@ public class Configs implements RobotUser{
 //    RobotConfig PowerPlay = new RobotConfig(drive, lift, outtake, gyro, camera, odometry, distanceSensors);
 //    RobotConfig PowerPlay = new RobotConfig(drive, lift, outtake, gyro, camera, odometry);
 
-    RobotConfig PowerPlay = new RobotConfig(drive, lift, outtake, gyro, camera, odometry);
+    RobotConfig CenterStage = new RobotConfig(drive, gyro, intake, lift, odometry);
 
     /**
      * Current Config
      */
     public void setCurrentConfig(){
-        setConfig(PowerPlay);
+        setConfig(CenterStage);
     }
 
 }

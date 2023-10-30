@@ -35,7 +35,7 @@ public class NewOdometry extends RobotPart {
     }
 
     public void update(){
-        double currentX = getEncX();
+        double currentX = -getEncX();
         double currentY = getEncY();
 //        double currentY2 = getEncY2();
         double deltaX = currentX - lastX;
@@ -51,7 +51,7 @@ public class NewOdometry extends RobotPart {
 
 //        h += deltaHeading;
 
-        gyro.update();
+//        gyro.update();
 
         h = gyro.getHeading();
 
@@ -121,6 +121,7 @@ public class NewOdometry extends RobotPart {
         lastX = 0;
         lastY = 0;
         lastY2 = 0;
-        gyro.setHeading(pose.getAngle());
+//        gyro.setHeading(pose.getAngle());
+//        TOD5 FIX set heading
     }
 }
