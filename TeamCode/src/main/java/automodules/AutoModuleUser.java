@@ -87,7 +87,7 @@ public interface AutoModuleUser extends RobotUser{
             lift.checkAndLift(),
 //            outtake.stageFlip(0.0),
 //            outtake.stageReadyStart(0.0),
-            outtake.stageFlip(0.0),
+//            outtake.stageFlip(0.0),
             outtake.stageReadyStartCond(0.0),
             lift.stageLift(1.0, heightMode.getValue(HIGH)+2).attach(
                     outtake.stageReadyEndAfter(0.48)
@@ -104,7 +104,7 @@ public interface AutoModuleUser extends RobotUser{
     AutoModule BackwardGrabMiddleTele = new AutoModule(
             outtake.stageClose(0.22),
             lift.checkAndLift(),
-            outtake.stageFlip(0.0),
+//            outtake.stageFlip(0.0),
             outtake.stageReadyStartCond(0.0),
             lift.stageLift(1.0, heightMode.getValue(MIDDLE)+2).attach(
                     outtake.stageReadyEndAfter(0.48)
@@ -121,7 +121,7 @@ public interface AutoModuleUser extends RobotUser{
     AutoModule BackwardGrabLowTele = new AutoModule(
             outtake.stageClose(0.22),
             lift.checkAndLift(),
-            outtake.stageFlip(0.0),
+//            outtake.stageFlip(0.0),
             outtake.stageReadyStartCond(0.0),
             lift.stageLift(1.0, heightMode.getValue(LOW)+2).attach(
                     outtake.stageReadyEndAfter(0.48)
@@ -148,7 +148,7 @@ public interface AutoModuleUser extends RobotUser{
 
     AutoModule BackwardGrabGroundTele2 = new AutoModule(
             outtake.stageClose(0.0),
-            outtake.stageUnFlip(0.4),
+//            outtake.stageUnFlip(0.4),
             outtake.stageStartContinuous(0.7),
             outtake.stage(0.1, 0.0),
             lift.checkAndLift(),
@@ -210,7 +210,7 @@ public interface AutoModuleUser extends RobotUser{
     });
     AutoModule UprightCone = new AutoModule(outtake.stage(0.1, 0.0), lift.stageLift(1.0, 5), driveMode.ChangeMode(SLOW));
     AutoModule FixCone = new AutoModule(lift.moveTimeBack(0.1, -0.4, () -> 0.15), outtake.stageStart(0.0), lift.moveTimeBack(-0.35, -0.3, () -> 0.3), driveMode.ChangeMode(MEDIUM)).setStartCode(()->{lift.currentCutoffPosition = lift.defaultCutoffPosition;});
-    AutoModule TakeOffCone = new AutoModule(heightMode.ChangeMode(HIGH), outtake.stageClose(0.0), lift.stageLift(1.0, heightMode.getValue(HIGH)+3.5).attach(outtake.stageReadyStartAfter(0.5)),RobotPart.pause(0.1),outtake.stageFlip(0.0));
+//    AutoModule TakeOffCone = new AutoModule(heightMode.ChangeMode(HIGH), outtake.stageClose(0.0), lift.stageLift(1.0, heightMode.getValue(HIGH)+3.5).attach(outtake.stageReadyStartAfter(0.5)),RobotPart.pause(0.1),outtake.stageFlip(0.0));
 
     static AutoModule ForwardStackTele(int i){return new AutoModule(
         lift.stageLift(1.0,  Math.max(13 - ((i+1)*13/4.6), -0.5))
@@ -230,9 +230,9 @@ public interface AutoModuleUser extends RobotUser{
             lift.stageLift(1.0, heightMode.getValue(HIGH)+1.5).attach(outtake.stageEndContinuousWithFlip(1.0, 0.1))
     );
 
-    AutoModule ForwardCycle = new AutoModule(
-            lift.stageLift(1.0,0).attach(outtake.stageBack(0.3))
-    ).setStartCode(outtake::dropConeRaw);
+//    AutoModule ForwardCycle = new AutoModule(
+//            lift.stageLift(1.0,0).attach(outtake.stageBack(0.3))
+//    ).setStartCode(outtake::dropConeRaw);
 
     static Independent Cycle(int i) {return new Independent() {
         @Override
@@ -242,7 +242,7 @@ public interface AutoModuleUser extends RobotUser{
             addConcurrentAutoModuleWithCancel(BackwardCycle, 0.25);
             addWaypoint(0.4, x, -38, 0);
             addSegment(0.3, 0.1, NonstopSP, x+0.5, -44.0, 0.0);
-            addConcurrentAutoModuleWithCancel(ForwardCycle, 0.1);
+//            addConcurrentAutoModuleWithCancel(ForwardCycle, 0.1);
             addWaypoint(0.4, x+0.5, -8, 0);
             addSegment(0.3, 0.1, NonstopSP, x, 2.0, 0.0);
         }
@@ -275,70 +275,70 @@ public interface AutoModuleUser extends RobotUser{
             lift.stageLift(1.0, heightMode.getValue(LOW)+1.5).attach(outtake.stageReadyEndContinuousWithFlip(1.1, 0.2))
     );
 
-
-    AutoModule ForwardCycleMiddle = new AutoModule(
-            RobotPart.pause(0.1),
-            lift.stageLift(1.0,0).attach(outtake.stageBack(0.2))
-    ).setStartCode(outtake::dropConeRaw);
-
-
-    AutoModule ForwardCycleLow = new AutoModule(
-            RobotPart.pause(0.4),
-            lift.stageLift(1.0,0).attach(outtake.stageBack(0.2))
-    ).setStartCode(outtake::dropConeRaw);
+//
+//    AutoModule ForwardCycleMiddle = new AutoModule(
+//            RobotPart.pause(0.1),
+//            lift.stageLift(1.0,0).attach(outtake.stageBack(0.2)}
+////    ).setStartCode(outtake::dropConeRaw);
 
 
-    AutoModule BackwardCycleLow2 = new AutoModule(
-            outtake.stageClose(0.2),
-            lift.stageLift(1.0, heightMode.getValue(LOW)+1.5).attach(outtake.stageReadyEndContinuousWithFlip(0.8, 0.2))
-    );
+//    AutoModule ForwardCycleLow = new AutoModule(
+//            RobotPart.pause(0.4),
+//            lift.stageLift(1.0,0).attach(outtake.stageBack(0.2))
+//    ).setStartCode(outtake::dropConeRaw);
 
-    Machine MachineCycleExtra = new Machine()
-            .addInstruction(odometry::reset, 0.1)
-            .addIndependentWithPause(new Independent() {
-                @Override
-                public void define() {
-                    addSegment(0.2, 0.2, NonstopSP, 0.0, 6.0, 0.0);
-                    addConcurrentAutoModuleWithCancel(BackwardCycleMiddle, 0.15);
-                    addWaypoint(0.8,-2,-15,-5.0);
-                    addSegment(1.0, 0.4, NonstopSP, -31, -36.0, -50.0);
-                    addSegment(0.4, 0.4, NonstopSP, -37, -42.0, -50.0);
-                }
-            })
-            .addIndependentWithPause(new Independent() {
-                @Override
-                public void define() {
-                    addConcurrentAutoModuleWithCancel(ForwardCycleMiddle, 0.2);
-                    addWaypoint(0.6, -32.0, 0.0, -21.0);
-                    addSegment(0.5, 0.34, NonstopSP, -27.0, 26.0, -25.0);
-                    addConcurrentAutoModuleWithCancel(BackwardCycleLow, 0.15);
-                    addWaypoint(1.0, -25.0, 15.0, 0.0);
-                    addWaypoint(1.0, -30.0, -5.0, -45);
-                    addSegment(1.1, 0.4, NonstopSP, -100.0, -45.0, -50);
-                }
-            })
-            .addIndependentWithPause(new Independent() {
-                @Override
-                public void define() {
-                    addConcurrentAutoModuleWithCancel(ForwardCycleLow, 0.15);
-                    addWaypoint(1.0, -70.0, -30.0, -75);
-                    addWaypoint(1.0, -50.0, -20.0, -70);
-                    addWaypoint(0.4, -40.0, -10.0, 0.0);
-                    addWaypoint(0.4, -27.0, 6.0, 0.0);
-                    addSegment(0.6, 0.34, NonstopSP, -27.0, 26.0, -25.0);
-                    addConcurrentAutoModuleWithCancel(BackwardCycleLow2, 0.15);
-                    addSegment(0.7, 0.3, NonstopSP, -25.0, 26.0, -57.0);
-                    addSegment(0.4, 0.4, NonstopSP, -35.0, 9.0, -57.0);
-                }
-            })
-            .addIndependent(new Independent() {
-                @Override
-                public void define() {
-                    addConcurrentAutoModuleWithCancel(ForwardCycleLow,0.15);
-                    addSegment(0.4, 0.4, NonstopSP, -25.0, 26.0, -57.0);
-                    addSegment(0.8, 0.35, NonstopSP, -27.0, 10.0, 0.0);
-                }
-            });
+//
+//    AutoModule BackwardCycleLow2 = new AutoModule(
+//            outtake.stageClose(0.2),
+//            lift.stageLift(1.0, heightMode.getValue(LOW)+1.5).attach(outtake.stageReadyEndContinuousWithFlip(0.8, 0.2))
+//    );
+
+//    Machine MachineCycleExtra = new Machine()
+//            .addInstruction(odometry::reset, 0.1)
+//            .addIndependentWithPause(new Independent() {
+//                @Override
+//                public void define() {
+//                    addSegment(0.2, 0.2, NonstopSP, 0.0, 6.0, 0.0);
+//                    addConcurrentAutoModuleWithCancel(BackwardCycleMiddle, 0.15);
+//                    addWaypoint(0.8,-2,-15,-5.0);
+//                    addSegment(1.0, 0.4, NonstopSP, -31, -36.0, -50.0);
+//                    addSegment(0.4, 0.4, NonstopSP, -37, -42.0, -50.0);
+//                }
+//            })
+//            .addIndependentWithPause(new Independent() {
+//                @Override
+//                public void define() {
+//                    addConcurrentAutoModuleWithCancel(ForwardCycleMiddle, 0.2);
+//                    addWaypoint(0.6, -32.0, 0.0, -21.0);
+//                    addSegment(0.5, 0.34, NonstopSP, -27.0, 26.0, -25.0);
+//                    addConcurrentAutoModuleWithCancel(BackwardCycleLow, 0.15);
+//                    addWaypoint(1.0, -25.0, 15.0, 0.0);
+//                    addWaypoint(1.0, -30.0, -5.0, -45);
+//                    addSegment(1.1, 0.4, NonstopSP, -100.0, -45.0, -50);
+//                }
+//            })
+//            .addIndependentWithPause(new Independent() {
+//                @Override
+//                public void define() {
+//                    addConcurrentAutoModuleWithCancel(ForwardCycleLow, 0.15);
+//                    addWaypoint(1.0, -70.0, -30.0, -75);
+//                    addWaypoint(1.0, -50.0, -20.0, -70);
+//                    addWaypoint(0.4, -40.0, -10.0, 0.0);
+//                    addWaypoint(0.4, -27.0, 6.0, 0.0);
+//                    addSegment(0.6, 0.34, NonstopSP, -27.0, 26.0, -25.0);
+//                    addConcurrentAutoModuleWithCancel(BackwardCycleLow2, 0.15);
+//                    addSegment(0.7, 0.3, NonstopSP, -25.0, 26.0, -57.0);
+//                    addSegment(0.4, 0.4, NonstopSP, -35.0, 9.0, -57.0);
+//                }
+//            })
+//            .addIndependent(new Independent() {
+//                @Override
+//                public void define() {
+//                    addConcurrentAutoModuleWithCancel(ForwardCycleLow,0.15);
+//                    addSegment(0.4, 0.4, NonstopSP, -25.0, 26.0, -57.0);
+//                    addSegment(0.8, 0.35, NonstopSP, -27.0, 10.0, 0.0);
+//                }
+//            });
         ;
 
 }

@@ -29,6 +29,8 @@ public class DistanceSensors extends RobotPart {
     public double getFrontDistance(){ return df.getDistance()*1.061224; }
     public double getRightDistance(){ return dr.getDistance()*1.061224; }
 
+
+
     public void ready(){
         df.ready(); dr.ready();
     }

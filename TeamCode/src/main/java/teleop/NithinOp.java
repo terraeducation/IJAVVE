@@ -43,13 +43,15 @@ public class NithinOp extends Tele {
         voltageScale = 1;
         gph1.link(RIGHT_BUMPER, () -> lift.adjustHolderTarget(2.5));
         gph1.link(LEFT_BUMPER, () -> lift.adjustHolderTarget(-2.5));
-        gph1.link(DPAD_DOWN, () -> intake.move(-1));
-        gph1.link(DPAD_UP, () -> intake.move(1));
-
-
+        gph1.link(DPAD_DOWN, () -> intake.move(-.8));
+        gph1.link(DPAD_UP, () -> intake.move(.8));
+        gph1.link(Y, () -> outtake.moveMiddle());
+        gph1.link(B, () -> outtake.moveEnd());
+        gph1.link(A, () -> outtake.moveStart());
         /**
          * Start code
          */
+        outtake.moveStart();
 
     }
 

@@ -45,7 +45,7 @@ public class TerraOp extends Tele {
         gph1.link(DPAD_DOWN, () -> {if(lift.upright){lift.upright = false; bot.addAutoModuleWithCancel(FixCone);}else{bot.addAutoModuleWithCancel(ForwardTeleBottom);}});
         gph1.link(DPAD_UP, () -> {lift.upright = true; bot.addAutoModuleWithCancel(UprightCone);});
 
-        gph1.link(DPAD_LEFT, () -> bot.addAutoModuleWithCancel(TakeOffCone));
+//        gph1.link(DPAD_LEFT, () -> bot.addAutoModuleWithCancel(TakeOffCone));
 
         gph1.link(DPAD_RIGHT, () -> {lift.cap = true; bot.addAutoModuleWithCancel(CapGrab); });
 //        gph1.link(DPAD_RIGHT, () -> {
@@ -90,8 +90,8 @@ public class TerraOp extends Tele {
          */
         gph2.link(RIGHT_BUMPER, outtake::closeClaw);
         gph2.link(LEFT_BUMPER, outtake::openClaw);
-        gph2.link(RIGHT_TRIGGER, outtake::flip);
-        gph2.link(LEFT_TRIGGER, outtake::unFlip);
+//        gph2.link(RIGHT_TRIGGER, outtake::flip);
+//        gph2.link(LEFT_TRIGGER, outtake::unFlip);
 
 
 
