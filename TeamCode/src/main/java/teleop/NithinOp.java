@@ -41,17 +41,23 @@ public class NithinOp extends Tele {
     @Override
     public void initTele() {
         voltageScale = 1;
-        gph1.link(RIGHT_BUMPER, () -> lift.adjustHolderTarget(2.5));
-        gph1.link(LEFT_BUMPER, () -> lift.adjustHolderTarget(-2.5));
-        gph1.link(DPAD_DOWN, () -> intake.move(-.8));
-        gph1.link(DPAD_UP, () -> intake.move(.8));
-        gph1.link(Y, () -> outtake.moveMiddle());
-        gph1.link(B, () -> outtake.moveEnd());
-        gph1.link(A, () -> outtake.moveStart());
+        gph2.link(RIGHT_BUMPER, () -> lift.adjustHolderTarget(2.5));
+        gph2.link(LEFT_BUMPER, () -> lift.adjustHolderTarget(-2.5));
+        gph1.link(DPAD_DOWN, () -> intake.move(-1));
+        gph1.link(DPAD_UP, () -> intake.move(1));
+        gph1.link(Y, PlaceHigh);
+        gph1.link(B, PlaceMid);
+        gph1.link(X, Place);
+        gph1.link(RIGHT_TRIGGER, PlaceReady);
+        gph1.link(A, PlaceLow);
+        gph2.link(Y, ManualOpenFull);
+        gph2.link(A, ManualClose);
+        gph2.link(B, ManualOpenHalf);
         /**
          * Start code
          */
-        outtake.moveStart();
+        outtake.moveEnd();
+        outtake.closeClaw();
 
     }
 

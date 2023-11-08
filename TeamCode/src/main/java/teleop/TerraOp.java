@@ -1,7 +1,5 @@
 package teleop;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import automodules.AutoModuleUser;
 import teleutil.button.Button;
 
@@ -17,7 +15,6 @@ import static global.Modes.OuttakeStatus.*;
 import static global.Modes.Height.*;
 import static teleutil.button.Button.*;
 
-@TeleOp(name = "TerraOp", group = "TeleOp")
 public class TerraOp extends Tele {
 
     @Override
@@ -89,7 +86,7 @@ public class TerraOp extends Tele {
          * Gamepad 2 Manual
          */
         gph2.link(RIGHT_BUMPER, outtake::closeClaw);
-        gph2.link(LEFT_BUMPER, outtake::openClaw);
+        gph2.link(LEFT_BUMPER, outtake::openClawHalf);
 //        gph2.link(RIGHT_TRIGGER, outtake::flip);
 //        gph2.link(LEFT_TRIGGER, outtake::unFlip);
 
@@ -101,7 +98,7 @@ public class TerraOp extends Tele {
         lift.move(-0.15);
         outtake.moveStart();
 //        outtake.readyStart();
-        outtake.openClaw();
+        outtake.openClawHalf();
     }
 
     @Override
