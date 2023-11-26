@@ -113,17 +113,17 @@ public class TerraAutoRam extends AutoFramework {
     public void postProcess() { autoPlane.reflectY(); autoPlane.reflectX(); }
 
 
-    @Autonomous(name = "G. RIGHT RAM (No SS) ", group = "auto", preselectTeleOp = "TerraOp")
-    public static class RIGHT extends TerraAutoRam {{ normal = true; fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.LOWER; startPose = new Pose(20.5, Field.width/2.0 - Field.tileWidth - GameItems.Cone.height - 16,90); }}
-
-    @Autonomous(name = "H. LEFT RAM (No SS) ", group = "auto", preselectTeleOp = "TerraOp")
-    public static class LEFT extends TerraAutoRam {{ normal = true; fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.UPPER; startPose = new Pose(20.5, Field.width/2.0 + Field.tileWidth + GameItems.Cone.height + 16,90); }}
-
-
-    @Autonomous(name = "I. RIGHT RAM (SS) ", group = "auto", preselectTeleOp = "TerraOp")
-    public static class RIGHT_RAM extends TerraAutoRam {{ fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.LOWER; startPose = new Pose(20.5, Field.width/2.0 - Field.tileWidth - GameItems.Cone.height - 16,90); }}
-
-    @Autonomous(name = "J. LEFT RAM (SS) ", group = "auto", preselectTeleOp = "TerraOp")
-    public static class LEFT_RAM extends TerraAutoRam {{ fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.UPPER; startPose = new Pose(20.5, Field.width/2.0 + Field.tileWidth + GameItems.Cone.height + 16,90); }}
-
+//    @Autonomous(name = "G. RIGHT RAM (No SS) ", group = "auto", preselectTeleOp = "TerraOp")
+//    public static class RIGHT extends TerraAutoRam {{ normal = true; fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.LOWER; startPose = new Pose(20.5, Field.width/2.0 - Field.tileWidth - GameItems.Cone.height - 16,90); }}
+//
+//    @Autonomous(name = "H. LEFT RAM (No SS) ", group = "auto", preselectTeleOp = "TerraOp")
+//    public static class LEFT extends TerraAutoRam {{ normal = true; fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.UPPER; startPose = new Pose(20.5, Field.width/2.0 + Field.tileWidth + GameItems.Cone.height + 16,90); }}
+//
+//
+//    @Autonomous(name = "I. RIGHT RAM (SS) ", group = "auto", preselectTeleOp = "TerraOp")
+//    public static class RIGHT_RAM extends TerraAutoRam {{ fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.LOWER; startPose = new Pose(20.5, Field.width/2.0 - Field.tileWidth - GameItems.Cone.height - 16,90); }}
+//
+//    @Autonomous(name = "J. LEFT RAM (SS) ", group = "auto", preselectTeleOp = "TerraOp")
+//    public static class LEFT_RAM extends TerraAutoRam {{ fieldSide = FieldSide.BLUE; fieldPlacement = FieldPlacement.UPPER; startPose = new Pose(20.5, Field.width/2.0 + Field.tileWidth + GameItems.Cone.height + 16,90); }}
+//
 }

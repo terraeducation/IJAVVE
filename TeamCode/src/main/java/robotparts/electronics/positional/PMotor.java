@@ -9,6 +9,7 @@ import autoutil.controllers.control1D.PositionHolder;
 import debugging.StallDetector;
 import robotparts.Electronic;
 import robotparts.electronics.input.IEncoder;
+import util.codeseg.CodeSeg;
 import util.codeseg.ReturnCodeSeg;
 import util.codeseg.ReturnParameterCodeSeg;
 import util.condition.Expectation;
@@ -17,7 +18,6 @@ import util.template.Precision;
 
 import static global.General.bot;
 import static global.General.fault;
-import static global.General.log;
 import static global.General.voltageScale;
 import static java.lang.Math.*;
 
@@ -142,10 +142,12 @@ public class PMotor extends Electronic {
     /**
      * Set the power of the pmotor
      * NOTE: Use halt to stop the motors (otherwise will be set with restPower)
+     *
      * @param p
+     * @return
      */
     @Override
-    public final void move(double p){
+    public final CodeSeg move(double p){
         if(access.isAllowed()){
             if(!detector.isStalling()){
                 positionHolder.update();
@@ -156,6 +158,7 @@ public class PMotor extends Electronic {
                 bot.cancelAutoModules();
             }
         }
+        return null;
     }
 
     /**

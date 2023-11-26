@@ -1,6 +1,7 @@
 package automodules;
 
 import automodules.stage.Stop;
+import auton.Auto;
 import robot.RobotUser;
 import robotparts.RobotPart;
 import teleutil.independent.Independent;
@@ -17,97 +18,122 @@ import static global.Modes.OuttakeStatus.DRIVING;
 import static global.Modes.OuttakeStatus.PLACING;
 
 
-public interface AutoModuleUser extends RobotUser{
+public interface AutoModuleUser extends RobotUser {
 
     /**
      * Forward
      */
-    AutoModule ManualClose = new AutoModule(
-            outtake.stageClose(1)
-    ).setStartCode(() -> {
+
+    AutoModule Intake = new AutoModule(
+            outtake.stageOpen(.2),
+            intake.stageStart(.2),
+            intake.moveTime(-.8,2)
 
 
-
-
-
-
-    });
-    AutoModule ManualOpenFull = new AutoModule(
-            outtake.stageOpen(1)
-    ).setStartCode(() -> {
-
-
-
+    ).setStartCode(() ->
+    {
+        outtake.stageStart(.2);
 
 
     });
 
-    AutoModule ManualOpenHalf = new AutoModule(
-            outtake.stageOpenHalf(1)
-    ).setStartCode(() -> {
+
+    AutoModule Extake = new AutoModule(
+            outtake.stageOpenHalf(.2).attach(intake.moveTime(1, .2)),
+            outtake.stageMiddle(.2),
+            outtake.stageClose(.2)
+    ).setStartCode(() ->
+    {
 
 
-
+        intake.stageStart(.2);
 
 
     });
-    AutoModule Place = new AutoModule(
-            outtake.stageStartContinuousWithFlip(.5,0).attach(lift.stageLift(1.0, heightMode.getValue(GROUND)))
+    //
+//    AutoModule ManualClose = new AutoModule(
+//            outtake.stageClose(1)
+//    ).setStartCode(() -> {
+//
+//
+//
+//
+//
+//
+//    });
+//    AutoModule ManualOpenFull = new AutoModule(
+//            outtake.stageOpen(1)
+//    ).setStartCode(() -> {
+//
+//
+//
+//
+//
+//    });
+//
+//    AutoModule ManualOpenHalf = new AutoModule(
+//            outtake.stageOpenHalf(1)
+//    ).setStartCode(() -> {
+//
+//
+//
+//
+//
+//    });
+    AutoModule PlaceAll = new AutoModule(
+            outtake.stageOpen(.2),
+            RobotPart.pause(.2),
+            outtake.stageStart(.5).attach(lift.stageLift(.8, heightMode.getValue(GROUND)))
     ).setStartCode(() -> {
 
         heightMode.set(GROUND);
 
 
-
-
     });
-    AutoModule PlaceReady = new AutoModule(
-            RobotPart.pause(0.05)
-//            lift.stageLift(1.0,0)
-    ).setStartCode(() ->
-    {
-            outtake.moveMiddle();
 
+    AutoModule PlaceOne = new AutoModule(
+            outtake.stageOpenHalf(.2)
 
+    ).setStartCode(() -> {
 
 
 
     });
+
 
     AutoModule PlaceLow = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(1.0, heightMode.getValue(LOW)).attach(outtake.stageEndContinuousWithFlip(.5,0))
+            lift.stageLift(.8, heightMode.getValue(LOW)),
+            outtake.stageEnd(.2)
     ).setStartCode(() -> {
 
-            heightMode.set(LOW);
-
-
+        heightMode.set(LOW);
 
 
     });
     AutoModule PlaceMid = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(1.0, heightMode.getValue(MIDDLE)).attach(outtake.stageEndContinuousWithFlip(.5,0))
+            lift.stageLift(1.0, heightMode.getValue(MIDDLE)).attach(outtake.stageEndContinuousWithFlip(.5, 0))
     ).setStartCode(() -> {
 
         heightMode.set(MIDDLE);
-
-
 
 
     });
 
     AutoModule PlaceHigh = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(1.0, heightMode.getValue(HIGH)).attach(outtake.stageEndContinuousWithFlip(.5,0))
+            lift.stageLift(1.0, heightMode.getValue(HIGH)).attach(outtake.stageEndContinuousWithFlip(.5, 0))
     ).setStartCode(() -> {
 
         heightMode.set(HIGH);
-
-
-
-
     });
+
+
+
+
+
+
 
     AutoModule ForwardTeleHigh = new AutoModule(
             RobotPart.pause(0.05),
@@ -364,19 +390,19 @@ public interface AutoModuleUser extends RobotUser{
 //    AutoModule ForwardCycleMiddle = new AutoModule(
 //            RobotPart.pause(0.1),
 //            lift.stageLift(1.0,0).attach(outtake.stageBack(0.2)}
-////    ).setStartCode(outtake::dropConeRaw);
-
-
+//    ).setStartCode(outtake::dropConeRaw);
+//
+//
 //    AutoModule ForwardCycleLow = new AutoModule(
 //            RobotPart.pause(0.4),
 //            lift.stageLift(1.0,0).attach(outtake.stageBack(0.2))
 //    ).setStartCode(outtake::dropConeRaw);
 
-//
-//    AutoModule BackwardCycleLow2 = new AutoModule(
-//            outtake.stageClose(0.2),
-//            lift.stageLift(1.0, heightMode.getValue(LOW)+1.5).attach(outtake.stageReadyEndContinuousWithFlip(0.8, 0.2))
-//    );
+
+    AutoModule BackwardCycleLow2 = new AutoModule(
+            outtake.stageClose(0.2),
+            lift.stageLift(1.0, heightMode.getValue(LOW)+1.5).attach(outtake.stageReadyEndContinuousWithFlip(0.8, 0.2))
+    );
 
 //    Machine MachineCycleExtra = new Machine()
 //            .addInstruction(odometry::reset, 0.1)
@@ -424,6 +450,6 @@ public interface AutoModuleUser extends RobotUser{
 //                    addSegment(0.8, 0.35, NonstopSP, -27.0, 10.0, 0.0);
 //                }
 //            });
-        ;
-
 }
+
+

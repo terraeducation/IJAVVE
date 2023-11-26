@@ -263,4 +263,6 @@ public abstract class RobotPart extends StageBuilder implements RobotUser {
      */
     @Override
     protected void maintain() { bot.addBackgroundTask(new BackgroundTask(() -> {checkAccess(User.AUTO); move(0);}));}
+
+
 }

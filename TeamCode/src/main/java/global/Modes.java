@@ -22,9 +22,9 @@ public interface Modes {
 
     enum Height implements Mode.ModeType {HIGH, MIDDLE, LOW, GROUND}
     Mode heightMode = new Mode(Height.class)
-            .set(Height.HIGH, -10)
-            .set(Height.MIDDLE, -15)
-            .set(Height.LOW, -8)
+            .set(Height.HIGH, 10)
+            .set(Height.MIDDLE, 50)
+            .set(Height.LOW, 35)
             .set(Height.GROUND, 0);
 
     // TOD5 MULTI DIMENSIONAL MODE

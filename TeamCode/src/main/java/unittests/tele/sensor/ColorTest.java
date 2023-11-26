@@ -29,6 +29,6 @@ public class ColorTest extends TeleUnitTest {
          */
         log.show("Is a ball in the intake?", bot.color.isBall());
         log.show("Is a cube in the intake?", bot.color.isCube());
-        log.show("Is a freight in the intake?", bot.color.isFreight());
+//        log.show("Is a freight in the intake?", bot.color.isFreight());
     }
 }

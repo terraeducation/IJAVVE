@@ -24,6 +24,7 @@ public class AutoModule {
         stages.addAll(Arrays.asList(stageArray));
     }
 
+
     public AutoModule add(Stage... stageArray){
         stages.addAll(Arrays.asList(stageArray));
         return this;

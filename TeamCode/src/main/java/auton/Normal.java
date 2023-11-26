@@ -4,6 +4,7 @@ import static global.General.bot;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import automodules.AutoModule;
 import autoutil.AutoFramework;
 
 @Autonomous(name = "Normal" + "", group = "auto", preselectTeleOp = "NithinOp")
@@ -14,7 +15,9 @@ public class Normal extends AutoFramework {
         this.setConfig(NonstopConfig);
         bot.saveLocationOnField();
         outtake.moveStart();
+
     }
+
 
     public void define() {
         addTimedSetpoint(1,1,1,0,70,0);

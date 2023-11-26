@@ -1,7 +1,5 @@
 package unittests.tele.framework.movement;
 import automodules.AutoModule;
-import automodules.stage.Initial;
-import automodules.stage.Main;
 import automodules.stage.Stage;
 import global.Constants;
 import robotparts.RobotPart;
@@ -9,11 +7,9 @@ import robotparts.electronics.ElectronicType;
 import robotparts.electronics.positional.PMotor;
 import teleutil.button.Button;
 import unittests.tele.TeleUnitTest;
-import util.Timer;
-import util.template.Iterator;
+import util.codeseg.CodeSeg;
 
 import static global.General.bot;
-import static global.General.gamepad1;
 import static global.General.gph1;
 import static global.General.log;
 
@@ -32,7 +28,9 @@ public class AutoModuleTest extends TeleUnitTest {
         }
 
         @Override
-        protected void move(double p) { car.move(p); }
+        protected CodeSeg move(double p) { car.move(p);
+            return null;
+        }
 
         @Override
         public AutoModule MoveTime(double p, double t) {
