@@ -31,7 +31,7 @@ public class TerraAutoTestNew extends AutoFramework {
 //    );
 
     public static void testInit(AutoFramework auto) {
-        auto.scan(true, "blue");
+        auto.scan(true, "red");
     }
 
     @Override
