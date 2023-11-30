@@ -28,8 +28,8 @@ public class Lift extends RobotPart {
     public PMotor motorRight;
     public PMotor motorLeft;
 
-    public static final double maxPosition = 61;
-    public final double defaultCutoffPosition = 6;
+    public static final double maxPosition = 100;
+    public final double defaultCutoffPosition = 1000;
     public volatile double currentCutoffPosition = defaultCutoffPosition;
     public int stackedMode = 0;
     public boolean circuitMode = false;
@@ -44,13 +44,13 @@ public class Lift extends RobotPart {
 
     @Override
     public void init() {
-        motorRight = create("lil", ElectronicType.PMOTOR_FORWARD);
-        motorLeft = create("lir", ElectronicType.PMOTOR_REVERSE);
+        motorRight = create("lir", ElectronicType.PMOTOR_FORWARD);
+        motorLeft = create("lil", ElectronicType.PMOTOR_REVERSE);
         // 0.25
-        motorRight.setToLinear(Constants.ORBITAL_TICKS_PER_REV, 1.79, 0.66, 5);
-        motorLeft.setToLinear(Constants.ORBITAL_TICKS_PER_REV, 1.79, 0.66, 5);
-        motorRight.usePositionHolder(0.18, 0.1);
-        motorLeft.usePositionHolder(0.18, 0.1);
+        motorRight.setToLinear(Constants.ORBITAL_TICKS_PER_REV, 1.79, 1, 30);
+        motorLeft.setToLinear(Constants.ORBITAL_TICKS_PER_REV, 1.79, 1, 30);
+        motorRight.usePositionHolder(0.1, .1);
+        motorLeft.usePositionHolder(0.1, .1);
         heightMode.set(Modes.Height.HIGH);
         circuitMode = false;
         stacked = false;
@@ -67,16 +67,17 @@ public class Lift extends RobotPart {
     public void setGround(boolean ground){ this.ground = ground; }
 
     @Override
-    public void move(double p) {
-        motorRight.moveWithPositionHolder(p, currentCutoffPosition, 0.1);
-        motorLeft.moveWithPositionHolder(p, currentCutoffPosition, 0.1);
+    public CodeSeg move(double p) {
+        motorRight.moveWithPositionHolder(p, currentCutoffPosition, 0.05);
+        motorLeft.moveWithPositionHolder(p, currentCutoffPosition, 0.05);
+        return null;
     }
 
     public void adjustHolderTarget(double delta){
         if(outtakeStatus.modeIs(PLACING) && !heightMode.modeIs(GROUND)) {
             globalOffset += delta;
         }
-        currentCutoffPosition = -10;
+        currentCutoffPosition = 0;
         motorRight.holdPositionExact();
         motorLeft.holdPositionExact();
         double target = Precision.clip(motorRight.getPositionHolder().getTarget()+delta, 0, maxPosition);

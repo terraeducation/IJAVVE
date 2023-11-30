@@ -52,10 +52,10 @@ public class Drive extends RobotPart {
 //        bl = create("bl", ElectronicType.CMOTOR_FORWARD);
 
 
-        fr = create("fr", ElectronicType.CMOTOR_REVERSE_FLOAT);
-        br = create("br", ElectronicType.CMOTOR_REVERSE_FLOAT);
-        fl = create("fl", ElectronicType.CMOTOR_FORWARD_FLOAT);
-        bl = create("bl", ElectronicType.CMOTOR_FORWARD_FLOAT);
+        fr = create("fr", ElectronicType.CMOTOR_REVERSE);
+        br = create("br", ElectronicType.CMOTOR_REVERSE);
+        fl = create("fl", ElectronicType.CMOTOR_FORWARD);
+        bl = create("bl", ElectronicType.CMOTOR_FORWARD);
 
 //
 //        retract = create("ret", ElectronicType.PSERVO_FORWARD);
@@ -124,12 +124,12 @@ public class Drive extends RobotPart {
 //            deltaPower[i] = Math.max(0, deltaPower[i] - decel);
         }
     }
-    public void newMove(double f, double t) {
+    public void newMove(double f, double s, double t) {
 
-        fr.setPower(f - t);
-        br.setPower(f - t);
-        fl.setPower(f + t);
-        bl.setPower(f + t);
+        fr.setPower(f - s - t);
+        br.setPower(f + s - t);
+        fl.setPower(f + s + t);
+        bl.setPower(f - s + t);
     }
     public void moveSmooth(double f, double s, double t) {
 

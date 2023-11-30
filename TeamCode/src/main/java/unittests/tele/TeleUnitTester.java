@@ -28,6 +28,7 @@ import unittests.tele.framework.ThreadTest;
 import unittests.tele.framework.movement.OdometryTest;
 import unittests.tele.other.GeometryTest;
 import unittests.tele.sensor.DistanceTest;
+import unittests.tele.sensor.GyroTest;
 import unittests.tele.sensor.JunctionScannerTest;
 
 import static global.General.*;
@@ -66,9 +67,9 @@ public class TeleUnitTester extends Tele implements UnitTester{
 //        add(new SynchroniserTest());
 //        add(new ThreadTest());
 //        add(new BackgroundTest());
-
-        add(new OdometryTest());
-
+//
+//        add(new OdometryTest());
+        add(new GyroTest());
 
         /**
          * Framework (needs hardware, in movement package)

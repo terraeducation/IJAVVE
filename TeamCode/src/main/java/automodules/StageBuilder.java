@@ -1,7 +1,5 @@
 package automodules;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 
 import automodules.stage.Exit;
@@ -9,7 +7,6 @@ import automodules.stage.Initial;
 import automodules.stage.Main;
 import automodules.stage.Stage;
 import automodules.stage.Stop;
-import robot.BackgroundTask;
 import robotparts.RobotPart;
 import robotparts.electronics.positional.PMotor;
 import robotparts.electronics.positional.PServo;
@@ -17,7 +14,6 @@ import util.Timer;
 import util.codeseg.CodeSeg;
 import util.codeseg.ParameterCodeSeg;
 import util.codeseg.ReturnCodeSeg;
-import util.template.Iterator;
 
 import static global.General.bot;
 
@@ -93,9 +89,11 @@ public class StageBuilder {
     protected Stage moveTime(double fp, double sp, double tp, ReturnCodeSeg<Double> t){ return new Stage(usePart(), main(fp, sp, tp), new Exit(() -> bot.rfsHandler.getTimer().seconds() > t.run()), stop(), returnPart()); }
     protected AutoModule MoveTime(double fp, double sp, double tp, double t){ return new AutoModule(moveTime(fp, sp, tp, t)); }
 
-    protected void move(double p){}
+    protected CodeSeg move(double p){
+        return null;
+    }
     protected Main main(double p){ return new Main(() -> move(p)); }
-    protected Stage moveTime(double p, double t){ return new Stage(usePart(), main(p), exitTime(t), stop(), returnPart()); }
+    public Stage moveTime(double p, double t){ return new Stage(usePart(), main(p), exitTime(t), stop(), returnPart()); }
     protected Stage moveTime(double p, ReturnCodeSeg<Double> t){ final Double[] val = {0.0}; return new Stage(usePart(), new Initial(() -> val[0] = t.run()), main(p), new Exit(() -> { synchronized (val){ return bot.rfsHandler.getTimer().seconds() > val[0]; }}), stop(), returnPart()); }
     protected Stage moveNow(double p){ return new Stage(usePart(), main(p), exitAlways(), stop(), returnPart()); }
     protected AutoModule MoveTime(double p, double t){ return new AutoModule(moveTime(p, t)); }

@@ -3,7 +3,7 @@ package robot;
 import robotparts.sensors.odometry.NewOdometry;
 import unittests.tele.framework.movement.AutoModuleTest;
 import robotparts.hardware.Drive;
-import robotparts.unused.Intake;
+import robotparts.hardware.Intake;
 import robotparts.hardware.Lift;
 import robotparts.hardware.Outtake;
 import robotparts.sensors.Cameras;

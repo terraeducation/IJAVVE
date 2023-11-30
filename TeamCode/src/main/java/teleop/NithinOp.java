@@ -6,6 +6,7 @@ import javax.crypto.Mac;
 
 import automodules.AutoModule;
 import automodules.AutoModuleUser;
+import auton.TerraAutoRam;
 import autoutil.vision.JunctionScannerAll;
 import elements.FieldPlacement;
 import geometry.framework.Point;
@@ -42,99 +43,70 @@ public class NithinOp extends Tele {
     public void initTele() {
         voltageScale = 1;
 
-        outtake.setToTeleop();
-        outtake.changeArmPosition("endHalf", 0.74);
-        outtake.changeArmPosition("start", 0.0);
-//        outtake.armr.changePosition("flipped", 0.82);
+        gph1.link(LEFT_BUMPER, Intake);
+        gph1.link(LEFT_TRIGGER, Extake);
 
-        MachineCycle.reset();
+        gph1.link(X, PlaceLow);
+        gph1.link(A, PlaceMid);
+        gph1.link(Y, () -> intake.moveMiddle());
 
-        /**
-         * Gamepad 1 Normal
-         */
+        gph1.link(RIGHT_TRIGGER, PlaceAll);
+        gph1.link(RIGHT_BUMPER, PlaceOne);
+//
+//        gph1.link(DPAD_DOWN, () -> intake.move(-.9));
+//        gph1.link(DPAD_UP, () -> intake.move(.9));
+//        gph1.link(DPAD_LEFT, () -> intake.move(0));
+//        gph1.link(Y, PlaceHigh);
 
-        gph1.linkWithCancel(Button.Y, heightMode.isMode(HIGH).and(outtakeStatus.isMode(PLACING)), ForwardTeleHigh, BackwardGrabHighTele);
-        gph1.linkWithCancel(Button.X, heightMode.isMode(MIDDLE).and(outtakeStatus.isMode(PLACING)), ForwardTeleMiddle, BackwardGrabMiddleTele);
-        gph1.linkWithCancel(Button.B, heightMode.isMode(LOW).and(outtakeStatus.isMode(PLACING)), ForwardTeleLow, BackwardGrabLowTele);
-//        gph1.link(Button.A, heightMode.isMode(GROUND), () -> {if(lift.ground){ driveMode.set(SLOW); bot.addAutoModuleWithCancel(BackwardPlaceGroundTele);}else{if(outtakeStatus.modeIs(DRIVING)){ driveMode.set(MEDIUM); bot.addAutoModuleWithCancel(BackwardGrabGroundTele);}else{ driveMode.set(MEDIUM); bot.addAutoModuleWithCancel(ForwardTeleGround);}}}, () -> {driveMode.set(MEDIUM); bot.addAutoModuleWithCancel(BackwardGrabGroundTele2);});
+//        gph1.link(LEFT_TRIGGER, Place);
+//        gph1.link(RIGHT_TRIGGER, PlaceReady);
 
-//        gph1.link(A, new AutoModule(drive.stageEndSignal(0.2), drive.stageStartReadySignal(0.0)));
-
-        gph1.link(DPAD_DOWN, () -> {if(lift.upright){lift.upright = false; bot.addAutoModuleWithCancel(FixCone);}else{bot.addAutoModuleWithCancel(ForwardTeleBottom);}});
-        gph1.link(DPAD_UP, () -> {lift.upright = true; bot.addAutoModuleWithCancel(UprightCone);});
-
-        gph1.link(DPAD_LEFT, () -> bot.addAutoModuleWithCancel(TakeOffCone));
-
-        gph1.link(DPAD_RIGHT, () -> {lift.cap = true; bot.addAutoModuleWithCancel(CapGrab); });
-//        gph1.link(DPAD_RIGHT, () -> {
-//            if(!lift.cap){
-//                lift.cap = true; bot.addAutoModuleWithCancel(CapGrab);
-//            }else{
-//                lift.cap = false; bot.addAutoModuleWithCancel(CapPlace);
-//            }
-//        });
-
-
-
-//        gph1.link(DPAD_DOWN, () -> bot.isMachineNotRunning(), () -> {if(lift.upright){lift.upright = false; bot.addAutoModuleWithCancel(FixCone);}else{bot.addAutoModuleWithCancel(ForwardTeleBottom);}}, () -> odometry.adjustUp(1.0));
-//        gph1.link(DPAD_UP, () -> bot.isMachineNotRunning(), () -> {lift.upright = true; bot.addAutoModuleWithCancel(UprightCone);}, () -> odometry.adjustDown(1.0));
-//        gph1.link(DPAD_LEFT, () -> bot.isMachineNotRunning(), () -> bot.addAutoModuleWithCancel(TakeOffCone), () -> odometry.adjustRight(1.0));
-//        gph1.link(DPAD_RIGHT, () -> bot.isMachineNotRunning(), () -> {
-//            if(!lift.cap){
-//                lift.cap = true; bot.addAutoModuleWithCancel(CapGrab);
-//            }else{
-//                lift.cap = false; bot.addAutoModuleWithCancel(CapPlace);
-//            }
-//            }, () -> odometry.adjustLeft(1.0));
-
-        gph1.link(RIGHT_BUMPER, () -> lift.adjustHolderTarget(2.5));
-        gph1.link(LEFT_BUMPER, () -> lift.adjustHolderTarget(-2.5));
-
-        gph1.link(RIGHT_TRIGGER, () -> bot.isMachineNotRunning(), () -> {if(lift.stackedMode < 5){ lift.stacked = true; bot.addAutoModuleWithCancel(AutoModuleUser.ForwardStackTele(lift.stackedMode)); lift.stackedMode++;}else{lift.stackedMode = 0; }} , () -> {if(MachineCycle.isRunning()){ bot.pauseOrPlayMachine(); }else{ bot.skipToNextMachine(); }});
-        gph1.link(LEFT_TRIGGER, () -> bot.isMachineNotRunning(), () -> {if(!driveMode.modeIs(SLOW)){driveMode.set(SLOW);}else{driveMode.set(MEDIUM);}}, () -> bot.skipToLastMachine());
-
-        /**
-         * Gamepad 1 Automated
-         */
-        //gph1.link(Button.X, bot::cancelMovements, AUTOMATED);
-//        gph1.link(Button.B, MachineCycle, AUTOMATED);
-//        gph1.link(Button.Y, MachineCycleExtra, AUTOMATED);
-
-
-        gph1.link(DPAD_DOWN, ResetLift, AUTOMATED);
-
-        /**
-         * Gamepad 2 Manual
-         */
-        gph2.link(RIGHT_BUMPER, outtake::closeClaw);
-        gph2.link(LEFT_BUMPER, outtake::openClaw);
-        gph2.link(RIGHT_TRIGGER, outtake::flip);
-        gph2.link(LEFT_TRIGGER, outtake::unFlip);
-
-
-
+//        gph2.link(Y, ManualOpenFull);
+//        gph2.link(A, ManualClose);
+//        gph2.link(B, ManualOpenHalf);
         /**
          * Start code
          */
-        lift.move(-0.15);
         outtake.moveStart();
-//        outtake.readyStart();
-        outtake.openClaw();
+        outtake.openClawFull();
+        intake.moveStart();
+        lift.reset();
+
     }
 
     @Override
     public void startTele() {
         lift.reset();
+
     }
 
     @Override
     public void loopTele() {
 
-        drive.newMove(gph1.ly, gph1.lx);
+        drive.newMove(gph1.ry, gph1.rx, gph1.lx);
         lift.move(gph2.ry);
+//        log.show("pose", odometry.getPose());
+//        log.show("DriveMode", driveMode.get());
 
-        log.show("DriveMode", driveMode.get());
-        log.show("StackedMode", lift.stackedMode == 0 ? "N/A" : 6-lift.stackedMode);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        log.show("StackedMode", lift.stackedMode == 0 ? "N/A" : 6-lift.stackedMode);
 
 
 
