@@ -23,22 +23,22 @@ public class Outtake extends RobotPart {
         arml = create("arml", ElectronicType.PSERVO_FORWARD);
 
 
-        arml.changePosition("start", .02); //.21 difference
-        armr.changePosition("start", 0.23);
+        arml.changePosition("start", 0); //.21 difference
+        armr.changePosition("start", 0.22);
         arml.addPosition("s", 0.09);
         armr.addPosition("s", 0.3);
 //
 //        arml.addPosition("startHalf", 0.38);
 //        armr.addPosition("startHalf", 0.38);
 
-        arml.addPosition("middle", 0.31);
-        armr.addPosition("middle", 0.52);
+        arml.addPosition("middle", 0.29);
+        armr.addPosition("middle", 0.50);
 //
 //        arml.addPosition("endHalf", 0.71);
 //        armr.addPosition("endHalf", 0.71);
 
-        arml.changePosition("end", 0.64);
-        armr.changePosition("end", 0.85);
+        arml.changePosition("end", 0.62);
+        armr.changePosition("end", 0.83);
 
         armr.addPosition("e", 0.1);
         arml.addPosition("e", 0.1);
@@ -47,9 +47,9 @@ public class Outtake extends RobotPart {
 
 
 
-        claw.addPosition("close", .16);
-        claw.addPosition("openfull", .1);
-        claw.addPosition("openhalf", .05);
+        claw.addPosition("close", .14);
+        claw.addPosition("openfull", .06);
+        claw.addPosition("openhalf", 0);
 
         outtakeStatus.set(DRIVING);
     }

@@ -1,5 +1,6 @@
 package automodules;
 
+import automodules.stage.Stage;
 import automodules.stage.Stop;
 import auton.Auto;
 import robot.RobotUser;
@@ -25,9 +26,10 @@ public interface AutoModuleUser extends RobotUser {
      */
 
     AutoModule Intake = new AutoModule(
+
             outtake.stageOpen(.2),
             intake.stageStart(.2),
-            intake.moveTime(-.8,2)
+            intake.moveTime(-.8, 1)
 
 
     ).setStartCode(() ->
@@ -39,7 +41,7 @@ public interface AutoModuleUser extends RobotUser {
 
 
     AutoModule Extake = new AutoModule(
-            outtake.stageOpenHalf(.2).attach(intake.moveTime(1, .2)),
+            outtake.stageOpenHalf(.2).attach(intake.moveTime(1, .3)),
             outtake.stageMiddle(.2),
             outtake.stageClose(.2)
     ).setStartCode(() ->
@@ -103,8 +105,8 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule PlaceLow = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(.8, heightMode.getValue(LOW)),
-            outtake.stageEnd(.2)
+            lift.stageLift(1, heightMode.getValue(LOW)),
+            outtake.stageEnd(.1)
     ).setStartCode(() -> {
 
         heightMode.set(LOW);
@@ -113,7 +115,7 @@ public interface AutoModuleUser extends RobotUser {
     });
     AutoModule PlaceMid = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(1.0, heightMode.getValue(MIDDLE)).attach(outtake.stageEndContinuousWithFlip(.5, 0))
+            lift.stageLift(1.0, heightMode.getValue(MIDDLE)).attach(outtake.stageEndContinuousWithFlip(.5,      0))
     ).setStartCode(() -> {
 
         heightMode.set(MIDDLE);

@@ -94,6 +94,8 @@ public class StageBuilder {
     }
     protected Main main(double p){ return new Main(() -> move(p)); }
     public Stage moveTime(double p, double t){ return new Stage(usePart(), main(p), exitTime(t), stop(), returnPart()); }
+    public Stage moveFull(double p){ return new Stage(usePart(), main(p), stop(), returnPart()); }
+
     protected Stage moveTime(double p, ReturnCodeSeg<Double> t){ final Double[] val = {0.0}; return new Stage(usePart(), new Initial(() -> val[0] = t.run()), main(p), new Exit(() -> { synchronized (val){ return bot.rfsHandler.getTimer().seconds() > val[0]; }}), stop(), returnPart()); }
     protected Stage moveNow(double p){ return new Stage(usePart(), main(p), exitAlways(), stop(), returnPart()); }
     protected AutoModule MoveTime(double p, double t){ return new AutoModule(moveTime(p, t)); }

@@ -22,38 +22,41 @@ public class Intake extends RobotPart {
     private PServo link2;
     private CMotor hang;
 
+    boolean Pixel;
+
     @Override
     public void init() {
         in = create("in", ElectronicType.CMOTOR_FORWARD);
-        ins = create("ins", ElectronicType.CSERVO_FORWARD);
+//        ins = create("ins", ElectronicType.CSERVO_FORWARD);
         link = create("link", ElectronicType.PSERVO_REVERSE);
         link2 = create("link2", ElectronicType.PSERVO_FORWARD);
 
-        hang = create("hang", ElectronicType.CMOTOR_FORWARD);
+//        hang = create("hang", ElectronicType.CMOTOR_FORWARD);
 
         link.changePosition("init", .39);
-        link.changePosition("start",.72);
-        link.changePosition("middle",.52);
+        link.changePosition("start", .72);
+        link.changePosition("middle", .52);
 
         link2.changePosition("init", .39);
-        link2.changePosition("start",.72);
-        link2.changePosition("middle",.52);
+        link2.changePosition("start", .72);
+        link2.changePosition("middle", .52);
     }
-    public void moveInit(){
+
+    public void moveInit() {
         link.setPosition("init");
         link.setPosition("init");
 
 
     }
 
-    public void moveStart(){
+    public void moveStart() {
         link.setPosition("start");
         link2.setPosition("start");
 
 
     }
 
-    public void moveMiddle(){
+    public void moveMiddle() {
         link.setPosition("middle");
         link2.setPosition("middle");
 
@@ -61,28 +64,37 @@ public class Intake extends RobotPart {
     }
 
 
-    public void moveHang(double pow) {
-        hang.setPower(pow);
-    }
+//    public void moveHang(double pow) {
+//        hang.setPower(pow);
+//    }
+
     @Override
     public CodeSeg move(double pow) {
         in.setPower(pow);
-        ins.setPower(pow);
+//        ins.setPower(pow);
         return null;
     }
-//    public void isPixel(){
-//        boolean isPixel;
-//        if(cso.getDistance() < 4){
-//            isPixel = true;
+
+//    public void isPixel() {
 //
-//        }else{
+//        if (cso.getDistance() < 4) {
+//            Pixel = true;
 //
-//            isPixel = false;
+//        } else {
+//
+//            Pixel = false;
 //        }
 //    }
 //
-//    public Stage intakePixel(double p){
+//    public Stage intakePixel(double p) {
+//        isPixel();
+//        if (Pixel = true) {
 //
+//            in.setPower(0);
+//        } else {
+//            in.setPower(p);
+//        }
+//        return null;
 //
 //    }
 
@@ -93,9 +105,14 @@ public class Intake extends RobotPart {
     public Stage moveTime(double p, ReturnCodeSeg<Double> t) { return super.moveTime(p, t); }
 
     @Override
+    public Stage moveFull(double p){
+        return super.moveFull(p);
+    }
+
+    @Override
     public AutoModule MoveTime(double p, double t) {
         return super.MoveTime(p, t);
     }
-
-
 }
+
+
