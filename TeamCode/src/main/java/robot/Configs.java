@@ -10,7 +10,6 @@ public class Configs implements RobotUser{
     RobotConfig TestConfig = new RobotConfig(customTestPart);
     RobotConfig TestConfig2 = new RobotConfig(testPart2);
     RobotConfig TestConfig3 = new RobotConfig(drive);
-    RobotConfig test = new RobotConfig(camera);
 
     /**
      * Used for PowerPlay robot
@@ -27,7 +26,7 @@ public class Configs implements RobotUser{
      * Current Config
      */
     public void setCurrentConfig(){
-        setConfig(test);
+        setConfig(CenterStage);
     }
 
 }

@@ -88,11 +88,6 @@ public class CaseScannerContours extends Scanner{
             Imgproc.rectangle(input, rect, new Scalar(0, 255, 0), 2);
             c = getCase(rect);
         }
-        mat.release();
-        lowerThresh.release();
-        upperThresh.release();
-        finalThresh.release();
-        rgb.release();
         return c;
     }
     @Override
