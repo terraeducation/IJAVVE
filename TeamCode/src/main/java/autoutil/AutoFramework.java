@@ -1,21 +1,13 @@
 package autoutil;
 
 
-import static global.General.fault;
-import static global.General.fieldPlacement;
-import static global.General.fieldSide;
-import static global.General.log;
 
-import androidx.annotation.NonNull;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.firstinspires.ftc.teamcode.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+import androidx.annotation.NonNull;
 import automodules.AutoModule;
 import automodules.stage.Main;
 import automodules.stage.Stage;
@@ -26,13 +18,11 @@ import autoutil.generators.Generator;
 import autoutil.generators.PauseGenerator;
 import autoutil.reactors.Reactor;
 import autoutil.vision.CaseScanner;
-import autoutil.vision.CaseScannerContours;
+import autoutil.vision.CaseScannerBar;
 import autoutil.vision.Scanner;
-//import autoutil.vision.TeamPropScanner;
 import elements.Case;
 import elements.FieldPlacement;
 import elements.FieldSide;
-import elements.TeamProp;
 import geometry.framework.CoordinatePlane;
 import geometry.position.Pose;
 import robotparts.RobotPart;
@@ -44,6 +34,11 @@ import util.condition.DecisionList;
 import util.condition.Expectation;
 import util.condition.Magnitude;
 import util.template.Iterator;
+
+import static global.General.fault;
+import static global.General.fieldPlacement;
+import static global.General.fieldSide;
+import static global.General.log;
 
 public abstract class AutoFramework extends Auto implements AutoUser {
     protected AutoConfig config;
@@ -67,12 +62,9 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 
     protected boolean scanning = false;
     protected boolean haltCameraAfterInit = true;
-    //    public CaseScanner caseScanner;
-    public CaseScannerContours caseScanner;
-//    protected TeamPropScanner teamPropScanner;
+    protected CaseScanner caseScanner;
     protected Scanner scannerAfterInit;
     protected Case caseDetected = Case.FIRST;
-    protected TeamProp propCaseDetected = TeamProp.FIRST;
 
     private int segmentIndex = 1;
     private int pauseIndex, autoModuleIndex, customSegmentIndex, breakpointIndex = 0;
@@ -121,7 +113,7 @@ public abstract class AutoFramework extends Auto implements AutoUser {
     public void customFlipped(CodeSeg one, CodeSeg two){ if(!isFlipped()){ one.run();}else{two.run();}}
     public void customPlacement(CodeSeg one, CodeSeg two){ addDecision(new DecisionList(() -> fieldPlacement).addOption(FieldPlacement.LOWER, one).addOption(FieldPlacement.UPPER, two)); }
     public void customSidePlacement(CodeSeg one, CodeSeg two, CodeSeg three, CodeSeg four){customSide(() -> customPlacement(one, two), () -> customPlacement(three, four));}
-    public void customCase(CodeSeg first, CodeSeg second, CodeSeg third){ addDecision(new DecisionList(() -> propCaseDetected).addOption(TeamProp.FIRST, first).addOption(TeamProp.SECOND, second).addOption(TeamProp.THIRD, third)); }
+    public void customCase(CodeSeg first, CodeSeg second, CodeSeg third){ addDecision(new DecisionList(() -> caseDetected).addOption(Case.FIRST, first).addOption(Case.SECOND, second).addOption(Case.THIRD, third)); }
     public void customNumber(int num, ParameterCodeSeg<Integer> one){ for (int i = 0; i < num; i++) { one.run(i); } }
     public void customIf(boolean value, CodeSeg ifTrue, CodeSeg ifFalse){ if(value){ifTrue.run();}else{ifFalse.run();} }
 
@@ -130,35 +122,22 @@ public abstract class AutoFramework extends Auto implements AutoUser {
         scannerAfterInit = scanner;
     }
 
-    public void scan(boolean view, String color){
+    public void scan(boolean view){
         scanning = true;
-        caseScanner = new CaseScannerContours();
-        camera.start(true);
+        caseScanner = new CaseScannerBar();
         camera.setScanner(caseScanner);
-        caseScanner.setColor(color);
-        caseScanner.start();
+        camera.start(view);
     }
-
-//    public void propScanner(boolean view) {
-//        scanning = true;
-//        teamPropScanner = new TeamPropScanner();
-//        camera.setScanner(teamPropScanner);
-//        camera.start(view);
-//    }
-
 
     @Override
     public final void initAuto() {
         initialize();
         if(scanning){
-            log.show("yeet");
-//            while (!isStarted() && !isStopRequested()){ propCaseDetected = teamPropScanner.getCase(); teamPropScanner.log(); log.showTelemetry(); }
-            while (!isStarted() && !isStopRequested()){ propCaseDetected = caseScanner.getCase(); caseScanner.log(); log.showTelemetry(); }
-
-            if(haltCameraAfterInit) {camera.halt();} else{ camera.setScanner(scannerAfterInit); }
+            while (!isStarted() && !isStopRequested()){ caseDetected = caseScanner.getCase(); caseScanner.log(); log.showTelemetry(); }
+            if(haltCameraAfterInit) { camera.halt(); }else{ camera.setScanner(scannerAfterInit); }
         }
-//        setup();
-//        createSegments();
+        setup();
+        createSegments();
     }
 
     public abstract void initialize();
@@ -309,7 +288,6 @@ public abstract class AutoFramework extends Auto implements AutoUser {
         caseScanner = null;
         scannerAfterInit = null;
         caseDetected = Case.FIRST;
-        propCaseDetected = TeamProp.FIRST;
         segmentIndex = 1;
         pauseIndex = 0;
         autoModuleIndex = 0;
