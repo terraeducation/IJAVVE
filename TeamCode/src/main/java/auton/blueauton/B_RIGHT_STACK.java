@@ -58,7 +58,7 @@ public class B_RIGHT_STACK extends AutoFramework {
     @Override
     public void define() {
         customCase(() -> {
-
+//
             addTimedSetpoint(1.0,1,.2,0,15,0);
             addTimedSetpoint(1.0, 1,1, 0, 55, -90);
             addAutoModule(Extake);
