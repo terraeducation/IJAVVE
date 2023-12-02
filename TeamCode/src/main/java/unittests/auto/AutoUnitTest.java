@@ -36,7 +36,7 @@ public class AutoUnitTest extends UnitTest implements Iterator, Common, AutoUser
      * Run runs once after start
      * NOTE: This is equivalent to loop in TeleUnitTest except it runs once
      */
-    protected void run(){ if(autoFramework != null){ autoFramework.initAuto(); autoFramework.runAuto(); autoFramework.stopAuto(); } }
+    protected void run(){ if(autoFramework != null){ autoFramework.initAuto(); autoFramework.runAuto();} }
 
     /**
      * Test runs the test
