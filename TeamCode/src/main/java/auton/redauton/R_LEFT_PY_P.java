@@ -1,4 +1,4 @@
-package auton.blueauton;
+package auton.redauton;
 
 import static global.General.bot;
 
@@ -9,8 +9,8 @@ import autoutil.AutoFramework;
 import elements.Case;
 import robotparts.RobotPart;
 
-@Autonomous(name = "B. Right PY&P ", group = "auto", preselectTeleOp = "TerraOp")
-public class B_RIGHT_PY_P extends AutoFramework {
+@Autonomous(name = "R. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
+public class R_LEFT_PY_P extends AutoFramework {
 
 
     @Override
@@ -87,3 +87,4 @@ public class B_RIGHT_PY_P extends AutoFramework {
 
 
 }
+

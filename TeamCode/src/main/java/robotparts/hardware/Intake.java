@@ -100,6 +100,7 @@ public class Intake extends RobotPart {
 
 
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
+    public Stage stageMiddle(double t){ return super.customTime(this::moveMiddle, t); }
 
     @Override
     public Stage moveTime(double p, ReturnCodeSeg<Double> t) { return super.moveTime(p, t); }
