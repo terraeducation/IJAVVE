@@ -10,6 +10,7 @@ public class Configs implements RobotUser{
     RobotConfig TestConfig = new RobotConfig(customTestPart);
     RobotConfig TestConfig2 = new RobotConfig(testPart2);
     RobotConfig TestConfig3 = new RobotConfig(drive);
+    RobotConfig test = new RobotConfig(camera);
 
     /**
      * Used for PowerPlay robot
@@ -20,7 +21,7 @@ public class Configs implements RobotUser{
     /**
      * Used for CenterStage robot
      */
-    RobotConfig CenterStage = new RobotConfig(drive, gyro, intake, lift, odometry, outtake);
+    RobotConfig CenterStage = new RobotConfig(drive, gyro, intake, lift, odometry, outtake, camera);
 
     /**
      * Current Config

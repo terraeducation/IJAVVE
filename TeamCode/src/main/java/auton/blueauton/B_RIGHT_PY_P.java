@@ -7,19 +7,18 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import automodules.AutoModule;
 import autoutil.AutoFramework;
 import elements.Case;
+import elements.TeamProp;
 import robotparts.RobotPart;
 
 @Autonomous(name = "B. Right PY&P ", group = "auto", preselectTeleOp = "TerraOp")
 public class B_RIGHT_PY_P extends AutoFramework {
-
-
     @Override
     public void initialize() {
         this.setConfig(NonstopConfig);
         bot.saveLocationOnField();
         outtake.moveStart();
         outtake.openClawHalf();
-
+        propCaseDetected = TeamProp.FIRST;
     }
     AutoModule Extake = new AutoModule(
             intake.moveTime(.5,.25)

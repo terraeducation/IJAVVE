@@ -11,13 +11,10 @@ import robotparts.RobotPart;
 
 @Autonomous(name = "B. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
 public class B_LEFT_PY_P extends AutoFramework {
-
-
     @Override
     public void initialize() {
         this.setConfig(NonstopConfig);
         bot.saveLocationOnField();
-
         outtake.moveStart();
         outtake.openClawHalf();
         caseDetected = Case.FIRST;
