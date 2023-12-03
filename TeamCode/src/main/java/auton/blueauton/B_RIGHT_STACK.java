@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import automodules.AutoModule;
 import autoutil.AutoFramework;
 import elements.Case;
+import elements.TeamProp;
 import robotparts.RobotPart;
 
 
@@ -20,7 +21,8 @@ public class B_RIGHT_STACK extends AutoFramework {
         bot.saveLocationOnField();
         outtake.moveStart();
         outtake.openClawFull();
-        caseDetected = Case.FIRST;
+        propCaseDetected = TeamProp.FIRST;
+
 
     }
     AutoModule PullStack = new AutoModule(

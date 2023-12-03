@@ -1,12 +1,14 @@
 package auton.blueauton;
 
 import static global.General.bot;
+import static global.General.log;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import automodules.AutoModule;
 import autoutil.AutoFramework;
 import elements.Case;
+import elements.TeamProp;
 import robotparts.RobotPart;
 
 @Autonomous(name = "B. Right PY&P ", group = "auto", preselectTeleOp = "TerraOp")
@@ -19,8 +21,10 @@ public class B_RIGHT_PY_P extends AutoFramework {
         bot.saveLocationOnField();
         outtake.moveStart();
         outtake.openClawHalf();
-        caseDetected = Case.FIRST;
-
+        propCaseDetected = TeamProp.FIRST;
+        AutoFramework auto = this;
+        auto.scan(true, "blue", "right");
+//        log.show("Test case thing", propCaseDetected);
     }
     AutoModule Extake = new AutoModule(
             intake.moveTime(.5,.25)

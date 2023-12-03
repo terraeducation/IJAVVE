@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import automodules.AutoModule;
 import autoutil.AutoFramework;
 import elements.Case;
+import elements.TeamProp;
 import robotparts.RobotPart;
 
 @Autonomous(name = "R. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
@@ -19,8 +20,9 @@ public class R_LEFT_PY_P extends AutoFramework {
         bot.saveLocationOnField();
         outtake.moveStart();
         outtake.openClawHalf();
-        caseDetected = Case.FIRST;
-
+        propCaseDetected = TeamProp.FIRST;
+        AutoFramework auto = this;
+        auto.scan(true, "red", "left");
     }
     AutoModule Extake = new AutoModule(
             intake.moveTime(.5,.25)
@@ -42,6 +44,7 @@ public class R_LEFT_PY_P extends AutoFramework {
     );
     @Override
     public void define() {
+        propCaseDetected = TeamProp.FIRST;
         customCase(() -> {
 
             addTimedSetpoint(1.0,1,.2,0,15,0);
@@ -79,11 +82,11 @@ public class R_LEFT_PY_P extends AutoFramework {
             addAutoModule(Reset);
         });
     }
-    @Override
-    public void postProcess() {
-        autoPlane.reflectY();
-        autoPlane.reflectX();
-    }
+//    @Override
+//    public void postProcess() {
+////        autoPlane.reflectY();
+////        autoPlane.reflectX();
+//    }
 
 
 }

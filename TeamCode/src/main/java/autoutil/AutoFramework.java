@@ -69,7 +69,7 @@ public abstract class AutoFramework extends Auto implements AutoUser {
     protected boolean scanning = false;
     protected boolean haltCameraAfterInit = true;
     //    public CaseScanner caseScanner;
-    public CaseScannerRect caseScanner;
+    protected CaseScannerRect caseScanner;
 //    protected TeamPropScanner teamPropScanner;
     protected Scanner scannerAfterInit;
     protected Case caseDetected = Case.FIRST;
@@ -153,14 +153,14 @@ public abstract class AutoFramework extends Auto implements AutoUser {
     public final void initAuto() {
         initialize();
         if(scanning){
-            log.show("yeet");
+//            log.show("yeet");
 //            while (!isStarted() && !isStopRequested()){ propCaseDetected = teamPropScanner.getCase(); teamPropScanner.log(); log.showTelemetry(); }
             while (!isStarted() && !isStopRequested()){ propCaseDetected = caseScanner.getCase(); caseScanner.log(); log.showTelemetry(); }
 
             if(haltCameraAfterInit) {camera.halt();} else{ camera.setScanner(scannerAfterInit); }
         }
-//        setup();
-//        createSegments();
+        setup();
+        createSegments();
     }
 
     public abstract void initialize();

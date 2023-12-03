@@ -10,6 +10,7 @@ import automodules.AutoModule;
 import autoutil.AutoFramework;
 import elements.Case;
 import elements.FieldSide;
+import elements.TeamProp;
 import robotparts.RobotPart;
 
 @Autonomous(name = "R. Right PY&P ", group = "auto", preselectTeleOp = "TerraOp")
@@ -20,7 +21,9 @@ public class R_RIGHT_PY_P extends AutoFramework {
         bot.saveLocationOnField();
         outtake.moveStart();
         outtake.openClawHalf();
-        caseDetected = Case.FIRST;
+        propCaseDetected = TeamProp.FIRST;
+        AutoFramework auto = this;
+        auto.scan(true, "red", "left");
     }
     AutoModule Extake = new AutoModule(
             intake.moveTime(.5,.25)

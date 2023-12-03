@@ -55,7 +55,25 @@ public class Cameras extends RobotPart {
 //    public boolean updateVuforia(){ return cam.updateVuforia(); }
     public Pose getPoseFromVuforia(){ return cam.getPose(); }
     @Override
-    public void halt(){ camera1.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
+    public void halt(){
+//        WebcamName webcamName = hardwareMap.get(WebcamName.class, "ecam");
+//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+//        // With live preview
+//        camera1 = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
+//        camera1.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+//        {
+//            @Override
+//            public void onOpened()
+//            {
+//                camera1.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
+//            }
+//            @Override
+//            public void onError(int errorCode)
+//            {
+//                log.show("CAN'T BE OPENED");
+//            }
+//        });
+        camera1.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
         @Override
         public void onClose() {}
     }); }

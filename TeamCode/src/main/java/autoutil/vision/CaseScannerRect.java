@@ -77,11 +77,14 @@ public class CaseScannerRect extends Scanner {
             log.show("STARTING");
             Imgproc.cvtColor(input, YCbCr, Imgproc.COLOR_RGB2YCrCb);
 
-            Rect leftRect = new Rect(100, 500, 200, 200);
-            Rect centerRect = new Rect(600, 300, 200, 200);
-            Rect rightRect = new Rect(1050, 500, 200, 200);
+            Rect leftRect = new Rect(0, 500, 200, 200);
+            Rect centerRect = new Rect(250, 300, 400, 250);
+            Rect rightRect = new Rect(899, 400, 300, 300);
 
             if (side.equalsIgnoreCase("left")) {
+                leftRect = new Rect(100, 350, 300, 300);
+                centerRect = new Rect(450, 300, 400, 250);
+                rightRect = new Rect(1050, 500, 200, 200);
                 notSeen = rightRect;
             } else if (side.equalsIgnoreCase("right")) {
                 notSeen = leftRect;
@@ -109,10 +112,10 @@ public class CaseScannerRect extends Scanner {
             centerAvgFin = centerAvg.val[0];
             rightAvgFin = rightAvg.val[0];
 
-            double maxFin = Math.max(leftAvgFin, centerAvgFin);
-            if (maxFin < rightAvgFin) {
-                maxFin = rightAvgFin;
-            }
+//            double maxFin = Math.max(leftAvgFin, centerAvgFin);
+//            if (maxFin < rightAvgFin) {
+//                maxFin = rightAvgFin;
+//            }
 
             if (notSeen.equals(rightRect)) {
                 if (leftAvgFin < threshhold && centerAvgFin < threshhold) {
@@ -137,6 +140,9 @@ public class CaseScannerRect extends Scanner {
             }
 
             YCbCr.release();
+            leftCrop.release();
+            centerCrop.release();
+            rightCrop.release();
             return -1;
     //        if (leftAvgFin > centerAvgFin && leftAvgFin > rightAvgFin) {
     //            Imgproc.rectangle(input, leftRect, GREEN, 5);
