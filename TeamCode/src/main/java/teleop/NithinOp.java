@@ -28,6 +28,7 @@ import static global.General.gph1;
 import static global.General.gph2;
 import static global.General.log;
 import static global.General.voltageScale;
+import static global.Modes.Drive.FAST;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.GamepadMode.*;
@@ -44,11 +45,12 @@ public class NithinOp extends Tele {
         voltageScale = 1;
 
         gph1.link(LEFT_BUMPER, Intake);
-        gph1.link(LEFT_TRIGGER, Extake);
+        gph1.link(LEFT_TRIGGER, PlaceReady);
 
         gph1.link(X, PlaceLow);
         gph1.link(A, PlaceMid);
         gph1.link(Y, () -> intake.moveMiddle());
+        gph1.link(B, ()-> intake.moveTime(1,1));
 
         gph1.link(RIGHT_TRIGGER, PlaceAll);
         gph1.link(RIGHT_BUMPER, PlaceOne);
@@ -70,6 +72,7 @@ public class NithinOp extends Tele {
         outtake.moveStart();
         outtake.openClawFull();
         intake.moveStart();
+        driveMode.set(FAST);
         lift.reset();
 
     }

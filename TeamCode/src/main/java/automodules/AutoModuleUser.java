@@ -9,6 +9,7 @@ import teleutil.independent.Independent;
 import teleutil.independent.Machine;
 
 import static global.Modes.*;
+import static global.Modes.Drive.FAST;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.Height.GROUND;
@@ -40,9 +41,8 @@ public interface AutoModuleUser extends RobotUser {
     });
 
 
-    AutoModule Extake = new AutoModule(
-            outtake.stageOpenHalf(.2).attach(intake.moveTime(1, .3)),
-            outtake.stageMiddle(.2),
+    AutoModule PlaceReady = new AutoModule(
+            outtake.stageOpenHalf(.2).attach(outtake.stageMiddle(.2)),
             outtake.stageClose(.2)
     ).setStartCode(() ->
     {
@@ -87,7 +87,7 @@ public interface AutoModuleUser extends RobotUser {
             RobotPart.pause(.2),
             outtake.stageStart(.5).attach(lift.stageLift(.8, heightMode.getValue(GROUND)))
     ).setStartCode(() -> {
-
+        driveMode.set(FAST);
         heightMode.set(GROUND);
 
 
@@ -108,7 +108,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, heightMode.getValue(LOW)),
             outtake.stageEnd(.1)
     ).setStartCode(() -> {
-
+        driveMode.set(SLOW);
         heightMode.set(LOW);
 
 
@@ -117,7 +117,7 @@ public interface AutoModuleUser extends RobotUser {
             RobotPart.pause(0.05),
             lift.stageLift(1.0, heightMode.getValue(MIDDLE)).attach(outtake.stageEndContinuousWithFlip(.5,      0))
     ).setStartCode(() -> {
-
+        driveMode.set(SLOW);
         heightMode.set(MIDDLE);
 
 
@@ -127,7 +127,7 @@ public interface AutoModuleUser extends RobotUser {
             RobotPart.pause(0.05),
             lift.stageLift(1.0, heightMode.getValue(HIGH)).attach(outtake.stageEndContinuousWithFlip(.5, 0))
     ).setStartCode(() -> {
-
+        driveMode.set(SLOW);
         heightMode.set(HIGH);
     });
 

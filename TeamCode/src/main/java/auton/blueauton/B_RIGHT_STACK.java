@@ -32,7 +32,7 @@ public class B_RIGHT_STACK extends AutoFramework {
     );
     AutoModule Extake = new AutoModule(
             outtake.stageOpenHalf(.1),
-            intake.moveTime(.5,.25),
+            intake.moveTime(.75,.5),
             outtake.stageClose(.1)
 
 

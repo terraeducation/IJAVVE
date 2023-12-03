@@ -67,7 +67,7 @@ public class Drive extends RobotPart {
 
         noStrafeLock = false;
 
-        driveMode.set(MEDIUM);
+        driveMode.set(FAST);
         precision.reset();
         precision2.reset();
 
@@ -125,12 +125,18 @@ public class Drive extends RobotPart {
         }
     }
     public void newMove(double f, double s, double t) {
-
-        fr.setPower(f - s - t);
-        br.setPower(f + s - t);
-        fl.setPower(f + s + t);
-        bl.setPower(f - s + t);
-    }
+        if(driveMode.modeIs(SLOW)){
+            fr.setPower(.5*f - .5*s - .25*t);
+            br.setPower(.5*f + .5*s - .25*t);
+            fl.setPower(.5*f + .5*s + .25*t);
+            bl.setPower(.5*f - .5*s + .25*t);
+    }else if(driveMode.modeIs(FAST)) {
+            fr.setPower(f - s - t);
+            br.setPower(f + s - t);
+            fl.setPower(f + s + t);
+            bl.setPower(f - s + t);
+        }
+        }
     public void moveSmooth(double f, double s, double t) {
 
 
