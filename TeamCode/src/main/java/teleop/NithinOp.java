@@ -50,7 +50,7 @@ public class NithinOp extends Tele {
         gph1.link(X, PlaceLow);
         gph1.link(A, PlaceMid);
         gph1.link(Y, () -> intake.moveMiddle());
-        gph1.link(B, ()-> intake.moveTime(1,1));
+        gph1.link(B, Extake);
 
         gph1.link(RIGHT_TRIGGER, PlaceAll);
         gph1.link(RIGHT_BUMPER, PlaceOne);
@@ -144,8 +144,8 @@ public class NithinOp extends Tele {
 //        log.show("heading", gyro.getHeading());
 
 //        junctionScannerAll.message();
-//        log.show("Right", lift.motorRight.getPosition());
-//        log.show("Left", lift.motorLeft.getPosition());
+        log.show("Right", lift.motorRight.getPosition());
+        log.show("Left", lift.motorLeft.getPosition());
 //        log.show("TargetRight", lift.motorRight.getPositionHolder().getTarget());
 //        log.show("TargetLeft", lift.motorLeft.getPositionHolder().getTarget());
 //        log.show("Pose", odometry.getPose());

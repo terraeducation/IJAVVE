@@ -24,7 +24,7 @@ public class B_RIGHT_PY_P extends AutoFramework {
         propCaseDetected = TeamProp.FIRST;
         AutoFramework auto = this;
         auto.scan(true, "blue", "right");
-//        log.show("Test case thing", propCaseDetected);
+
     }
     AutoModule Extake = new AutoModule(
             intake.moveTime(.5,.25)

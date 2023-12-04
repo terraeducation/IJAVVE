@@ -39,6 +39,18 @@ public interface AutoModuleUser extends RobotUser {
 
 
     });
+    AutoModule Extake = new AutoModule(
+
+
+            intake.moveTime(.8, 1)
+
+
+    ).setStartCode(() ->
+    {
+
+
+
+    });
 
 
     AutoModule PlaceReady = new AutoModule(
@@ -84,8 +96,9 @@ public interface AutoModuleUser extends RobotUser {
 //    });
     AutoModule PlaceAll = new AutoModule(
             outtake.stageOpen(.2),
-            RobotPart.pause(.2),
-            outtake.stageStart(.5).attach(lift.stageLift(.8, heightMode.getValue(GROUND)))
+            RobotPart.pause(.1),
+            outtake.stageMiddle(.2).attach(lift.stageLift(.8, heightMode.getValue(GROUND))),
+            outtake.stageStart(.1)
     ).setStartCode(() -> {
         driveMode.set(FAST);
         heightMode.set(GROUND);
@@ -94,7 +107,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule PlaceOne = new AutoModule(
-            outtake.stageOpenHalf(.2)
+            outtake.stageOpenHalf(.05)
 
     ).setStartCode(() -> {
 
@@ -105,7 +118,7 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule PlaceLow = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(1, heightMode.getValue(LOW)),
+            lift.stageLift(1, heightMode.getValue(LOW)).attach(outtake.stageMiddler(.2)),
             outtake.stageEnd(.1)
     ).setStartCode(() -> {
         driveMode.set(SLOW);

@@ -23,24 +23,28 @@ public class Outtake extends RobotPart {
         arml = create("arml", ElectronicType.PSERVO_FORWARD);
 
 
-        arml.changePosition("start", 0.1); //.21 difference
-        armr.changePosition("start", 0.28);
+        arml.changePosition("start", 0.09); //.21 difference
+        armr.changePosition("start", 0.30);
         arml.addPosition("s", 0.09);
         armr.addPosition("s", 0.3);
 //
 //        arml.addPosition("startHalf", 0.38);
 //        armr.addPosition("startHalf", 0.38);
-        arml.addPosition("middle", 0.27);
-        armr.addPosition("middle", 0.48);
-//
+        arml.addPosition("middle", 0.33);
+        armr.addPosition("middle", 0.54);
+
+        arml.addPosition("middler", 0.4);
+        armr.addPosition("middler", 0.61);
+
+
 //        arml.addPosition("endHalf", 0.71);
 //        armr.addPosition("endHalf", 0.71);
 
-        arml.changePosition("end", 0.62);
-        armr.changePosition("end", 0.83);
+        arml.changePosition("end", 0.7);
+        armr.changePosition("end", 0.90);
 
-        armr.addPosition("e", 0.1);
-        arml.addPosition("e", 0.1);
+        armr.addPosition("e", 0.68);
+        arml.addPosition("e", 0.88);
 
         claw = create("claw", ElectronicType.PSERVO_REVERSE);
 
@@ -61,6 +65,8 @@ public class Outtake extends RobotPart {
 
     public void moveStart(){ armr.setPosition("start"); arml.setPosition("start"); }
     public void moveEnd(){ armr.setPosition("end"); arml.setPosition("end"); }
+    public void moveEndAuto(){ armr.setPosition("e"); arml.setPosition("e"); }
+
     public void openClawFull(){ claw.setPosition("openfull"); }
     public void openClawHalf(){ claw.setPosition("openhalf"); }
 //    public void openClawCap() { claw.setPosition("cap"); }
@@ -72,9 +78,14 @@ public class Outtake extends RobotPart {
 
     public void moveMiddle(){ armr.setPosition("middle"); arml.setPosition("middle"); }
 
+    public void moveMiddler(){ armr.setPosition("middler"); arml.setPosition("middler"); }
+
+
     public Stage stageReadyStart(double t){return super.customTime(this::readyStart, t);}
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageEnd(double t){ return super.customTime(this::moveEnd, t); }
+    public Stage stageEndAuto(double t){ return super.customTime(this::moveEndAuto, t); }
+
     public Stage stageOpen(double t){ return super.customTime(this::openClawFull, t); }
     public Stage stageOpenHalf(double t){ return super.customTime(this::openClawHalf, t); }
     public Stage stageClose(double t){ return super.customTime(this::closeClaw, t); }
@@ -85,6 +96,8 @@ public class Outtake extends RobotPart {
     public Stage stageOpenAfter(double t){ return super.customTimeAfter(this::openClawHalf, t); }
 
     public Stage stageMiddle(double t){ return super.customTime(this::moveMiddle, t);}
+    public Stage stageMiddler(double t){ return super.customTime(this::moveMiddler, t);}
+
     public Stage stageReadyEnd(double t){ return super.customTime(this::readyEnd, t); }
     public Stage stageReadyEndAfter(double t){ return super.customTimeAfter(this::readyEnd, t); }
     public Stage stageStartAfter(double t){ return super.customTimeAfter(this::moveStart, t); }

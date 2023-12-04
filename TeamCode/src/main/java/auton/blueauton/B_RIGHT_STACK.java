@@ -22,6 +22,8 @@ public class B_RIGHT_STACK extends AutoFramework {
         outtake.moveStart();
         outtake.openClawFull();
         propCaseDetected = TeamProp.FIRST;
+        AutoFramework auto = this;
+        auto.scan(true, "blue", "right");
 
 
     }
