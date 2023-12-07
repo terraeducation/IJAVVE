@@ -50,22 +50,14 @@ public class NithinOp extends Tele {
         gph1.link(X, PlaceLow);
         gph1.link(A, PlaceMid);
         gph1.link(Y, () -> intake.moveMiddle());
+        gph1.link(DPAD_UP, HangReady);
+        gph1.link(DPAD_DOWN, Hang);
+
         gph1.link(B, Extake);
 
         gph1.link(RIGHT_TRIGGER, PlaceAll);
         gph1.link(RIGHT_BUMPER, PlaceOne);
-//
-//        gph1.link(DPAD_DOWN, () -> intake.move(-.9));
-//        gph1.link(DPAD_UP, () -> intake.move(.9));
-//        gph1.link(DPAD_LEFT, () -> intake.move(0));
-//        gph1.link(Y, PlaceHigh);
 
-//        gph1.link(LEFT_TRIGGER, Place);
-//        gph1.link(RIGHT_TRIGGER, PlaceReady);
-
-//        gph2.link(Y, ManualOpenFull);
-//        gph2.link(A, ManualClose);
-//        gph2.link(B, ManualOpenHalf);
         /**
          * Start code
          */
@@ -80,6 +72,8 @@ public class NithinOp extends Tele {
     @Override
     public void startTele() {
         lift.reset();
+        outtake.moveStart();
+
 
     }
 

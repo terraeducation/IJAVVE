@@ -64,7 +64,9 @@ public class Lift extends RobotPart {
         globalOffset = 0;
     }
 
-    public void setGround(boolean ground){ this.ground = ground; }
+    public void setGround(boolean ground) {
+        this.ground = ground;
+    }
 
     @Override
     public CodeSeg move(double p) {
@@ -73,14 +75,14 @@ public class Lift extends RobotPart {
         return null;
     }
 
-    public void adjustHolderTarget(double delta){
-        if(outtakeStatus.modeIs(PLACING) && !heightMode.modeIs(GROUND)) {
+    public void adjustHolderTarget(double delta) {
+        if (outtakeStatus.modeIs(PLACING) && !heightMode.modeIs(GROUND)) {
             globalOffset += delta;
         }
         currentCutoffPosition = 0;
         motorRight.holdPositionExact();
         motorLeft.holdPositionExact();
-        double target = Precision.clip(motorRight.getPositionHolder().getTarget()+delta, 0, maxPosition);
+        double target = Precision.clip(motorRight.getPositionHolder().getTarget() + delta, 0, maxPosition);
         motorRight.setPositionHolderTarget(target);
         motorLeft.setPositionHolderTarget(target);
     }
@@ -91,35 +93,59 @@ public class Lift extends RobotPart {
     }
 
     @Override
-    public Stage moveTime(double p, ReturnCodeSeg<Double> t) { return super.moveTime(p, t); }
-
-    public Stage moveTimeBack(double fp, double p, ReturnCodeSeg<Double> t){ return moveTimeBack(() -> fp, () -> p, t, () -> {}); }
-
-    public Stage moveTimeBack(ReturnCodeSeg<Double> fp, ReturnCodeSeg<Double> p, ReturnCodeSeg<Double> t, CodeSeg endCode){
-        final Double[] val = {0.0};
-        return new Stage(drive.usePart(), this.usePart(), new Initial(() -> val[0] = t.run()),
-                new Main(() -> {drive.move(fp.run(), 0,0); move(p.run());}),
-                new Exit(() -> { synchronized (val){ return val[0] == 0 || bot.rfsHandler.getTimer().seconds() > val[0]; }}), this.stop(), drive.stop(), new Stop(endCode), this.returnPart(), drive.returnPart());
+    public Stage moveTime(double p, ReturnCodeSeg<Double> t) {
+        return super.moveTime(p, t);
     }
 
-    public Stage moveTimeBackOverride(double fp, double p, double t){
+    public Stage moveTimeBack(double fp, double p, ReturnCodeSeg<Double> t) {
+        return moveTimeBack(() -> fp, () -> p, t, () -> {
+        });
+    }
+
+    public Stage moveTimeBack(ReturnCodeSeg<Double> fp, ReturnCodeSeg<Double> p, ReturnCodeSeg<Double> t, CodeSeg endCode) {
+        final Double[] val = {0.0};
+        return new Stage(drive.usePart(), this.usePart(), new Initial(() -> val[0] = t.run()),
+                new Main(() -> {
+                    drive.move(fp.run(), 0, 0);
+                    move(p.run());
+                }),
+                new Exit(() -> {
+                    synchronized (val) {
+                        return val[0] == 0 || bot.rfsHandler.getTimer().seconds() > val[0];
+                    }
+                }), this.stop(), drive.stop(), new Stop(endCode), this.returnPart(), drive.returnPart());
+    }
+
+    public Stage moveTimeBackOverride(double fp, double p, double t) {
         final Double[] val = {0.0};
         return new Stage(drive.usePart(), this.usePart(), new Initial(() -> val[0] = t),
-                new Main(() -> {drive.move(fp, 0,0); motorLeft.setPowerRaw(p); motorRight.setPowerRaw(p);}),
-                new Exit(() -> { synchronized (val){ return bot.rfsHandler.getTimer().seconds() > val[0]; }}), stop(), drive.stop(), this.returnPart(), drive.returnPart());
+                new Main(() -> {
+                    drive.move(fp, 0, 0);
+                    motorLeft.setPowerRaw(p);
+                    motorRight.setPowerRaw(p);
+                }),
+                new Exit(() -> {
+                    synchronized (val) {
+                        return bot.rfsHandler.getTimer().seconds() > val[0];
+                    }
+                }), stop(), drive.stop(), this.returnPart(), drive.returnPart());
     }
 
     public Stage stageLift(double power, double target) {
         return moveTarget(() -> motorRight, () -> motorLeft, power, power, () -> {
-        if(target == heightMode.getValue(LOW)+2 || target == heightMode.getValue(MIDDLE)+2 || target == heightMode.getValue(HIGH)+2){
-            return target+globalOffset;
-        }else{
-            return target;
-        }
-    }).combine(new Initial(() -> currentCutoffPosition = target < 1 ? defaultCutoffPosition : 0)); }
+            if (target == heightMode.getValue(LOW) + 2 || target == heightMode.getValue(MIDDLE) + 2 || target == heightMode.getValue(HIGH) + 2) {
+                return target + globalOffset;
+            } else {
+                return target;
+            }
+        }).combine(new Initial(() -> currentCutoffPosition = target < 1 ? defaultCutoffPosition : 0));
+    }
 
     @Override
-    public void maintain() { super.maintain(); }
+    public void maintain() {
+        super.maintain();
+    }
+
 
     public void reset(){ motorRight.softReset(); motorLeft.softReset(); }
 

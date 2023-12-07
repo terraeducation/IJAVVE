@@ -79,11 +79,11 @@ public class CaseScannerRect extends Scanner {
 
             Rect leftRect = new Rect(0, 500, 200, 200);
             Rect centerRect = new Rect(250, 300, 400, 250);
-            Rect rightRect = new Rect(899, 400, 300, 300);
+            Rect rightRect = new Rect(899, 300, 325, 400);
 
             if (side.equalsIgnoreCase("left")) {
                 leftRect = new Rect(100, 350, 300, 300);
-                centerRect = new Rect(450, 300, 400, 250);
+                centerRect = new Rect(600, 300, 400, 250);
                 rightRect = new Rect(1050, 500, 200, 200);
                 notSeen = rightRect;
             } else if (side.equalsIgnoreCase("right")) {

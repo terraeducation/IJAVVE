@@ -28,7 +28,7 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule Intake = new AutoModule(
 
-            outtake.stageOpen(.2),
+            outtake.stageStart(.2).attach(outtake.stageOpen(.2)),
             intake.stageStart(.2),
             intake.moveTime(-.8, 1)
 
@@ -52,10 +52,24 @@ public interface AutoModuleUser extends RobotUser {
 
     });
 
+    AutoModule HangReady = new AutoModule(
+            intake.stageMiddle(.1),
+            lift.stageLift(.2,33)
+    ).setStartCode(() ->{
+
+    });
+    AutoModule Hang = new AutoModule(
+            lift.stageLift(.2,heightMode.getValue(GROUND))
+    ).setStartCode(() ->{
+
+    });
+
 
     AutoModule PlaceReady = new AutoModule(
             outtake.stageOpenHalf(.2).attach(outtake.stageMiddle(.2)),
             outtake.stageClose(.2)
+
+
     ).setStartCode(() ->
     {
 
@@ -98,7 +112,8 @@ public interface AutoModuleUser extends RobotUser {
             outtake.stageOpen(.2),
             RobotPart.pause(.1),
             outtake.stageMiddle(.2).attach(lift.stageLift(.8, heightMode.getValue(GROUND))),
-            outtake.stageStart(.1)
+            outtake.stageStart(.2).attach(outtake.stageStartClaw(.2))
+
     ).setStartCode(() -> {
         driveMode.set(FAST);
         heightMode.set(GROUND);
@@ -107,7 +122,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule PlaceOne = new AutoModule(
-            outtake.stageOpenHalf(.05)
+            outtake.stageOpenHalf(.01)
 
     ).setStartCode(() -> {
 
@@ -118,20 +133,27 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule PlaceLow = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(1, heightMode.getValue(LOW)).attach(outtake.stageMiddler(.2)),
+            lift.stageLift(1, heightMode.getValue(LOW)),
+            outtake.stageMiddler(.05).attach(outtake.stageClose(.1)),
             outtake.stageEnd(.1)
+
     ).setStartCode(() -> {
         driveMode.set(SLOW);
         heightMode.set(LOW);
+        outtakeStatus.set(PLACING);
 
 
     });
     AutoModule PlaceMid = new AutoModule(
             RobotPart.pause(0.05),
-            lift.stageLift(1.0, heightMode.getValue(MIDDLE)).attach(outtake.stageEndContinuousWithFlip(.5,      0))
+            lift.stageLift(1.0, heightMode.getValue(MIDDLE)).attach(outtake.stageMiddle(.2)),
+            outtake.stageEnd(.1).attach(outtake.stageClose(.1))
+
     ).setStartCode(() -> {
         driveMode.set(SLOW);
         heightMode.set(MIDDLE);
+        outtakeStatus.set(PLACING);
+
 
 
     });
