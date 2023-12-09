@@ -98,7 +98,7 @@ public class B_RIGHT_STACK extends AutoFramework {
             addAutoModule(Intake);
 
 
-
+//
         }, () -> {
             addTimedSetpoint(1.0,1,1,0,30,0);
 
