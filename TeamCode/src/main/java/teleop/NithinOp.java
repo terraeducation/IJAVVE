@@ -49,7 +49,7 @@ public class NithinOp extends Tele {
 
         gph1.link(X, PlaceLow);
         gph1.link(A, PlaceMid);
-        gph1.link(Y, () -> intake.moveMiddle());
+        gph1.link(Y, intake::moveMiddle);
         gph1.link(DPAD_UP, HangReady);
         gph1.link(DPAD_DOWN, Hang);
 
