@@ -151,6 +151,7 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 
     @Override
     public final void initAuto() {
+//        distanceSensorsNew.start();
         initialize();
         if(scanning){
 //            log.show("yeet");
