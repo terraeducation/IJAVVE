@@ -1,6 +1,7 @@
 package auton.blueauton;
 
 import static global.General.bot;
+import static global.General.log;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -10,110 +11,108 @@ import elements.Case;
 import elements.TeamProp;
 import robotparts.RobotPart;
 
-
-@Autonomous(name = "B. Right RStack", group = "auto", preselectTeleOp = "TerraOp")
+@Autonomous(name = "B. Right Stack ", group = "auto", preselectTeleOp = "TerraOp")
 public class B_RIGHT_STACK extends AutoFramework {
 
 
     @Override
     public void initialize() {
+
         this.setConfig(NonstopConfig);
         bot.saveLocationOnField();
         outtake.moveStart();
-        outtake.openClawFull();
+        outtake.openClawHalf();
         propCaseDetected = TeamProp.FIRST;
         AutoFramework auto = this;
         auto.scan(true, "blue", "right");
 
-
     }
-    AutoModule PullStack = new AutoModule(
-      intake.moveTime(-1,.8)
-
+    AutoModule Intake = new AutoModule(
+            intake.stageMiddle(.1),
+            intake.moveTime(.8,1)
 
     );
     AutoModule Extake = new AutoModule(
-            outtake.stageOpenHalf(.1),
-            intake.moveTime(.75,.5),
-            outtake.stageClose(.1)
-
-
-    );
-    AutoModule DropStackStart = new AutoModule(
-            outtake.stageClose(.1),
-            intake.stageMiddle(.2)
-
+            intake.moveTime(.2,.8)
 
 
     );
     AutoModule Drop = new AutoModule(
             outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
-            lift.stageLift(1,30),
-            outtake.stageEnd(.2),
-            RobotPart.pause(.1),
+            lift.stageLift(.8,20).attach(outtake.stageMiddler(.5)),
+            outtake.stageEndAuto(.2),
+            RobotPart.pause(.5),
             outtake.stageOpen(.2),
-            RobotPart.pause(.1)
+            RobotPart.pause(.5),
+            lift.stageLift(.8,25)
+    );
+    AutoModule Drop3rd = new AutoModule(
+            outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
+            lift.stageLift(.8,22).attach(outtake.stageMiddler(.5)),
+            outtake.stageEndAuto(.2),
+            RobotPart.pause(.5),
+            outtake.stageOpen(.2),
+            RobotPart.pause(.5),
+            lift.stageLift(.8,25)
     );
     AutoModule Reset = new AutoModule(
             outtake.stageStart(1),
-            lift.stageLift(.8,0)
+            lift.stageLift(.6,0)
 
     );
     @Override
     public void define() {
         customCase(() -> {
+
+            addTimedSetpoint(1.0,1,1,0,65,0);
+
+            addTimedSetpoint(1,1,.5,-40,69,-95);
+            addAutoModule(Extake);
+            addTimedSetpoint(1,1,.5,0,65,-95);
+            addTimedSetpoint(1,.8,.5,0,120,0);
+            addTimedSetpoint(1.0,1,1,-20,125,90);
+            addTimedSetpoint(1.0,1,3,-215,125,90);
+            addTimedSetpoint(1.0,1,1.5,-235,48,92);
+            addAutoModule(Drop);
+            RobotPart.pause(.5);
+            addAutoModule(Reset);
+
+
+
+        }, () -> {
+
+            addTimedSetpoint(1.0,1,1.5,0,110,0);
+            addAutoModule(Extake);
+            addTimedSetpoint(1,.8,.5,0,120,0);
+            addTimedSetpoint(1.0,1,1,-20,125,90);
+            addTimedSetpoint(1.0,1,3,-215,125,90);
+            addTimedSetpoint(1.0,1,1.5,-235,62,92);
+            addAutoModule(Drop);
+            RobotPart.pause(.5);
+            addAutoModule(Reset);
+            addTimedSetpoint(1.0,1,.5,-200,62,92);
+
+            addTimedSetpoint(1.0,1,1,-180,125,90);
+            addTimedSetpoint(1.0,1,1.5,0,125,90);
+            addTimedSetpoint(1.0,1,1.5,40,130,94);
+            addAutoModule(Intake);
+
+
 //
-            addTimedSetpoint(1.0,1,.2,0,15,0);
-            addTimedSetpoint(1.0, 1,1, 0, 55, -90);
-            addAutoModule(Extake);
-            addTimedSetpoint(1.0,1,1,0,125,90);
-            addTimedSetpoint(1.0,1,1,40,130,90);
-            addAutoModule(DropStackStart);
-            addAutoModule(PullStack);
-            addTimedSetpoint(1.0,1,3,-200,125,90);
-            addTimedSetpoint(1.0,1,2,-230,35,90);
-            addAutoModule(Drop);
-            RobotPart.pause(.5);
-            addAutoModule(Reset);
-            addTimedSetpoint(1.0,1,.2,-200,35,90);
-            addTimedSetpoint(1.0,1,3,-200,125,90);
-            addTimedSetpoint(1.0,1,2,35,130,90);
-            addAutoModule(PullStack);
-            addTimedSetpoint(1.0,1,3,-200,125,90);
-            addTimedSetpoint(1.0,1,2,-230,35,90);
-            addAutoModule(Drop);
-            RobotPart.pause(.5);
-            addAutoModule(Reset);
-
-//            addTimedSetpoint(1.0,1,3,-200,125,90);
-//            addTimedSetpoint(1.0,1,1,-250,10,90);
-//            addAutoModule(Drop);
-//            RobotPart.pause(1);
-//            addAutoModule(Reset);
-
-
-
-
         }, () -> {
-            addTimedSetpoint(1.0,1,1,0,130,0);
-            addAutoModule(Extake);
-//            addTimedSetpoint(1.0,1,1,0,125,-90);
-//            addTimedSetpoint(1.0,1,3,-200,125,90);
-//            addTimedSetpoint(1.0,1,1,-250,10,90);
-//            addAutoModule(Drop);
-//            RobotPart.pause(1);
-//            addAutoModule(Reset);
+            addTimedSetpoint(1.0,1,1,0,30,0);
 
-        }, () -> {
-            addTimedSetpoint(1.0, 1, .2, 0, 15, 0);
-            addTimedSetpoint(1.0, 1, 1, 0, 55, 90);
+            addTimedSetpoint(1,.8,1,0,60,90);
+            addTimedSetpoint(1,.8,.5,-2,85,90);
             addAutoModule(Extake);
-            addTimedSetpoint(1.0,1,1,0,125,90);
-//            addTimedSetpoint(1.0,1,3,-200,125,90);
-//            addTimedSetpoint(1.0,1,1,-250,10,90);
-//            addAutoModule(Drop);
-//            RobotPart.pause(1);
-//            addAutoModule(Reset);
+            addTimedSetpoint(1,.8,.3,-20,75,90);
+
+            addTimedSetpoint(1.0,1,1,-10,125,90);
+            addTimedSetpoint(1.0,1,3,-215,125,90);
+            addTimedSetpoint(1.0,1,1.5,-235,75,92);
+            addAutoModule(Drop3rd);
+            RobotPart.pause(1);
+            addAutoModule(Reset);
         });
     }
     @Override
@@ -121,5 +120,6 @@ public class B_RIGHT_STACK extends AutoFramework {
         autoPlane.reflectY();
         autoPlane.reflectX();
     }
+
 
 }
