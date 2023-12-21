@@ -1,5 +1,8 @@
 package robot;
 
+import android.graphics.Color;
+
+import robotparts.sensors.ColorSensorsNew;
 import robotparts.sensors.DistanceSensorsNew;
 import robotparts.sensors.odometry.NewOdometry;
 import unittests.tele.framework.movement.AutoModuleTest;
@@ -32,6 +35,7 @@ public interface RobotUser {
     GyroSensors gyro = new GyroSensors();
     Cameras camera = new Cameras();
     DistanceSensorsNew distanceSensorsNew = new DistanceSensorsNew();
+    ColorSensorsNew colorSensorsNew = new ColorSensorsNew();
 
 //    Odometry odometry = new TwoOdometry();
 //    ThreeOdometry odometry = new ThreeOdometry(); // TOD 5 EXTEND THIS CONCEPT TO ALL ROBOT PARTS
