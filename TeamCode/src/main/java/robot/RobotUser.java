@@ -1,9 +1,7 @@
 package robot;
 
-import android.graphics.Color;
-
-import robotparts.sensors.ColorSensorsNew;
-import robotparts.sensors.DistanceSensorsNew;
+import robotparts.sensors.ColorSensors;
+import robotparts.sensors.DistanceSensors;
 import robotparts.sensors.odometry.NewOdometry;
 import unittests.tele.framework.movement.AutoModuleTest;
 import robotparts.hardware.Drive;
@@ -11,9 +9,8 @@ import robotparts.hardware.Intake;
 import robotparts.hardware.Lift;
 import robotparts.hardware.Outtake;
 import robotparts.sensors.Cameras;
-import robotparts.sensors.ColorSensors;
 import robotparts.sensors.GyroSensors;
-import robotparts.unused.DistanceSensors;
+import robotparts.unused.DistanceSensorsOld;
 import robotparts.unused.CustomTestPart;
 import robotparts.unused.TouchSensors;
 
@@ -31,11 +28,11 @@ public interface RobotUser {
     Lift lift = new Lift();
     Outtake outtake = new Outtake();
 //    Leds leds = new Leds();
-    DistanceSensors distanceSensors = new DistanceSensors();
+    DistanceSensorsOld distanceSensors = new DistanceSensorsOld();
     GyroSensors gyro = new GyroSensors();
     Cameras camera = new Cameras();
-    DistanceSensorsNew distanceSensorsNew = new DistanceSensorsNew();
-    ColorSensorsNew colorSensorsNew = new ColorSensorsNew();
+    DistanceSensors distanceSensorsNew = new DistanceSensors();
+    ColorSensors colorSensorsNew = new ColorSensors();
 
 //    Odometry odometry = new TwoOdometry();
 //    ThreeOdometry odometry = new ThreeOdometry(); // TOD 5 EXTEND THIS CONCEPT TO ALL ROBOT PARTS
@@ -47,7 +44,6 @@ public interface RobotUser {
     Intake intake = new Intake();
     TouchSensors touchSensors = new TouchSensors();
 
-    ColorSensors color = new ColorSensors();
 
     /**
      * Test Part

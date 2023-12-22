@@ -158,7 +158,7 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 //            while (!isStarted() && !isStopRequested()){ propCaseDetected = teamPropScanner.getCase(); teamPropScanner.log(); log.showTelemetry(); }
             while (!isStarted() && !isStopRequested()){ propCaseDetected = caseScanner.getCase(); caseScanner.log(); log.showTelemetry(); }
 
-            if(haltCameraAfterInit) {camera.halt();} else{ camera.setScanner(scannerAfterInit); }
+//            if(haltCameraAfterInit) {camera.halt();} else{ camera.setScanner(scannerAfterInit); }
         }
         setup();
         createSegments();

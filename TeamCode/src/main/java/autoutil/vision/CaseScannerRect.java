@@ -33,7 +33,7 @@ public class CaseScannerRect extends Scanner {
     double leftAvgFin;
     double centerAvgFin;
     double rightAvgFin;
-    final private int threshhold = 130; //TODO change threshold at event
+    final private int threshhold = 138; //TODO change threshold at event
     Rect notSeen;
 
     //    public int getCase(Mat input, String color) {

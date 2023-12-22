@@ -28,9 +28,7 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule Intake = new AutoModule(
 
-            outtake.stageStart(.2).attach(outtake.stageOpen(.2)),
-            intake.stageStart(.2),
-            intake.moveTime(-.8, 1)
+        intake.moveSmart(-1)
 
 
     ).setStartCode(() ->

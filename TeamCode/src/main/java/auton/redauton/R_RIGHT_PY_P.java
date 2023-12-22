@@ -1,15 +1,13 @@
 package auton.redauton;
 
 import static global.General.bot;
-import static global.Modes.Height.HIGH;
-import static global.Modes.Height.LOW;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import automodules.AutoModule;
 import autoutil.AutoFramework;
 import elements.Case;
-import elements.FieldSide;
+import elements.Robot;
 import elements.TeamProp;
 import robotparts.RobotPart;
 
@@ -23,20 +21,29 @@ public class R_RIGHT_PY_P extends AutoFramework {
         outtake.openClawHalf();
         propCaseDetected = TeamProp.FIRST;
         AutoFramework auto = this;
-        auto.scan(true, "red", "left");
+        auto.scan(true, "red", "right");
+
     }
     AutoModule Extake = new AutoModule(
-            intake.moveTime(.5,.25)
-
+            intake.moveTime(.1,1)
 
     );
     AutoModule Drop = new AutoModule(
-            outtake.stageMiddle(.5).attach(outtake.stageClose(.5)),
-            lift.stageLift(.7,35),
-            outtake.stageEnd(1),
+            outtake.stageMiddle(.5).attach(outtake.stageClose(.2)),
+            lift.stageLift(.8,25).attach(outtake.stageMiddler(.2)),
+            outtake.stageEndAuto(.4),
             RobotPart.pause(.5),
             outtake.stageOpen(.2),
             RobotPart.pause(.5)
+    );
+    AutoModule Drop3rd = new AutoModule(
+            outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
+            lift.stageLift(.8,23).attach(outtake.stageMiddler(.5)),
+            outtake.stageEndAuto(.2),
+            RobotPart.pause(.5),
+            outtake.stageOpen(.2),
+            RobotPart.pause(.5),
+            lift.stageLift(.8,28)
     );
     AutoModule Reset = new AutoModule(
             outtake.stageStart(1),
@@ -46,42 +53,46 @@ public class R_RIGHT_PY_P extends AutoFramework {
     @Override
     public void define() {
         customCase(() -> {
-
-            addTimedSetpoint(1.0,1,.2,0,15,0);
-            addTimedSetpoint(1.0, 1,1, 0, 35, -90);
-            addTimedSetpoint(1.0,1,1,42,65,-90);
+            addTimedSetpoint(1.0,1,.1,0,10,0);
+            addTimedSetpoint(1.0,1,1,0,60,-90);
+            addTimedSetpoint(1.0,1,1,-28,60,-90);
             addAutoModule(Extake);
-            addTimedSetpoint(1.0,1,1,93,45,-90);
-            addAutoModule(Drop);
-            RobotPart.pause(1);
-            addAutoModule(Reset);
-            addTimedSetpoint(1.0,1,.2,85,45,-90);
-            addTimedSetpoint(1.0,1,1,85,5,0);
-            addTimedSetpoint(1.0,1,1,115,5,0);
+            addWaypoint(.8,85,75,-90);
 
-        }, () -> {
-            addTimedSetpoint(1.0,1,.2,0,15,0);
-            addTimedSetpoint(1.0, 1,1, 0, 35, -90);
-            addTimedSetpoint(1.0,1,1,35,95,-90);
-            addAutoModule(Extake);
-            addTimedSetpoint(1.0,1,1,113,50,-90);
-            addAutoModule(Drop);
-            RobotPart.pause(1);
+            addTimedSetpoint(1.0,.8,1,95.5,75,-90);
+            addAutoModule(Drop3rd);
             addAutoModule(Reset);
-            addTimedSetpoint(1.0,1,.2,85,45,-90);
+            addWaypoint(1,75,45,-90);
             addTimedSetpoint(1.0,1,1,85,5,0);
-            addTimedSetpoint(1.0,1,1,115,5,0);
+            addTimedSetpoint(1.0,1,1,110,5,0);
 
         }, () -> {
-            addTimedSetpoint(1.0, 1, .2, 0, 15, 0);
-            addTimedSetpoint(1.0, 1, 1, -16, 60, -90);
+            addTimedSetpoint(1.0,1,.1,0,10,0);
+            addTimedSetpoint(1.0,1,2,30,95,-90);
             addAutoModule(Extake);
-            addTimedSetpoint(1.0,1,1,113,60,-90);
+            addWaypoint(1,85,59,-90);
+            addTimedSetpoint(1.0,1,1.2,96.5,57,-94);
             addAutoModule(Drop);
-            RobotPart.pause(1);
             addAutoModule(Reset);
-            addTimedSetpoint(1.0,1,.2,85,45,-90);
-            addTimedSetpoint(1.0,1,1,85,5,0);
+            addTimedSetpoint(1.0,1,.2,60,45,-90);
+            addWaypoint(1,45,5,0);
+            addTimedSetpoint(1.0,1,1,115,0,0);
+
+        }, () -> {
+
+            addTimedSetpoint(1.0,1,1,0,30,0);
+
+            addTimedSetpoint(1,.8,1,0,60,-90);
+            addTimedSetpoint(1,.8,1,38,75,-90);
+            addAutoModule(Extake);
+            addWaypoint(.8,70,85,-90);
+            addTimedSetpoint(1,1,1.5,80,40,-90);
+            RobotPart.pause(.2);
+            addTimedSetpoint(1,1,1,98,40,-95);
+            addAutoModule(Drop3rd);
+            addAutoModule(Reset);
+            addTimedSetpoint(1.0,1,.2,60,45,-90);
+            addWaypoint(1,45,5,0);
             addTimedSetpoint(1.0,1,1,115,5,0);
         });
     }

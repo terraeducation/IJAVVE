@@ -28,7 +28,7 @@ public interface Modes {
             .set(Height.GROUND, 0);
 
     // TOD5 MULTI DIMENSIONAL MODE
-    enum Drive implements Mode.ModeType {FAST, MEDIUM, SLOW}
+    enum Drive implements Mode.ModeType {FAST, MEDIUM, SLOW, SUPERSLOW}
     Mode driveMode = new Mode(Drive.class);
 
 }

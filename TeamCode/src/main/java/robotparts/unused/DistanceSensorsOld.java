@@ -5,7 +5,7 @@ import robotparts.electronics.ElectronicType;
 import robotparts.electronics.input.IDistance;
 
 
-public class DistanceSensors extends RobotPart {
+public class DistanceSensorsOld extends RobotPart {
     /**
      * Distance sensors,
      * left, right, front left, front right, and outtake

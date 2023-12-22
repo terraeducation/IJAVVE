@@ -1,5 +1,7 @@
 package robotparts.hardware;
 
+import static global.General.log;
+
 import automodules.AutoModule;
 import automodules.stage.Exit;
 import automodules.stage.Stage;
@@ -17,7 +19,7 @@ public class Intake extends RobotPart {
     private IColor cso;
 
     private CMotor in;
-    private CServo ins;
+    private CServo drone;
     private PServo link;
     private PServo link2;
     private CMotor hang;
@@ -27,7 +29,7 @@ public class Intake extends RobotPart {
     @Override
     public void init() {
         in = create("in", ElectronicType.CMOTOR_FORWARD);
-//        ins = create("ins", ElectronicType.CSERVO_FORWARD);
+        drone = create("drone", ElectronicType.CSERVO_FORWARD);
         link = create("link", ElectronicType.PSERVO_REVERSE);
         link2 = create("link2", ElectronicType.PSERVO_FORWARD);
 
@@ -36,6 +38,7 @@ public class Intake extends RobotPart {
         link.changePosition("init", .39);
         link.changePosition("start", .72);
         link.changePosition("middle", .52);
+        link.changePosition("middler", .65);
 
         link2.changePosition("init", .39);
         link2.changePosition("start", .72);
@@ -55,6 +58,12 @@ public class Intake extends RobotPart {
 
 
     }
+    public void moveMiddler() {
+        link.setPosition("middler");
+        link2.setPosition("middler");
+
+
+    }
 
     public void moveMiddle() {
         link.setPosition("middle");
@@ -63,7 +72,12 @@ public class Intake extends RobotPart {
 
     }
 
+    public void chubramani(){
 
+        drone.setPower(1);
+        log.show("mission failed");
+
+    }
 //    public void moveHang(double pow) {
 //        hang.setPower(pow);
 //    }
@@ -75,32 +89,14 @@ public class Intake extends RobotPart {
         return null;
     }
 
-//    public void isPixel() {
-//
-//        if (cso.getDistance() < 4) {
-//            Pixel = true;
-//
-//        } else {
-//
-//            Pixel = false;
-//        }
-//    }
-//
-//    public Stage intakePixel(double p) {
-//        isPixel();
-//        if (Pixel = true) {
-//
-//            in.setPower(0);
-//        } else {
-//            in.setPower(p);
-//        }
-//        return null;
-//
-//    }
-
+    public Stage moveSmart(double p){
+        return super.customExit(p, colorSensorsNew.exitIntake());
+    }
 
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageMiddle(double t){ return super.customTime(this::moveMiddle, t); }
+
+    public Stage stageMiddler(double t){ return super.customTime(this::moveMiddler, t); }
 
     @Override
     public Stage moveTime(double p, ReturnCodeSeg<Double> t) { return super.moveTime(p, t); }

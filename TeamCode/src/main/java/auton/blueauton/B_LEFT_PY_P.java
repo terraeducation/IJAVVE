@@ -38,7 +38,7 @@ public class B_LEFT_PY_P extends AutoFramework {
     );
     AutoModule Drop3rd = new AutoModule(
             outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
-            lift.stageLift(.8,23).attach(outtake.stageMiddler(.5)),
+            lift.stageLift(.8,20).attach(outtake.stageMiddler(.5)),
             outtake.stageEndAuto(.2),
             RobotPart.pause(.5),
             outtake.stageOpen(.2),
@@ -58,9 +58,8 @@ public class B_LEFT_PY_P extends AutoFramework {
             addAutoModule(Extake);
             addWaypoint(.8,-85,45,90);
 
-            addTimedSetpoint(1.0,.8,1,-96.5,39.15,90);
+            addTimedSetpoint(1.0,.8,1,-96.5,41,90);
             addAutoModule(Drop3rd);
-            RobotPart.pause(1);
             addAutoModule(Reset);
             addTimedSetpoint(1.0,1,.2,-85,45,90);
             addTimedSetpoint(1.0,1,1,-85,5,0);
@@ -73,7 +72,7 @@ public class B_LEFT_PY_P extends AutoFramework {
             addWaypoint(1,-85,59,90);
             addTimedSetpoint(1.0,1,1.2,-96.5,59,94);
             addAutoModule(Drop);
-            RobotPart.pause(1);
+
             addAutoModule(Reset);
             addTimedSetpoint(1.0,1,.2,-85,45,90);
             addTimedSetpoint(1.0,1,1,-85,5,0);
@@ -84,14 +83,13 @@ public class B_LEFT_PY_P extends AutoFramework {
             addTimedSetpoint(1.0,1,1,0,30,0);
 
             addTimedSetpoint(1,.8,1,0,60,90);
-            addTimedSetpoint(1,.8,1,20,75,90);
+            addTimedSetpoint(1,.8,1,23,75,90);
             addAutoModule(Extake);
             addWaypoint(.8,-70,85,90);
             addTimedSetpoint(1,1,1.5,-80,85,90);
             RobotPart.pause(.2);
             addTimedSetpoint(1,1,1,-98,85.25,95);
             addAutoModule(Drop3rd);
-            RobotPart.pause(1);
             addAutoModule(Reset);
             addTimedSetpoint(1.0,1,.2,-60,45,90);
             addTimedSetpoint(1.0,1,1,-85,5,0);

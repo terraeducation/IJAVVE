@@ -18,6 +18,7 @@ import static global.General.bot;
 import static global.Modes.Drive.FAST;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
+import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.driveMode;
 //import static global.Modes.driveMode;
 
@@ -125,18 +126,27 @@ public class Drive extends RobotPart {
         }
     }
     public void newMove(double f, double s, double t) {
+        if (distanceSensorsNew.isClose()){
+            driveMode.set(SUPERSLOW);
+        }
         if(driveMode.modeIs(SLOW)){
             fr.setPower(.5*f - .5*s - .25*t);
             br.setPower(.5*f + .5*s - .25*t);
             fl.setPower(.5*f + .5*s + .25*t);
             bl.setPower(.5*f - .5*s + .25*t);
-    }else if(driveMode.modeIs(FAST)) {
+        }else if(driveMode.modeIs(FAST)) {
             fr.setPower(f - s - t);
             br.setPower(f + s - t);
             fl.setPower(f + s + t);
             bl.setPower(f - s + t);
+        } else if (driveMode.modeIs(SUPERSLOW)) {
+            fr.setPower(.1*f - .5*s - .25*t);
+            br.setPower(.1*f + .5*s - .25*t);
+            fl.setPower(.1*f + .5*s + .25*t);
+            bl.setPower(.1*f - .5*s + .25*t);
+
         }
-        }
+    }
     public void moveSmooth(double f, double s, double t) {
 
 

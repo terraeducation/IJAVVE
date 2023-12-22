@@ -29,9 +29,15 @@ public class B_RIGHT_STACK extends AutoFramework {
     }
     AutoModule Intake = new AutoModule(
             intake.stageMiddle(.1),
-            intake.moveTime(.8,1)
+            intake.moveTime(-.8,2)
 
     );
+    AutoModule Intake2 = new AutoModule(
+            intake.stageStart(.1),
+            intake.moveTime(-1,2)
+
+    );
+
     AutoModule Extake = new AutoModule(
             intake.moveTime(.2,.8)
 
@@ -39,7 +45,7 @@ public class B_RIGHT_STACK extends AutoFramework {
     );
     AutoModule Drop = new AutoModule(
             outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
-            lift.stageLift(.8,20).attach(outtake.stageMiddler(.5)),
+            lift.stageLift(.8,20),
             outtake.stageEndAuto(.2),
             RobotPart.pause(.5),
             outtake.stageOpen(.2),
@@ -48,7 +54,7 @@ public class B_RIGHT_STACK extends AutoFramework {
     );
     AutoModule Drop3rd = new AutoModule(
             outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
-            lift.stageLift(.8,22).attach(outtake.stageMiddler(.5)),
+            lift.stageLift(.8,22),
             outtake.stageEndAuto(.2),
             RobotPart.pause(.5),
             outtake.stageOpen(.2),
@@ -63,6 +69,7 @@ public class B_RIGHT_STACK extends AutoFramework {
     @Override
     public void define() {
         customCase(() -> {
+            addPause(10);
 
             addTimedSetpoint(1.0,1,1,0,65,0);
 
@@ -80,8 +87,9 @@ public class B_RIGHT_STACK extends AutoFramework {
 
 
         }, () -> {
+            addPause(10);
 
-            addTimedSetpoint(1.0,1,1.5,0,110,0);
+            addTimedSetpoint(1.0,1,2,0,115,0);
             addAutoModule(Extake);
             addTimedSetpoint(1,.8,.5,0,120,0);
             addTimedSetpoint(1.0,1,1,-20,125,90);
@@ -94,12 +102,18 @@ public class B_RIGHT_STACK extends AutoFramework {
 
             addTimedSetpoint(1.0,1,1,-180,125,90);
             addTimedSetpoint(1.0,1,1.5,0,125,90);
-            addTimedSetpoint(1.0,1,1.5,40,130,94);
+            addTimedSetpoint(1.0,1,1.5,44,130,94);
             addAutoModule(Intake);
+            addTimedSetpoint(1.0,1,1.5,42,130,94);
+
+            addAutoModule(Intake2);
+
 
 
 //
         }, () -> {
+            addPause(10);
+
             addTimedSetpoint(1.0,1,1,0,30,0);
 
             addTimedSetpoint(1,.8,1,0,60,90);
