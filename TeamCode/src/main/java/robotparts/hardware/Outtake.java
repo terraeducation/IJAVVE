@@ -1,16 +1,16 @@
 package robotparts.hardware;
 
+import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.outtakeStatus;
+
 import automodules.stage.Stage;
 import robotparts.RobotPart;
 import robotparts.electronics.ElectronicType;
 import robotparts.electronics.positional.PServo;
 
-import static global.Modes.OuttakeStatus.DRIVING;
-import static global.Modes.outtakeStatus;
-
 public class Outtake extends RobotPart {
 
-    public PServo armr, arml, claw;
+    public PServo armr, arml, claw1, claw2, pivot, rotate;
 //    public PServo forklift;
 
 //    public boolean cycleMachine = false;
@@ -19,64 +19,81 @@ public class Outtake extends RobotPart {
 
     @Override
     public void init() {
-        armr = create("armr", ElectronicType.PSERVO_REVERSE);
-        arml = create("arml", ElectronicType.PSERVO_FORWARD);
+        armr = create("armr", ElectronicType.PSERVO_FORWARD);
+        arml = create("arml", ElectronicType.PSERVO_REVERSE);
 
 
-        arml.changePosition("start", 0.112); //.21 difference
-        armr.changePosition("start", 0.292);
-        arml.addPosition("s", 0.096);
-        armr.addPosition("s", 0.3);
-//
-//        arml.addPosition("startHalf", 0.38);
-//        armr.addPosition("startHalf", 0.38);
-        arml.addPosition("middle", 0.33);
-        armr.addPosition("middle", 0.54);
+        arml.changePosition("start", 0); //.21 difference
+        armr.changePosition("start", 0);
+
+
+        arml.addPosition("middle", 0.3);
+        armr.addPosition("middle", 0.3);
 
         arml.addPosition("middler", 0.37);
-        armr.addPosition("middler", 0.58);
+        armr.addPosition("middler", 0.37);
 
 
-//        arml.addPosition("endHalf", 0.71);
-//        armr.addPosition("endHalf", 0.71);
-
-        arml.changePosition("end", 0.68);
-        armr.changePosition("end", 0.89);
-
-        armr.addPosition("e", 0.76);
-        arml.addPosition("e", 0.97);
-
-
-        claw = create("claw", ElectronicType.PSERVO_REVERSE);
+        arml.changePosition("end", .6);
+        armr.changePosition("end", 0.6);
 
 
 
-        claw.addPosition("close", .12);
-        claw.addPosition("openfull", .05);
-        claw.addPosition("openhalf", 0);
+        claw1 = create("claw1", ElectronicType.PSERVO_FORWARD);
+
+
+
+        claw1.addPosition("close", 1);
+        claw1.addPosition("open", 0.5);
+
+        claw2 = create("claw2", ElectronicType.PSERVO_REVERSE);
+
+
+
+        claw2.addPosition("close", .12);
+        claw2.addPosition("open", .05);
+
+
+        pivot = create("pivot", ElectronicType.PSERVO_REVERSE);
+
+
+
+        pivot.addPosition("start", 0);
+        pivot.addPosition("transfer", 0.4);
+
+
+        rotate = create("rotate", ElectronicType.PSERVO_FORWARD);
+
+
+
+        rotate.addPosition("start", .4);
+        rotate.addPosition("transfer", .35);
+
 
         outtakeStatus.set(DRIVING);
     }
 
     public void changeArmPosition(String name, double pos){ armr.changePosition(name, pos); arml.changePosition(name, pos); }
 
-    public void setToTeleop(){ changeArmPosition("start", 0.06);}
 
     public void arm(double pos){ armr.setPosition(pos); arml.setPosition(pos); }
 
-    public void moveStart(){ armr.setPosition("start"); arml.setPosition("start"); }
+    public void moveStart(){ armr.setPosition("start"); arml.setPosition("start"); rotate.setPosition("start"); pivot.setPosition("start");}
+    public void moveStarttest(){ rotate.setPosition("transfer");   }
+
     public void moveEnd(){ armr.setPosition("end"); arml.setPosition("end"); }
+    public void moveTransfer(){ pivot.setPosition("transfer");}
+    public void moveTransferRotate(){ rotate.setPosition("transfer");}
+
+
     public void moveEndAuto(){ armr.setPosition("e"); arml.setPosition("e"); }
 
     public void moveEnderAuto(){ armr.setPosition("ee"); arml.setPosition("ee"); }
 
 
-    public void openClawFull(){ claw.setPosition("openfull"); }
-    public void startClaw(){ claw.setPosition("start"); }
+    public void openClaw(){ claw1.setPosition("open"); claw2.setPosition("open"); }
 
-    public void openClawHalf(){ claw.setPosition("openhalf"); }
-//    public void openClawCap() { claw.setPosition("cap"); }
-    public void closeClaw(){ claw.setPosition("close"); }
+    public void closeClaw(){ claw1.setPosition("close"); claw2.setPosition("close"); }
 
 
     public void readyStart(){ armr.setPosition("startHalf"); arml.setPosition("startHalf"); }
@@ -90,23 +107,25 @@ public class Outtake extends RobotPart {
     public Stage stageReadyStart(double t){return super.customTime(this::readyStart, t);}
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageEnd(double t){ return super.customTime(this::moveEnd, t); }
+
+    public Stage stageTransfer(double t) {return super.customTime(this::moveTransfer, t);}
+    public Stage stageTransferRotate(double t) {return super.customTime(this::moveTransferRotate, t);}
+
     public Stage stageEndAuto(double t){ return super.customTime(this::moveEndAuto, t); }
     public Stage stageEnderAuto(double t){ return super.customTime(this::moveEnderAuto, t); }
 
 
-    public Stage stageOpen(double t){ return super.customTime(this::openClawFull, t); }
-    public Stage stageOpenHalf(double t){ return super.customTime(this::openClawHalf, t); }
+    public Stage stageOpen(double t){ return super.customTime(this::openClaw, t); }
     public Stage stageClose(double t){ return super.customTime(this::closeClaw, t); }
-    public Stage stageStartClaw(double t){ return super.customTime(this::startClaw, t); }
 
-
-    public Stage stageCloseAfter(double t){ return super.customTimeAfter(this::closeClaw, t);}
-
-    public Stage stageEndAfter(double t){ return super.customTimeAfter(this::moveEnd, t); }
-    public Stage stageOpenAfter(double t){ return super.customTimeAfter(this::openClawHalf, t); }
+//
+//    public Stage stageCloseAfter(double t){ return super.customTimeAfter(this::closeClaw, t);}
+//
+//    public Stage stageEndAfter(double t){ return super.customTimeAfter(this::moveEnd, t); }
+//    public Stage stageOpenAfter(double t){ return super.customTimeAfter(this::openClawHalf, t); }
 
     public Stage stageMiddle(double t){ return super.customTime(this::moveMiddle, t);}
-    public Stage stageMiddler(double t){ return super.customTime(this::moveMiddler, t);}
+//    public Stage stageMiddler(double t){ return super.customTime(this::moveMiddler, t);}
 
     public Stage stageReadyEnd(double t){ return super.customTime(this::readyEnd, t); }
     public Stage stageReadyEndAfter(double t){ return super.customTimeAfter(this::readyEnd, t); }
@@ -146,112 +165,18 @@ public class Outtake extends RobotPart {
     public Stage stageReadyEndWithoutFlip(double t){ return super.customTime(() -> {armr.setPosition("endHalf"); arml.setPosition("endHalf");}, t); }
 
 
-    public double getArmPos(){ return armr.getPosition(); }
-    public boolean isClawClosed(){ return claw.getPosition() > 0.2; }
-
-    public Stage stageBack(double start){
-        return super.customTime(new StageBuilderTime(this)
-                .addSubStage(start, () -> {})
-                .addSubStage(0.1, () -> arm(0.0))
-
-        );
-    }
-
-
-    public void startSignal(){
-//        forklift.setPosition("start");
-    }
-
-
-    public void startReadySignal(){
-//        forklift.setPosition("readyStart");
-    }
-
-    public void endSignal(){
-//        forklift.setPosition("end");
-    }
-
-
-    public Stage stageStartSignal(double t){
-        return super.customTime(this::startSignal, t);
-    }
-
-    public Stage stageEndSignal(double t){
-        return super.customTime(this::endSignal, t);
-    }
-
-    public Stage stageStartReadySignal(double t){
-        return super.customTime(this::startReadySignal, t);
-    }
-
-    public Stage stageStartSignalAfter(double t){
-        return super.customTimeAfter(this::startSignal, t);
-    }
-
-    public Stage stageStartReadySignalAfter(double t) {
-        return super.customTimeAfter(this::startReadySignal, t);
-    }
-
-
-    public Stage stageEndSignalAfter(double t){
-        return super.customTimeAfter(this::endSignal, t);
-    }
-
-
-
-
-    public Stage stageStartAndSignal(){
-        return super.customTime(new StageBuilderTime(this)
-                .addSubStage(0.1, this::startReadySignal)
-                .addSubStage(0.2, this::moveStart)
-                .addSubStage(0.1, this::endSignal)
-                .addSubStage(0.1, this::startSignal)
-        );
-    }
-
-
-    public Stage stageStartAndSignal2(){
-        return super.customTime(new StageBuilderTime(this)
-                .addSubStage(0.15, this::startReadySignal)
-                .addSubStage(0.2, this::moveStart)
-                .addSubStage(0.1, this::endSignal)
-                .addSubStage(0.1, this::startSignal)
-        );
-    }
-
-    public void readyStartCond(){
-        if(armr.getPosition() < 0.4){
-            readyStart();
-        }
-    }
-
-    public Stage stageReadyStartCond(double time){
-        return super.customTime(this::readyStartCond, time);
-    }
 
 
 
 
 
-//
-//    public Stage stageEnd(){
-//        return super.customTime(new StageBuilderTime(this)
-//                .addSubStage(0.1, () -> {closeClaw(); readyStart();})
-//                .addSubStage(0.3, () -> {flip(); })
-//                        //setArmTarget("end");
-//                        .addSubStage(0.5, () -> moveEnd())
-////                .addSubStage(0.5, () -> moveArmContinuous(0.5))
-//        );
-//    }
-//
-//    public Stage stageStart() {
-//        return super.customTime(new StageBuilderTime(this)
-//                .addSubStage(0.1, () -> {openClaw();readyEnd();})
-//                .addSubStage(0.3, () -> {closeClaw(); unFlip();  })
-//                //setArmTarget("start");
-////                .addSubStage(0.5, () -> moveArmContinuous(0.5))
-//                .addSubStage(0.5, () -> moveStart())
-//        );
-//    }
+
+
+
+
+
+
+
 
 }
+

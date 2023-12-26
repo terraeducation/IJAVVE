@@ -5,6 +5,7 @@ import static java.lang.Math.abs;
 import automodules.AutoModule;
 import automodules.stage.Stage;
 import geometry.position.Vector;
+import global.Modes;
 import math.misc.Logistic;
 import math.polynomial.Linear;
 import robotparts.RobotPart;

@@ -8,25 +8,27 @@ import robotparts.RobotPart;
 import static global.General.hardwareMap;
 
 public class DistanceSensors extends RobotPart {
-    public DistanceSensor dso;
+    public DistanceSensor dsol, dsor;
 
     @Override
     public void init() {
-            dso = hardwareMap.get(DistanceSensor.class, "dso");
+            dsol = hardwareMap.get(DistanceSensor.class, "dsol");
+            dsor = hardwareMap.get(DistanceSensor.class, "dsor");
+
     }
 
 
 
     public double getCMDistance() {
-        return dso.getDistance(DistanceUnit.CM);
+        return dsol.getDistance(DistanceUnit.CM);
     }
 
     public double getMETERDistance() {
-        return dso.getDistance(DistanceUnit.METER);
+        return dsol.getDistance(DistanceUnit.METER);
     }
 
     public boolean isClose(){
-        return dso.getDistance(DistanceUnit.CM) < 2;
+        return dsor.getDistance(DistanceUnit.CM) < 2;
     }
 
 
