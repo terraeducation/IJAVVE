@@ -74,7 +74,7 @@ public class NithinOp extends Tele {
     public void loopTele() {
 
         drive.newMove(gph1.ry, gph1.rx, gph1.lx);
-        drive.newMove(gph2.ry, gph2.rx, gph2.lx);
+//        drive.newMove(gph2.ry, gph2.rx, gph2.lx);
 
 
 

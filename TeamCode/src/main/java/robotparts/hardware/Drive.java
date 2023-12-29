@@ -129,42 +129,24 @@ public class Drive extends RobotPart {
         }
     }
     public void newMove(double f, double s, double t) {
-        if(outtakeStatus.modeIs(PLACING)) {
 
-            if (distanceSensorsNew.IsRightClose()) {
-                fr.setPower(0.5 * f - 0.5 * s - 0.2 * t);
-                br.setPower(0.5 * f + 0.5 * s - 0.2 * t);
 
-            }else if((distanceSensorsNew.IsRightSuperClose())){
-                fr.setPower(0 * f - s - 0.2 * t);
-                br.setPower(0 * f + s - 0.2 * t);
-            }else {
-                fr.setPower(f - s - t);
-                br.setPower(f + s - t);
-            }
-            if (distanceSensorsNew.IsLeftClose()) {
-                fl.setPower(0.5 * f + 0.5 * s + 0.2 * t);
-                bl.setPower(0.5 * f - 0.5 * s + 0.2 * t);
-            }else if((distanceSensorsNew.IsLeftSuperClose())){
-                fl.setPower(0 * f + s + 0.2 * t);
-                bl.setPower(0 * f - s + 0.2 * t);
+            if (distanceSensorsNew.IsLeftClose() && distanceSensorsNew.IsRightClose()) {
+                fl.setPower(0.2 * f + 0.5 * s + 0.2 * t);
+                bl.setPower(0.2 * f - 0.5 * s + 0.2 * t);
+                fr.setPower(0.2 * f - 0.5 * s - 0.2 * t);
+                br.setPower(0.2 * f + 0.5 * s - 0.2 * t);
+//            }else if((distanceSensorsNew.IsLeftSuperClose())){
+//                fl.setPower(0 * f + s + 0.2 * t);
+//                bl.setPower(0 * f - s + 0.2 * t);
             } else {
                 fl.setPower(f + s + t);
                 bl.setPower(f - s + t);
+                fr.setPower(f - s - t);
+                br.setPower(f + s - t);
             }
-        }
+        
 
-
-        if (outtakeStatus.modeIs(DRIVING)){
-
-                    fr.setPower(f - s - t);
-                    br.setPower(f + s - t);
-                    fl.setPower(f + s + t);
-                    bl.setPower(f - s + t);
-
-
-
-            }
         }
 
     public void moveSmooth(double f, double s, double t) {

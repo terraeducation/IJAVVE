@@ -71,7 +71,6 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule X_BUTTON = new AutoModule(
             lift.stageLift(1, 7),
-            outtake.stageTransferRotate(.2),
             lift.stageLift(1, 20).attach(outtake.stageThruPivot(.1)),
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageStartRotate(.2))
