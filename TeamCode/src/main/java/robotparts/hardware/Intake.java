@@ -1,10 +1,14 @@
 package robotparts.hardware;
 
 import static global.General.log;
+import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.OuttakeStatus.PLACING;
+import static global.Modes.outtakeStatus;
 
 import automodules.AutoModule;
 import automodules.stage.Exit;
 import automodules.stage.Stage;
+import elements.GameElement;
 import robotparts.RobotPart;
 import robotparts.electronics.ElectronicType;
 import robotparts.electronics.continuous.CMotor;
@@ -90,7 +94,9 @@ public class Intake extends RobotPart {
     }
 
     public Stage moveSmart(double p){
-        return super.customExit(p, colorSensorsNew.exitIntake());
+
+            return super.customExit(p, colorSensorsNew.exitIntake());
+
     }
 
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }

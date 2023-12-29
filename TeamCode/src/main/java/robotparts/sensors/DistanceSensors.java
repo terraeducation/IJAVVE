@@ -19,16 +19,30 @@ public class DistanceSensors extends RobotPart {
 
 
 
-    public double getCMDistance() {
+    public double getCMDistanceLeft() {
         return dsol.getDistance(DistanceUnit.CM);
     }
+    public double getCMDistanceRight() {
+        return dsor.getDistance(DistanceUnit.CM);
+    }
+
 
     public double getMETERDistance() {
         return dsol.getDistance(DistanceUnit.METER);
     }
 
-    public boolean isClose(){
-        return dsor.getDistance(DistanceUnit.CM) < 2;
+    public boolean IsRightClose(){
+        return dsor.getDistance(DistanceUnit.CM) < 28;
+    }
+    public boolean IsLeftClose(){
+        return dsol.getDistance(DistanceUnit.CM) < 28;
+    }
+
+    public boolean IsRightSuperClose(){
+        return dsor.getDistance(DistanceUnit.CM) == 20;
+    }
+    public boolean IsLeftSuperClose(){
+        return dsol.getDistance(DistanceUnit.CM) == 20;
     }
 
 
