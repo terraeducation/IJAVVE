@@ -39,12 +39,12 @@ public class Intake extends RobotPart {
 
 //        hang = create("hang", ElectronicType.CMOTOR_FORWARD);
 
-        link.changePosition("init", .39);
+        link.changePosition("init", .20);
         link.changePosition("start", .72);
         link.changePosition("middle", .52);
         link.changePosition("middler", .65);
 
-        link2.changePosition("init", .39);
+        link2.changePosition("init", .20);
         link2.changePosition("start", .72);
         link2.changePosition("middle", .52);
     }

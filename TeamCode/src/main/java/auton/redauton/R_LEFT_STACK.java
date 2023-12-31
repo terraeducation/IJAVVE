@@ -6,12 +6,14 @@ import static global.Modes.Height.GROUND;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import automodules.AutoModule;
+import auton.Auto;
 import autoutil.AutoFramework;
 import elements.TeamProp;
 import robotparts.RobotPart;
 
-@Autonomous(name = "R. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
-public class R_LEFT_PY_P extends AutoFramework {
+@Autonomous(name = "R. Left Stack", group = "auto", preselectTeleOp = "TerraOp")
+public class R_LEFT_STACK extends AutoFramework {
+
 
 
     @Override
@@ -31,6 +33,18 @@ public class R_LEFT_PY_P extends AutoFramework {
     }
     AutoModule Extake = new AutoModule(
             intake.moveTime(.3,.8)
+
+
+    );
+
+    AutoModule IntakeFirst = new AutoModule(
+            intake.stageMiddler(.2).attach(intake.moveSmart(1))
+
+
+    );
+
+    AutoModule IntakeSecond = new AutoModule(
+            intake.stageMiddle(.2).attach(intake.moveSmart(1))
 
 
     );
@@ -55,7 +69,7 @@ public class R_LEFT_PY_P extends AutoFramework {
             outtake.stageStartPivot(.1)
 
     );
-    //TODO MAKE DISTANCE SENSOR ADJUST Y COORDINATE
+
     @Override
     public void define() {
         customCase(() -> {
@@ -110,6 +124,8 @@ public class R_LEFT_PY_P extends AutoFramework {
             addWaypoint(0, -65,0);
 
             addWaypoint(0, -65,90);
+
+
             addWaypoint(-150, -72,93);
             addConcurrentAutoModule(PreExtend);
             addTimedSetpoint(1,1,1.2,-190, -72,93);
@@ -133,13 +149,16 @@ public class R_LEFT_PY_P extends AutoFramework {
 
 
         }, () -> {
-            addPause(18);
+//            addPause(18);
             addWaypoint(0,-35,0);
             addWaypoint(0,-55,90);
             addTimedSetpoint(1.0,1,1.2,0,-80,90);
             addAutoModule(Extake);
             addWaypoint(0,-70,-90);
             addTimedSetpoint(1.0,1,1.2,0,-130,90);
+            addWaypoint(30,-70,-90);
+            addAutoModule(IntakeFirst);
+
             addWaypoint(-155, -130,90);
             addConcurrentAutoModule(PreExtend);
             addTimedSetpoint(1.0,1,1.2,-155,-64,90);
@@ -160,7 +179,32 @@ public class R_LEFT_PY_P extends AutoFramework {
                     });
 
             addAutoModule(Reset);
+            addTimedSetpoint(1,1,1,-190, -64,92);
+            addWaypoint(-155,-64,90);
+            addTimedSetpoint(1.0,1,2.5,30,-130,90);
+            addAutoModule(IntakeSecond);
+            addTimedSetpoint(1.0,1,2,-155,-130,90);
 
+            addTimedSetpoint(1.0,1,.5,-155,-95,90);
+            addTimedSetpoint(1,1,.5,-190, -95,92);
+
+            addAutoModule(Drop);
+            addTimedSetpoint(1,1,1.5,-225, -95,92);
+            addCustomCode(
+                    () -> {
+
+                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
+
+                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -95,92);
+
+                        });
+
+
+                    });
+
+            addAutoModule(Reset);
+
+//
 
 
 
@@ -174,3 +218,6 @@ public class R_LEFT_PY_P extends AutoFramework {
 
 
 }
+
+
+

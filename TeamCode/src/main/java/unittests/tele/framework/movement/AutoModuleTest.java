@@ -28,7 +28,7 @@ public class AutoModuleTest extends TeleUnitTest {
         }
 
         @Override
-        protected CodeSeg move(double p) { car.move(p);
+        public CodeSeg move(double p) { car.move(p);
             return null;
         }
 

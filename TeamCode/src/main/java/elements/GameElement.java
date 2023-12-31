@@ -10,5 +10,8 @@ public enum GameElement implements Decision {
     CUBE,
     UNKNOWN,
     NONE,
-    PIXEL
-}
+    PIXEL1,
+
+    PIXEL2
+
+    }

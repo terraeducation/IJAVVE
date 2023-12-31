@@ -246,6 +246,10 @@ public class Drive extends RobotPart {
         return super.moveTime(fp, sp, tp, t);
     }
 
+    public Stage driveSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitDrive());
+    }
+
     @Override
     public AutoModule MoveTime(double fp, double sp, double tp, double t) {
         return super.MoveTime(fp, sp, tp, t);

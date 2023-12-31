@@ -1,104 +1,136 @@
-//package auton.blueauton;
-//
-//import static global.General.bot;
-//
-//import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-//
-//import automodules.AutoModule;
-//import autoutil.AutoFramework;
-//import elements.TeamProp;
-//import robotparts.RobotPart;
-//
-//@Autonomous(name = "B. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
-//public class B_LEFT_PY_P extends AutoFramework {
-//    @Override
-//    public void initialize() {
-//        this.setConfig(NonstopConfig);
-//        bot.saveLocationOnField();
-//        OUTTAKE_OLD.moveStart();
-//        OUTTAKE_OLD.openClawHalf();
-//        propCaseDetected = TeamProp.FIRST;
+package auton.blueauton;
+
+import static global.General.bot;
+import static global.Modes.Height.GROUND;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import automodules.AutoModule;
+import autoutil.AutoFramework;
+import elements.TeamProp;
+import robotparts.RobotPart;
+
+@Autonomous(name = "B. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
+public class B_LEFT_PY_P extends AutoFramework {
+    @Override
+    public void initialize() {
+        this.setConfig(NonstopConfig);
+        bot.saveLocationOnField();
+        outtake.moveStart();
+        outtake.moveLock();
+        outtake.closeClaw();
+        intake.moveInit();
+        propCaseDetected = TeamProp.THIRD;
 //        AutoFramework auto = this;
 //        auto.scan(true, "blue", "left");
-//
-//    }
-//    AutoModule Extake = new AutoModule(
-//            intake.moveTime(.1,1.2)
-//
-//    );
-//    AutoModule Drop = new AutoModule(
-////            OUTTAKE_OLD.stageMiddle(.5).attach(OUTTAKE_OLD.stageClose(.2)),
-//            lift.stageLift(.8,25).attach(OUTTAKE_OLD.stageMiddler(.2)),
-//            OUTTAKE_OLD.stageEndAuto(.4),
-//            RobotPart.pause(.5),
-//            OUTTAKE_OLD.stageOpen(.2),
-//            RobotPart.pause(.5)
-//    );
-//    AutoModule Drop3rd = new AutoModule(
-//            OUTTAKE_OLD.stageMiddle(.2).attach(OUTTAKE_OLD.stageClose(.2)),
-//            lift.stageLift(.8,20).attach(OUTTAKE_OLD.stageMiddler(.5)),
-//            OUTTAKE_OLD.stageEndAuto(.2),
-//            RobotPart.pause(.5),
-//            OUTTAKE_OLD.stageOpen(.2),
-//            RobotPart.pause(.5),
-//            lift.stageLift(.8,28)
-//    );
-//    AutoModule Reset = new AutoModule(
-//            OUTTAKE_OLD.stageStart(1),
-//            lift.stageLift(.6,0)
-//
-//    );
-//    @Override
-//    public void define() {
-//        customCase(() -> {
-//            addTimedSetpoint(1.0,1,.1,0,10,0);
-//            addTimedSetpoint(1.0,1,1,-39,73,90);
-//            addAutoModule(Extake);
-//            addWaypoint(.8,-85,45,90);
-//
-//            addTimedSetpoint(1.0,.8,1,-96.5,41,90);
-//            addAutoModule(Drop3rd);
-//            addAutoModule(Reset);
-//            addTimedSetpoint(1.0,1,.2,-85,45,90);
-//            addTimedSetpoint(1.0,1,1,-85,5,0);
-//            addTimedSetpoint(1.0,1,1,-110,5,0);
-//
-//        }, () -> {
-//            addTimedSetpoint(1.0,1,.1,0,10,0);
-//            addTimedSetpoint(1.0,1,2,-30,95,90);
-//            addAutoModule(Extake);
-//            addWaypoint(1,-85,59,90);
-//            addTimedSetpoint(1.0,1,1.2,-96.5,59,94);
-//            addAutoModule(Drop);
-//
-//            addAutoModule(Reset);
-//            addTimedSetpoint(1.0,1,.2,-85,45,90);
-//            addTimedSetpoint(1.0,1,1,-85,5,0);
-//            addTimedSetpoint(1.0,1,1,-115,5,0);
-//
-//        }, () -> {
-//
-//            addTimedSetpoint(1.0,1,1,0,30,0);
-//
-//            addTimedSetpoint(1,.8,1,0,60,90);
-//            addTimedSetpoint(1,.8,1,23,75,90);
-//            addAutoModule(Extake);
-//            addWaypoint(.8,-70,85,90);
-//            addTimedSetpoint(1,1,1.5,-80,85,90);
-//            RobotPart.pause(.2);
-//            addTimedSetpoint(1,1,1,-98,85.25,95);
-//            addAutoModule(Drop3rd);
-//            addAutoModule(Reset);
-//            addTimedSetpoint(1.0,1,.2,-60,45,90);
-//            addTimedSetpoint(1.0,1,1,-85,5,0);
-//            addTimedSetpoint(1.0,1,1,-115,5,0);
-//        });
-//    }
-//    @Override
-//    public void postProcess() {
-//        autoPlane.reflectY();
-//        autoPlane.reflectX();
-//    }
-//
-//
-//}
+
+    }
+    AutoModule ExtakeandLift = new AutoModule(
+            intake.moveTime(.25,.2).attach(lift.stageLift(1, 10)),
+            lift.stageLift(1, 18).attach(outtake.stageThruPivot(.1)),
+            outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
+            outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
+
+    );
+
+    AutoModule Drop = new AutoModule(
+            lift.stageLift(1, 7),
+            lift.stageLift(1, 18).attach(outtake.stageThruPivot(.1)),
+            outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
+            outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
+    );
+
+    AutoModule Reset = new AutoModule(
+            outtake.stageOpen(.1),
+            outtake.stageTransferPivot(.2).attach(outtake.stageStart(.2)),
+            outtake.stageStartRotate(.05),
+
+            lift.stageLift(1, heightMode.getValue(GROUND)).attach(outtake.stageThruPivot(.2)),
+            outtake.stageStartPivot(.1)
+
+    );
+    @Override
+    public void define() {
+        customCase(() -> {
+            addWaypoint(0,-40,0);
+            addWaypoint(34,-76,-90);
+
+            addTimedSetpoint(1.0,1,.8,34,-76,-90);
+            addAutoModule(ExtakeandLift);
+            addTimedSetpoint(1.0,1,.85,74,-48,-90);
+            addCustomCode(
+                    () -> {
+
+                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
+
+                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -48,-90);
+
+                        });
+
+
+                    });
+            addAutoModule(Reset);
+            addWaypoint(60,-7,0);
+            addTimedSetpoint(1.0,1,1.5,105,-7,0);
+
+
+        }, () -> {
+            addWaypoint(0,-40,0);
+            addWaypoint(35,-105,-90);
+            addTimedSetpoint(1.0,1,1,18,-104,-90);
+
+            addAutoModule(ExtakeandLift);
+            addTimedSetpoint(1.0,1,1,74,-64.5,-90);
+            addCustomCode(
+                    () -> {
+
+                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
+
+                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -64.5,-90);
+
+                        });
+
+
+                    });
+            addAutoModule(Reset);
+            addWaypoint(60,-7,0);
+            addTimedSetpoint(1.0,1,1.3,105,-7,0);
+
+
+
+
+        }, () -> {
+
+            addWaypoint(0,-40,0);
+            addWaypoint(-10,-70,-90);
+
+            addTimedSetpoint(1.0,1,1,-15,-70,-90);
+            addAutoModule(ExtakeandLift);
+            addTimedSetpoint(1.0,1,.9,70,-81,-90);
+
+            addTimedSetpoint(1.0,1,.3,71,-81,-90);
+            addCustomCode(
+                    () -> {
+
+                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
+
+                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -81,-90);
+
+                        });
+
+
+                    });
+            addAutoModule(Reset);
+            addWaypoint(60,-7,0);
+            addTimedSetpoint(1.0,1,1.5,105,-7,0);
+
+        });
+    }
+    @Override
+    public void postProcess() {
+        autoPlane.reflectY();
+        autoPlane.reflectX();
+    }
+
+
+}

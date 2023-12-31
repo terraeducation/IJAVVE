@@ -4,8 +4,9 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-import elements.GameElement;
+import automodules.stage.Exit;
 import robotparts.RobotPart;
+
 import static global.General.hardwareMap;
 import static global.Modes.OuttakeStatus.PLACING;
 import static global.Modes.outtakeStatus;
@@ -17,6 +18,7 @@ public class DistanceSensors extends RobotPart {
     public void init() {
             dsol = hardwareMap.get(DistanceSensor.class, "dsol");
             dsor = hardwareMap.get(DistanceSensor.class, "dsor");
+
 
     }
 
@@ -34,9 +36,17 @@ public class DistanceSensors extends RobotPart {
         return dsol.getDistance(DistanceUnit.METER);
     }
 
+    public boolean isClose(){
+
+        return (dsor.getDistance(DistanceUnit.CM) < 17);
+    }
+
+    public Exit exitDrive(){return new Exit(this::isClose);}
+
+//    public Stage moveDist(double t){ return super.customTime(this::moveDist, t);}
     public boolean IsRightClose(){
         if(outtakeStatus.modeIs(PLACING)) {
-            return dsor.getDistance(DistanceUnit.CM) < 30;
+            return dsor.getDistance(DistanceUnit.CM) < 50;
         }
         return false;
     }
