@@ -9,6 +9,7 @@ import static global.Modes.Height.GROUND;
 import static global.Modes.Height.HIGH;
 import static global.Modes.Height.LOW;
 import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
 
 
@@ -46,10 +47,13 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule R_TRIGGER = new AutoModule(
+            intake.stageStart(.2),
             outtake.stageOpen(.1).attach(outtake.stageStart(.1)),
             intake.moveSmart(-.6),
             outtake.stageLock(.2),
-            outtake.stageClose(.5)
+            outtake.stageClose(.5),
+            intake.stageInit(.2)
+
 
 
     ).setStartCode(() ->{

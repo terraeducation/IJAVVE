@@ -131,21 +131,12 @@ public class Drive extends RobotPart {
     public void newMove(double f, double s, double t) {
 
 
-            if (distanceSensorsNew.IsLeftClose() && distanceSensorsNew.IsRightClose()) {
-                fl.setPower(0.2 * f + 0.5 * s + 0.2 * t);
-                bl.setPower(0.2 * f - 0.5 * s + 0.2 * t);
-                fr.setPower(0.2 * f - 0.5 * s - 0.2 * t);
-                br.setPower(0.2 * f + 0.5 * s - 0.2 * t);
-//            }else if((distanceSensorsNew.IsLeftSuperClose())){
-//                fl.setPower(0 * f + s + 0.2 * t);
-//                bl.setPower(0 * f - s + 0.2 * t);
-            } else {
-                fl.setPower(f + s + t);
-                bl.setPower(f - s + t);
-                fr.setPower(f - s - t);
-                br.setPower(f + s - t);
-            }
-        
+
+                fl.setPower(f + s + .7*t);
+                bl.setPower(f - s + .7*t);
+                fr.setPower(f - s - .7*t);
+                br.setPower(f + s - .7*t);
+
 
         }
 

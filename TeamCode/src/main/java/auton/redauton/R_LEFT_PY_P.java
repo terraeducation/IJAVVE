@@ -65,6 +65,7 @@ public class R_LEFT_PY_P extends AutoFramework {
             addWaypoint(-64,-65,90);
             addTimedSetpoint(1.0,1,.7,-64,-80,90);
             addAutoModule(Extake);
+
             addWaypoint(-64,-65,90);
             addSetpoint(-125,-65,90);
             addTimedSetpoint(1,1,1.2,-125,-145,90);

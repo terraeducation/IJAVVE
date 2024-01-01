@@ -55,7 +55,7 @@ public class NithinOp extends Tele {
          * Start code
          */
         outtake.moveStart();
-        intake.moveStart();
+        intake.moveInit();
         driveMode.set(FAST);
         outtakeStatus.set(DRIVING);
         lift.reset();
