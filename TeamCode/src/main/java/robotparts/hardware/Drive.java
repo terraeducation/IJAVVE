@@ -5,7 +5,6 @@ import static java.lang.Math.abs;
 import automodules.AutoModule;
 import automodules.stage.Stage;
 import geometry.position.Vector;
-import global.Modes;
 import math.misc.Logistic;
 import math.polynomial.Linear;
 import robotparts.RobotPart;
@@ -20,7 +19,10 @@ import static global.Modes.Drive.FAST;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.Drive.SUPERSLOW;
+import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.OuttakeStatus.PLACING;
 import static global.Modes.driveMode;
+import static global.Modes.outtakeStatus;
 //import static global.Modes.driveMode;
 
 public class Drive extends RobotPart {
@@ -127,27 +129,17 @@ public class Drive extends RobotPart {
         }
     }
     public void newMove(double f, double s, double t) {
-        if (distanceSensorsNew.isClose()){
-            driveMode.set(SUPERSLOW);
-        }
-        if(driveMode.modeIs(SLOW)){
-            fr.setPower(.5*f - .5*s - .25*t);
-            br.setPower(.5*f + .5*s - .25*t);
-            fl.setPower(.5*f + .5*s + .25*t);
-            bl.setPower(.5*f - .5*s + .25*t);
-        }else if(driveMode.modeIs(FAST)) {
-            fr.setPower(f - s - t);
-            br.setPower(f + s - t);
-            fl.setPower(f + s + t);
-            bl.setPower(f - s + t);
-        } else if (driveMode.modeIs(SUPERSLOW)) {
-            fr.setPower(.1*f - .5*s - .25*t);
-            br.setPower(.1*f + .5*s - .25*t);
-            fl.setPower(.1*f + .5*s + .25*t);
-            bl.setPower(.1*f - .5*s + .25*t);
+
+
+
+                fl.setPower(f + s + .7*t);
+                bl.setPower(f - s + .7*t);
+                fr.setPower(f - s - .7*t);
+                br.setPower(f + s - .7*t);
+
 
         }
-    }
+
     public void moveSmooth(double f, double s, double t) {
 
 
@@ -243,6 +235,10 @@ public class Drive extends RobotPart {
     @Override
     public Stage moveTime(double fp, double sp, double tp, ReturnCodeSeg<Double> t) {
         return super.moveTime(fp, sp, tp, t);
+    }
+
+    public Stage driveSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitDrive());
     }
 
     @Override

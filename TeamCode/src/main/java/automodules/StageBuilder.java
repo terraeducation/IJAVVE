@@ -89,7 +89,7 @@ public class StageBuilder {
     protected Stage moveTime(double fp, double sp, double tp, ReturnCodeSeg<Double> t){ return new Stage(usePart(), main(fp, sp, tp), new Exit(() -> bot.rfsHandler.getTimer().seconds() > t.run()), stop(), returnPart()); }
     protected AutoModule MoveTime(double fp, double sp, double tp, double t){ return new AutoModule(moveTime(fp, sp, tp, t)); }
 
-    protected CodeSeg move(double p){
+    public CodeSeg move(double p){
         return null;
     }
     protected Main main(double p){ return new Main(() -> move(p)); }
