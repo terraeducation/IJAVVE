@@ -20,14 +20,16 @@ public class Outtake extends RobotPart {
         arml = create("arml", ElectronicType.PSERVO_REVERSE);
 
 
-        arml.changePosition("start", 0.02); //.21 difference
-        armr.changePosition("start", 0.022);
+        arml.changePosition("start", 0);
+        armr.changePosition("start", 0);
 
 
         arml.changePosition("lock", 0);
         armr.changePosition("lock", 0);
 
 
+        arml.changePosition("middle", 0.15);
+        armr.changePosition("middle", 0.15);
 
         arml.changePosition("end", 0.65);
         armr.changePosition("end", 0.67);
@@ -38,23 +40,26 @@ public class Outtake extends RobotPart {
 
 
 
-        claw1.addPosition("close", 1);
-        claw1.addPosition("open", 0.2);
+        claw1.addPosition("close", .7);
+        claw1.addPosition("open", 0.3);
 
         claw2 = create("claw2", ElectronicType.PSERVO_FORWARD);
 
 
 
-        claw2.addPosition("close", 1);
-        claw2.addPosition("open", 0.2);
+        claw2.addPosition("close", .7);
+        claw2.addPosition("open", 0.3);
 
 
         pivot = create("pivot", ElectronicType.PSERVO_REVERSE);
 
 
 
-        pivot.addPosition("start", 0.027);
-        pivot.addPosition("makeitthru", 0);
+        pivot.addPosition("start", 0);
+        pivot.addPosition("makeitthru", 0.05);
+        pivot.addPosition("makeitdown", 0.08);
+
+
 
         pivot.addPosition("transfer", 0.4);
         pivot.addPosition("end",0.51);
@@ -64,7 +69,7 @@ public class Outtake extends RobotPart {
 
 
 
-        rotate.addPosition("start", .43);
+        rotate.addPosition("start", .41);
         rotate.addPosition("transfer", .30);
         rotate.addPosition("angleleft", .56);
         rotate.addPosition("stack", 0.11);
@@ -86,8 +91,11 @@ public class Outtake extends RobotPart {
 
     public void moveEnd(){ armr.setPosition("end"); arml.setPosition("end"); }
 
+
     public void moveLock(){ armr.setPosition("lock"); arml.setPosition("lock");}
     public void moveEndPivot(){ pivot.setPosition("end");}
+    public void moveDownPivot(){ pivot.setPosition("makeitdown");}
+
     public void moveThruPivot(){ pivot.setPosition("makeitthru");}
 
     public void moveTransferPivot(){ pivot.setPosition("transfer");}
@@ -131,6 +139,8 @@ public class Outtake extends RobotPart {
     public Stage stageStartPivot(double t) {return super.customTime(this::moveStartPivot, t);}
 
     public Stage stageThruPivot(double t) {return super.customTime(this::moveThruPivot, t);}
+    public Stage stageDownPivot(double t) {return super.customTime(this::moveDownPivot, t);}
+
 
 
     public Stage stageEndPivot(double t) {return super.customTime(this::moveEndPivot, t);}

@@ -47,11 +47,13 @@ public class Intake extends RobotPart {
         link2.changePosition("init", .15);
         link2.changePosition("start", .72);
         link2.changePosition("middle", .52);
+        link2.changePosition("middler", .65);
+
     }
 
     public void moveInit() {
         link.setPosition("init");
-        link.setPosition("init");
+        link2.setPosition("init");
 
 
     }

@@ -13,6 +13,8 @@ public class ColorSensors extends RobotPart {
     @Override
     public void init() {
         cso1 = hardwareMap.get(ColorSensor.class, "cso1");
+        cso2 = hardwareMap.get(ColorSensor.class, "cso2");
+
 
     }
 

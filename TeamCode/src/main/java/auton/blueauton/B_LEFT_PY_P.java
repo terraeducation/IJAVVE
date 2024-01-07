@@ -17,17 +17,19 @@ public class B_LEFT_PY_P extends AutoFramework {
         this.setConfig(NonstopConfig);
         bot.saveLocationOnField();
         outtake.moveStart();
-        outtake.moveLock();
+        outtake.moveStartPivot();
         outtake.closeClaw();
+
         intake.moveInit();
-        propCaseDetected = TeamProp.THIRD;
+        propCaseDetected = TeamProp.SECOND;
 //        AutoFramework auto = this;
 //        auto.scan(true, "blue", "left");
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.moveTime(.25,.2).attach(lift.stageLift(1, 10)),
-            lift.stageLift(1, 18).attach(outtake.stageThruPivot(.1)),
+            intake.stageMiddle(.1).attach(intake.moveTime(.5,.2)),
+            intake.stageInit(.1).attach(lift.stageLift(1, 10)),
+            lift.stageLift(1, 15).attach(outtake.stageThruPivot(.1)),
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
 
@@ -77,16 +79,19 @@ public class B_LEFT_PY_P extends AutoFramework {
         }, () -> {
             addWaypoint(0,-40,0);
             addWaypoint(35,-105,-90);
-            addTimedSetpoint(1.0,1,1,18,-104,-90);
+            addTimedSetpoint(1.0,1,.5,18,-104,-90);
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,1,1,74,-64.5,-90);
+            addTimedSetpoint(1.0,1,.5,50,-64.5,-90);
+
+            addTimedSetpoint(1.0,1,.5,65,-55.5,-90);
+
             addCustomCode(
                     () -> {
 
                         whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
 
-                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -64.5,-90);
+                            addTimedSetpoint(1,1,.1, (odometry.getX() + 5), -64.5,-90);
 
                         });
 
@@ -94,7 +99,7 @@ public class B_LEFT_PY_P extends AutoFramework {
                     });
             addAutoModule(Reset);
             addWaypoint(60,-7,0);
-            addTimedSetpoint(1.0,1,1.3,105,-7,0);
+            addTimedSetpoint(1.0,1,1,105,-7,0);
 
 
 
