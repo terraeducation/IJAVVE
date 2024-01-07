@@ -129,13 +129,19 @@ public class Drive extends RobotPart {
         }
     }
     public void newMove(double f, double s, double t) {
+            if(outtakeStatus.modeIs(DRIVING)) {
 
 
-
-                fl.setPower(f + s + .7*t);
-                bl.setPower(f - s + .7*t);
-                fr.setPower(f - s - .7*t);
-                br.setPower(f + s - .7*t);
+                fl.setPower(f + s + .7 * t);
+                bl.setPower(f - s + .7 * t);
+                fr.setPower(f - s - .7 * t);
+                br.setPower(f + s - .7 * t);
+            }else{
+                fl.setPower(.5 * f + .5 * s + .3 * t);
+                bl.setPower(.5 * f - .5 * s + .3 * t);
+                fr.setPower(.5 * f - .5 * s - .3 * t);
+                br.setPower(.5 * f + .5 * s - .3 * t);
+            }
 
 
         }

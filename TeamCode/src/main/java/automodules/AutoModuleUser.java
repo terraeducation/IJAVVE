@@ -36,8 +36,8 @@ public interface AutoModuleUser extends RobotUser {
         outtake.stageTransferPivot(.2).attach(outtake.stageStart(.2)),
             outtake.stageStartRotate(.05),
 
-            lift.stageLift(1, heightMode.getValue(GROUND)).attach(outtake.stageDownPivot(.1)),
-        outtake.stageStartPivot(.1)
+            lift.stageLift(1, 5).attach(outtake.stageThruPivot(.1)),
+        outtake.stageStartPivot(.1).attach(lift.stageLift(1,0))
 
     ).setStartCode(() ->{
         heightMode.set(GROUND);
@@ -47,9 +47,11 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule R_TRIGGER = new AutoModule(
+            outtake.stageLock(.1),
             intake.stageStart(.2).attach(outtake.stageOpen(.1)),
             intake.moveSmart(-.6),
-            outtake.stageClose(.5).attach(intake.stageInit(.2))
+            outtake.stageClose(.5).attach(outtake.stageLock(.2)),
+            intake.stageInit(.2)
 
 
 
@@ -60,23 +62,22 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule A_BUTTON = new AutoModule(
-            lift.stageLift(1, 30)
+            lift.stageLift(1, 35)
 
             ).setStartCode(() ->{
 
     });
 
     AutoModule Y_BUTTON = new AutoModule(
-
+            outtake.stageUp(.2).attach(outtake.stageHiPivot(.2))
     ).setStartCode(() ->{
 
     });
 
     AutoModule X_BUTTON = new AutoModule(
 //            outtake.stageMiddle(.2),
-            lift.stageLift(1, 10).attach(outtake.stageThruPivot(.2)),
+            lift.stageLift(1, 20).attach(outtake.stageThruPivot(.2)),
 
-            lift.stageLift(1, 20),
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageStartRotate(.2))
 
@@ -87,6 +88,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule B_BUTTON = new AutoModule(
+            lift.stageLift(1, 45)
 
     ).setStartCode(() ->{
 

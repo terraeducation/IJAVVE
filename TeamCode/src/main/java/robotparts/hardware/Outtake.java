@@ -20,8 +20,8 @@ public class Outtake extends RobotPart {
         arml = create("arml", ElectronicType.PSERVO_REVERSE);
 
 
-        arml.changePosition("start", 0);
-        armr.changePosition("start", 0);
+        arml.changePosition("start", 0.05);
+        armr.changePosition("start", 0.05);
 
 
         arml.changePosition("lock", 0);
@@ -33,6 +33,11 @@ public class Outtake extends RobotPart {
 
         arml.changePosition("end", 0.65);
         armr.changePosition("end", 0.67);
+
+        arml.changePosition("uphigh", 0.55);
+        armr.changePosition("uphigh", 0.57);
+
+
 
 
 
@@ -55,14 +60,15 @@ public class Outtake extends RobotPart {
 
 
 
-        pivot.addPosition("start", 0);
-        pivot.addPosition("makeitthru", 0.05);
+        pivot.addPosition("start", 0.03);
+        pivot.addPosition("makeitthru", 0.3);
         pivot.addPosition("makeitdown", 0.08);
 
 
 
         pivot.addPosition("transfer", 0.4);
-        pivot.addPosition("end",0.51);
+        pivot.addPosition("end",0.55);
+        pivot.addPosition("hi",0.65);
 
 
         rotate = create("rotate", ElectronicType.PSERVO_FORWARD);
@@ -90,6 +96,8 @@ public class Outtake extends RobotPart {
     public void moveStarttest(){ pivot.setPosition("start");   }
 
     public void moveEnd(){ armr.setPosition("end"); arml.setPosition("end"); }
+    public void moveUp(){ armr.setPosition("uphigh"); arml.setPosition("uphigh"); }
+
 
 
     public void moveLock(){ armr.setPosition("lock"); arml.setPosition("lock");}
@@ -97,6 +105,8 @@ public class Outtake extends RobotPart {
     public void moveDownPivot(){ pivot.setPosition("makeitdown");}
 
     public void moveThruPivot(){ pivot.setPosition("makeitthru");}
+    public void moveHiPivot(){ pivot.setPosition("hi");}
+
 
     public void moveTransferPivot(){ pivot.setPosition("transfer");}
     public void moveStartPivot(){ pivot.setPosition("start");}
@@ -134,12 +144,16 @@ public class Outtake extends RobotPart {
     public Stage stageReadyStart(double t){return super.customTime(this::readyStart, t);}
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageEnd(double t){ return super.customTime(this::moveEnd, t); }
+    public Stage stageUp(double t){ return super.customTime(this::moveUp, t); }
+
 
     public Stage stageTransferPivot(double t) {return super.customTime(this::moveTransferPivot, t);}
     public Stage stageStartPivot(double t) {return super.customTime(this::moveStartPivot, t);}
 
     public Stage stageThruPivot(double t) {return super.customTime(this::moveThruPivot, t);}
     public Stage stageDownPivot(double t) {return super.customTime(this::moveDownPivot, t);}
+    public Stage stageHiPivot(double t) {return super.customTime(this::moveHiPivot, t);}
+
 
 
 
