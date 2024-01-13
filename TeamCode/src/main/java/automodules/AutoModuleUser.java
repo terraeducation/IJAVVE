@@ -78,7 +78,8 @@ public interface AutoModuleUser extends RobotUser {
 //            outtake.stageMiddle(.2),
             lift.stageLift(1, 20).attach(outtake.stageThruPivot(.2)),
 
-            outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
+            outtake.stageEnd(.4).attach(outtake.stageTransferPivot(.4)),
+            RobotPart.pause(.3),
             outtake.stageEndPivot(.2).attach(outtake.stageStartRotate(.2))
 
 
@@ -102,7 +103,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule DOWN_DPAD = new AutoModule(
-        intake.moveTime(.4,1)
+        intake.removeSmart(.8).attach(intake.stageMiddle(.1))
     ).setStartCode(() ->{
 
     });

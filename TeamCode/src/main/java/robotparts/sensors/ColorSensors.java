@@ -35,9 +35,24 @@ public class ColorSensors extends RobotPart {
         }
 
     }
+
+    public GameElement isObjectGone(){
+        if (cso1.alpha() < 2000 && cso2.alpha() < 2000){
+            return GameElement.PIXELGONE;
+        }else{
+            return GameElement.NONE;
+        }
+
+    }
     public boolean isPixel1(){
         return isObject().equals(GameElement.PIXEL1);
     }
+    public boolean isPixelGone(){
+        return isObjectGone().equals(GameElement.PIXELGONE);
+    }
+
     public Exit exitIntake(){return new Exit(this::isPixel1);}
+    public Exit exitExtake(){return new Exit(this::isPixelGone);}
+
 
 }

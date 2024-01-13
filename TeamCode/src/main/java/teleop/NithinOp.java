@@ -20,10 +20,13 @@ public class NithinOp extends Tele {
 
         gph1.link(LEFT_BUMPER, L_BUMPER);
         gph1.link(RIGHT_BUMPER, R_BUMPER);
-        gph1.link(LEFT_TRIGGER, L_TRIGGER);
-        gph1.link(RIGHT_TRIGGER, R_TRIGGER);
+        gph1.link(RIGHT_TRIGGER, L_TRIGGER);
+        gph1.link(LEFT_TRIGGER, R_TRIGGER);
 
         gph1.link(DPAD_DOWN, DOWN_DPAD);
+        gph1.link(DPAD_RIGHT, RIGHT_DPAD);
+        gph1.link(DPAD_LEFT, LEFT_DPAD);
+        gph1.link(DPAD_UP, UP_DPAD);
 
 
         gph1.link(X, X_BUTTON);
@@ -35,9 +38,7 @@ public class NithinOp extends Tele {
 
         gph2.link(A, outtake::openClaw);
         gph2.link(B, outtake::closeClaw);
-        gph2.link(DPAD_RIGHT, RIGHT_DPAD);
-        gph2.link(DPAD_LEFT, LEFT_DPAD);
-        gph2.link(DPAD_UP, UP_DPAD);
+
 
 
         /**
@@ -65,7 +66,7 @@ public class NithinOp extends Tele {
         drive.newMove(gph1.ry, gph1.rx, gph1.lx);
         lift.move(gph2.ry);
 
-
+//        log.show("", odometry.getEncX());
 
         /**
          * Gets Distance

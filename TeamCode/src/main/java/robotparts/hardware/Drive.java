@@ -125,7 +125,7 @@ public class Drive extends RobotPart {
             currentPower[i] = Math.signum(power[i])*cutoff;
         }else{
             currentPower[i] = power[i];
-//            deltaPower[i] = Math.max(0, deltaPower[i] - decel);
+//            del taPower[i] = Math.max(0, deltaPower[i] - decel);
         }
     }
     public void newMove(double f, double s, double t) {

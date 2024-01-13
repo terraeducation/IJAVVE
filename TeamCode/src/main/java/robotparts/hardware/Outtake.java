@@ -60,13 +60,13 @@ public class Outtake extends RobotPart {
 
 
 
-        pivot.addPosition("start", 0.03);
-        pivot.addPosition("makeitthru", 0.3);
+        pivot.addPosition("start", 0.08);
+        pivot.addPosition("makeitthru", 0.2);
         pivot.addPosition("makeitdown", 0.08);
 
 
 
-        pivot.addPosition("transfer", 0.4);
+        pivot.addPosition("transfer", 0.3);
         pivot.addPosition("end",0.55);
         pivot.addPosition("hi",0.65);
 

@@ -12,6 +12,6 @@ public enum GameElement implements Decision {
     NONE,
     PIXEL1,
 
-    PIXEL2
+    PIXELGONE
 
     }

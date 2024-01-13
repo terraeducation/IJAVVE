@@ -101,6 +101,12 @@ public class Intake extends RobotPart {
 
     }
 
+    public Stage removeSmart(double p){
+
+        return super.customExit(p, colorSensorsNew.exitExtake());
+
+    }
+
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageInit(double t){ return super.customTime(this::moveInit, t); }
 
