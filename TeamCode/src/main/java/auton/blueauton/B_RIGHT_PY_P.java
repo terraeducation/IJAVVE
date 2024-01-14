@@ -24,9 +24,9 @@ public class B_RIGHT_PY_P extends AutoFramework {
         outtake.closeClaw();
         intake.moveInit();
 
-        propCaseDetected = TeamProp.FIRST;
-//        AutoFramework auto = this;
-//        auto.scan(true, "blue", "right");
+//        propCaseDetected = TeamProp.FIRST;
+        AutoFramework auto = this;
+        auto.scan(true, "blue", "right");
 
     }
     AutoModule Extake = new AutoModule(

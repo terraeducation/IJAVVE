@@ -21,9 +21,9 @@ public class B_LEFT_PY_P extends AutoFramework {
         outtake.closeClaw();
 
         intake.moveInit();
-        propCaseDetected = TeamProp.FIRST;
-//        AutoFramework auto = this;
-//        auto.scan(true, "blue", "left");
+//        propCaseDetected = TeamProp.FIRST;
+        AutoFramework auto = this;
+        auto.scan(true, "blue", "left");
 
     }
     AutoModule ExtakeandLift = new AutoModule(
@@ -63,7 +63,7 @@ public class B_LEFT_PY_P extends AutoFramework {
             addAutoModule(ExtakeandLift);
             addTimedSetpoint(1.0,1,.4,60,-60.5,-90);
 
-            addTimedSetpoint(1.0,1,.55,73,-52,-90);
+            addTimedSetpoint(1.0,1,.55,75,-52,-90);
 //            while (distanceSensorsNew.getCMDistanceRight() > 21.5 && distanceSensorsNew.getCMDistanceLeft() > 21.5)  {
 //
 //                            drive.move(.5);
