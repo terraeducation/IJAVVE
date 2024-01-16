@@ -10,7 +10,7 @@ import autoutil.AutoFramework;
 import elements.TeamProp;
 import robotparts.RobotPart;
 
-@Autonomous(name = "B. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
+@Autonomous(name = "BLUE Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
 public class B_LEFT_PY_P extends AutoFramework {
     @Override
     public void initialize() {
@@ -21,13 +21,14 @@ public class B_LEFT_PY_P extends AutoFramework {
         outtake.closeClaw();
 
         intake.moveInit();
-        propCaseDetected = TeamProp.FIRST;
-//        AutoFramework auto = this;
-//        auto.scan(true, "blue", "left");
+//        propCaseDetected = TeamProp.FIRST;
+        AutoFramework auto = this;
+        auto.scan(true, "blue", "left");
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.stageMiddle(.1).attach(intake.moveTime(.5,.2)),
+            intake.moveTime(.5,.3).attach(intake.stageMiddler(.2)),
+            intake.stageInit(.2),
             lift.stageLift(1, 12).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
@@ -37,7 +38,7 @@ public class B_LEFT_PY_P extends AutoFramework {
 
     AutoModule Drop = new AutoModule(
             lift.stageLift(1, 7),
-            lift.stageLift(1, 18).attach(outtake.stageThruPivot(.1)),
+            lift.stageLift(1, 15).attach(outtake.stageThruPivot(.1)),
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
     );
@@ -55,15 +56,18 @@ public class B_LEFT_PY_P extends AutoFramework {
     @Override
     public void define() {
         customCase(() -> {
-            addWaypoint(0,-40,0);
-            addWaypoint(40,-76,0);
 
-            addTimedSetpoint(1.0,1,.5,34,-76,-90);
+
+            addTimedSetpoint(1.0,.5,1,20,-30,0);
+
+            addTimedSetpoint(1.0,.5,1,20,-43,0);
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,1,.4,60,-60.5,-90);
+            addWaypoint(30,-20,0);
 
-            addTimedSetpoint(1.0,1,.55,73,-52,-90);
+            addTimedSetpoint(1.0,.5,2,60,-60.5,-90);
+
+            addTimedSetpoint(1.0,.5,1,78,-53,-90);
 //            while (distanceSensorsNew.getCMDistanceRight() > 21.5 && distanceSensorsNew.getCMDistanceLeft() > 21.5)  {
 //
 //                            drive.move(.5);
@@ -73,18 +77,20 @@ public class B_LEFT_PY_P extends AutoFramework {
 //
 //                    }
             addAutoModule(Reset);
-            addWaypoint(60,-7,0);
-            addTimedSetpoint(1.0,1,.8,107,-9,0);
+            addWaypoint(60,-10,0);
+            addTimedSetpoint(1.0,.3,2,105,-10,0);
 
         }, () -> {
-            addWaypoint(0,-40,0);
-            addWaypoint(33,-90,0);
-            addTimedSetpoint(1.0,1,.5,15,-104,-90);
+
+
+            addTimedSetpoint(1.0,.5,1,20,-70,-35);
+            addTimedSetpoint(1.0,.5,1,10,-80,-30);
+
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,1,.3,60,-77,-90);
+            addTimedSetpoint(1.0,.5,1,60,-67,-90);
 
-            addTimedSetpoint(1.0,1,.75,72,-77,-90);
+            addTimedSetpoint(1.0,.5,1,80,-67,-90);
 
 //            addCustomCode(
 //                    () -> {
@@ -98,22 +104,28 @@ public class B_LEFT_PY_P extends AutoFramework {
 //
 //                    });
             addAutoModule(Reset);
-            addWaypoint(60,-5,0);
-            addTimedSetpoint(1.0,1,.9,107,-5,0);
+            addWaypoint(60,-14,0);
+            addTimedSetpoint(1.0,.3,2,105,-12,0);
 
 
 
 
         }, () -> {
 
-            addWaypoint(0,-40,0);
-            addWaypoint(-10,-70,-90);
+            addWaypoint(0,-30,0);
+            addWaypoint(-30,-30,-10);
 
-            addTimedSetpoint(1.0,1,.5,-15,-70,-90);
+//            addTimedSetpoint(1.0,.5,1.5,-18,-55,-80);
+//            addTimedSetpoint(1.0,.5,1,-30,-50,-80);
+            addTimedSetpoint(1.0,.5,1,-30,-50,-30);
+
+
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,1,.7,60,-81,-90);
+            addTimedSetpoint(1.0,.5,1,40,-74,-94);
+            addPause(.2);
+            addTimedSetpoint(1.0,.5,.7,77,-78,-93);
+            addPause(.5);
 
-            addTimedSetpoint(1.0,1,.4,71,-81,-90);
 //            addCustomCode(
 //                    () -> {
 //
@@ -126,8 +138,8 @@ public class B_LEFT_PY_P extends AutoFramework {
 //
 //                    });
             addAutoModule(Reset);
-            addWaypoint(60,-5,0);
-            addTimedSetpoint(1.0,1,1,105,-5,0);
+            addWaypoint(60,-15,0);
+            addTimedSetpoint(1.0,.3,2,90,-13,0);
 
         });
     }

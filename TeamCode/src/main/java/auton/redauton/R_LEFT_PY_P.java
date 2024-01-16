@@ -10,7 +10,7 @@ import autoutil.AutoFramework;
 import elements.TeamProp;
 import robotparts.RobotPart;
 
-@Autonomous(name = "R. Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
+@Autonomous(name = "RED Left PY&P ", group = "auto", preselectTeleOp = "TerraOp")
 public class R_LEFT_PY_P extends AutoFramework {
 
 
@@ -23,15 +23,16 @@ public class R_LEFT_PY_P extends AutoFramework {
         outtake.moveLock();
         outtake.closeClaw();
         intake.moveInit();
-        propCaseDetected = TeamProp.THIRD;
+//        propCaseDetected = TeamProp.THIRD;
 
-//        AutoFramework auto = this;
-//        auto.scan(true, "red", "left");
+        AutoFramework auto = this;
+        auto.scan(true, "red", "left");
 
     }
     AutoModule Extake = new AutoModule(
-            intake.moveTime(.3,.8)
-
+            intake.stageMiddler(.1),
+            intake.moveTime(.5,.3),
+            intake.stageInit(.1)
 
     );
 
@@ -41,53 +42,50 @@ public class R_LEFT_PY_P extends AutoFramework {
     );
 
     AutoModule PreExtend = new AutoModule(
-            lift.stageLift(1, 7),
-            lift.stageLift(1, 18).attach(outtake.stageThruPivot(.1))
+            lift.stageLift(1, 16).attach(outtake.stageThruPivot(.2)),
+
+            outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
+            outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
+
 
     );
     AutoModule Reset = new AutoModule(
-            RobotPart.pause(.2),
-            outtake.stageOpen(.1),
+            outtake.stageOpen(.1).attach(intake.stageInit(.2)),
             outtake.stageTransferPivot(.2).attach(outtake.stageStart(.2)),
             outtake.stageStartRotate(.05),
 
-            lift.stageLift(1, heightMode.getValue(GROUND)).attach(outtake.stageThruPivot(.2)),
-            outtake.stageStartPivot(.1)
+            lift.stageLift(1, 5).attach(outtake.stageThruPivot(.1)),
+            outtake.stageStartPivot(.1).attach(lift.stageLift(1,0))
 
     );
     //TODO MAKE DISTANCE SENSOR ADJUST Y COORDINATE
     @Override
     public void define() {
         customCase(() -> {
-            addPause(14);
-            addWaypoint(0,-55,0);
-            addTimedSetpoint(1.0,1,1,0,-65,90);
-            addWaypoint(-64,-65,90);
-            addTimedSetpoint(1.0,1,.7,-64,-80,90);
+            addPause(20);
+            addWaypoint(0,-35,0);
+            addWaypoint(5,-55,90);
+            addTimedSetpoint(1.0,1,.9,7,-80,90);
             addAutoModule(Extake);
-
-            addWaypoint(-64,-65,90);
-            addSetpoint(-125,-65,90);
-            addTimedSetpoint(1,1,1.2,-125,-145,90);
-            addTimedSetpoint(1,1,2,-200,-145,90);
-            addConcurrentAutoModule(PreExtend);
+            addWaypoint(0,-70,90);
+            addTimedSetpoint(1.0,1,.8,0,-130,90);
+            addWaypoint(-155, -130,90.5);
+            addAutoModule(PreExtend);
 
 
+            addTimedSetpoint(1.0,1,.8,-220,-94,93);
 
-            addWaypoint(-200, -97,91);
-            addAutoModule(Drop);
-            addTimedSetpoint(1,1,1.3,-225, -90,91);
-            addCustomCode(
-                    () -> {
-
-                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-
-                            addTimedSetpoint(1,1,1, -(odometry.getX() + 5), -90,91);
-
-                        });
-
-
-                    });
+//            addCustomCode(
+//                    () -> {
+//
+//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
+//
+//                            addTimedSetpoint(1,1,1, -(odometry.getX() + 5), -90,91);
+//
+//                        });
+//
+//
+//                    });
 
             addAutoModule(Reset);
 
@@ -103,65 +101,67 @@ public class R_LEFT_PY_P extends AutoFramework {
 
 
         }, () -> {
-            addPause(18);
-            addTimedSetpoint(1.0,1,1.5,0,-65,0);
-            addTimedSetpoint(1.0,1,.5,0,-80,0);
+            addPause(22);
+            addTimedSetpoint(1.0,.5,1,20,-70,-35);
+            addTimedSetpoint(1.0,.5,1,10,-76,-30);
+
 
             addAutoModule(Extake);
             addWaypoint(0, -65,0);
 
             addWaypoint(0, -65,90);
-            addWaypoint(-150, -72,93);
+            addWaypoint(-155, -70,90);
             addConcurrentAutoModule(PreExtend);
-            addTimedSetpoint(1,1,1.2,-190, -72,93);
-
-            addAutoModule(Drop);
-            addTimedSetpoint(1,1,1.5,-225, -72,93);
-            addCustomCode(
-                    () -> {
-
-                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-
-                            addTimedSetpoint(1,1,1, -(odometry.getX() + 5), -72,93);
-
-                        });
+            addTimedSetpoint(1,1,.8,-180, -70,91);
 
 
-                    });
+            addTimedSetpoint(1,1,.6,-220, -73,91);
+//            addCustomCode(
+//                    () -> {
+//
+//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
+//
+//                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -84,-93);
+//
+//                        });
+//
+//
+//                    });
+            addPause(.2);
             addAutoModule(Reset);
+
 
 
 
 
         }, () -> {
             addPause(18);
+
             addWaypoint(0,-35,0);
-            addWaypoint(0,-55,90);
-            addTimedSetpoint(1.0,1,1.2,0,-80,90);
+            addWaypoint(5,-55,-90);
+            addTimedSetpoint(1.0,1,.9,-25,-70,-90);
             addAutoModule(Extake);
-            addWaypoint(0,-70,-90);
-            addTimedSetpoint(1.0,1,1.2,0,-130,90);
-            addWaypoint(-155, -130,90);
-            addConcurrentAutoModule(PreExtend);
-            addTimedSetpoint(1.0,1,1.2,-155,-64,90);
-            addTimedSetpoint(1,1,.5,-190, -64,92);
+            addWaypoint(0,-70,90);
+            addTimedSetpoint(1.0,1,1,0,-125,90);
+            addWaypoint(-200, -120,90);
+            addTimedSetpoint(1.0,1,1.7,-200,-60,90);
+            addAutoModule(PreExtend);
 
-            addAutoModule(Drop);
-            addTimedSetpoint(1,1,1.5,-225, -64,92);
-            addCustomCode(
-                    () -> {
+            addTimedSetpoint(1.0,1,.5,-228,-64,92);
 
-                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-
-                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -64,92);
-
-                        });
-
-
-                    });
-
+//            addCustomCode(
+//                    () -> {
+//
+//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
+//
+//                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -84,-93);
+//
+//                        });
+//
+//
+//                    });
+            addPause(.2);
             addAutoModule(Reset);
-
 
 
 
