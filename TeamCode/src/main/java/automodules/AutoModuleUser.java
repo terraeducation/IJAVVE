@@ -49,16 +49,19 @@ public interface AutoModuleUser extends RobotUser {
     AutoModule R_TRIGGER = new AutoModule(
             outtake.stageLock(.1),
             intake.stageStart(.2).attach(outtake.stageOpen(.1)),
-            intake.moveSmart(-.6),
-            outtake.stageClose(.5).attach(outtake.stageLock(.2)),
+            intake.moveSmart(-.5),
+            outtake.stageClose(.5),
             intake.stageInit(.2)
 
 
 
 
-    ).setStartCode(() ->{
-        outtake.stageStart(.2);
 
+    ).setStartCode(() ->{
+        outtakeStatus.set(INTAKING);
+
+    }).setEndCode(() -> {
+        outtakeStatus.set(DRIVING);
     });
 
     AutoModule A_BUTTON = new AutoModule(
@@ -96,7 +99,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule UP_DPAD = new AutoModule(
-            outtake.stageStackRotate(.1)
+            outtake.stageStackRotate(.1).attach(outtake.stageHiPivot(.1))
 
     ).setStartCode(() ->{
 
@@ -109,13 +112,15 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule LEFT_DPAD = new AutoModule(
-        outtake.stageLeftRotate(.1)
+        outtake.stageLeftRotate(.1).attach(outtake.stageHiPivot(.1))
+
     ).setStartCode(() ->{
 
     });
 
     AutoModule RIGHT_DPAD = new AutoModule(
-            outtake.stageTransferRotate(.1)
+            outtake.stageTransferRotate(.1).attach(outtake.stageHiPivot(.1))
+
 
     ).setStartCode(() ->{
 

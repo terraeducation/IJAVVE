@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import automodules.stage.Main;
 import automodules.stage.Stage;
-import automodules.stage.StageComponent;
 import util.codeseg.CodeSeg;
 import util.codeseg.ReturnCodeSeg;
 import util.condition.Decision;
@@ -57,6 +56,8 @@ public class Mode {
     public Stage ChangeMode(ModeType newMode){return new Stage(new Main(() -> currentMode = newMode), exitAlways()); }
     public Stage ChangeMode(ReturnCodeSeg<ModeType> newMode){return new Stage(new Main(() -> currentMode = newMode.run()), exitAlways()); }
     public void set(ModeType mode){ this.currentMode = mode; }
+    public Stage setStage(ModeType mode){ return (Stage) (this.currentMode = mode); }
+
     public CodeSeg setTo(ModeType mode){return () -> {this.currentMode = mode;};}
 
     public void toggle(ModeType one, ModeType two){ if(modeIs(one)){set(two);}else{set(one);} }

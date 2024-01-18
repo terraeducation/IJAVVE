@@ -20,6 +20,7 @@ import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
 import static global.Modes.driveMode;
 import static global.Modes.outtakeStatus;
@@ -132,16 +133,22 @@ public class Drive extends RobotPart {
             if(outtakeStatus.modeIs(DRIVING)) {
 
 
-                fl.setPower(f + s + .7 * t);
-                bl.setPower(f - s + .7 * t);
-                fr.setPower(f - s - .7 * t);
-                br.setPower(f + s - .7 * t);
-            }else{
-                fl.setPower(.5 * f + .5 * s + .3 * t);
-                bl.setPower(.5 * f - .5 * s + .3 * t);
-                fr.setPower(.5 * f - .5 * s - .3 * t);
-                br.setPower(.5 * f + .5 * s - .3 * t);
-            }
+                fl.setPower(f + s + .55 * t);
+                bl.setPower(f - s + .55 * t);
+                fr.setPower(f - s - .55 * t);
+                br.setPower(f + s - .55 * t);
+            }else if(outtakeStatus.modeIs(PLACING)){
+                fl.setPower(.3 * f + .3 * s + .2 * t);
+                bl.setPower(.3 * f - .3 * s + .2 * t);
+                fr.setPower(.3 * f - .3 * s - .2 * t);
+                br.setPower(.3 * f + .3 * s - .2 * t);
+            }else if(outtakeStatus.modeIs(INTAKING)){
+                fl.setPower( f + s + .3 * t);
+                bl.setPower( f - s + .3 * t);
+                fr.setPower( f - s - .3 * t);
+                br.setPower( f + s - .3 * t);
+
+    }
 
 
         }

@@ -103,6 +103,7 @@ public class RobotFunctions {
             if (rfsQueue.isEmpty()) { robotFunctionsThread.setStatus(Status.ACTIVE); }
             rfsQueue.addAll(autoModule.getStages());
         }
+        autoModule.runEndCode();
     }
 
     /**

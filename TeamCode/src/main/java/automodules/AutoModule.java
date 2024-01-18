@@ -15,6 +15,8 @@ public class AutoModule {
      */
     private final ArrayList<Stage> stages = new ArrayList<>();
     private CodeSeg startCode = () -> {};
+    private CodeSeg endCode = () -> {};
+
 
     /**
      * Create a stage list using the robot parts used
@@ -36,8 +38,12 @@ public class AutoModule {
     }
 
     public AutoModule setStartCode(CodeSeg startCode){ this.startCode = startCode; return this; }
+    public AutoModule setEndCode(CodeSeg endCode){ this.endCode = endCode; return this; }
+
 
     public void runStartCode(){ startCode.run(); }
+    public void runEndCode(){ endCode.run(); }
+
 
     /**
      * Get the arraylist of stages

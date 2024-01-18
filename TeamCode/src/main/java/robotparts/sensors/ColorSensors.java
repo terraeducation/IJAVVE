@@ -21,6 +21,7 @@ public class ColorSensors extends RobotPart {
 
 
     public int getLight1(){
+
         return cso1.alpha();
     }
     public int getLight2(){
@@ -28,7 +29,7 @@ public class ColorSensors extends RobotPart {
     }
 
     public GameElement isObject(){
-        if (cso1.alpha() > 2000 && cso2.alpha() > 2000){
+        if (cso1.alpha() > 500 && cso2.alpha() > 500){
             return GameElement.PIXEL1;
         }else{
             return GameElement.NONE;
@@ -36,8 +37,9 @@ public class ColorSensors extends RobotPart {
 
     }
 
+
     public GameElement isObjectGone(){
-        if (cso1.alpha() < 2000 && cso2.alpha() < 2000){
+        if (cso1.alpha() < 500 && cso2.alpha() < 500){
             return GameElement.PIXELGONE;
         }else{
             return GameElement.NONE;

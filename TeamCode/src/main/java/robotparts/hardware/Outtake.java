@@ -20,12 +20,15 @@ public class Outtake extends RobotPart {
         arml = create("arml", ElectronicType.PSERVO_REVERSE);
 
 
-        arml.changePosition("start", 0.05);
-        armr.changePosition("start", 0.05);
+        arml.changePosition("start", 0.07);
+        armr.changePosition("start", 0.09);
 
 
-        arml.changePosition("lock", 0);
-        armr.changePosition("lock", 0);
+        arml.changePosition("lock", 0.04);
+        armr.changePosition("lock", 0.06);
+
+        arml.changePosition("betterlock", 0.0);
+        armr.changePosition("betterlock", 0.0);
 
 
         arml.changePosition("middle", 0.15);
@@ -60,15 +63,15 @@ public class Outtake extends RobotPart {
 
 
 
-        pivot.addPosition("start", 0.08);
+        pivot.addPosition("start", 0.1); //0.08
         pivot.addPosition("makeitthru", 0.2);
         pivot.addPosition("makeitdown", 0.08);
 
 
 
         pivot.addPosition("transfer", 0.3);
-        pivot.addPosition("end",0.55);
-        pivot.addPosition("hi",0.65);
+        pivot.addPosition("end",0.65);
+        pivot.addPosition("hi",0.67);
 
 
         rotate = create("rotate", ElectronicType.PSERVO_FORWARD);
@@ -78,7 +81,7 @@ public class Outtake extends RobotPart {
         rotate.addPosition("start", .41);
         rotate.addPosition("transfer", .30);
         rotate.addPosition("angleleft", .56);
-        rotate.addPosition("stack", 0.11);
+        rotate.addPosition("stack", 0.055);
 
 
 
@@ -101,6 +104,8 @@ public class Outtake extends RobotPart {
 
 
     public void moveLock(){ armr.setPosition("lock"); arml.setPosition("lock");}
+    public void moveBetterLock(){ armr.setPosition("betterlock"); arml.setPosition("betterlock");}
+
     public void moveEndPivot(){ pivot.setPosition("end");}
     public void moveDownPivot(){ pivot.setPosition("makeitdown");}
 
@@ -144,6 +149,8 @@ public class Outtake extends RobotPart {
     public Stage stageReadyStart(double t){return super.customTime(this::readyStart, t);}
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageEnd(double t){ return super.customTime(this::moveEnd, t); }
+    public Stage stageBetterLock(double t){ return super.customTime(this::moveBetterLock, t); }
+
     public Stage stageUp(double t){ return super.customTime(this::moveUp, t); }
 
 

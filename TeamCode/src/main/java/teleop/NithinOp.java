@@ -38,13 +38,14 @@ public class NithinOp extends Tele {
 
         gph2.link(A, outtake::openClaw);
         gph2.link(B, outtake::closeClaw);
-
+        gph2.link(X, intake::chubramani);
 
 
         /**
          * Start code
          */
         outtake.moveStart();
+        outtake.moveStartRotate();
         intake.moveInit();
         driveMode.set(FAST);
         outtakeStatus.set(DRIVING);
@@ -78,12 +79,14 @@ public class NithinOp extends Tele {
         /**
          * Gets light of color sensor
          */
-//        log.show("light", colorSensorsNew.getLight());
+        log.show("light 1", colorSensorsNew.getLight1());
+        log.show("light 2", colorSensorsNew.getLight2());
+
 
         /**
          * odo pose
          */
-        log.show("pose", odometry.getPose());
+//        log.show("pose", odometry.getPose());
 
         /**
          * Outtake Status
