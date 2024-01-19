@@ -29,7 +29,7 @@ public class Lift extends RobotPart {
     public PMotor motorLeft;
 
     public static final double maxPosition = 50;
-    public final double defaultCutoffPosition = 1000;
+    public final double defaultCutoffPosition = 0;
     public volatile double currentCutoffPosition = defaultCutoffPosition;
     public int stackedMode = 0;
     public boolean circuitMode = false;

@@ -29,7 +29,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.moveTime(.5,.3).attach(intake.stageMiddler(.2)),
+            intake.moveTime(.5,.1).attach(intake.stageMiddler(.2)),
             intake.stageInit(.2),
             lift.stageLift(1, 12).attach(outtake.stageThruPivot(.2)),
 
@@ -58,8 +58,8 @@ public class R_RIGHT_PY_P extends AutoFramework {
     @Override
     public void define() {
         customCase(() -> {
-            addWaypoint(10,-50,0);
-            addWaypoint(30,-50,20);
+            addWaypoint(10,-30,0);
+            addWaypoint(30,-40,20);
 
 //            addTimedSetpoint(1.0,.5,1.5,-18,-55,-80);
 //            addTimedSetpoint(1.0,.5,1,-30,-50,-80);
@@ -71,7 +71,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
             addPause(.2);
             addTimedSetpoint(1.0,.5,.7,-78.5,-78,93);
             addPause(.5);
-            addTimedSetpoint(1.0,.5,.7,-86,-80,93);
+            addTimedSetpoint(1.0,.5,.7,-88.5,-83,91);
             addPause(.5);
 
 
@@ -96,7 +96,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
 //
 //                    });
             addAutoModule(Reset);
-            addWaypoint(-60,-5,0);
+            addWaypoint(-60,-10,0);
             addTimedSetpoint(1.0,.5,1.5,-105,-10,0);
 
 
@@ -111,9 +111,8 @@ public class R_RIGHT_PY_P extends AutoFramework {
             addTimedSetpoint(1.0,.5,1,-60,-67,90);
             addPause(.5);
 
-            addTimedSetpoint(1.0,.5,1,-84.5,-67,90    );
+            addTimedSetpoint(1.0,.5,1,-88.5,-67,90    );
             addPause(.5);
-            addTimedSetpoint(1.0,.5,1,-86,-67,90    );
 
 
 //            addCustomCode(
@@ -164,7 +163,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
             addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-20,0);
-            addTimedSetpoint(1.0,.5,1,-105,-5,0);
+            addTimedSetpoint(1.0,.5,1,-105,-10,0);
         });
     }
     @Override

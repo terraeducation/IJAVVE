@@ -22,6 +22,7 @@ import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.OuttakeStatus.DRIVING;
 import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
+import static global.Modes.OuttakeStatus.PLACING2;
 import static global.Modes.driveMode;
 import static global.Modes.outtakeStatus;
 //import static global.Modes.driveMode;
@@ -142,11 +143,11 @@ public class Drive extends RobotPart {
                 bl.setPower(.3 * f - .3 * s + .2 * t);
                 fr.setPower(.3 * f - .3 * s - .2 * t);
                 br.setPower(.3 * f + .3 * s - .2 * t);
-            }else if(outtakeStatus.modeIs(INTAKING)){
-                fl.setPower( f + s + .3 * t);
-                bl.setPower( f - s + .3 * t);
-                fr.setPower( f - s - .3 * t);
-                br.setPower( f + s - .3 * t);
+            }else if(outtakeStatus.modeIs(PLACING2)){
+                fl.setPower(.3 * f + .3 * s + .2 * t);
+                bl.setPower(.3 * f - .3 * s + .2 * t);
+                fr.setPower(.3 * f - .3 * s - .2 * t);
+                br.setPower(.3 * f + .3 * s - .2 * t);
 
     }
 

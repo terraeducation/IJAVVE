@@ -13,6 +13,7 @@ import static global.Modes.Height.LOW;
 import static global.Modes.OuttakeStatus.DRIVING;
 import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
+import static global.Modes.OuttakeStatus.PLACING2;
 
 
 public interface AutoModuleUser extends RobotUser {
@@ -70,6 +71,24 @@ public interface AutoModuleUser extends RobotUser {
 
 
     });
+
+    AutoModule IntakeMid = new AutoModule(
+            outtake.stageLock(.1),
+            intake.stageMiddle(.2).attach(outtake.stageOpen(.1)),
+            intake.moveSmart(-.5),
+            outtake.stageClose(.5),
+            intake.stageInit(.2)
+
+    );
+
+    AutoModule IntakeMider = new AutoModule(
+            outtake.stageLock(.1),
+            intake.stageMiddler(.2).attach(outtake.stageOpen(.1)),
+            intake.moveSmart(-.5),
+            outtake.stageClose(.5),
+            intake.stageInit(.2)
+
+    );
 
 //    AutoModule Y_BUTTON = new AutoModule(
 //            lift.stageLift(1, adjustHeight)
@@ -143,6 +162,71 @@ public interface AutoModuleUser extends RobotUser {
 
 
     });
+
+    AutoModule levelone = new AutoModule(
+            lift.stageLift(1, 20)
+
+    ).setStartCode(() ->{
+        heightMode.set(PLACING2);
+
+
+    });
+
+    AutoModule leveltwo = new AutoModule(
+            lift.stageLift(1, 25)
+//
+    ).setStartCode(() ->{
+        heightMode.set(PLACING);
+
+//
+    });
+
+    AutoModule levelthree = new AutoModule(
+            lift.stageLift(1, 30)
+//
+    ).setStartCode(() ->{
+        heightMode.set(PLACING2);
+
+//
+    });
+
+    AutoModule levelfour = new AutoModule(
+            lift.stageLift(1, 35)
+//
+    ).setStartCode(() ->{
+        heightMode.set(PLACING);
+
+//
+    });
+
+    AutoModule levelfive = new AutoModule(
+            lift.stageLift(1, 40)
+//
+    ).setStartCode(() ->{
+        heightMode.set(PLACING2);
+
+//
+    });
+    AutoModule levelsix = new AutoModule(
+            lift.stageLift(1, 45)
+//
+    ).setStartCode(() ->{
+        heightMode.set(PLACING);
+
+//
+    });
+
+    AutoModule levelseven = new AutoModule(
+            lift.stageLift(1, 50)
+//
+    ).setStartCode(() ->{
+        heightMode.set(PLACING2);
+
+//
+    });
+
+
+
 //    AutoModule Extake = new AutoModule(
 //
 //

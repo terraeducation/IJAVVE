@@ -27,7 +27,7 @@ public class B_LEFT_PY_P extends AutoFramework {
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.moveTime(.5,.3).attach(intake.stageMiddler(.2)),
+            intake.moveTime(.5,.1).attach(intake.stageMiddler(.2)),
             intake.stageInit(.2),
             lift.stageLift(1, 12).attach(outtake.stageThruPivot(.2)),
 
@@ -66,8 +66,11 @@ public class B_LEFT_PY_P extends AutoFramework {
             addWaypoint(30,-20,0);
 
             addTimedSetpoint(1.0,.5,2,60,-60.5,-90);
+            addPause(.2);
 
-            addTimedSetpoint(1.0,.5,1,78,-53,-90);
+            addTimedSetpoint(1.0,.5,1,82,-50,-90);
+            addPause(.5);
+
 //            while (distanceSensorsNew.getCMDistanceRight() > 21.5 && distanceSensorsNew.getCMDistanceLeft() > 21.5)  {
 //
 //                            addWaypoint(odometry.getX()+5, -60.5, -90);
@@ -89,8 +92,11 @@ public class B_LEFT_PY_P extends AutoFramework {
 
             addAutoModule(ExtakeandLift);
             addTimedSetpoint(1.0,.5,1,60,-67,-90);
+            addPause(.2);
 
             addTimedSetpoint(1.0,.5,1,80,-67,-90);
+            addPause(.5);
+
 
 //            addCustomCode(
 //                    () -> {
