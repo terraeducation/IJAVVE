@@ -2,6 +2,7 @@ package robotparts.hardware;
 
 import static global.General.log;
 import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
 import static global.Modes.outtakeStatus;
 
@@ -81,7 +82,7 @@ public class Intake extends RobotPart {
     public void chubramani(){
 
         drone.setPower(1);
-        log.show("mission failed");
+//        log.show("mission failed");
 
     }
 //    public void moveHang(double pow) {
@@ -96,10 +97,17 @@ public class Intake extends RobotPart {
     }
 
     public Stage moveSmart(double p){
-
             return super.customExit(p, colorSensorsNew.exitIntake());
 
+
+
+
+
     }
+
+//    public Stage stopSmart(){
+//        return
+//    }
 
     public Stage removeSmart(double p){
 

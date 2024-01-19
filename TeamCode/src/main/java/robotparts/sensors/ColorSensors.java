@@ -5,6 +5,7 @@ import static global.General.hardwareMap;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import automodules.stage.Exit;
+import automodules.stage.Stage;
 import elements.GameElement;
 import robotparts.RobotPart;
 
@@ -27,6 +28,19 @@ public class ColorSensors extends RobotPart {
     public int getLight2(){
         return cso2.alpha();
     }
+
+//    double cso1Val = cso1.alpha();
+//    double cso2Val = cso2.alpha();
+
+//    public double endIntake1(){
+//        return cso1Val = 501;
+//
+//    }
+//
+//    public double endIntake2(){
+//        return cso2Val = 501;
+//
+//    }
 
     public GameElement isObject(){
         if (cso1.alpha() > 500 && cso2.alpha() > 500){

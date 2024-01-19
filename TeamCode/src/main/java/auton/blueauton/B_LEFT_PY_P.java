@@ -68,14 +68,14 @@ public class B_LEFT_PY_P extends AutoFramework {
             addTimedSetpoint(1.0,.5,2,60,-60.5,-90);
 
             addTimedSetpoint(1.0,.5,1,78,-53,-90);
-            while (distanceSensorsNew.getCMDistanceRight() > 21.5 && distanceSensorsNew.getCMDistanceLeft() > 21.5)  {
-
-                            drive.moveTime( .5 , .1 );
-
-
-
-
-                    }
+//            while (distanceSensorsNew.getCMDistanceRight() > 21.5 && distanceSensorsNew.getCMDistanceLeft() > 21.5)  {
+//
+//                            addWaypoint(odometry.getX()+5, -60.5, -90);
+//
+//
+//
+//
+//                    }
             addAutoModule(Reset);
             addWaypoint(60,-10,0);
             addTimedSetpoint(1.0,.3,2,105,-10,0);

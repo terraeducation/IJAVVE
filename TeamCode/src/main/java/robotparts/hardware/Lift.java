@@ -28,7 +28,7 @@ public class Lift extends RobotPart {
     public PMotor motorRight;
     public PMotor motorLeft;
 
-    public static final double maxPosition = 100;
+    public static final double maxPosition = 50;
     public final double defaultCutoffPosition = 1000;
     public volatile double currentCutoffPosition = defaultCutoffPosition;
     public int stackedMode = 0;
@@ -40,6 +40,7 @@ public class Lift extends RobotPart {
     public boolean cap = false;
     public int adjust = 0;
     public boolean adjusting = false;
+
     public double globalOffset = 0;
 
     @Override
@@ -51,7 +52,6 @@ public class Lift extends RobotPart {
         motorLeft.setToLinear(Constants.ORBITAL_TICKS_PER_REV, 1.79, 1, 30);
         motorRight.usePositionHolder(0.1, .1);
         motorLeft.usePositionHolder(0.1, .1);
-        heightMode.set(Modes.Height.HIGH);
         circuitMode = false;
         stacked = false;
         ground = false;
@@ -133,6 +133,7 @@ public class Lift extends RobotPart {
 
     public Stage stageLift(double power, double target) {
         return moveTarget(() -> motorRight, () -> motorLeft, power, power, () -> {
+            double Lasttarget = target;
             if (target == heightMode.getValue(LOW) + 2 || target == heightMode.getValue(MIDDLE) + 2 || target == heightMode.getValue(HIGH) + 2) {
                 return target + globalOffset;
             } else {
@@ -140,6 +141,17 @@ public class Lift extends RobotPart {
             }
         }).combine(new Initial(() -> currentCutoffPosition = target < 1 ? defaultCutoffPosition : 0));
     }
+
+
+//    public Stage adjustLift(double power, double adjust){
+//        return moveTarget(() -> motorRight, () -> motorLeft, power, power, () -> {
+//            if (lastTarget == heightMode.getValue(LOW) + 2 || target == heightMode.getValue(MIDDLE) + 2 || target == heightMode.getValue(HIGH) + 2) {
+//                return target + globalOffset;
+//            } else {
+//                return target;
+//            }
+//        }).combine(new Initial(() -> currentCutoffPosition = target < 1 ? defaultCutoffPosition : 0));
+//    }
 
     @Override
     public void maintain() {

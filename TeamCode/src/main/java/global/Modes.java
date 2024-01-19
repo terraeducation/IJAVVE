@@ -20,12 +20,14 @@ public interface Modes {
     enum OuttakeStatus implements Mode.ModeType { DRIVING, PLACING, INTAKING}
     Mode outtakeStatus = new Mode(OuttakeStatus.class);
 
+
     enum Height implements Mode.ModeType {HIGH, MIDDLE, LOW, GROUND}
     Mode heightMode = new Mode(Height.class)
-            .set(Height.HIGH, 10)
-            .set(Height.MIDDLE, 50)
-            .set(Height.LOW, 35)
+            .set(Height.HIGH, 50)
+            .set(Height.MIDDLE, 35)
+            .set(Height.LOW, 15)
             .set(Height.GROUND, 0);
+
 
     // TOD5 MULTI DIMENSIONAL MODE
     enum Drive implements Mode.ModeType {FAST, MEDIUM, SLOW, SUPERSLOW}

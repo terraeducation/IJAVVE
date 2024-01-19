@@ -8,6 +8,7 @@ import static global.General.log;
 import static global.General.voltageScale;
 import static global.Modes.Drive.FAST;
 import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
 import static teleutil.button.Button.*;
 
@@ -21,24 +22,30 @@ public class NithinOp extends Tele {
         gph1.link(LEFT_BUMPER, L_BUMPER);
         gph1.link(RIGHT_BUMPER, R_BUMPER);
         gph1.link(RIGHT_TRIGGER, L_TRIGGER);
-        gph1.link(LEFT_TRIGGER, R_TRIGGER);
+        gph1.linkWithCancel(LEFT_TRIGGER, outtakeStatus.isMode(DRIVING), R_TRIGGER, CancelIntake);
+//        gph1.link(LEFT_TRIGGER, R_TRIGGER);
 
-        gph1.link(DPAD_DOWN, DOWN_DPAD);
+        gph1.link(DPAD_DOWN, () -> lift.adjustHolderTarget(-7));
         gph1.link(DPAD_RIGHT, RIGHT_DPAD);
         gph1.link(DPAD_LEFT, LEFT_DPAD);
-        gph1.link(DPAD_UP, UP_DPAD);
+        gph1.link(DPAD_UP,  () -> lift.adjustHolderTarget(2.5));
 
 
         gph1.link(X, X_BUTTON);
         gph1.link(A, A_BUTTON);
         gph1.link(B, B_BUTTON);
-        gph1.link(Y, Y_BUTTON);
+        gph1.link(Y,  UP_DPAD);
 
 
 
         gph2.link(A, outtake::openClaw);
         gph2.link(B, outtake::closeClaw);
         gph2.link(X, intake::chubramani);
+        gph2.link(X, intake::chubramani);
+
+        gph2.link(DPAD_UP, HangReady);
+        gph2.link(DPAD_DOWN, Hang );
+
 
 
         /**

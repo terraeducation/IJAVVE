@@ -1,9 +1,11 @@
 package automodules;
 
+import automodules.stage.Stage;
 import robot.RobotUser;
 import robotparts.RobotPart;
 
 import static global.Modes.*;
+import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.Height.GROUND;
 import static global.Modes.Height.HIGH;
@@ -46,40 +48,41 @@ public interface AutoModuleUser extends RobotUser {
 
     });
 
-    AutoModule R_TRIGGER = new AutoModule(
-            outtake.stageLock(.1),
-            intake.stageStart(.2).attach(outtake.stageOpen(.1)),
-            intake.moveSmart(-.5),
-            outtake.stageClose(.5),
-            intake.stageInit(.2)
+        AutoModule R_TRIGGER = new AutoModule(
+                outtake.stageLock(.1),
+                intake.stageStart(.2).attach(outtake.stageOpen(.1)),
+                intake.moveSmart(-.5),
+                outtake.stageClose(.5),
+                intake.stageInit(.2)
 
 
+        ).setStartCode(() -> {
+            outtakeStatus.set(INTAKING);
 
+        });
 
-
-    ).setStartCode(() ->{
-        outtakeStatus.set(INTAKING);
-
-    }).setEndCode(() -> {
-        outtakeStatus.set(DRIVING);
-    });
 
     AutoModule A_BUTTON = new AutoModule(
             lift.stageLift(1, 35)
 
             ).setStartCode(() ->{
+        heightMode.set(MEDIUM);
+
 
     });
 
-    AutoModule Y_BUTTON = new AutoModule(
-            outtake.stageUp(.2).attach(outtake.stageHiPivot(.2))
-    ).setStartCode(() ->{
-
-    });
+//    AutoModule Y_BUTTON = new AutoModule(
+//            lift.stageLift(1, adjustHeight)
+//
+//    ).setStartCode(() ->{
+//
+//
+//    });
 
     AutoModule X_BUTTON = new AutoModule(
 //            outtake.stageMiddle(.2),
-            lift.stageLift(1, 20).attach(outtake.stageThruPivot(.2)),
+            outtake.stageClose(.1),
+            lift.stageLift(1, 15).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.4).attach(outtake.stageTransferPivot(.4)),
             RobotPart.pause(.3),
@@ -95,11 +98,12 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 45)
 
     ).setStartCode(() ->{
+        heightMode.set(HIGH);
 
     });
 
     AutoModule UP_DPAD = new AutoModule(
-            outtake.stageStackRotate(.1).attach(outtake.stageHiPivot(.1))
+            outtake.stageStackRotate(.2).attach(outtake.stageHiPivot(.2))
 
     ).setStartCode(() ->{
 
@@ -112,14 +116,14 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule LEFT_DPAD = new AutoModule(
-        outtake.stageLeftRotate(.1).attach(outtake.stageHiPivot(.1))
+        outtake.stageLeftRotate(.2).attach(outtake.stageHiPivot(.2))
 
     ).setStartCode(() ->{
 
     });
 
     AutoModule RIGHT_DPAD = new AutoModule(
-            outtake.stageTransferRotate(.1).attach(outtake.stageHiPivot(.1))
+            outtake.stageTransferRotate(.2).attach(outtake.stageHiPivot(.2))
 
 
     ).setStartCode(() ->{
@@ -127,17 +131,18 @@ public interface AutoModuleUser extends RobotUser {
     });
 
 //
-//    AutoModule Intake = new AutoModule(
-//
-//        intake.moveSmart(-.6)
-//
-//
-//    ).setStartCode(() ->
-//    {
-////        outtake.stageStart(.2);
-//
-//
-//    });
+    AutoModule CancelIntake = new AutoModule(
+        outtake.stageClose(.5),
+        intake.moveTime(0,.1).attach(intake.stageInit(.1))
+
+
+
+).setStartCode(() ->{
+        outtakeStatus.set(DRIVING);
+
+
+
+    });
 //    AutoModule Extake = new AutoModule(
 //
 //
@@ -151,17 +156,16 @@ public interface AutoModuleUser extends RobotUser {
 //
 //    });
 //
-//    AutoModule HangReady = new AutoModule(
-//            intake.stageMiddle(.1),
-//            lift.stageLift(.2,33)
-//    ).setStartCode(() ->{
-//
-//    });
-//    AutoModule Hang = new AutoModule(
-//            lift.stageLift(.2,heightMode.getValue(GROUND))
-//    ).setStartCode(() ->{
-//
-//    });
+    AutoModule HangReady = new AutoModule(
+            lift.stageLift(1,33)
+    ).setStartCode(() ->{
+
+    });
+    AutoModule Hang = new AutoModule(
+            lift.stageLift(.5,heightMode.getValue(GROUND))
+    ).setStartCode(() ->{
+
+    });
 //
 
 //    AutoModule PlaceReady = new AutoModule(
