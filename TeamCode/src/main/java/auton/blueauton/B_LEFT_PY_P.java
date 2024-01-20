@@ -27,7 +27,7 @@ public class B_LEFT_PY_P extends AutoFramework {
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.moveTime(.5,.1).attach(intake.stageMiddler(.2)),
+            intake.moveTime(.5,.2).attach(intake.stageMiddler(.2)),
             intake.stageInit(.2),
             lift.stageLift(1, 12).attach(outtake.stageThruPivot(.2)),
 

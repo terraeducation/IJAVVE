@@ -31,7 +31,7 @@ public class R_LEFT_PY_P extends AutoFramework {
     }
     AutoModule Extake = new AutoModule(
             intake.stageMiddler(.1),
-            intake.moveTime(.5,.1),
+            intake.moveTime(.5,.2),
             intake.stageInit(.1)
 
     );
