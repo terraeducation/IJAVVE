@@ -34,18 +34,24 @@ public class NithinOp extends Tele {
         gph1.linkWithCancel(X, outtakeStatus.isMode(PLACING), levelone, leveltwo);
         gph1.linkWithCancel(A, outtakeStatus.isMode(PLACING), levelthree, levelfour);
         gph1.linkWithCancel(B, outtakeStatus.isMode(PLACING), levelfive, levelsix);
-        gph1.link(Y, levelseven);
+        gph1.linkWithCancel(Y, outtakeStatus.isMode(PLACING), levelseven, levelseven);
 
 
 
-        gph2.link(A, outtake::openClaw);
-        gph2.link(B, outtake::closeClaw);
+
+
+
+        gph2.link(RIGHT_BUMPER, outtake::openClaw);
+        gph2.link(LEFT_BUMPER, outtake::closeClaw);
         gph2.link(X, intake::chubramani);
+        gph2.linkWithCancel(A, outtakeStatus.isMode(DRIVING), IntakeMid, CancelIntake);
+        gph2.linkWithCancel(B, outtakeStatus.isMode(DRIVING), IntakeMider, CancelIntake);
+
 
         gph2.link(LEFT_TRIGGER, X_BUTTON);
 
-        gph2.link(DPAD_UP, HangReady);
-        gph2.link(DPAD_DOWN, Hang );
+//        gph2.link(DPAD_UP, HangReady);
+//        gph2.link(DPAD_DOWN, Hang );
 
 
 
@@ -118,6 +124,8 @@ public class NithinOp extends Tele {
          * drive mode
          */
 //        log.show("DriveMode", driveMode.get());
+
+                log.show("outske", outtakeStatus.get());
 
     }
 

@@ -11,7 +11,7 @@ import autoutil.AutoFramework;
 import elements.TeamProp;
 import robotparts.RobotPart;
 
-@Autonomous(name = "RED Left Stack", group = "auto", preselectTeleOp = "TerraOp")
+//@Autonomous(name = "RED Left Stack", group = "auto", preselectTeleOp = "TerraOp")
 public class R_LEFT_STACK extends AutoFramework {
 
 

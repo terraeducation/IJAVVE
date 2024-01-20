@@ -97,7 +97,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
 //                    });
             addAutoModule(Reset);
             addWaypoint(-60,-10,0);
-            addTimedSetpoint(1.0,.5,1.5,-105,-10,0);
+            addTimedSetpoint(1.0,.5,1.5,-90,-10,90);
 
 
 
@@ -128,7 +128,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
 //                    });
             addAutoModule(Reset);
             addWaypoint(-60,-9,0);
-            addTimedSetpoint(1.0,.5,1.3,-105,-10,0);
+            addTimedSetpoint(1.0,.5,1.3,-90,-10,90);
 
 
         }, () -> {
@@ -169,7 +169,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
             addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-20,0);
-            addTimedSetpoint(1.0,.5,1,-105,-10,0);
+            addTimedSetpoint(1.0,.5,1,-90,-10,90);
         });
     }
     @Override

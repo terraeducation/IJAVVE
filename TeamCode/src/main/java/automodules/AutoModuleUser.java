@@ -79,7 +79,10 @@ public interface AutoModuleUser extends RobotUser {
             outtake.stageClose(.5),
             intake.stageInit(.2)
 
-    );
+    ).setStartCode(() -> {
+        outtakeStatus.set(INTAKING);
+
+    });
 
     AutoModule IntakeMider = new AutoModule(
             outtake.stageLock(.1),
@@ -88,7 +91,10 @@ public interface AutoModuleUser extends RobotUser {
             outtake.stageClose(.5),
             intake.stageInit(.2)
 
-    );
+    ).setStartCode(() -> {
+        outtakeStatus.set(INTAKING);
+
+    });
 
 //    AutoModule Y_BUTTON = new AutoModule(
 //            lift.stageLift(1, adjustHeight)
@@ -167,7 +173,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 20)
 
     ).setStartCode(() ->{
-        heightMode.set(PLACING2);
+        outtakeStatus.set(PLACING2);
 
 
     });
@@ -176,7 +182,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 25)
 //
     ).setStartCode(() ->{
-        heightMode.set(PLACING);
+        outtakeStatus.set(PLACING);
 
 //
     });
@@ -185,16 +191,16 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 30)
 //
     ).setStartCode(() ->{
-        heightMode.set(PLACING2);
+        outtakeStatus.set(PLACING2);
 
 //
     });
 
     AutoModule levelfour = new AutoModule(
-            lift.stageLift(1, 35)
+            lift.stageLift(1, 37)
 //
     ).setStartCode(() ->{
-        heightMode.set(PLACING);
+        outtakeStatus.set(PLACING);
 
 //
     });
@@ -203,7 +209,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 40)
 //
     ).setStartCode(() ->{
-        heightMode.set(PLACING2);
+        outtakeStatus.set(PLACING2);
 
 //
     });
@@ -211,7 +217,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 45)
 //
     ).setStartCode(() ->{
-        heightMode.set(PLACING);
+        outtakeStatus.set(PLACING);
 
 //
     });
@@ -220,7 +226,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 50)
 //
     ).setStartCode(() ->{
-        heightMode.set(PLACING2);
+        outtakeStatus.set(PLACING2);
 
 //
     });
@@ -241,7 +247,7 @@ public interface AutoModuleUser extends RobotUser {
 //    });
 //
     AutoModule HangReady = new AutoModule(
-            lift.stageLift(1,33)
+            lift.stageLift(1,40)
     ).setStartCode(() ->{
 
     });
