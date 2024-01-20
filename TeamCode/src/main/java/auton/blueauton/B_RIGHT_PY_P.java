@@ -31,7 +31,7 @@ public class B_RIGHT_PY_P extends AutoFramework {
     }
     AutoModule Extake = new AutoModule(
             intake.stageMiddler(.1),
-            intake.moveTime(.5,.25),
+            intake.moveTime(.5,.1),
             intake.stageInit(.1)
 
 
@@ -75,7 +75,9 @@ public class B_RIGHT_PY_P extends AutoFramework {
             addAutoModule(PreExtend);
             addWaypoint(200, -130,-90);
             addTimedSetpoint(1.0,1,1.2,210,-40,-80);
+            addPause(.2);
             addTimedSetpoint(1.0,1,.8,223,-31,-80);
+            addPause(.2);
 
 
 
@@ -106,7 +108,7 @@ public class B_RIGHT_PY_P extends AutoFramework {
 
 
         }, () -> {
-            addPause(22);
+            addPause(21);
             addTimedSetpoint(1.0,.5,1,-20,-70,35);
             addTimedSetpoint(1.0,.5,1,-10,-75,30);
 
@@ -119,8 +121,11 @@ public class B_RIGHT_PY_P extends AutoFramework {
             addConcurrentAutoModule(PreExtend);
             addTimedSetpoint(1,1,.8,180, -82,-91);
 
+            addPause(.2);
 
-            addTimedSetpoint(1,1,.6,214, -84,-91);
+            addTimedSetpoint(1,1,.6,217, -84,-91);
+            addPause(.2);
+
 //            addCustomCode(
 //                    () -> {
 //
@@ -146,11 +151,16 @@ public class B_RIGHT_PY_P extends AutoFramework {
             addAutoModule(Extake);
             addWaypoint(0,-70,-90);
             addTimedSetpoint(1.0,1,.8,0,-130,-90);
-            addWaypoint(155, -130,-90.5);
+            addWaypoint(155, -130,-90);
             addAutoModule(PreExtend);
+            addTimedSetpoint(1.0,1,.8,200,-94,-93);
+
+            addPause(.2);
 
 
             addTimedSetpoint(1.0,1,.8,220,-94,-93);
+            addPause(.2);
+
 
 //            addCustomCode(
 //                    () -> {
