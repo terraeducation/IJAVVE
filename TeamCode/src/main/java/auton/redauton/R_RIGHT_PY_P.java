@@ -29,9 +29,10 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.moveTime(.5,.2).attach(intake.stageMiddler(.2)),
+            intake.stageMiddler(.2),
+            intake.moveTime(.53,.2),
             intake.stageInit(.2),
-            lift.stageLift(1, 12).attach(outtake.stageThruPivot(.2)),
+            lift.stageLift(1, 13).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
@@ -67,11 +68,11 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,.5,1,-40,-74,94);
+            addTimedSetpoint(1.0,.5,1,-40,-74,91);
             addPause(.2);
-            addTimedSetpoint(1.0,.5,.7,-78.5,-78,93);
+            addTimedSetpoint(1.0,.5,.7,-75,-78,91);
             addPause(.5);
-            addTimedSetpoint(1.0,.5,.7,-88.5,-83,91);
+            addTimedSetpoint(1.0,.5,.7,-88.5,-85,91);
             addPause(.5);
 
 
@@ -96,22 +97,22 @@ public class R_RIGHT_PY_P extends AutoFramework {
 //
 //                    });
             addAutoModule(Reset);
-            addWaypoint(-60,-10,0);
+            addWaypoint(-60,-15,0);
             addTimedSetpoint(1.0,.5,1.5,-90,-10,90);
 
 
 
         }, () -> {
 
-            addTimedSetpoint(1.0,.5,1,-20,-70,35);
-            addTimedSetpoint(1.0,.5,1,-10,-77,30);
+            addTimedSetpoint(1.0,.5,1,-20,-70,40);
+            addTimedSetpoint(1.0,.5,1,-10,-74,55);
 
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,.5,1,-60,-67,90);
+            addTimedSetpoint(1.0,.5,1,-60,-74,90);
             addPause(.5);
 
-            addTimedSetpoint(1.0,.5,1,-88.5,-67,90    );
+            addTimedSetpoint(1.0,.5,1,-88.5,-74,90    );
             addPause(.5);
 
 
@@ -132,15 +133,10 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
 
         }, () -> {
-            addTimedSetpoint(1.0,.5,1,-17,-30,0);
+            addTimedSetpoint(1.0,.5,1,-14,-30,0);
 
-            addTimedSetpoint(1.0,.5,1,-17,-43,0);
+            addTimedSetpoint(1.0,.5,1,-14,-43,0);
 
-
-            addTimedSetpoint(1.0,.5,1,-20,-30,0);
-
-            addTimedSetpoint(1.0,.5,1,-20,-43,0);
-            addTimedSetpoint(1.0,.5,1,0,-20,0);
 
             addAutoModule(ExtakeandLift);
 
@@ -149,9 +145,9 @@ public class R_RIGHT_PY_P extends AutoFramework {
             addTimedSetpoint(1.0,.5,2,-60,-60.5,90);
             addPause(.5);
 
-            addTimedSetpoint(1.0,.5,.8,-83,-49,95);
+            addTimedSetpoint(1.0,.5,.8,-83,-51,95);
             addPause(.5);
-            addTimedSetpoint(1.0,.5,.8,-86,-49,95);
+            addTimedSetpoint(1.0,.5,.8,-86,-51,95);
 
 
 //

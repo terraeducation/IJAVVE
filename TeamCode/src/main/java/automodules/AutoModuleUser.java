@@ -50,10 +50,11 @@ public interface AutoModuleUser extends RobotUser {
     });
 
         AutoModule R_TRIGGER = new AutoModule(
-                outtake.stageLock(.1),
-                intake.stageStart(.2).attach(outtake.stageOpen(.1)),
-                intake.moveSmart(-.5),
+                outtake.stageLock(.3),
+                intake.stageMiddler(.2).attach(outtake.stageOpen(.1)),
+                intake.moveSmart(-.45),
                 outtake.stageClose(.5),
+                intake.moveTime(1,.2),
                 intake.stageInit(.2)
 
 
@@ -73,26 +74,18 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule IntakeMid = new AutoModule(
-            outtake.stageLock(.1),
-            intake.stageMiddle(.2).attach(outtake.stageOpen(.1)),
-            intake.moveSmart(-.5),
-            outtake.stageClose(.5),
+
             intake.stageInit(.2)
 
     ).setStartCode(() -> {
-        outtakeStatus.set(INTAKING);
 
     });
 
     AutoModule IntakeMider = new AutoModule(
-            outtake.stageLock(.1),
-            intake.stageMiddler(.2).attach(outtake.stageOpen(.1)),
-            intake.moveSmart(-.5),
-            outtake.stageClose(.5),
-            intake.stageInit(.2)
+            intake.stageMiddler(.2)
 
     ).setStartCode(() -> {
-        outtakeStatus.set(INTAKING);
+
 
     });
 
@@ -128,7 +121,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule UP_DPAD = new AutoModule(
-            outtake.stageStackRotate(.2).attach(outtake.stageHiPivot(.2))
+            outtake.stageStackRotate(.2)
 
     ).setStartCode(() ->{
 
@@ -141,14 +134,14 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule LEFT_DPAD = new AutoModule(
-        outtake.stageLeftRotate(.2).attach(outtake.stageHiPivot(.2))
+        outtake.stageLeftRotate(.2)
 
     ).setStartCode(() ->{
 
     });
 
     AutoModule RIGHT_DPAD = new AutoModule(
-            outtake.stageTransferRotate(.2).attach(outtake.stageHiPivot(.2))
+            outtake.stageTransferRotate(.2)
 
 
     ).setStartCode(() ->{

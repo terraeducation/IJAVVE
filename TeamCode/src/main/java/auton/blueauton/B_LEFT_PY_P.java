@@ -27,7 +27,7 @@ public class B_LEFT_PY_P extends AutoFramework {
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.moveTime(.5,.2).attach(intake.stageMiddler(.2)),
+            intake.moveTime(.53,.2).attach(intake.stageMiddler(.2)),
             intake.stageInit(.2),
             lift.stageLift(1, 12).attach(outtake.stageThruPivot(.2)),
 
@@ -86,8 +86,8 @@ public class B_LEFT_PY_P extends AutoFramework {
         }, () -> {
 
 
-            addTimedSetpoint(1.0,.5,1,20,-70,-35);
-            addTimedSetpoint(1.0,.5,1,10,-80,-30);
+            addTimedSetpoint(1.0,.5,1,20,-70,-40);
+            addTimedSetpoint(1.0,.5,1,10,-80,-55);
 
 
             addAutoModule(ExtakeandLift);
@@ -123,13 +123,13 @@ public class B_LEFT_PY_P extends AutoFramework {
 
 //            addTimedSetpoint(1.0,.5,1.5,-18,-55,-80);
 //            addTimedSetpoint(1.0,.5,1,-30,-50,-80);
-            addTimedSetpoint(1.0,.5,1,-30,-50,-30);
+            addTimedSetpoint(1.0,.5,1,-30,-50,-26);
 
 
             addAutoModule(ExtakeandLift);
             addTimedSetpoint(1.0,.5,1,40,-74,-94);
             addPause(.2);
-            addTimedSetpoint(1.0,.5,.7,77,-78,-93);
+            addTimedSetpoint(1.0,.5,.7,77,-79.5,-93);
             addPause(.5);
 
 //            addCustomCode(

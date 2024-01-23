@@ -65,7 +65,7 @@ public class B_RIGHT_PY_P extends AutoFramework {
         customCase(() -> {
             addPause(18);
 
-            addWaypoint(0,-40,0);
+            addWaypoint(0,-20,0);
 
 //            addTimedSetpoint(1.0,.5,1.5,-18,-55,-80);
 //            addTimedSetpoint(1.0,.5,1,-30,-50,-80);

@@ -51,7 +51,7 @@ public class NithinOp extends Tele {
         gph2.link(LEFT_TRIGGER, X_BUTTON);
 
 //        gph2.link(DPAD_UP, HangReady);
-//        gph2.link(DPAD_DOWN, Hang );
+        gph2.link(DPAD_DOWN, Hang );
 
 
 

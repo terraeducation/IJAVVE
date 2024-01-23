@@ -140,13 +140,19 @@ public class Drive extends RobotPart {
                 br.setPower(f + s - .55 * t);
 
 
-            }else{
+            }else if(outtakeStatus.modeIs(INTAKING)){
+                fl.setPower(f + s + .55 * t);
+                bl.setPower(f - s + .55 * t);
+                fr.setPower(f - s - .55 * t);
+                br.setPower(f + s - .55 * t);
+
+    }else{
+
                 fl.setPower(.3 * f + .3 * s + .2 * t);
                 bl.setPower(.3 * f - .3 * s + .2 * t);
                 fr.setPower(.3 * f - .3 * s - .2 * t);
                 br.setPower(.3 * f + .3 * s - .2 * t);
-
-    }
+            }
 
 
         }
