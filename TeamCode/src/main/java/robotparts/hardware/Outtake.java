@@ -24,8 +24,8 @@ public class Outtake extends RobotPart {
         armr.changePosition("start", 0.12);
 
 
-        arml.changePosition("lock", 0.06);
-        armr.changePosition("lock", 0.08);
+        arml.changePosition("lock", 0.04);
+        armr.changePosition("lock", 0.06);
 
         arml.changePosition("betterlock", 0.0);
         armr.changePosition("betterlock", 0.0);
