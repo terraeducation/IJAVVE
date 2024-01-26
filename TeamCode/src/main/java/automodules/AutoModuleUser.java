@@ -122,7 +122,6 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 15).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.4).attach(outtake.stageTransferPivot(.4)),
-            RobotPart.pause(.3),
             outtake.stageEndPivot(.2).attach(outtake.stageStartRotate(.2))
 
 
