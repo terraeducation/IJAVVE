@@ -32,14 +32,16 @@ public class DistanceSensors extends RobotPart {
     }
 
 
+
     public double getMETERDistance() {
         return dsol.getDistance(DistanceUnit.METER);
     }
 
     public boolean isClose(){
 
-        return (dsor.getDistance(DistanceUnit.CM) < 17);
+        return (dsor.getDistance(DistanceUnit.CM) < 25.3) && (dsor.getDistance(DistanceUnit.CM) < 25.3);
     }
+
 
     public Exit exitDrive(){return new Exit(this::isClose);}
 

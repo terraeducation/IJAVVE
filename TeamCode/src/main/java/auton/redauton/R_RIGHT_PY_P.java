@@ -56,46 +56,23 @@ public class R_RIGHT_PY_P extends AutoFramework {
             outtake.stageStartPivot(.1).attach(lift.stageLift(1,0))
 
     );
+    AutoModule align = new AutoModule(
+            drive.driveSmart(-.3,0,0)
+    );
     @Override
     public void define() {
         customCase(() -> {
             addWaypoint(10,-30,0);
             addWaypoint(30,-40,20);
 
-//            addTimedSetpoint(1.0,.5,1.5,-18,-55,-80);
-//            addTimedSetpoint(1.0,.5,1,-30,-50,-80);
             addTimedSetpoint(1.0,.5,1,30,-60,30);
 
 
             addAutoModule(ExtakeandLift);
             addTimedSetpoint(1.0,.5,1,-40,-74,91);
-            addPause(.2);
-            addTimedSetpoint(1.0,.5,.7,-75,-78,91);
-            addPause(.5);
+
             addTimedSetpoint(1.0,.5,.7,-88.5,-85,91);
-            addPause(.5);
-
-
-
-//            addCustomCode(
-//                    () -> {
-//
-//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-//
-//                            addTimedSetpoint(1,1,1, -(odometry.getX() + 5), -87.5,90);
-//
-//
-//
-//
-//                        });
-//
-//
-//
-//
-//
-//
-//
-//                    });
+            addAutoModule(align);
             addAutoModule(Reset);
             addWaypoint(-60,-15,0);
             addTimedSetpoint(1.0,.5,1.5,-90,-10,90);
@@ -110,23 +87,10 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
             addAutoModule(ExtakeandLift);
             addTimedSetpoint(1.0,.5,1,-60,-74,90);
-            addPause(.5);
 
             addTimedSetpoint(1.0,.5,1,-88.5,-74,90    );
-            addPause(.5);
+            addAutoModule(align);
 
-
-//            addCustomCode(
-//                    () -> {
-//
-//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-//
-//                            addTimedSetpoint(1,1,1, -(odometry.getX() + 5), -64.5,90);
-//
-//                        });
-//
-//
-//                    });
             addAutoModule(Reset);
             addWaypoint(-60,-9,0);
             addTimedSetpoint(1.0,.5,1.3,-90,-10,90);
@@ -143,26 +107,10 @@ public class R_RIGHT_PY_P extends AutoFramework {
             addWaypoint(-30,-20,0);
 
             addTimedSetpoint(1.0,.5,2,-60,-60.5,90);
-            addPause(.5);
 
-            addTimedSetpoint(1.0,.5,.8,-83,-51,95);
-            addPause(.5);
             addTimedSetpoint(1.0,.5,.8,-86,-51,95);
+            addAutoModule(align);
 
-
-//
-//            addCustomCode(
-//                    () -> {
-//
-//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-//
-//                            addTimedSetpoint(1,1,1, -(odometry.getX() + 5), -48,90);
-//
-//                        });
-//
-//
-//                    });
-            addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-20,0);
             addTimedSetpoint(1.0,.5,1,-90,-10,90);

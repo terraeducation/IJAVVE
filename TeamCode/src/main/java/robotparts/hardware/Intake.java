@@ -41,12 +41,12 @@ public class Intake extends RobotPart {
 //        hang = create("hang", ElectronicType.CMOTOR_FORWARD);
 
         link.changePosition("init", .15);
-        link.changePosition("start", .72);
+        link.changePosition("start", .68);
         link.changePosition("middle", .56);
         link.changePosition("middler", .30);
 
         link2.changePosition("init", .15);
-        link2.changePosition("start", .72);
+        link2.changePosition("start", .68);
         link2.changePosition("middle", .52);
         link2.changePosition("middler", .30);
 
@@ -71,6 +71,8 @@ public class Intake extends RobotPart {
 
 
     }
+
+
 
     public void moveMiddle() {
         link.setPosition("middle");
@@ -117,6 +119,9 @@ public class Intake extends RobotPart {
 
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageInit(double t){ return super.customTime(this::moveInit, t); }
+
+    public Stage chubramani(double t){ return super.customTime(this::chubramani, t); }
+
 
     public Stage stageMiddle(double t){ return super.customTime(this::moveMiddle, t); }
 

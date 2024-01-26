@@ -7,6 +7,7 @@ import robotparts.RobotPart;
 import static global.Modes.*;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
+import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.Height.GROUND;
 import static global.Modes.Height.HIGH;
 import static global.Modes.Height.LOW;
@@ -34,6 +35,12 @@ public interface AutoModuleUser extends RobotUser {
 
     });
 
+    AutoModule chubramani = new AutoModule(
+            intake.chubramani(.1)
+    ).setStartCode(() ->{
+
+    });
+
     AutoModule L_TRIGGER = new AutoModule(
         outtake.stageOpen(.1),
         outtake.stageTransferPivot(.2).attach(outtake.stageStart(.2)),
@@ -44,6 +51,7 @@ public interface AutoModuleUser extends RobotUser {
 
     ).setStartCode(() ->{
         heightMode.set(GROUND);
+        driveMode.set(SLOW);
         outtakeStatus.set(DRIVING);
 
 
@@ -59,10 +67,9 @@ public interface AutoModuleUser extends RobotUser {
 
 
         ).setStartCode(() -> {
-            outtakeStatus.set(INTAKING);
+            driveMode.set(SUPERSLOW);
 
         });
-
 
     AutoModule A_BUTTON = new AutoModule(
             lift.stageLift(1, 35)
@@ -74,20 +81,32 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule IntakeMid = new AutoModule(
-
+            outtake.stageLock(.3),
+            intake.stageMiddle(.2).attach(outtake.stageOpen(.1)),
+            intake.moveSmart(-.45),
+            outtake.stageClose(.5),
+            intake.moveTime(1,.2),
             intake.stageInit(.2)
 
     ).setStartCode(() -> {
+        driveMode.set(SUPERSLOW);
 
     });
+
 
     AutoModule IntakeMider = new AutoModule(
-            intake.stageMiddler(.2)
+            outtake.stageLock(.3),
+            intake.stageMiddler(.2).attach(outtake.stageOpen(.1)),
+            intake.moveSmart(-.45),
+            outtake.stageClose(.5),
+            intake.moveTime(1,.2),
+            intake.stageInit(.2)
 
     ).setStartCode(() -> {
-
+        driveMode.set(SUPERSLOW);
 
     });
+
 
 //    AutoModule Y_BUTTON = new AutoModule(
 //            lift.stageLift(1, adjustHeight)
@@ -128,7 +147,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule DOWN_DPAD = new AutoModule(
-        intake.removeSmart(.8).attach(intake.stageMiddle(.1))
+        outtake.stageStartRotate(.1)
     ).setStartCode(() ->{
 
     });
@@ -151,12 +170,14 @@ public interface AutoModuleUser extends RobotUser {
 //
     AutoModule CancelIntake = new AutoModule(
         outtake.stageClose(.5),
+        intake.moveTime(.7,.2),
+
         intake.moveTime(0,.1).attach(intake.stageInit(.1))
 
 
 
 ).setStartCode(() ->{
-        outtakeStatus.set(DRIVING);
+    driveMode.set(SLOW);
 
 
 

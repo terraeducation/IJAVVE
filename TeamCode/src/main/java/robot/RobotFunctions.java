@@ -102,8 +102,9 @@ public class RobotFunctions {
         synchronized (rfsQueue) {
             if (rfsQueue.isEmpty()) { robotFunctionsThread.setStatus(Status.ACTIVE); }
             rfsQueue.addAll(autoModule.getStages());
+            autoModule.runEndCode();
         }
-        autoModule.runEndCode();
+
     }
 
     /**

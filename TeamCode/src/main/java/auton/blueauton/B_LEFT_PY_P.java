@@ -5,7 +5,10 @@ import static global.Modes.Height.GROUND;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import java.security.AuthProvider;
+
 import automodules.AutoModule;
+import auton.Auto;
 import autoutil.AutoFramework;
 import elements.TeamProp;
 import robotparts.RobotPart;
@@ -21,9 +24,9 @@ public class B_LEFT_PY_P extends AutoFramework {
         outtake.closeClaw();
 
         intake.moveInit();
-//        propCaseDetected = TeamProp.FIRST;
-        AutoFramework auto = this;
-        auto.scan(true, "blue", "left");
+        propCaseDetected = TeamProp.FIRST; //TODO FIX
+//        AutoFramework auto = this;
+//        auto.scan(true, "blue", "left");
 
     }
     AutoModule ExtakeandLift = new AutoModule(
@@ -37,11 +40,14 @@ public class B_LEFT_PY_P extends AutoFramework {
     );
 
     AutoModule Drop = new AutoModule(
-            lift.stageLift(1, 7),
-            lift.stageLift(1, 15).attach(outtake.stageThruPivot(.1)),
+            lift.stageLift(1, 12).attach(outtake.stageThruPivot(.2)),
+
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
     );
+     AutoModule align = new AutoModule(
+       drive.driveSmart(-.3,0,0)
+     );
 
     AutoModule Reset = new AutoModule(
 
@@ -66,22 +72,17 @@ public class B_LEFT_PY_P extends AutoFramework {
             addWaypoint(30,-20,0);
 
             addTimedSetpoint(1.0,.5,2,60,-60.5,-90);
-            addPause(.2);
-
-            addTimedSetpoint(1.0,.5,1,82,-50,-90);
-            addPause(.5);
-
-//            while (distanceSensorsNew.getCMDistanceRight() > 21.5 && distanceSensorsNew.getCMDistanceLeft() > 21.5)  {
-//
-//                            addWaypoint(odometry.getX()+5, -60.5, -90);
-//
-//
-//
-//
-//                    }
+            addAutoModule(align);
             addAutoModule(Reset);
             addWaypoint(60,-10,0);
             addTimedSetpoint(1.0,.3,2,90,-10,-90);
+
+
+
+
+
+
+
 
         }, () -> {
 
@@ -91,24 +92,9 @@ public class B_LEFT_PY_P extends AutoFramework {
 
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,.5,1,60,-67,-90);
-            addPause(.2);
 
             addTimedSetpoint(1.0,.5,1,80,-67,-90);
-            addPause(.5);
-
-
-//            addCustomCode(
-//                    () -> {
-//
-//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-//
-//                            whileActive(drive.move(.5));
-//
-//                        });
-//
-//
-//                    });
+            addAutoModule(align);
             addAutoModule(Reset);
             addWaypoint(60,-14,0);
             addTimedSetpoint(1.0,.3,2,90,-12,-90);
@@ -121,28 +107,17 @@ public class B_LEFT_PY_P extends AutoFramework {
             addWaypoint(0,-30,0);
             addWaypoint(-30,-30,-10);
 
-//            addTimedSetpoint(1.0,.5,1.5,-18,-55,-80);
-//            addTimedSetpoint(1.0,.5,1,-30,-50,-80);
+
             addTimedSetpoint(1.0,.5,1,-30,-50,-26);
 
 
             addAutoModule(ExtakeandLift);
             addTimedSetpoint(1.0,.5,1,40,-74,-94);
-            addPause(.2);
+            addPause(.1);
             addTimedSetpoint(1.0,.5,.7,77,-79.5,-93);
-            addPause(.5);
 
-//            addCustomCode(
-//                    () -> {
-//
-//                        whileNotExit(() -> distanceSensorsNew.getCMDistanceRight() < 21.5 && distanceSensorsNew.getCMDistanceLeft() < 21.5, () -> {
-//
-//                            addTimedSetpoint(1,1,1, (odometry.getX() + 5), -81,-90);
-//
-//                        });
-//
-//
-//                    });
+
+            addAutoModule(align);
             addAutoModule(Reset);
             addWaypoint(60,-15,0);
             addTimedSetpoint(1.0,.3,2,90,-13,-90);
