@@ -70,7 +70,7 @@ public class Outtake extends RobotPart {
 
 
         pivot.addPosition("transfer", 0.3);
-        pivot.addPosition("end",0.62);
+        pivot.addPosition("end",0.68);
         pivot.addPosition("hi",0.7);
 
 
@@ -78,10 +78,10 @@ public class Outtake extends RobotPart {
 
 
 
-        rotate.addPosition("start", .43);
-        rotate.addPosition("transfer", .13);
+        rotate.addPosition("start", .435);
+        rotate.addPosition("transfer", .26);
         rotate.addPosition("angleleft", .65);
-        rotate.addPosition("stack", 0.085);
+        rotate.addPosition("stack", 0.079);
 
 
 

@@ -46,8 +46,8 @@ public interface AutoModuleUser extends RobotUser {
         outtake.stageTransferPivot(.2).attach(outtake.stageStart(.2)),
             outtake.stageStartRotate(.05),
 
-            lift.stageLift(1, 5).attach(outtake.stageThruPivot(.1)),
-        outtake.stageStartPivot(.1).attach(lift.stageLift(1,0))
+            outtake.stageThruPivot(.1).attach(lift.stageLift(1,0)),
+            outtake.stageStartPivot(.1)
 
     ).setStartCode(() ->{
         heightMode.set(GROUND);
