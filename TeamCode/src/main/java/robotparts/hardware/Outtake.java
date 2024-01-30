@@ -25,10 +25,10 @@ public class Outtake extends RobotPart {
 
 
         arml.changePosition("lock", 0.08);
-        armr.changePosition("lock", 0.1);
+        armr.changePosition("lock", 0.12);
 
-        arml.changePosition("betterlock", 0.0);
-        armr.changePosition("betterlock", 0.0);
+        arml.changePosition("betterlock", 0.04);
+        armr.changePosition("betterlock", 0.08);
 
 
         arml.changePosition("middle", 0.15);
@@ -65,7 +65,7 @@ public class Outtake extends RobotPart {
 
         pivot.addPosition("start", 0.19); //0.08
         pivot.addPosition("makeitthru", 0.23);
-        pivot.addPosition("makeitdown", 0.08);
+        pivot.addPosition("makeitdown", 0.16);
 
 
 

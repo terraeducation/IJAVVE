@@ -29,8 +29,9 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
     }
     AutoModule ExtakeandLift = new AutoModule(
-            intake.stageMiddler(.2),
-            intake.moveTime(.53,.2),
+
+            intake.stageStart(.2),
+            RobotPart.pause(.1),
             intake.stageInit(.2),
             lift.stageLift(1, 13).attach(outtake.stageThruPivot(.2)),
 
@@ -48,12 +49,12 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
     AutoModule Reset = new AutoModule(
 
-            outtake.stageOpen(.1).attach(intake.stageInit(.2)),
+            outtake.stageOpen(.1),
             outtake.stageTransferPivot(.2).attach(outtake.stageStart(.2)),
             outtake.stageStartRotate(.05),
 
-            lift.stageLift(1, 5).attach(outtake.stageThruPivot(.1)),
-            outtake.stageStartPivot(.1).attach(lift.stageLift(1,0))
+            outtake.stageThruPivot(.1).attach(lift.stageLift(1,0)),
+            outtake.stageDownPivot(.1).attach(outtake.stageLock(.1))
 
     );
     AutoModule align = new AutoModule(
@@ -63,19 +64,20 @@ public class R_RIGHT_PY_P extends AutoFramework {
     public void define() {
         customCase(() -> {
             addWaypoint(10,-30,0);
-            addWaypoint(30,-40,20);
+            addWaypoint(10,-40,20);
 
-            addTimedSetpoint(1.0,.5,1,30,-60,30);
+            addTimedSetpoint(1.0,.5,1,15,-65,35);
 
 
             addAutoModule(ExtakeandLift);
             addTimedSetpoint(1.0,.5,1,-40,-74,91);
 
-            addTimedSetpoint(1.0,.5,.7,-88.5,-85,91);
+            addTimedSetpoint(1.0,.5,.7,-75,-85,91);
             addAutoModule(align);
+            addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-15,0);
-            addTimedSetpoint(1.0,.5,1.5,-90,-10,90);
+            addTimedSetpoint(1.0,.5,1.5,-80,-10,90);
 
 
 
@@ -90,7 +92,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
             addTimedSetpoint(1.0,.5,1,-88.5,-74,90    );
             addAutoModule(align);
-
+            addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-9,0);
             addTimedSetpoint(1.0,.5,1.3,-90,-10,90);
@@ -110,7 +112,7 @@ public class R_RIGHT_PY_P extends AutoFramework {
 
             addTimedSetpoint(1.0,.5,.8,-86,-51,95);
             addAutoModule(align);
-
+            addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-20,0);
             addTimedSetpoint(1.0,.5,1,-90,-10,90);

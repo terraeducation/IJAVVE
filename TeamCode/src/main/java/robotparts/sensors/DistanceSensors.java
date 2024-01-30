@@ -39,7 +39,7 @@ public class DistanceSensors extends RobotPart {
 
     public boolean isClose(){
 
-        return (dsor.getDistance(DistanceUnit.CM) < 25.3) && (dsor.getDistance(DistanceUnit.CM) < 25.3);
+        return (dsor.getDistance(DistanceUnit.CM) < 23.5) && (dsor.getDistance(DistanceUnit.CM) < 23.5);
     }
 
 

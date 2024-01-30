@@ -51,8 +51,8 @@ public class TestOp extends Tele {
          * Gets Distance
          */
 
-//        log.show("right distance (cm)", distanceSensorsNew.getCMDistanceRight());
-//        log.show("left distance (cm)", distanceSensorsNew.getCMDistanceLeft());
+        log.show("right distance (cm)", distanceSensorsNew.getCMDistanceRight());
+        log.show("left distance (cm)", distanceSensorsNew.getCMDistanceLeft());
 
         /**
          * Gets light of color sensor
