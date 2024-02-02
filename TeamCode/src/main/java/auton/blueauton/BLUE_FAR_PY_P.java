@@ -1,17 +1,15 @@
 package auton.blueauton;
 
 import static global.General.bot;
-import static global.Modes.Height.GROUND;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import automodules.AutoModule;
 import autoutil.AutoFramework;
-import elements.TeamProp;
 import robotparts.RobotPart;
 
-@Autonomous(name = "BLUE Right PY&P ", group = "auto", preselectTeleOp = "TerraOp")
-public class B_RIGHT_PY_P extends AutoFramework {
+@Autonomous(name = "BLUEFAR PY&P ", group = "auto", preselectTeleOp = "TerraOp")
+public class BLUE_FAR_PY_P extends AutoFramework {
 
 
     @Override
@@ -30,9 +28,10 @@ public class B_RIGHT_PY_P extends AutoFramework {
 
     }
     AutoModule Extake = new AutoModule(
-            intake.stageMiddler(.1),
-            intake.moveTime(.5,.2),
-            intake.stageInit(.1)
+            intake.stageStart(.2),
+            RobotPart.pause(.1),
+            intake.stageInit(.2)
+
 
 
     );
@@ -69,11 +68,10 @@ public class B_RIGHT_PY_P extends AutoFramework {
         customCase(() -> {
             addPause(18);
 
-            addWaypoint(0,-20,0);
+            addWaypoint(0,-30,0);
+            addWaypoint(0,-35,20);
 
-            addTimedSetpoint(1.0,.5,1,35,-60,30);
-            addTimedSetpoint(1.0,.5,1,30,-60,35 );
-
+            addTimedSetpoint(1.0,.5,1,5,-80,95);
             addAutoModule(Extake);
             addWaypoint(-10,-50,35);
             addTimedSetpoint(1.0,1,1,0,-130,-90);
@@ -81,6 +79,8 @@ public class B_RIGHT_PY_P extends AutoFramework {
             addAutoModule(PreExtend);
             addWaypoint(180, -130,-90);
             addWaypoint(200,-90,-90);
+            addTimedSetpoint(1.0,2,.8,200,-67,-90);
+
             addAutoModule(align);
 
 
@@ -99,12 +99,13 @@ public class B_RIGHT_PY_P extends AutoFramework {
 
         }, () -> {
             addPause(21);
-            addTimedSetpoint(1.0,.5,1,-20,-70,35);
-            addTimedSetpoint(1.0,.5,1,-10,-75,35);
+            addWaypoint(-30,-30,0);
+
+            addTimedSetpoint(1.0,.5,1,-35,-97,95);
 
 
             addAutoModule(Extake);
-            addWaypoint(0, -65,0);
+            addWaypoint(-40, -65,0);
 
             addWaypoint(0, -65,-90);
             addWaypoint(150, -68,-93);
@@ -122,16 +123,19 @@ public class B_RIGHT_PY_P extends AutoFramework {
 
         }, () -> {
             addPause(17);
-            addTimedSetpoint(1.0,.5,1,-13,-43,0);
+            addTimedSetpoint(1.0,.5,1,6,-45,0);
+
+            addTimedSetpoint(1.0,.5,1,10,-60,-90);
 
             addAutoModule(Extake);
-            addWaypoint(0,-15,0);
-            addWaypoint(0,-120,0);
+            addWaypoint(0,-50,-90);
+            addWaypoint(0,-120,-90);
             addTimedSetpoint(1.0,1,.8,0,-130,-90);
             addWaypoint(155, -130,-90);
             addAutoModule(PreExtend);
             addWaypoint(180, -130,-90);
             addWaypoint(200,-95.5,-90);
+
             addAutoModule(align);
 
             addAutoModule(Reset);

@@ -60,9 +60,11 @@ public interface AutoModuleUser extends RobotUser {
         AutoModule R_TRIGGER = new AutoModule(
                 outtake.stageLock(.5).attach(outtake.stageDownPivot(.5)),
                 intake.stageStart(.4).attach(outtake.stageOpen(.4)),
-                RobotPart.pause(.1),
-                intake.moveSmart(-.52),
+                intake.moveSmart(-.45),
+                intake.moveTime(-.35,.5),
                 outtake.stageClose(.1).attach(outtake.stageBetterLock(.2)),
+                RobotPart.pause(.3),
+
                 intake.moveTime(1,.2),
                 intake.stageInit(.2)
 
