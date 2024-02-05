@@ -20,8 +20,8 @@ public class Outtake extends RobotPart {
         arml = create("arml", ElectronicType.PSERVO_REVERSE);
 
 
-        arml.changePosition("start", 0.1);
-        armr.changePosition("start", 0.12);
+        arml.changePosition("start", 0.14);
+        armr.changePosition("start", 0.16);
 
 
         arml.changePosition("lock", 0.07);
@@ -64,7 +64,7 @@ public class Outtake extends RobotPart {
 
 
         pivot.addPosition("start", 0.19); //0.08
-        pivot.addPosition("makeitthru", 0.26);
+        pivot.addPosition("makeitthru", 0.3);
         pivot.addPosition("makeitdown", 0.16);
 
 

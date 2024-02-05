@@ -44,10 +44,10 @@ public interface AutoModuleUser extends RobotUser {
     AutoModule L_TRIGGER = new AutoModule(
         outtake.stageOpen(.1),
         outtake.stageTransferPivot(.2).attach(outtake.stageMiddle(.2)),
-            outtake.stageStartRotate(.05),
+            outtake.stageStartRotate(.05).attach(outtake.stageLock(.1)),
 
             outtake.stageThruPivot(.1).attach(lift.stageLift(1,0)),
-            outtake.stageDownPivot(.1).attach(outtake.stageLock(.1))
+            outtake.stageDownPivot(.1)
 
     ).setStartCode(() ->{
         heightMode.set(GROUND);
@@ -58,9 +58,12 @@ public interface AutoModuleUser extends RobotUser {
     });
 
         AutoModule R_TRIGGER = new AutoModule(
+                outtake.stageStart(.1),
+                outtake.stageOpen(.4),
                 outtake.stageLock(.5).attach(outtake.stageDownPivot(.5)),
-                intake.stageStart(.4).attach(outtake.stageOpen(.4)),
+                intake.stageStart(.4),
                 intake.moveSmart(-.45),
+
                 intake.moveTime(-.35,.5),
                 outtake.stageClose(.1).attach(outtake.stageBetterLock(.2)),
                 RobotPart.pause(.3),
@@ -84,7 +87,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule IntakeMid = new AutoModule(
-            outtake.stageLock(.3),
+            outtake.stageLock(.3).attach(outtake.stageDownPivot(.5)),
             intake.stageMiddle(.2).attach(outtake.stageOpen(.1)),
             intake.moveSmart(-.45),
             outtake.stageClose(.5),
@@ -98,7 +101,7 @@ public interface AutoModuleUser extends RobotUser {
 
 
     AutoModule IntakeMider = new AutoModule(
-            outtake.stageLock(.3),
+            outtake.stageLock(.3).attach(outtake.stageDownPivot(.5)),
             intake.stageMiddler(.2).attach(outtake.stageOpen(.1)),
             intake.moveSmart(-.45),
             outtake.stageClose(.5),

@@ -8,8 +8,8 @@ import automodules.AutoModule;
 import autoutil.AutoFramework;
 import robotparts.RobotPart;
 
-@Autonomous(name = "REDFAR PY&P ", group = "auto", preselectTeleOp = "TerraOp")
-public class RED_FAR_PY_P extends AutoFramework {
+@Autonomous(name = "REDFAR STACK", group = "auto", preselectTeleOp = "TerraOp")
+public class RED_FAR_STACK extends AutoFramework {
 
 
     @Override
@@ -34,6 +34,17 @@ public class RED_FAR_PY_P extends AutoFramework {
 
     );
 
+    AutoModule IntakeFirst = new AutoModule(
+            intake.stageMiddle(.4).attach(outtake.stageOpen(.4)),
+            intake.moveSmart(-.65).attach(drive.moveTime(-.3,0,0,.5)),
+
+            outtake.stageClose(.1).attach(outtake.stageBetterLock(.2)),
+//            RobotPart.pause(.3),
+
+//            intake.moveTime(1,.2),
+            intake.stageInit(.2)
+    );
+
     AutoModule align = new AutoModule(
             drive.driveSmart(-.3,0,0)
     );
@@ -49,6 +60,9 @@ public class RED_FAR_PY_P extends AutoFramework {
             outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
 
 
+    );
+    AutoModule RemovePixels = new AutoModule(
+           intake.moveTime(.5,1)
     );
     AutoModule Reset = new AutoModule(
             outtake.stageOpen(.1).attach(intake.stageInit(.2)),
@@ -114,24 +128,31 @@ public class RED_FAR_PY_P extends AutoFramework {
 
 
         }, () -> {
-            addPause(18);
+//            addPause(18);
 
             addWaypoint(0,-30,0);
             addWaypoint(0,-35,-20);
 
-            addTimedSetpoint(1.0,.5,1,-15,-56,-95);
+            addTimedSetpoint(1.0,1,1,-15,-58,-95);
 
             addAutoModule(Extake);
-            addWaypoint(10,-50,-35);
-            addTimedSetpoint(1.0,1,1,0,-130,90);
-            addWaypoint(-155, -130,90);
-            addAutoModule(PreExtend);
-            addWaypoint(-180, -130,90);
-            addWaypoint(-180,-90,90);
-            addTimedSetpoint(1.0,2,.8,-219,-67,90);
-            addAutoModule(align);
+            addWaypoint(10,-60,-95);
+            addTimedSetpoint(1,1,1,32,-70,89);
+            addAutoModule(IntakeFirst);
+            addWaypoint(0,-60,95);
+            addAutoModule(RemovePixels);
 
-            addAutoModule(Reset);
+//
+//
+//            addTimedSetpoint(1.0,1,1,0,-130,90);
+//            addWaypoint(-155, -130,90);
+//            addAutoModule(PreExtend);
+//            addWaypoint(-180, -130,90);
+//            addWaypoint(-180,-90,90);
+//            addTimedSetpoint(1.0,2,.8,-219,-67,90);
+//            addAutoModule(align);
+
+//            addAutoModule(Reset);
 
 
 
