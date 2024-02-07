@@ -43,11 +43,12 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule L_TRIGGER = new AutoModule(
         outtake.stageOpen(.1),
+            outtake.stageUp(.1).attach(outtake.stageHiPivot(.1)),
         outtake.stageTransferPivot(.2).attach(outtake.stageMiddle(.2)),
             outtake.stageStartRotate(.05).attach(outtake.stageLock(.1)),
-
-            outtake.stageThruPivot(.1).attach(lift.stageLift(1,0)),
-            outtake.stageDownPivot(.1)
+            outtake.stageDownPivot(.1),
+            outtake.stageStart(.1).attach(lift.stageLift(1,0)),
+            outtake.stageDownPivot(.1).attach(outtake.stageLock(.1))
 
     ).setStartCode(() ->{
         heightMode.set(GROUND);
@@ -62,7 +63,7 @@ public interface AutoModuleUser extends RobotUser {
                 outtake.stageOpen(.4),
                 outtake.stageLock(.5).attach(outtake.stageDownPivot(.5)),
                 intake.stageStart(.4),
-                intake.moveSmart(-.45),
+                intake.moveSmart(-.53),
 
                 intake.moveTime(-.35,.5),
                 outtake.stageClose(.1).attach(outtake.stageBetterLock(.2)),
@@ -207,7 +208,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule levelthree = new AutoModule(
-            lift.stageLift(1, 30)
+            lift.stageLift(1, 50)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING2);
@@ -216,7 +217,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule levelfour = new AutoModule(
-            lift.stageLift(1, 37)
+            lift.stageLift(1, 40)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING);
@@ -225,7 +226,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule levelfive = new AutoModule(
-            lift.stageLift(1, 40)
+            lift.stageLift(1, 45)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING2);
@@ -233,7 +234,7 @@ public interface AutoModuleUser extends RobotUser {
 //
     });
     AutoModule levelsix = new AutoModule(
-            lift.stageLift(1, 45)
+            lift.stageLift(1, 50)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING);
@@ -242,7 +243,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule levelseven = new AutoModule(
-            lift.stageLift(1, 50)
+            lift.stageLift(1, 55)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING2);
