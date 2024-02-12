@@ -1,6 +1,8 @@
 package autoutil.vision;
 
+import static autoutil.vision.Scanner.BLUE;
 import static autoutil.vision.Scanner.GREEN;
+import static autoutil.vision.Scanner.RED;
 import static global.General.log;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -24,7 +26,7 @@ import java.awt.font.ImageGraphicAttribute;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Autonomous(name = "PixelHSV", group = "auto")
+@Autonomous(name = "PixelHSV", group = "auto")
 public class PixelScannerHSV extends LinearOpMode {
     @Override
     public void runOpMode() {
@@ -57,52 +59,15 @@ public class PixelScannerHSV extends LinearOpMode {
 
     class Scan extends OpenCvPipeline {
         Mat mat = new Mat();
-        @Override
-        public Mat processFrame(Mat input) {
-            Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
-//            Rect rect_crop = new Rect(50, 0, 150, 300);
-//            Mat crop = mat.submat(rect_crop);
-////            Scalar lowerBound = new Scalar(0, 0, 255 - 15);
-////            Scalar upperBound = new Scalar(255, 15, 255);
-////            Scalar lowerBound = new Scalar(0, 0, 0);
-////            Scalar upperBound = new Scalar(0, 0, 255);
-////            Scalar lowerBound = new Scalar(75, 0, 99);
-////            Scalar upperBound = new Scalar(179, 62, 255);
-            Scalar lowerBound = new Scalar(0, 0, 168);
-            Scalar upperBound = new Scalar(172, 111, 255);
-            int lowerValue = 150;
+        double firstLeft;
+        double firstRight;
 
-            int topx = 400; int topy = 300; int width = 300; int height = 60;
-//            Mat edges = new Mat();
-            Rect rect1 = new Rect(topx, topy, width, height);
-            Rect rect2 = new Rect(topx, topy + height, width, height);
-            Rect rect3 = new Rect(topx, topy + height * 2, width, height);
-            Rect rect4 = new Rect(topx, topy + height * 3, width, height);
-            Rect rect5 = new Rect(topx, topy + height * 4, width, height);
-
-            Mat mask1 = new Mat();
-            Mat mask2 = new Mat();
-            Mat mask3 = new Mat();
-            Mat mask4 = new Mat();
-            Mat mask5 = new Mat();
-
-            Imgproc.rectangle(input, rect1, GREEN, 3);
-            Imgproc.rectangle(input, rect2, GREEN, 3);
-            Imgproc.rectangle(input, rect3, GREEN, 3);
-            Imgproc.rectangle(input, rect4, GREEN, 3);
-            Imgproc.rectangle(input, rect5, GREEN, 3);
-
-
+        public double[] scan (Rect rect1, Rect rect2, Rect rect3, Rect rect4, Rect rect5) {
             Mat matRect1 = mat.submat(rect1);
-            Core.inRange(matRect1, lowerBound, upperBound, mask1);
             Mat matRect2 = mat.submat(rect2);
-            Core.inRange(matRect2, lowerBound, upperBound, mask2);
             Mat matRect3 = mat.submat(rect3);
-            Core.inRange(matRect3, lowerBound, upperBound, mask3);
             Mat matRect4 = mat.submat(rect4);
-            Core.inRange(matRect4, lowerBound, upperBound, mask4);
             Mat matRect5 = mat.submat(rect5);
-            Core.inRange(matRect5, lowerBound, upperBound, mask5);
 
 //            Core.extractChannel(matRect1, matRect1, 0);
 //            Core.extractChannel(matRect2, matRect2, 0);
@@ -128,27 +93,156 @@ public class PixelScannerHSV extends LinearOpMode {
 
 //            mask1.copyTo(input);
 
-            mask1.release();
-            mask2.release();
-            mask3.release();
-            mask4.release();
-            mask5.release();
+            return new double[] {v1Avg, v2Avg, v3Avg, v4Avg, v5Avg};
+        }
 
-            double[] values = new double[] {v1Avg, v2Avg, v3Avg, v4Avg, v5Avg};
+        public double scanBig(Rect rect1) {
+            Mat matRect = mat.submat(rect1);
+            Scalar avg = Core.mean(matRect);
+            double finAvg = avg.val[2];
 
-            for (int i = 0; i < values.length; i++) {
-                telemetry.addData(String.valueOf(i), values[i]);
+            return finAvg;
+        }
+        @Override
+        public Mat processFrame(Mat input) {
+            Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
+//            Rect rect_crop = new Rect(50, 0, 150, 300);
+//            Mat crop = mat.submat(rect_crop);
+////            Scalar lowerBound = new Scalar(0, 0, 255 - 15);
+////            Scalar upperBound = new Scalar(255, 15, 255);
+////            Scalar lowerBound = new Scalar(0, 0, 0);
+////            Scalar upperBound = new Scalar(0, 0, 255);
+////            Scalar lowerBound = new Scalar(75, 0, 99);
+////            Scalar upperBound = new Scalar(179, 62, 255);
+////            Scalar upperBound = new Scalar(179, 62, 255);
+            Scalar lowerBound = new Scalar(0, 0, 168);
+            Scalar upperBound = new Scalar(172, 111, 255);
+            int lowerValue = 150;
+            int space = 20;
+            String location = "";
+            boolean first = true;
+
+            int topx = 750; int topy = 585; int width = 150; int height = 25;
+//            Mat edges = new Mat();
+            Rect rect1 = new Rect(topx, topy, width, height);
+            Rect rect2 = new Rect(topx, topy + height, width, height);
+            Rect rect3 = new Rect(topx, topy + height * 2, width, height);
+            Rect rect4 = new Rect(topx, topy + height * 3, width, height);
+            Rect rect5 = new Rect(topx, topy + height * 4, width, height);
+
+//            Rect rightRect1 = new Rect(topx - width / 2 - space, topy, width / 2, height);
+//            Rect rightRect2 = new Rect(topx - width / 2 - space, topy + height, width / 2, height);
+//            Rect rightRect3 = new Rect(topx - width / 2 - space, topy + height * 2, width / 2, height);
+//            Rect rightRect4 = new Rect(topx - width / 2 - space, topy + height * 3, width / 2, height);
+//            Rect rightRect5 = new Rect(topx - width / 2 - space, topy + height * 4, width / 2, height);
+
+            Rect rightRect = new Rect(topx - width / 2, topy, width / 2, height * 5);
+
+//            Rect leftRect1 = new Rect(topx + width + space, topy, width / 2, height);
+//            Rect leftRect2 = new Rect(topx + width + space, topy + height, width / 2, height);
+//            Rect leftRect3 = new Rect(topx + width + space, topy + height * 2, width / 2, height);
+//            Rect leftRect4 = new Rect(topx + width + space, topy + height * 3, width / 2, height);
+//            Rect leftRect5 = new Rect(topx + width + space, topy + height * 4, width / 2, height);
+
+            Rect leftRect = new Rect(topx + width + space, topy, width / 2, height * 5);
+
+            Imgproc.rectangle(input, rect1, GREEN, 3);
+            Imgproc.rectangle(input, rect2, GREEN, 3);
+            Imgproc.rectangle(input, rect3, GREEN, 3);
+            Imgproc.rectangle(input, rect4, GREEN, 3);
+            Imgproc.rectangle(input, rect5, GREEN, 3);
+
+//            Imgproc.rectangle(input, rightRect1, RED, 3);
+//            Imgproc.rectangle(input, rightRect2, RED, 3);
+//            Imgproc.rectangle(input, rightRect3, RED, 3);
+//            Imgproc.rectangle(input, rightRect4, RED, 3);
+//            Imgproc.rectangle(input, rightRect5, RED, 3);
+//
+//            Imgproc.rectangle(input, leftRect1, BLUE, 3);
+//            Imgproc.rectangle(input, leftRect2, BLUE, 3);
+//            Imgproc.rectangle(input, leftRect3, BLUE, 3);
+//            Imgproc.rectangle(input, leftRect4, BLUE, 3);
+//            Imgproc.rectangle(input, leftRect5, BLUE, 3);
+
+            Imgproc.rectangle(input, rightRect, RED, 3);
+            Imgproc.rectangle(input, leftRect, BLUE, 3);
+
+            double[] centerValues = scan(rect1, rect2, rect3, rect4, rect5);
+//            double[] leftValues = scan(leftRect1, leftRect2, leftRect3, leftRect4, leftRect5);
+//            double[] rightValues = scan(rightRect1, rightRect2, rightRect3, rightRect4, rightRect5);
+            double leftValue = scanBig(leftRect);
+            double rightValue = scanBig(rightRect);
+
+            for (int i = 0; i < centerValues.length; i++) {
+                telemetry.addData("Center " + i, centerValues[i]);
             }
 
-            int p_count = 0;
+            int p_center_count = 0;
 
-            for (double val: values) {
+            for (double val: centerValues) {
                 if (val >= lowerValue) {
-                    p_count += 1;
+                    p_center_count += 1;
                 }
             }
 
-            telemetry.addData("Pixel count", p_count);
+            telemetry.addData("Pixel count", p_center_count);
+            telemetry.addLine("");
+
+            telemetry.addData("Left", leftValue);
+            telemetry.addData("Right", rightValue);
+
+            if (first) {
+                firstLeft = leftValue;
+                firstRight = rightValue;
+                first = false;
+            } else {
+                if (leftValue >= firstLeft + 15) {
+                    location = "left";
+                } else if (rightValue >= firstRight + 15) {
+                    location = "right";
+                } else {
+                    location = "center";
+                }
+            }
+
+//            for (int i = 0; i < leftValues.length; i++) {
+//                telemetry.addData("Left " + i, leftValues[i]);
+//            }
+//
+//            int p_left_count = 0;
+//
+//            for (double val: centerValues) {
+//                if (val >= lowerValue) {
+//                    p_left_count += 1;
+//                }
+//            }
+//
+//            telemetry.addData("Pixel count", p_left_count);
+//            telemetry.addLine("");
+//
+//            for (int i = 0; i < rightValues.length; i++) {
+//                telemetry.addData("Right " + i, rightValues[i]);
+//            }
+//
+//            int p_right_count = 0;
+//
+//            for (double val: centerValues) {
+//                if (val >= lowerValue) {
+//                    p_right_count += 1;
+//                }
+//            }
+
+//            telemetry.addData("Pixel count", p_right_count);
+//            telemetry.addLine("");
+
+
+//            if (p_center_count >= 0) {
+//                location = "center";
+//            } else if (p_left_count >= 0) {
+//                location = "left";
+//            } else if (p_right_count >= 0) {
+//                location = "right";
+//            }
 
             telemetry.update();
 
