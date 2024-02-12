@@ -9,12 +9,15 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class PixelScannerIntegrate extends Scanner{
 
     double firstLeft;
     double firstRight;
     String location;
-    String leftOrRight = "";
+    ArrayList<String> locations;
     int pixelCount;
     boolean first = true;
     Mat mat = new Mat();
@@ -48,17 +51,20 @@ public class PixelScannerIntegrate extends Scanner{
         return new double[] {v1Avg, v2Avg, v3Avg, v4Avg, v5Avg};
     }
 
-    public double[] scan (Rect rect1, Rect rect2) {
+    public double[] scan (Rect rect1, Rect rect2, Rect rect3) {
         Mat matRect1 = mat.submat(rect1);
         Mat matRect2 = mat.submat(rect2);
+        Mat matRect3 = mat.submat(rect3);
 
         Scalar v1 = Core.mean(matRect1);
         Scalar v2 = Core.mean(matRect2);
+        Scalar v3 = Core.mean(matRect3);
 
         double v1Avg = v1.val[2];
         double v2Avg = v2.val[2];
+        double v3Avg = v3.val[2];
 
-        return new double[] {v1Avg, v2Avg};
+        return new double[] {v1Avg, v2Avg, v3Avg};
     }
 
     public double scanBig(Rect rect1) {
@@ -135,22 +141,76 @@ public class PixelScannerIntegrate extends Scanner{
 
     public void setLeftOrRight(Mat input) {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
-        int topx = 750; int topy = 585; int width = 150; int height = 125;
-        Rect left = new Rect(topx, topy, width, height);
-        Rect right = new Rect(topx + 50, topy, width, height);
+        int topx = 750; int topy = 585; int width = 200; int height = 125;
+        int threshold = 20;
+        Rect center = new Rect(750, 585, 200, 125);
+        Rect left = new Rect(450, 585, 300, 125);
+        Rect right = new Rect(950, 585, 200, 125);
 
         Imgproc.rectangle(input, left, BLUE, 3);
-        Imgproc.rectangle(input, right, RED, 3);
+        Imgproc.rectangle(input, center, RED, 3);
+        Imgproc.rectangle(input, right, GREEN, 3);
 
-        double[] values = scan(left, right);
+        double[] values = scan(left, center, right);
 
-        double lValue = values[0]; double rValue = values[1];
+        double lValue = values[0]; double cValue = values[1]; double rValue = values[2];
 
-        if (lValue > rValue) {
-            leftOrRight = "left";
+        telemetry.addData("left val", lValue);
+        telemetry.addData("center val", cValue);
+        telemetry.addData("right val", rValue);
+
+        if (lValue > rValue && lValue > cValue) {
+            if (lValue <= rValue + threshold) {
+                locations = new ArrayList<>(
+                        Arrays.asList("right", "left", "center")
+                );
+            } else if (lValue <= cValue + threshold) {
+                locations = new ArrayList<>(
+                        Arrays.asList("center", "left", "right")
+                );
+            } else {
+                double m = Math.max(cValue, rValue);
+                if (m == cValue) {
+                    locations = new ArrayList<>(
+                            Arrays.asList("left", "center", "right")
+                    );
+                } else {
+                    locations = new ArrayList<>(
+                            Arrays.asList("left", "right", "center")
+                    );
+                }
+            }
+        } else if (rValue > lValue && rValue > cValue) {
+            double m = Math.max(cValue, lValue);
+            if (m == cValue) {
+                locations = new ArrayList<>(
+                        Arrays.asList("right", "center", "left")
+                );
+            } else {
+                locations = new ArrayList<>(
+                        Arrays.asList("right", "left", "center")
+                );
+            }
         } else {
-            leftOrRight = "right";
+            if (cValue <= rValue + threshold) {
+                locations = new ArrayList<>(
+                        Arrays.asList("right", "center", "left")
+                );
+            } else {
+                double m = Math.max(rValue, lValue);
+                if (m == rValue) {
+                    locations = new ArrayList<>(
+                            Arrays.asList("center", "right", "left")
+                    );
+                } else {
+                    locations = new ArrayList<>(
+                            Arrays.asList("center", "left", "right")
+                    );
+                }
+            }
         }
+
+        telemetry.addData("location", locations.get(0));
     }
 
     public void setFirst(boolean f) {
