@@ -257,6 +257,16 @@ public class Drive extends RobotPart {
     public Stage driveSmart(double fp, double sp, double tp){
         return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitDrive());
     }
+    public Stage strafeSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitStrafe());
+    }
+
+    public Stage turnRightSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitRight());
+    }
+    public Stage turnLeftSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitLeft());
+    }
 
     public Stage intakeSmart(double fp, double sp, double tp){
         return super.moveCustomExit(fp, sp, tp, colorSensorsNew.exitIntake());

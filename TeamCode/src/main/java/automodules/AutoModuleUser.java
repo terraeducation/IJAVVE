@@ -11,6 +11,13 @@ import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.Height.GROUND;
 import static global.Modes.Height.HIGH;
 import static global.Modes.Height.LOW;
+import static global.Modes.Height.five;
+import static global.Modes.Height.four;
+import static global.Modes.Height.one;
+import static global.Modes.Height.seven;
+import static global.Modes.Height.six;
+import static global.Modes.Height.three;
+import static global.Modes.Height.two;
 import static global.Modes.OuttakeStatus.DRIVING;
 import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
@@ -133,15 +140,15 @@ public interface AutoModuleUser extends RobotUser {
 
 
     ).setStartCode(() ->{
-        heightMode.set(LOW);
         outtakeStatus.set(PLACING);
+
     });
 
-    AutoModule B_BUTTON = new AutoModule(
-            lift.stageLift(1, 45)
+    AutoModule joyoi = new AutoModule(
+            lift.stageLift(1, heightMode.getValue(heightMode.get()))
 
     ).setStartCode(() ->{
-        heightMode.set(HIGH);
+
 
     });
 
@@ -190,63 +197,76 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule levelone = new AutoModule(
-            lift.stageLift(1, 20)
+//                lift.stageLift(1, 20)
 
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING2);
+        heightMode.set(one);
+
 
 
     });
 
     AutoModule leveltwo = new AutoModule(
-            lift.stageLift(1, 25)
+//            lift.stageLift(1, 25)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING);
+        heightMode.set(two);
+
 
 //
     });
 
     AutoModule levelthree = new AutoModule(
-            lift.stageLift(1, 50)
+//            lift.stageLift(1, 50)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING2);
+        heightMode.set(three);
+
 
 //
     });
 
     AutoModule levelfour = new AutoModule(
-            lift.stageLift(1, 40)
+//            lift.stageLift(1, 40)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING);
+        heightMode.set(four);
 
 //
     });
 
     AutoModule levelfive = new AutoModule(
-            lift.stageLift(1, 45)
+//            lift.stageLift(1, 45)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING2);
+        heightMode.set(five);
+
 
 //
     });
     AutoModule levelsix = new AutoModule(
-            lift.stageLift(1, 50)
+//            lift.stageLift(1, 50)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING);
+        heightMode.set(six);
+
 
 //
     });
 
     AutoModule levelseven = new AutoModule(
-            lift.stageLift(1, 55)
+//            lift.stageLift(1, 55)
 //
     ).setStartCode(() ->{
         outtakeStatus.set(PLACING2);
+        heightMode.set(seven);
+
 
 //
     });

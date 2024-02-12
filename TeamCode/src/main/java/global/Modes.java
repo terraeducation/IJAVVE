@@ -1,7 +1,5 @@
 package global;
 
-import robotparts.hardware.Drive;
-import robotparts.hardware.Lift;
 import util.template.Mode;
 
 
@@ -21,12 +19,22 @@ public interface Modes {
     Mode outtakeStatus = new Mode(OuttakeStatus.class);
 
 
-    enum Height implements Mode.ModeType {HIGH, MIDDLE, LOW, GROUND}
+    enum Height implements Mode.ModeType {HIGH, MIDDLE, LOW, GROUND, one, two, three, four, five, six, seven}
     Mode heightMode = new Mode(Height.class)
+
             .set(Height.HIGH, 50)
             .set(Height.MIDDLE, 35)
             .set(Height.LOW, 15)
-            .set(Height.GROUND, 0);
+            .set(Height.GROUND, 0)
+            .set(Height.one, 15)
+            .set(Height.two, 20)
+            .set(Height.three, 30)
+            .set(Height.four, 40)
+            .set(Height.five, 45)
+            .set(Height.six, 50)
+            .set(Height.seven, 57);
+
+
 
 
     // TOD5 MULTI DIMENSIONAL MODE

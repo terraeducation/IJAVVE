@@ -33,7 +33,7 @@ public class Intake extends RobotPart {
 
     @Override
     public void init() {
-        in = create("in", ElectronicType.CMOTOR_FORWARD);
+        in = create("in", ElectronicType.CMOTOR_FORWARD_FLOAT);
         drone = create("drone", ElectronicType.CSERVO_FORWARD);
         link = create("link", ElectronicType.PSERVO_REVERSE);
         link2 = create("link2", ElectronicType.PSERVO_FORWARD);

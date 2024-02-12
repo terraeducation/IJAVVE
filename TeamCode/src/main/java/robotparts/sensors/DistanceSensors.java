@@ -39,13 +39,31 @@ public class DistanceSensors extends RobotPart {
 
     public boolean isClose(){
 
-        return (dsor.getDistance(DistanceUnit.CM) < 17) && (dsor.getDistance(DistanceUnit.CM) < 17);
+        return (dsor.getDistance(DistanceUnit.CM) < 17.5) && (dsor.getDistance(DistanceUnit.CM) < 17.5);
+    }
+
+    public boolean isClosey(){
+
+        return (dsor.getDistance(DistanceUnit.CM) < 80) && (dsor.getDistance(DistanceUnit.CM) < 80);
+    }
+
+    public boolean left(){
+        return (dsor.getDistance(DistanceUnit.CM) > dsor.getDistance(DistanceUnit.CM));
+    }
+    public boolean right(){
+        return (dsor.getDistance(DistanceUnit.CM) < dsor.getDistance(DistanceUnit.CM));
     }
 
 
     public Exit exitDrive(){return new Exit(this::isClose);}
+    public Exit exitStrafe(){return new Exit(this::isClosey);}
+    public Exit exitRight(){return new Exit(this::right);}
+    public Exit exitLeft(){return new Exit(this::left);}
 
-//    public Stage moveDist(double t){ return super.customTime(this::moveDist, t);}
+
+
+
+    //    public Stage moveDist(double t){ return super.customTime(this::moveDist, t);}
     public boolean IsRightClose(){
         if(outtakeStatus.modeIs(PLACING)) {
             return dsor.getDistance(DistanceUnit.CM) < 50;
