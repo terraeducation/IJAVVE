@@ -20,15 +20,15 @@ public class Outtake extends RobotPart {
         arml = create("arml", ElectronicType.PSERVO_REVERSE);
 
 
-        arml.changePosition("start", 0.1);
-        armr.changePosition("start", 0.12);
+        arml.changePosition("start", 0.14);
+        armr.changePosition("start", 0.16);
 
 
-        arml.changePosition("lock", 0.04);
-        armr.changePosition("lock", 0.06);
+        arml.changePosition("lock", 0.07);
+        armr.changePosition("lock", 0.11);
 
-        arml.changePosition("betterlock", 0.0);
-        armr.changePosition("betterlock", 0.0);
+        arml.changePosition("betterlock", 0.04);
+        armr.changePosition("betterlock", 0.08);
 
 
         arml.changePosition("middle", 0.15);
@@ -37,8 +37,8 @@ public class Outtake extends RobotPart {
         arml.changePosition("end", 0.8);
         armr.changePosition("end", 0.82);
 
-        arml.changePosition("uphigh", 0.55);
-        armr.changePosition("uphigh", 0.57);
+        arml.changePosition("uphigh", 0.6);
+        armr.changePosition("uphigh", 0.62);
 
 
 
@@ -49,39 +49,39 @@ public class Outtake extends RobotPart {
 
 
         claw1.addPosition("close", .7);
-        claw1.addPosition("open", 0.3);
+        claw1.addPosition("open", 0.25);
 
         claw2 = create("claw2", ElectronicType.PSERVO_FORWARD);
 
 
 
         claw2.addPosition("close", .7);
-        claw2.addPosition("open", 0.3);
+        claw2.addPosition("open", 0.25);
 
 
         pivot = create("pivot", ElectronicType.PSERVO_REVERSE);
 
 
 
-        pivot.addPosition("start", 0.185); //0.08
-        pivot.addPosition("makeitthru", 0.23);
-        pivot.addPosition("makeitdown", 0.08);
+        pivot.addPosition("start", 0.19); //0.08
+        pivot.addPosition("makeitthru", 0.31);
+        pivot.addPosition("makeitdown", 0.23);
 
 
 
-        pivot.addPosition("transfer", 0.3);
-        pivot.addPosition("end",0.62);
-        pivot.addPosition("hi",0.7);
+        pivot.addPosition("transfer", 0.29);
+        pivot.addPosition("end",0.70);
+        pivot.addPosition("hi",0.76);
 
 
         rotate = create("rotate", ElectronicType.PSERVO_FORWARD);
 
 
 
-        rotate.addPosition("start", .43);
-        rotate.addPosition("transfer", .13);
+        rotate.addPosition("start", .435);
+        rotate.addPosition("transfer", .26);
         rotate.addPosition("angleleft", .65);
-        rotate.addPosition("stack", 0.085);
+        rotate.addPosition("stack", 0.079);
 
 
 

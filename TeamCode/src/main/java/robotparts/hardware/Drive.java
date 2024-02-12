@@ -258,6 +258,10 @@ public class Drive extends RobotPart {
         return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitDrive());
     }
 
+    public Stage intakeSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, colorSensorsNew.exitIntake());
+    }
+
     @Override
     public AutoModule MoveTime(double fp, double sp, double tp, double t) {
         return super.MoveTime(fp, sp, tp, t);

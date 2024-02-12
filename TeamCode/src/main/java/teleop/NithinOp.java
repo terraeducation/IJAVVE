@@ -7,6 +7,8 @@ import static global.General.gph2;
 import static global.General.log;
 import static global.General.voltageScale;
 import static global.Modes.Drive.FAST;
+import static global.Modes.Drive.SLOW;
+import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.OuttakeStatus.DRIVING;
 import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
@@ -21,14 +23,16 @@ public class NithinOp extends Tele {
 
         gph1.link(LEFT_BUMPER, L_BUMPER);
         gph1.link(RIGHT_BUMPER, R_BUMPER);
-        gph1.link(RIGHT_TRIGGER, L_TRIGGER);
-        gph1.linkWithCancel(LEFT_TRIGGER, outtakeStatus.isMode(DRIVING), R_TRIGGER, CancelIntake);
-//        gph1.link(LEFT_TRIGGER, R_TRIGGER);
+        gph1.linkWithCancel(RIGHT_TRIGGER, outtakeStatus.isMode(DRIVING), X_BUTTON, L_TRIGGER);
+        gph1.linkWithCancel(LEFT_TRIGGER, driveMode.isMode(SLOW), R_TRIGGER, CancelIntake);
+        gph1.linkWithCancel(LEFT_STICK_BUTTON,  driveMode.isMode(SLOW), IntakeMid, CancelIntake);
+        gph1.linkWithCancel(RIGHT_STICK_BUTTON,  driveMode.isMode(SLOW), IntakeMider, CancelIntake);
 
-//        gph1.link(DPAD_DOWN, () -> lift.adjustHolderTarget(-7));
-        gph1.link(DPAD_RIGHT, RIGHT_DPAD);
+        gph1.linkWithCancel(DPAD_RIGHT,  outtakeStatus.isMode(PLACING), RIGHT_DPAD, chubramani);
         gph1.link(DPAD_LEFT, LEFT_DPAD);
         gph1.link(DPAD_UP,  UP_DPAD);
+        gph1.linkWithCancel(DPAD_DOWN, outtakeStatus.isMode(PLACING), DOWN_DPAD, Hang);
+
 
 
         gph1.linkWithCancel(X, outtakeStatus.isMode(PLACING), levelone, leveltwo);
@@ -43,15 +47,12 @@ public class NithinOp extends Tele {
 
         gph2.link(RIGHT_BUMPER, outtake::openClaw);
         gph2.link(LEFT_BUMPER, outtake::closeClaw);
-        gph2.link(X, intake::chubramani);
-        gph2.linkWithCancel(A, outtakeStatus.isMode(DRIVING), IntakeMid, CancelIntake);
-        gph2.linkWithCancel(B, outtakeStatus.isMode(DRIVING), IntakeMider, CancelIntake);
 
 
-        gph2.link(LEFT_TRIGGER, X_BUTTON);
 
-//        gph2.link(DPAD_UP, HangReady);
-        gph2.link(DPAD_DOWN, Hang );
+
+
+
 
 
 
@@ -60,8 +61,10 @@ public class NithinOp extends Tele {
          */
         outtake.moveStart();
         outtake.moveStartRotate();
+        outtake.openClaw();
+        outtake.moveStartPivot();
         intake.moveInit();
-        driveMode.set(FAST);
+        driveMode.set(SLOW);
         outtakeStatus.set(DRIVING);
         lift.reset();
 
@@ -70,7 +73,6 @@ public class NithinOp extends Tele {
     @Override
     public void startTele() {
         lift.reset();
-//        Outtake.moveStart();
 
 
     }
@@ -81,7 +83,6 @@ public class NithinOp extends Tele {
         drive.newMove(gph1.ry, gph1.rx, gph1.lx);
 //        lift.move(gph2.ry);
 
-//        log.show("", odometry.getEncX());
 
         /**
          * Gets Distance
@@ -116,8 +117,8 @@ public class NithinOp extends Tele {
         /**
          * lift encoder positions
          */
-        log.show("Right", lift.motorRight.getPosition());
-        log.show("Left", lift.motorLeft.getPosition());
+//        log.show("Right", lift.motorRight.getPosition());
+//        log.show("Left", lift.motorLeft.getPosition());
 
 
         /**
@@ -125,6 +126,9 @@ public class NithinOp extends Tele {
          */
 //        log.show("DriveMode", driveMode.get());
 
+        /**
+         * outtake status
+         */
                 log.show("outske", outtakeStatus.get());
 
     }

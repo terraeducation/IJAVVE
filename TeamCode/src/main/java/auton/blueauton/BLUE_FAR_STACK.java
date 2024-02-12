@@ -10,7 +10,7 @@
 //import robotparts.RobotPart;
 //
 //@Autonomous(name = "B. Right Stack ", group = "auto", preselectTeleOp = "TerraOp")
-//public class B_RIGHT_STACK extends AutoFramework {
+//public class BLUE_FAR_STACK extends AutoFramework {
 //
 //
 //    @Override
@@ -18,8 +18,8 @@
 //
 //        this.setConfig(NonstopConfig);
 //        bot.saveLocationOnField();
-//        OUTTAKE_OLD.moveStart();
-////        OUTTAKE_OLD.openClawHalf();
+////        outtake.moveStart();
+////        outtake.openClawHalf();
 //        propCaseDetected = TeamProp.FIRST;
 //        AutoFramework auto = this;
 //        auto.scan(true, "blue", "right");
@@ -42,25 +42,31 @@
 //
 //    );
 //    AutoModule Drop = new AutoModule(
-//            OUTTAKE_OLD.stageMiddle(.2).attach(OUTTAKE_OLD.stageClose(.2)),
+//            outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
 //            lift.stageLift(.8,20),
-//            OUTTAKE_OLD.stageEndAuto(.2),
+//            outtake.stageEndAuto(.2),
 //            RobotPart.pause(.5),
-//            OUTTAKE_OLD.stageOpen(.2),
+//            outtake.stageOpen(.2),
 //            RobotPart.pause(.5),
 //            lift.stageLift(.8,25)
 //    );
 //    AutoModule Drop3rd = new AutoModule(
-//            OUTTAKE_OLD.stageMiddle(.2).attach(OUTTAKE_OLD.stageClose(.2)),
+//            outtake.stageMiddle(.2).attach(outtake.stageClose(.2)),
 //            lift.stageLift(.8,22),
-//            OUTTAKE_OLD.stageEndAuto(.2),
+//            outtake.stageEndAuto(.2),
 //            RobotPart.pause(.5),
-//            OUTTAKE_OLD.stageOpen(.2),
+//            outtake.stageOpen(.2),
 //            RobotPart.pause(.5),
 //            lift.stageLift(.8,25)
 //    );
 //    AutoModule Reset = new AutoModule(
-//            OUTTAKE_OLD.stageStart(1),
+//            outtake.stageStart(1),
+//            lift.stageLift(.6,0)
+//
+//    );
+//
+//    AutoModule dynamicModule = new AutoModule(
+//            outtake.stageStart(colorSensorsNew.exitIntake()),
 //            lift.stageLift(.6,0)
 //
 //    );
