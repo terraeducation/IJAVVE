@@ -16,8 +16,8 @@ public class PixelScannerIntegrate extends Scanner{
 
     double firstLeft;
     double firstRight;
-    String location;
-    ArrayList<String> locations;
+    public static String location;
+    public static ArrayList<String> locations;
     int pixelCount;
     boolean first = true;
     Mat mat = new Mat();
@@ -159,6 +159,7 @@ public class PixelScannerIntegrate extends Scanner{
         telemetry.addData("center val", cValue);
         telemetry.addData("right val", rValue);
 
+
         if (lValue > rValue && lValue > cValue) {
             if (lValue <= rValue + threshold) {
                 locations = new ArrayList<>(
@@ -209,9 +210,10 @@ public class PixelScannerIntegrate extends Scanner{
                 }
             }
         }
-
         telemetry.addData("location", locations.get(0));
     }
+
+    public static String locatnio = locations.get(0);
 
     public void setFirst(boolean f) {
         first = f;

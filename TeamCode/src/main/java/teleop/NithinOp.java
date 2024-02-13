@@ -2,6 +2,7 @@ package teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import static autoutil.vision.PixelScannerIntegrate.locations;
 import static global.General.gph1;
 import static global.General.gph2;
 import static global.General.log;
