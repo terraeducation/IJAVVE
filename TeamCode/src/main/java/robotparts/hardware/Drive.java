@@ -19,11 +19,13 @@ import static global.Modes.Drive.FAST;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.Drive.SUPERSLOW;
+import static global.Modes.Height.GROUND;
 import static global.Modes.OuttakeStatus.DRIVING;
 import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
 import static global.Modes.OuttakeStatus.PLACING2;
 import static global.Modes.driveMode;
+import static global.Modes.heightMode;
 import static global.Modes.outtakeStatus;
 //import static global.Modes.driveMode;
 
@@ -131,7 +133,7 @@ public class Drive extends RobotPart {
         }
     }
     public void newMove(double f, double s, double t) {
-            if(outtakeStatus.modeIs(DRIVING)) {
+            if(heightMode.get() == GROUND) {
 
 
                 fl.setPower(f + s + .55 * t);
@@ -140,13 +142,7 @@ public class Drive extends RobotPart {
                 br.setPower(f + s - .55 * t);
 
 
-            }else if(outtakeStatus.modeIs(INTAKING)){
-                fl.setPower(f + s + .55 * t);
-                bl.setPower(f - s + .55 * t);
-                fr.setPower(f - s - .55 * t);
-                br.setPower(f + s - .55 * t);
-
-    }else{
+            }else{
 
                 fl.setPower(.3 * f + .3 * s + .2 * t);
                 bl.setPower(.3 * f - .3 * s + .2 * t);

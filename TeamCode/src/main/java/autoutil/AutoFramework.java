@@ -28,6 +28,7 @@ import autoutil.reactors.Reactor;
 import autoutil.vision.CaseScanner;
 import autoutil.vision.CaseScannerContours;
 import autoutil.vision.CaseScannerRect;
+import autoutil.vision.PixelScannerIntegrate;
 import autoutil.vision.Scanner;
 //import autoutil.vision.TeamPropScanner;
 import elements.Case;
@@ -70,6 +71,8 @@ public abstract class AutoFramework extends Auto implements AutoUser {
     protected boolean haltCameraAfterInit = true;
     //    public CaseScanner caseScanner;
     protected CaseScannerRect caseScanner;
+
+    protected PixelScannerIntegrate pixelScanner;
 //    protected TeamPropScanner teamPropScanner;
     protected Scanner scannerAfterInit;
     protected Case caseDetected = Case.FIRST;
@@ -80,6 +83,8 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 
     protected Timer timer = new Timer();
     public boolean skipping = false;
+
+    protected String location = "center";
 
     // TOD5 better breakpoint system
 
@@ -139,6 +144,26 @@ public abstract class AutoFramework extends Auto implements AutoUser {
         caseScanner.setColor(color);
         caseScanner.setSide(side);
         caseScanner.start();
+    }
+
+    public String getPixelPose(){
+        if(scanning) {
+            while (!isStopRequested()) {
+                location = pixelScanner.getLocation();
+                pixelScanner.log();
+                log.showTelemetry();
+            }
+        }
+//        location = pixelScanner.getLocation();
+        return location;
+    }
+    public void scanPixel(boolean view, String color){
+        scanning = true;
+        pixelScanner = new PixelScannerIntegrate();
+        camera.start(true);
+        camera.setScanner(pixelScanner);
+//        pix.setColor(color);
+        pixelScanner.start();
     }
 
 //    public void propScanner(boolean view) {

@@ -9,8 +9,8 @@ import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.Height.GROUND;
-import static global.Modes.Height.HIGH;
-import static global.Modes.Height.LOW;
+//import static global.Modes.Height.HIGH;
+//import static global.Modes.Height.LOW;
 import static global.Modes.Height.five;
 import static global.Modes.Height.four;
 import static global.Modes.Height.one;
@@ -140,15 +140,16 @@ public interface AutoModuleUser extends RobotUser {
 
 
     ).setStartCode(() ->{
+        heightMode.set(one);
         outtakeStatus.set(PLACING);
 
     });
 
     AutoModule joyoi = new AutoModule(
-            lift.stageLift(1, heightMode.getValue(heightMode.get()))
+            lift.stageLift(1,  heightMode.getValue(heightMode.get()))
 
     ).setStartCode(() ->{
-
+        heightMode.set(heightMode.get());
 
     });
 

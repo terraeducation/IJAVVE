@@ -4,7 +4,7 @@ import autoutil.generators.Generator;
 import autoutil.generators.LineGen;
 import autoutil.generators.PoseGen;
 import autoutil.reactors.JunctionReact;
-import autoutil.reactors.JunctionReact2;
+//import autoutil.reactors.JunctionReact2;
 import autoutil.reactors.NonstopReact;
 import autoutil.reactors.NStopNewReact;
 import autoutil.reactors.Reactor;
@@ -25,7 +25,7 @@ public interface AutoUser {
     ReturnCodeSeg<autoutil.reactors.PIDReact> PIDReact = reactor(autoutil.reactors.PIDReact.class);
     ReturnCodeSeg<autoutil.reactors.PPReact> PPReact = reactor(autoutil.reactors.PPReact.class);
     ReturnCodeSeg<JunctionReact> mecJunctionReact = reactor(JunctionReact.class);
-    ReturnCodeSeg<JunctionReact2> mecJunctionReact2 = reactor(JunctionReact2.class);
+//    ReturnCodeSeg<JunctionReact2> mecJunctionReact2 = reactor(JunctionReact2.class);
     ReturnCodeSeg<NonstopReact> mecNonstopReact = reactor(NonstopReact.class);
     ReturnCodeSeg<NonstopReact.NonstopReactSP> mecNonstopReactSP = reactor(NonstopReact.NonstopReactSP.class);
     ReturnCodeSeg<NonstopReact.NonstopReactTurnSP> turnReactSP = reactor(NonstopReact.NonstopReactTurnSP.class);
@@ -37,7 +37,7 @@ public interface AutoUser {
 
     AutoSegment<?, ?> DefaultSP = new AutoSegment<>(PIDReact, poseGen);
     AutoSegment<?, ?> JunctionSP = new AutoSegment<>(mecJunctionReact, poseGen);
-    AutoSegment<?, ?> JunctionSP2 = new AutoSegment<>(mecJunctionReact2, poseGen);
+//    AutoSegment<?, ?> JunctionSP2 = new AutoSegment<>(mecJunctionReact2, poseGen);
     AutoSegment<?, ?> DefaultWP = new AutoSegment<>(PPReact, lineGen);
     AutoSegment<?, ?> NonstopWP = new AutoSegment<>(mecNonstopReact, lineGen);
     AutoSegment<?, ?> NonstopSP = new AutoSegment<>(mecNonstopReactSP, lineGen);

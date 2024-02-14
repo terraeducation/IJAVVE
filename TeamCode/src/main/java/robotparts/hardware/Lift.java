@@ -16,9 +16,9 @@ import util.template.Precision;
 
 import static global.General.bot;
 import static global.Modes.Height.GROUND;
-import static global.Modes.Height.HIGH;
-import static global.Modes.Height.LOW;
-import static global.Modes.Height.MIDDLE;
+//import static global.Modes.Height.HIGH;
+//import static global.Modes.Height.LOW;
+//import static global.Modes.Height.MIDDLE;
 import static global.Modes.OuttakeStatus.PLACING;
 import static global.Modes.heightMode;
 import static global.Modes.outtakeStatus;
@@ -134,11 +134,9 @@ public class Lift extends RobotPart {
     public Stage stageLift(double power, double target) {
         return moveTarget(() -> motorRight, () -> motorLeft, power, power, () -> {
             double Lasttarget = target;
-            if (target == heightMode.getValue(LOW) + 2 || target == heightMode.getValue(MIDDLE) + 2 || target == heightMode.getValue(HIGH) + 2) {
-                return target + globalOffset;
-            } else {
+
                 return target;
-            }
+
         }).combine(new Initial(() -> currentCutoffPosition = target < 1 ? defaultCutoffPosition : 0));
     }
 

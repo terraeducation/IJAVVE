@@ -124,8 +124,8 @@ public class NithinOp extends Tele {
         /**
          * lift encoder positions
          */
-//        log.show("Right", lift.motorRight.getPosition());
-//        log.show("Left", lift.motorLeft.getPosition());
+        log.show("Right", lift.motorRight.getPosition());
+        log.show("Left", lift.motorLeft.getPosition());
 
 
         /**
@@ -136,7 +136,11 @@ public class NithinOp extends Tele {
         /**
          * outtake status
          */
-                log.show("outske", outtakeStatus.get());
+//                log.show("outske", outtakeStatus.get());
+        /**
+         * heights
+         */
+        log.show("current height", heightMode.getValue(heightMode.get()));
 
     }
 

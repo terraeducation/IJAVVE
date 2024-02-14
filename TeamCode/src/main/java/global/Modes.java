@@ -19,12 +19,10 @@ public interface Modes {
     Mode outtakeStatus = new Mode(OuttakeStatus.class);
 
 
-    enum Height implements Mode.ModeType {HIGH, MIDDLE, LOW, GROUND, one, two, three, four, five, six, seven}
+    enum Height implements Mode.ModeType {GROUND, one, two, three, four, five, six, seven}
     Mode heightMode = new Mode(Height.class)
 
-            .set(Height.HIGH, 50)
-            .set(Height.MIDDLE, 35)
-            .set(Height.LOW, 15)
+
             .set(Height.GROUND, 0)
             .set(Height.one, 15)
             .set(Height.two, 20)

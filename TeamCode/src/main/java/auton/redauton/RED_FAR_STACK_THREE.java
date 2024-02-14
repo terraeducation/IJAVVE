@@ -1,16 +1,20 @@
 package auton.redauton;
 
+
+import static autoutil.vision.PixelScannerIntegrate.locations;
+import static autoutil.vision.Scanner.RED;
 import static global.General.bot;
+import static global.General.telemetry;
+
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import automodules.AutoModule;
 import autoutil.AutoFramework;
+import autoutil.vision.PixelScannerIntegrate;
 import robotparts.RobotPart;
 
-@Autonomous(name = "REDFAR STACK", group = "auto", preselectTeleOp = "TerraOp")
-
-
+@Autonomous(name = "REDFAR STACK (3)", group = "auto", preselectTeleOp = "TerraOp")
 public class RED_FAR_STACK_THREE extends AutoFramework {
 
 
@@ -28,7 +32,6 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
 
         AutoFramework auto = this;
         auto.scan(true, "red", "left");
-
 
     }
     AutoModule Extake = new AutoModule(
@@ -51,8 +54,7 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
     AutoModule ReadyIntake = new AutoModule(
             outtake.stageLock(.1).attach(outtake.stageStartPivot(.1)),
             intake.stageStart(.1).attach(outtake.stageOpen(.3))
-    ).setStartCode(() ->
-            outtake.moveStart()
+    ).setStartCode(() ->{}
     );
     AutoModule StackIntake = new AutoModule(
 
@@ -91,6 +93,15 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
             lift.stageLift(1, 24).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.5).attach(outtake.stageEndPivot(.4))
+
+
+
+    );
+    AutoModule PreExtend1 = new AutoModule(
+            lift.stageLift(1, 24).attach(outtake.stageThruPivot(.2)),
+
+            outtake.stageEnd(.5).attach(outtake.stageEndPivot(.4)),
+            outtake.stageTransferRotate(.1)
 
 
 
@@ -140,23 +151,99 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
     @Override
     public void define() {
 
+
+
         customCase(() -> {
-            addPause(19);
+
+
             addTimedSetpoint(1.0,.5,1,-3,-45,0);
 
             addTimedSetpoint(1.0,.5,1,-17.5,-70,90);
             addAutoModule(Extake);
-//            addWaypoint(-5,-20,0);
             addTimedSetpoint(1.0,1,.8,-5,-130,90);
-            addWaypoint(-155, -130,90);
-            addAutoModule(PreExtend);
-            addWaypoint(-180, -130,90);
-            addWaypoint(-180,-95.5,90);
+
+
+            addWaypoint(0,-140,90);
+
+            addConcurrentAutoModule(ReadyIntake);
+
+            addTimedSetpoint(1,4,.8,33,-113.5,91);
+//            addPause(1.2);
+
+            addAutoModule(StackIntake);
+            addConcurrentAutoModule(RemovePixels);
+
+            addSegment(1,DefaultWP,0,-120,90);
+            addConcurrentAutoModule(intakereset);
+
+            addSegment(1,DefaultWP,-145,-130,80);
+
+            addConcurrentAutoModule(PreExtend1);
+
+
+
+            addSegment(1,DefaultWP,-180,-90,30);
+
+
+
+            addSegment(1,DefaultWP,-200,-35,75);
+
+
+
+
             addTimedSetpoint(1.0,1,2,-210,-95.5,91);
+            addAutoModule(align);
+            addPause(.2);
+
+
+            addConcurrentAutoModule(Reset);
+
+            //GOES FOR NEXT CYCLE
+            addSegment(1,DefaultWP,-219,-30,90);
+
+
+            addSegment(1,DefaultWP,-175,-90,40);
+            addSegment(1,DefaultWP,-120,-115,90);
+
+
+            addConcurrentAutoModule(ReadyIntake);
+
+
+
+
+
+            addSegment(.7,DefaultWP,-45,-120,90);
+
+
+
+            addSegment(.2,DefaultWP,35,-142,90);
+
+
+
+            addAutoModule(StackIntake2);
+            addConcurrentAutoModule(RemovePixels);
+//            addPause(1.5);
+
+
+            addSegment(1,DefaultWP,0,-120,90);
+
+            addConcurrentAutoModule(intakereset);
+
+            addSegment(1,DefaultWP,-136,-125,80);
+
+            addConcurrentAutoModule(whitePixel);
+
+            addSegment(1,DefaultWP,-170,-90,50);
+            addSegment(1,DefaultWP,-210,-75,90);
+
+            addTimedSetpoint(1,.2,.5,-210,-75,90);
+
 
             addAutoModule(align);
-
-            addAutoModule(Reset);
+            addPause(.2);
+            addConcurrentAutoModule(Reset);
+            addSegment(1,DefaultWP,-190,-120,90);
+            addSegment(1,DefaultWP,-220,-125,90);
 
 
 
@@ -194,6 +281,7 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
         }, () -> {
 
 
+
             addWaypoint(0,-30,0);
             addWaypoint(0,-35,-20);
 
@@ -202,7 +290,6 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
             addAutoModule(Extake);
             addWaypoint(10,-60,-95);
             addWaypoint(0,-140,90);
-
 
             addConcurrentAutoModule(ReadyIntake);
 
@@ -252,15 +339,17 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
 
 
 
-
             addSegment(.7,DefaultWP,-45,-120,90);
 
 
 
             addSegment(.2,DefaultWP,35,-142,90);
 
+
+
             addAutoModule(StackIntake2);
             addConcurrentAutoModule(RemovePixels);
+//            addPause(1.5);
 
 
             addSegment(1,DefaultWP,0,-120,90);
@@ -280,9 +369,25 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
             addAutoModule(align);
             addPause(.2);
             addConcurrentAutoModule(Reset);
-            addSegment(1,DefaultWP,-190,-90,90);
-            addSegment(1,DefaultWP,-200 ,-125,90);
+            addSegment(1,DefaultWP,-190,-120,90);
+            addSegment(1,DefaultWP,-210,-110,90);
+
+
+
+
+
+
+
+
+
 
         });
     }
+    @Override
+    public void postProcess() {
+        autoPlane.reflectY();
+        autoPlane.reflectX();
+    }
+
+
 }

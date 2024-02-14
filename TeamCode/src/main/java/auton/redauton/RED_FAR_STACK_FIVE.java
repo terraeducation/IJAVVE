@@ -2,18 +2,20 @@ package auton.redauton;
 
 
 import static autoutil.vision.PixelScannerIntegrate.locations;
+import static autoutil.vision.Scanner.RED;
 import static global.General.bot;
+import static global.General.telemetry;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import automodules.AutoModule;
 import autoutil.AutoFramework;
+import autoutil.vision.PixelScannerIntegrate;
 import robotparts.RobotPart;
 
-@Autonomous(name = "REDFAR STACK", group = "auto", preselectTeleOp = "TerraOp")
+@Autonomous(name = "REDFAR STACK (5)", group = "auto", preselectTeleOp = "TerraOp")
 public class RED_FAR_STACK_FIVE extends AutoFramework {
-        String locationz = String.valueOf(locations);
 
 
     @Override
@@ -30,7 +32,7 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
 
         AutoFramework auto = this;
         auto.scan(true, "red", "left");
-
+        setScannerAfterInit(pixelScanner);
 
     }
     AutoModule Extake = new AutoModule(
@@ -53,8 +55,7 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
     AutoModule ReadyIntake = new AutoModule(
             outtake.stageLock(.1).attach(outtake.stageStartPivot(.1)),
             intake.stageStart(.1).attach(outtake.stageOpen(.3))
-    ).setStartCode(() ->
-            outtake.moveStart()
+    ).setStartCode(() ->{}
     );
     AutoModule StackIntake = new AutoModule(
 
@@ -141,6 +142,10 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
     //TODO MAKE DISTANCE SENSOR ADJUST Y COORDINATE
     @Override
     public void define() {
+        AutoFramework auto = this;
+
+        auto.scanPixel(true, "red");
+
 
         customCase(() -> {
             addPause(19);
@@ -196,6 +201,7 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
         }, () -> {
 
 
+
             addWaypoint(0,-30,0);
             addWaypoint(0,-35,-20);
 
@@ -204,7 +210,6 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
             addAutoModule(Extake);
             addWaypoint(10,-60,-95);
             addWaypoint(0,-140,90);
-
 
             addConcurrentAutoModule(ReadyIntake);
 
@@ -249,8 +254,8 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
 
 
             addConcurrentAutoModule(ReadyIntake);
-            addBreakpoint(() -> locationz.equals("left"));
-            addBreakpoint(() -> locationz.equals("center"));
+            addBreakpoint(() -> getPixelPose().equals("left"));
+            addBreakpoint(() -> getPixelPose().equals("center"));
 
 
 
@@ -263,8 +268,8 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
             addSegment(.2,DefaultWP,35,-142,90);
             addBreakpointReturn();
 
-            addBreakpoint(() -> locationz.equals("right"));
-            addBreakpoint(() -> locationz.equals("center"));
+            addBreakpoint(() -> getPixelPose().equals("right"));
+            addBreakpoint(() -> getPixelPose().equals("center"));
             addSegment(.7,DefaultWP,-45,-120,90);
 
 
@@ -272,8 +277,8 @@ public class RED_FAR_STACK_FIVE extends AutoFramework {
             addSegment(.2,DefaultWP,35,-100,90);
             addBreakpointReturn();
 
-            addBreakpoint(() -> locationz.equals("right"));
-            addBreakpoint(() -> locationz.equals("left"));
+            addBreakpoint(() -> getPixelPose().equals("right"));
+            addBreakpoint(() -> getPixelPose().equals("left"));
             addSegment(.7,DefaultWP,-45,-120,90);
 
 
