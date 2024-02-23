@@ -110,6 +110,8 @@ public class GamepadHandler {
     public void link(Button b, Machine machine, Modes.GamepadMode mode){ link(b, () -> bot.addMachine(machine), mode);}
     public void link(Button b, CodeSeg codeSeg, Modes.GamepadMode mode) { link(b, OnPressEventHandler.class, codeSeg, mode); }
     public void link(Button b, ReturnCodeSeg<Boolean> condition, AutoModule one, AutoModule two){ link(b, () -> {if(condition.run()){bot.addAutoModule(one);}else{bot.addAutoModule(two);}}); }
+    public void link(Button b, ReturnCodeSeg<Boolean> condition, ReturnCodeSeg<Boolean> condition2, AutoModule one, AutoModule two){ link(b, () -> {if(condition.run()){bot.addAutoModule(one);}if(condition2.run()){bot.addAutoModule(two);}}); }
+
     public void link(Button b, ReturnCodeSeg<Boolean> condition, CodeSeg one, CodeSeg two){ link(b, () -> {if(condition.run()){one.run();}else{two.run();}});}
     public void link(Button b, ReturnCodeSeg<Boolean> conditionOne, CodeSeg one, ReturnCodeSeg<Boolean> conditionTwo, CodeSeg two, CodeSeg three){ link(b, () -> {if(conditionOne.run()){one.run();}else if(conditionTwo.run()){two.run();}else{three.run();}}); }
     public void link(Button b, ReturnCodeSeg<Boolean> conditionOne, AutoModule one, ReturnCodeSeg<Boolean> conditionTwo, AutoModule two, AutoModule three){ link(b, conditionOne, () -> bot.addAutoModuleWithCancel(one), conditionTwo, () -> bot.addAutoModuleWithCancel(two),() -> bot.addAutoModuleWithCancel(three));}

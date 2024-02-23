@@ -79,9 +79,11 @@ public class Outtake extends RobotPart {
 
 
         rotate.addPosition("start", .435);
-        rotate.addPosition("transfer", .26);
-        rotate.addPosition("angleleft", .65);
+        rotate.addPosition("transfer", .20);
+        rotate.addPosition("angleleft", .69);
         rotate.addPosition("stack", 0.079);
+        rotate.addPosition("flipstack", 0.79);
+
 
 
 
@@ -119,6 +121,9 @@ public class Outtake extends RobotPart {
     public void moveTransferRotate(){ rotate.setPosition("transfer");}
     public void moveLeftRotate(){ rotate.setPosition("angleleft");}
     public void moveStackRotate(){ rotate.setPosition("stack");}
+    public void moveflipStackRotate(){ rotate.setPosition("flipstack");}
+
+
 
 
 
@@ -169,6 +174,8 @@ public class Outtake extends RobotPart {
     public Stage stageTransferRotate(double t) {return super.customTime(this::moveTransferRotate, t);}
     public Stage stageStartRotate(double t) {return super.customTime(this::moveStartRotate, t);}
     public Stage stageStackRotate(double t) {return super.customTime(this::moveStackRotate, t);}
+    public Stage stageflipStackRotate(double t) {return super.customTime(this::moveflipStackRotate, t);}
+
     public Stage stageLeftRotate(double t) {return super.customTime(this::moveLeftRotate, t);}
 
 

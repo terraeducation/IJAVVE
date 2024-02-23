@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Autonomous(name = "PixelHSV", group = "auto")
+//@Autonomous(name = "PixelHSV", group = "auto")
 public class PixelScannerHSV extends LinearOpMode {
     @Override
     public void runOpMode() {

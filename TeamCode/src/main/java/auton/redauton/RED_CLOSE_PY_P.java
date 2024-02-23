@@ -26,12 +26,11 @@ public class RED_CLOSE_PY_P extends AutoFramework {
     AutoModule ExtakeandLift = new AutoModule(
 
             intake.stageStart(.2),
-            RobotPart.pause(.1),
             intake.stageInit(.2),
             lift.stageLift(1, 13).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
-            outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
+            outtake.stageEndPivot(.2).attach(outtake.stageflipStackRotate(.2))
 
     );
 
@@ -45,15 +44,19 @@ public class RED_CLOSE_PY_P extends AutoFramework {
     AutoModule Reset = new AutoModule(
 
             outtake.stageOpen(.1),
+            outtake.stageTransferPivot(.2).attach(outtake.stageMiddle(.2)),
+            outtake.stageStartRotate(.05).attach(outtake.stageLock(.1)),
             outtake.stageTransferPivot(.2).attach(outtake.stageStart(.2)),
+
             outtake.stageStartRotate(.05),
-
-            outtake.stageThruPivot(.1).attach(lift.stageLift(1,0)),
-            outtake.stageDownPivot(.1).attach(outtake.stageLock(.1))
-
+            outtake.stageDownPivot(.3).attach(lift.stageLift(1,0))
     );
     AutoModule align = new AutoModule(
-            drive.driveSmart(-.3,0,0)
+            drive.driveSmart(-.18,0,0)
+    );
+
+    AutoModule alignCloser = new AutoModule(
+            drive.drivecloseSmart(-.18,0,0)
     );
     @Override
     public void define() {
@@ -61,56 +64,59 @@ public class RED_CLOSE_PY_P extends AutoFramework {
             addWaypoint(0,-30,0);
             addWaypoint(0,-50,20);
 
-            addTimedSetpoint(1.0,.5,1,5,-70,90);
+            addTimedSetpoint(1.0,.5,1,2,-58,90);
 
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,.5,1,-40,-74,91);
+            addTimedSetpoint(1.0,.5,1,-40,-74,90);
 
-            addTimedSetpoint(1.0,.5,.7,-70,-85,91);
-            addAutoModule(align);
+            addTimedSetpoint(1.0,.5,.7,-60,-80,90);
+            addAutoModule(alignCloser);
             addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-15,0);
-            addTimedSetpoint(1.0,.5,1.5,-80,-10,90);
+            addTimedSetpoint(1.0,.5,1.5,-100,-10,90);
 
 
 
         }, () -> {
 
             addWaypoint(-20,-80,0);
-            addTimedSetpoint(1.0,.5,1,-40,-102,91);
+addSegment(.3,DefaultWP, -47,-85,91);
+            addTimedSetpoint(1.0,.5,1,-40,-82,91);
+
+
 
 
             addAutoModule(ExtakeandLift);
-            addTimedSetpoint(1.0,.5,1,-60,-74,90);
+            addTimedSetpoint(1.0,.5,1,-50,-67.5,90);
 
-            addTimedSetpoint(1.0,.5,1,-70,-74,90    );
+            addTimedSetpoint(1.0,.5,.2,-60,-67.5,90    );
             addAutoModule(align);
             addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-9,0);
-            addTimedSetpoint(1.0,.5,1.3,-90,-10,90);
+            addTimedSetpoint(1.0,.5,1.3,-100,-10,90);
 
 
         }, () -> {
             addWaypoint(-30,-30,0);
 
-            addTimedSetpoint(1.0,.5,1,-47,-60,90);
+            addTimedSetpoint(1.0,.5,1,-50,-52,90);
 
 
             addAutoModule(ExtakeandLift);
 
 
 
-            addTimedSetpoint(1.0,.5,2,-60,-60.5,90);
+            addTimedSetpoint(1.0,.5,1,-60,-50,90);
 
-            addTimedSetpoint(1.0,.5,.8,-70,-51,95);
+            addTimedSetpoint(1.0,.5,.4,-70,-50,95);
             addAutoModule(align);
             addPause(.1);
             addAutoModule(Reset);
             addWaypoint(-60,-20,0);
-            addTimedSetpoint(1.0,.5,1,-90,-10,90);
+            addTimedSetpoint(1.0,.5,1,-100,-10,90);
         });
     }
     @Override

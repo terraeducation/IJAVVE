@@ -19,7 +19,8 @@ public interface Modes {
     Mode outtakeStatus = new Mode(OuttakeStatus.class);
 
 
-    enum Height implements Mode.ModeType {GROUND, one, two, three, four, five, six, seven}
+    enum Height implements Mode.ModeType {GROUND, one, two, three, four, five, six, seven, currentHeight}
+
     Mode heightMode = new Mode(Height.class)
 
 
@@ -31,6 +32,11 @@ public interface Modes {
             .set(Height.five, 45)
             .set(Height.six, 50)
             .set(Height.seven, 57);
+
+
+
+    Mode current = new Mode(Height.class)
+            .set(Height.currentHeight, heightMode.getValue(heightMode.get()));
 
 
 

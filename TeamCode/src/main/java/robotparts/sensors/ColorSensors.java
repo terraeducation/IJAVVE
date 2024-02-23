@@ -51,6 +51,14 @@ public class ColorSensors extends RobotPart {
 
     }
 
+    public GameElement isoneObject(){
+        if (cso1.alpha() > 500 || cso2.alpha() > 500){
+            return GameElement.PIXEL1;
+        }else{
+            return GameElement.NONE;
+        }
+
+    }
 
     public GameElement isObjectGone(){
         if (cso1.alpha() < 500 && cso2.alpha() < 500){
@@ -60,14 +68,22 @@ public class ColorSensors extends RobotPart {
         }
 
     }
+
+
     public boolean isPixel1(){
         return isObject().equals(GameElement.PIXEL1);
     }
+    public boolean isPixel(){
+        return isoneObject().equals(GameElement.PIXEL1);
+    }
+
     public boolean isPixelGone(){
         return isObjectGone().equals(GameElement.PIXELGONE);
     }
 
     public Exit exitIntake(){return new Exit(this::isPixel1);}
+    public Exit exitIntake2(){return new Exit(this::isPixel);}
+
     public Exit exitExtake(){return new Exit(this::isPixelGone);}
 
 

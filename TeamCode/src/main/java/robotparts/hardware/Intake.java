@@ -40,15 +40,15 @@ public class Intake extends RobotPart {
 
 //        hang = create("hang", ElectronicType.CMOTOR_FORWARD);
 
-        link.changePosition("init", .15);
-        link.changePosition("start", .66);
-        link.changePosition("middle", .50);
-        link.changePosition("middler", .28);
+        link.changePosition("init", .33);
+        link.changePosition("start", .64);
+        link.changePosition("middle", .62);
+        link.changePosition("middler", .53);
 
-        link2.changePosition("init", .15);
-        link2.changePosition("start", .66    );
-        link2.changePosition("middle", .50);
-        link2.changePosition("middler", .28);
+        link2.changePosition("init", .33);
+        link2.changePosition("start", .61);
+        link2.changePosition("middle", .62);
+        link2.changePosition("middler", .57);
 
     }
 
@@ -98,14 +98,42 @@ public class Intake extends RobotPart {
         return null;
     }
 
-    public Stage moveSmart(double p){
-            return super.customExit(p, colorSensorsNew.exitIntake());
+    public Stage moveSmart(double p, Exit exit2){
+            return super.customTwoExit(p, exit2, colorSensorsNew.exitIntake());
 
 
 
 
 
     }
+    public Stage moveSmart2(double p){
+        return super.customExit(p, colorSensorsNew.exitIntake());
+
+
+
+
+
+    }
+
+
+    public Stage moveOneSmart2(double p, Exit exit){
+        return super.customExit(p, colorSensorsNew.exitIntake2());
+
+
+
+
+
+    }
+
+    public Stage moveOneSmart(double p){
+        return super.customExit(p, colorSensorsNew.exitIntake2());
+
+
+
+
+
+    }
+
 
 //    public Stage stopSmart(){
 //        return

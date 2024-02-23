@@ -3,6 +3,7 @@ package robotparts.hardware;
 import static java.lang.Math.abs;
 
 import automodules.AutoModule;
+import automodules.stage.Exit;
 import automodules.stage.Stage;
 import geometry.position.Vector;
 import math.misc.Logistic;
@@ -18,15 +19,9 @@ import static global.General.bot;
 import static global.Modes.Drive.FAST;
 import static global.Modes.Drive.MEDIUM;
 import static global.Modes.Drive.SLOW;
-import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.Height.GROUND;
-import static global.Modes.OuttakeStatus.DRIVING;
-import static global.Modes.OuttakeStatus.INTAKING;
-import static global.Modes.OuttakeStatus.PLACING;
-import static global.Modes.OuttakeStatus.PLACING2;
 import static global.Modes.driveMode;
 import static global.Modes.heightMode;
-import static global.Modes.outtakeStatus;
 //import static global.Modes.driveMode;
 
 public class Drive extends RobotPart {
@@ -249,8 +244,15 @@ public class Drive extends RobotPart {
     public Stage moveTime(double fp, double sp, double tp, ReturnCodeSeg<Double> t) {
         return super.moveTime(fp, sp, tp, t);
     }
-
     public Stage driveSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitDrive());
+    }
+
+    public Stage drivecloseSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitDrive());
+    }
+
+    public Stage driveSmart2(double fp, double sp, double tp, Exit exit2){
         return super.moveCustomExit(fp, sp, tp, distanceSensorsNew.exitDrive());
     }
     public Stage strafeSmart(double fp, double sp, double tp){
@@ -267,7 +269,17 @@ public class Drive extends RobotPart {
     public Stage intakeSmart(double fp, double sp, double tp){
         return super.moveCustomExit(fp, sp, tp, colorSensorsNew.exitIntake());
     }
+    public Stage intakeSmart2(double fp, double sp, double tp, Exit exit){
+        return super.moveCustomTwoExit(fp, sp, tp, exit, colorSensorsNew.exitIntake());
+    }
 
+    public Stage intakeoneSmart(double fp, double sp, double tp){
+        return super.moveCustomExit(fp, sp, tp, colorSensorsNew.exitIntake2());
+    }
+
+    public Stage intakeoneSmart2(double fp, double sp, double tp, Exit exit){
+        return super.moveCustomTwoExit(fp, sp, tp, exit, colorSensorsNew.exitIntake2());
+    }
     @Override
     public AutoModule MoveTime(double fp, double sp, double tp, double t) {
         return super.MoveTime(fp, sp, tp, t);
