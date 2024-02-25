@@ -15,8 +15,8 @@ import util.Timer;
 @Autonomous(name = "REDCLOSE STAGE (4)", group = "auto", preselectTeleOp = "TerraOp")
 public class RED_CLOSE_STACK_FOUR extends AutoFramework {
     Timer time = new Timer();
-    public boolean timeout(){return time.seconds() > 12;}
-    public boolean timeout2(){return time.seconds() > 27;}
+    public boolean timeout(){return time.seconds() > 14;}
+    public boolean timeout2(){return time.seconds() > 25.5;}
 
 
     public Exit exitIntake(){return new Exit(this::timeout);}
@@ -316,7 +316,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
 
             addSegment(1,DefaultWP,-60,-90,50);
 
-            addTimedSetpoint(1,.2,.5,-60,-61,88);
+            addTimedSetpoint(1,.2,.5,-60,-74,88);
 
 
             addAutoModule(align);
@@ -326,7 +326,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
 
 
             addSegment(1,DefaultWP,-80,-90,40);
-            addBreakpoint(()-> time.seconds() > 25);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
             addSegment(1,DefaultWP,-60,-125,90);
 
@@ -342,7 +342,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
 
 
 
-            addSegment(.2,DefaultWP,189.5,-125,90);
+            addSegment(.2,DefaultWP,189.5,-123,90);
 
             addAutoModule(StackIntake2);
 
@@ -356,15 +356,15 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
             addConcurrentAutoModule(intakereset);
 
             addSegment(1,DefaultWP,-15,-125,80);
-            addBreakpoint(()-> time.seconds() < 27);
-            addSegment(1,DefaultWP,-50,-125,90);
+            addBreakpoint(()-> time.seconds() < 25.5);
+            addSegment(1,DefaultWP,-50,125,90);
             addAutoModule(PreExtend);
             addPause(.1);
 
             addAutoModule(Reset);
             addBreakpointReturn();
 
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
 
 
@@ -373,7 +373,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
 
             addSegment(1,DefaultWP,-60,-90,50);
 
-            addTimedSetpoint(1,.2,.5,-75,-63,88);
+            addTimedSetpoint(1,.2,.5,-75,-74,88);
 
 
             addAutoModule(align);
@@ -456,7 +456,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
 
 
             addSegment(1,DefaultWP,-80,-90,40);
-            addBreakpoint(()-> time.seconds() > 25);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
             addSegment(1,DefaultWP,-60,-125,90);
 
@@ -486,14 +486,14 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
             addConcurrentAutoModule(intakereset);
 
             addSegment(1,DefaultWP,-15,-125,80);
-            addBreakpoint(()-> time.seconds() < 27);
+            addBreakpoint(()-> time.seconds() < 25.5);
             addSegment(1,DefaultWP,-50,-125,90);
             addAutoModule(PreExtend);
 
             addAutoModule(Reset);
             addBreakpointReturn();
 
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
 
 
@@ -584,7 +584,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
 
 
             addSegment(1,DefaultWP,-80,-90,40);
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
             addSegment(1,DefaultWP,-60,-125,90);
 
@@ -614,7 +614,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
             addConcurrentAutoModule(intakereset);
 
             addSegment(1,DefaultWP,-15,-125,80);
-            addBreakpoint(()-> time.seconds() < 27);
+            addBreakpoint(()-> time.seconds() < 25.5);
             addSegment(1,DefaultWP,-50,-125,90);
             addAutoModule(PreExtend);
             addPause(.1);
@@ -622,7 +622,7 @@ public class RED_CLOSE_STACK_FOUR extends AutoFramework {
             addAutoModule(Reset);
             addBreakpointReturn();
 
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
 
 

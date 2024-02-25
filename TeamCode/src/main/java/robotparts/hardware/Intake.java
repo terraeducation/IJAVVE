@@ -41,12 +41,12 @@ public class Intake extends RobotPart {
 //        hang = create("hang", ElectronicType.CMOTOR_FORWARD);
 
         link.changePosition("init", .33);
-        link.changePosition("start", .64);
+        link.changePosition("start", .63);
         link.changePosition("middle", .62);
         link.changePosition("middler", .53);
 
         link2.changePosition("init", .33);
-        link2.changePosition("start", .61);
+        link2.changePosition("start", .62);
         link2.changePosition("middle", .62);
         link2.changePosition("middler", .57);
 
@@ -83,7 +83,7 @@ public class Intake extends RobotPart {
 
     public void chubramani(){
 
-        drone.setPower(1);
+        drone.setPower(-1);
 //        log.show("mission failed");
 
     }

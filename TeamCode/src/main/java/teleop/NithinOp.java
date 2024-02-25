@@ -24,8 +24,8 @@ public class NithinOp extends Tele {
     public void initTele() {
         voltageScale = 1;
 
-        gph1.link(LEFT_BUMPER, L_BUMPER);
-        gph1.link(RIGHT_BUMPER, R_BUMPER);
+        gph1.link(LEFT_BUMPER, R_BUMPER);
+        gph1.link(RIGHT_BUMPER, L_BUMPER);
         gph1.linkWithCancel(RIGHT_TRIGGER, outtakeStatus.isMode(DRIVING), X_BUTTON, L_TRIGGER);
         gph1.linkWithCancel(LEFT_TRIGGER, driveMode.isMode(SLOW), R_TRIGGER, CancelIntake);
         gph1.linkWithCancel(LEFT_STICK_BUTTON,  driveMode.isMode(SLOW), IntakeMid, CancelIntake);
@@ -75,13 +75,12 @@ public class NithinOp extends Tele {
         intake.moveInit();
         driveMode.set(SLOW);
         outtakeStatus.set(DRIVING);
-        lift.reset();
+
 
     }
 
     @Override
     public void startTele() {
-        lift.reset();
 
 
     }
@@ -126,8 +125,8 @@ public class NithinOp extends Tele {
         /**
          * lift encoder positions
          */
-//        log.show("Right", lift.motorRight.getPosition());
-//        log.show("Left", lift.motorLeft.getPosition());
+        log.show("Right", lift.motorRight.getPosition());
+        log.show("Left", lift.motorLeft.getPosition());
 
 
         /**

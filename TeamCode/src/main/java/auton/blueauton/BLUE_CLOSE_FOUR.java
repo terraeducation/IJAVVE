@@ -14,7 +14,7 @@ import util.Timer;
 public class BLUE_CLOSE_FOUR extends AutoFramework {
     Timer time = new Timer();
     public boolean timeout(){return time.seconds() > 14;}
-    public boolean timeout2(){return time.seconds() > 27;}
+    public boolean timeout2(){return time.seconds() > 25.5;}
 
 
     public Exit exitIntake(){return new Exit(this::timeout);}
@@ -181,7 +181,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
 
     );
     AutoModule align = new AutoModule(
-            drive.strafeSmart(0,-0.6,0),
+            drive.strafeSmart(0,0.6,0),
             drive.driveSmart(-.25,0,0)
     );
     AutoModule lock = new AutoModule(
@@ -266,7 +266,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
 
             addTimedSetpoint(1.0,.5,1,60,-55,-90);
 
-            addTimedSetpoint(1.0,.5,.4,70,-55,-95);
+            addTimedSetpoint(1.0,.5,.4,70,-57.5,-95);
             addAutoModule(alignCloser);
             addPause(.1);
             addAutoModule(Reset);
@@ -324,7 +324,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
 
 
             addSegment(1,DefaultWP,80,-90,-40);
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
             addSegment(1,DefaultWP,60,-125,-90);
 
@@ -354,7 +354,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
             addConcurrentAutoModule(intakereset);
 
             addSegment(1,DefaultWP,15,-125,-80);
-            addBreakpoint(()-> time.seconds() < 27);
+            addBreakpoint(()-> time.seconds() < 25.5);
             addSegment(1,DefaultWP,50,-125,-90);
             addAutoModule(PreExtend);
             addPause(.1);
@@ -362,7 +362,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
             addAutoModule(Reset);
             addBreakpointReturn();
 
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
 
 
@@ -454,7 +454,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
 
 
             addSegment(1,DefaultWP,80,-90,-40);
-            addBreakpoint(()-> time.seconds() > 25);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
             addSegment(1,DefaultWP,60,-125,-90);
 
@@ -491,7 +491,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
             addAutoModule(Reset);
             addBreakpointReturn();
 
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
 
 
@@ -580,7 +580,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
 
 
             addSegment(1,DefaultWP,80,-90,-40);
-            addBreakpoint(()-> time.seconds() > 25);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
             addSegment(1,DefaultWP,60,-125,-90);
 
@@ -596,7 +596,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
 
 
 
-            addSegment(.2,DefaultWP,-189.5,-125,-90);
+            addSegment(.2,DefaultWP,-189.5,-123,-90);
 
             addAutoModule(StackIntake2);
 
@@ -610,7 +610,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
             addConcurrentAutoModule(intakereset);
 
             addSegment(1,DefaultWP,15,-125,-80);
-            addBreakpoint(()-> time.seconds() < 27);
+            addBreakpoint(()-> time.seconds() < 25.5);
             addSegment(1,DefaultWP,50,-125,-90);
             addAutoModule(PreExtend);
             addPause(.1);
@@ -618,7 +618,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
             addAutoModule(Reset);
             addBreakpointReturn();
 
-            addBreakpoint(()-> time.seconds() > 27);
+            addBreakpoint(()-> time.seconds() > 25.5);
 
 
 
@@ -627,7 +627,7 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
 
             addSegment(1,DefaultWP,60,-90,-50);
 
-            addTimedSetpoint(1,.2,.5,75,-63,-88);
+            addTimedSetpoint(1,.2,.5,75,-75,-88);
 
 
             addAutoModule(align);

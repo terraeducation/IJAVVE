@@ -44,7 +44,7 @@ public interface AutoModuleUser extends RobotUser {
     });
 
     AutoModule chubramani = new AutoModule(
-            intake.chubramani(.1)
+            intake.chubramani(.5)
     ).setStartCode(() ->{
 
     });
@@ -137,7 +137,7 @@ public interface AutoModuleUser extends RobotUser {
             outtake.stageClose(.1),
             lift.stageLift(1, 15).attach(outtake.stageThruPivot(.2)),
 
-            outtake.stageEnd(.4).attach(outtake.stageTransferPivot(.4)),
+            outtake.stageEnd(.2).attach(outtake.stageTransferPivot(.2)),
             outtake.stageEndPivot(.2).attach(outtake.stageStartRotate(.2))
 
 

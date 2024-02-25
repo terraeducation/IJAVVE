@@ -270,7 +270,7 @@ public class BLUE_CLOSE_TWO extends AutoFramework {
 
             addTimedSetpoint(1.0,.5,1,60,-55,-90);
 
-            addTimedSetpoint(1.0,.5,.4,70,-55,-95);
+            addTimedSetpoint(1.0,.5,.4,70,-57.5,-95);
             addAutoModule(alignCloser);
             addPause(.1);
             addAutoModule(Reset);
@@ -465,7 +465,7 @@ public class BLUE_CLOSE_TWO extends AutoFramework {
 
             addSegment(1,DefaultWP,60,-90,-50);
 
-            addTimedSetpoint(1,.2,.5,75,-63,-88);
+            addTimedSetpoint(1,.2,.5,75,-75,-88);
 
 
             addAutoModule(align);

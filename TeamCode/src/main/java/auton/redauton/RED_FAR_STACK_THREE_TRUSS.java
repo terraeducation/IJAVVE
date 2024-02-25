@@ -14,7 +14,7 @@ import util.Timer;
 
 public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
     Timer time = new Timer();
-    public boolean timeout(){return time.seconds() > 14;}
+    public boolean timeout(){return time.seconds() > 12;}
 
     public Exit exitIntake(){return new Exit(this::timeout);}
 
@@ -50,7 +50,7 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
 
 
     AutoModule align = new AutoModule(
-            drive.strafeSmart(0,-0.6,0),
+            drive.strafeSmart(0,0.6,0),
             drive.driveSmart(-.2,0,0)
     );
 
@@ -84,7 +84,7 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
 //            drive.moveTime(0,-0.02,0,.3),
 
 
-            intake.moveSmart(-.6, exitIntake()).attach(drive.intakeSmart2(0.074,0.03,0.0, exitIntake())),
+            intake.moveSmart(-.57, exitIntake()).attach(drive.intakeSmart2(0.068,0.03,0.0, exitIntake())),
             intake.moveTime(-0.8, .2),
             outtake.stageClose(.3).attach(outtake.stageBetterLock(.3)),
             intake.moveTime(.8,.3)
@@ -340,7 +340,7 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addConcurrentAutoModule(PreExtend1);
 
 
-            addTimedSetpoint(1,.8,1,-200,-46 ,100);
+            addTimedSetpoint(1,.8,1,-200,-49 ,100);
             addAutoModule(align);
 
             addAutoModule(Reset);
@@ -442,7 +442,7 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addConcurrentAutoModule(ReadyIntake);
             addTimedSetpoint(1,.5,.5,20,-60,82);
 
-            addTimedSetpoint(1,.5,1,45,-60,82);
+            addTimedSetpoint(1,.5,1,46,-60,82);
 
             addAutoModule(lock);
 
@@ -534,7 +534,7 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
 
 
             addSegment(.8,DefaultWP, -170, -40 , 90);
-            addTimedSetpoint(1,.8,1,-200,-62,90);
+            addTimedSetpoint(1,.8,1,-200,-60,90);
             addAutoModule(align);
             addAutoModule(open2);
             addAutoModule(open1);
@@ -554,7 +554,7 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addSegment(.6,DefaultWP, 5, -18 , 50);
 
 
-            addTimedSetpoint(1,.5,1,35,-60,82);
+            addTimedSetpoint(1,.5,1,38,-60,82);
 
             addAutoModule(StackIntake3);
             addConcurrentAutoModule(RemovePixels);

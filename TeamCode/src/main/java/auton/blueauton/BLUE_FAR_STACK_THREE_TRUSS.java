@@ -85,7 +85,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
 //            drive.moveTime(0,-0.02,0,.3),
 
 
-            intake.moveSmart(-.6, exitIntake()).attach(drive.intakeSmart2(0.074,-0.03,0.0, exitIntake())),
+            intake.moveSmart(-.57, exitIntake()).attach(drive.intakeSmart2(0.07,-0.03,0.0, exitIntake())),
             intake.moveTime(-0.8, .2),
             outtake.stageClose(.3).attach(outtake.stageBetterLock(.3)),
             intake.moveTime(.8,.3)
@@ -250,7 +250,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
 
 
         customCase(() -> {
-            addTimedSetpoint(1.0,.5,1,10,-40,60);
+            addTimedSetpoint(1.0,.5,1,10,-45,65);
 
 
             addAutoModule(Extake);
@@ -279,7 +279,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
 
 
             addSegment(.8,DefaultWP, 170, -40 , -90);
-            addTimedSetpoint(1,.8,1,200,-62,-90);
+            addTimedSetpoint(1,.8,1,200,-57,-90);
             addAutoModule(align);
             addAutoModule(open2);
             addAutoModule(open1);
@@ -299,7 +299,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addSegment(.6,DefaultWP, -5, -18 , -50);
 
 
-            addTimedSetpoint(1,.5,1,-42,-60,-82);
+            addTimedSetpoint(1,.5,1,-44,-60,-82);
 
             addAutoModule(StackIntake3);
             addConcurrentAutoModule(RemovePixels);
@@ -327,7 +327,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addConcurrentAutoModule(ReadyIntake);
             addTimedSetpoint(1,.5,.5,-20,-60,-82);
 
-            addTimedSetpoint(1,.5,1,-45,-60,-82);
+            addTimedSetpoint(1,.5,.8,-51.5,-60,-82);
 
             addAutoModule(lock);
 
@@ -366,7 +366,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addSegment(.6,DefaultWP, -5, -18 , -50);
 
 
-            addTimedSetpoint(1,.5,1,-43,-60,-82);
+            addTimedSetpoint(1,.5,1,-44,-60,-82);
 
             addAutoModule(StackIntake3);
             addConcurrentAutoModule(RemovePixels);
@@ -390,7 +390,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
 
         }, () -> {
 
-            addTimedSetpoint(1.0,.5,1,-2,-30,0);
+            addTimedSetpoint(1.0,.5,1,-3.5,-30,0);
 
             addAutoModule(Extake);
             addWaypoint(0,-20,-90);
@@ -401,7 +401,7 @@ public class BLUE_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addSegment(.8,DefaultWP,-25,-30,-60);
             addSegment(.4,DefaultWP,-30,-54,-82);
 
-            addTimedSetpoint(1,.5,1,-47,-64,-82);
+            addTimedSetpoint(1,.5,1,-51.5,-64,-82);
             addAutoModule(lock);
 
             addSegment(.4,DefaultWP,-35,-30,-30);
