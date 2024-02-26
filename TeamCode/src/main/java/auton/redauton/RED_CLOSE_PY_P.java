@@ -27,7 +27,7 @@ public class RED_CLOSE_PY_P extends AutoFramework {
 
             intake.stageStart(.2),
             intake.stageInit(.2),
-            lift.stageLift(1, 13).attach(outtake.stageThruPivot(.2)),
+            lift.stageLift(1, 15).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageflipStackRotate(.2))
@@ -102,7 +102,7 @@ addSegment(.3,DefaultWP, -47,-85,91);
         }, () -> {
             addWaypoint(-30,-30,0);
 
-            addTimedSetpoint(1.0,.5,1,-50,-52,90);
+            addTimedSetpoint(1.0,.5,1,-48,-52,90);
 
 
             addAutoModule(ExtakeandLift);

@@ -42,7 +42,7 @@ public class RED_FAR_PYP extends AutoFramework {
     );
 
     AutoModule PreExtend = new AutoModule(
-            lift.stageLift(1, 21).attach(outtake.stageThruPivot(.2)),
+            lift.stageLift(1, 19.5).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageflipStackRotate(.2))
@@ -96,7 +96,7 @@ public class RED_FAR_PYP extends AutoFramework {
             addPause(21);
             addWaypoint(30,-30,0);
 
-            addTimedSetpoint(1.0,.5,1,27,-98,-95);
+            addTimedSetpoint(1.0,.5,1,27,-95.5,-95);
 
 
             addAutoModule(Extake);

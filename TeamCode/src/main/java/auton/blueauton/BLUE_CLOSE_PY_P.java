@@ -27,7 +27,7 @@ public class BLUE_CLOSE_PY_P extends AutoFramework {
 
             intake.stageStart(.2),
             intake.stageInit(.2),
-            lift.stageLift(1, 13).attach(outtake.stageThruPivot(.2)),
+            lift.stageLift(1, 15).attach(outtake.stageThruPivot(.2)),
 
             outtake.stageEnd(.3).attach(outtake.stageTransferPivot(.3)),
             outtake.stageEndPivot(.2).attach(outtake.stageStackRotate(.2))
