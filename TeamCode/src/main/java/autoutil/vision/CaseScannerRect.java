@@ -26,14 +26,14 @@ public class CaseScannerRect extends Scanner {
     protected final TeamProp[] cases = new TeamProp[]{TeamProp.FIRST, TeamProp.SECOND, TeamProp.THIRD};
     protected final TeamProp[] pastCases = new TeamProp[5];
     { Arrays.fill(pastCases, caseDetected); }
-
+//
     String color;
     String side;
     int index;
     double leftAvgFin;
     double centerAvgFin;
     double rightAvgFin;
-    final private int threshhold = 134; //TODO change threshold at event
+    final private int threshhold = 134;
     Rect notSeen;
 
     //    public int getCase(Mat input, String color) {

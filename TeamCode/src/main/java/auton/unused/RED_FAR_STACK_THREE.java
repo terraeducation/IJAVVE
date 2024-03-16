@@ -230,7 +230,6 @@ public class RED_FAR_STACK_THREE extends AutoFramework {
             outtake.stageDownPivot(.3).attach(lift.stageLift(1,0))
 
     );
-    //TODO MAKE DISTANCE SENSOR ADJUST Y COORDINATE
     @Override
     public void define() {
         time.reset();

@@ -122,7 +122,6 @@ public class NewOdometry extends RobotPart {
         lastX = 0;
         lastY = 0;
         lastY2 = 0;
-//        gyro.setHeading(pose.getAngle());
-//        TOD5 FIX set heading
+
     }
 }

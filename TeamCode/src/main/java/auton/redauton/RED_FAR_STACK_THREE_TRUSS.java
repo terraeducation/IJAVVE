@@ -240,7 +240,6 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
             outtake.stageDownPivot(.3).attach(lift.stageLift(1,0))
 
     );
-    //TODO MAKE DISTANCE SENSOR ADJUST Y COORDINATE
     @Override
     public void define() {
         time.reset();
@@ -280,7 +279,6 @@ public class RED_FAR_STACK_THREE_TRUSS extends AutoFramework {
             addSegment(.8,DefaultWP, -130, -15 , 90);
 
             addConcurrentAutoModule(PreExtend);
-
 
             addSegment(.8,DefaultWP, -200, -69 , 90);
             addTimedSetpoint(1,.8,1,-200,-92,90);

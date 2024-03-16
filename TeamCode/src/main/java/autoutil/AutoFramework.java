@@ -109,7 +109,6 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 //        autoPlane.rotate(-90);
 
 
-        // TODO FIX
 //        autoPlane.setStart(startPose);
 
 

@@ -15,7 +15,6 @@ import util.template.ParameterConstructor;
 public interface AutoUser {
 
 
-    // TOD5done Fix naming conventions (drop mecanum, setpoint -> SP)
     // SETPOINT -> SP, PURE PURSUIT -> PP, REACTOR -> REACT, SOME CASES OF MECANUM ->, NO -> N, SLOW -> SLO, WAYPOINT -> WP
 
 

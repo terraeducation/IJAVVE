@@ -15,7 +15,6 @@ public class ColorSensorsOld extends RobotPart {
      */
     private IColor cso;
 
-    // TODO4 NEW
     // Make more methods
     private final ArrayList<Double> runningAvg = new ArrayList<>();
     private final int runningAvgSize = 3;

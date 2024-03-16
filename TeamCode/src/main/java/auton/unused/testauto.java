@@ -76,7 +76,6 @@
 //            outtake.stageStartPivot(.1).attach(lift.stageLift(1,0))
 //
 //    );
-//    //TODO MAKE DISTANCE SENSOR ADJUST Y COORDINATE
 //    @Override
 //    public void define() {
 //        customCase(() -> {
