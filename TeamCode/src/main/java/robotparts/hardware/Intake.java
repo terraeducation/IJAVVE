@@ -1,15 +1,8 @@
 package robotparts.hardware;
 
-import static global.General.log;
-import static global.Modes.OuttakeStatus.DRIVING;
-import static global.Modes.OuttakeStatus.INTAKING;
-import static global.Modes.OuttakeStatus.PLACING;
-import static global.Modes.outtakeStatus;
-
 import automodules.AutoModule;
 import automodules.stage.Exit;
 import automodules.stage.Stage;
-import elements.GameElement;
 import robotparts.RobotPart;
 import robotparts.electronics.ElectronicType;
 import robotparts.electronics.continuous.CMotor;
@@ -25,6 +18,8 @@ public class Intake extends RobotPart {
 
     private CMotor in;
     private CServo drone;
+    private PServo lock;
+
     private PServo link;
     private PServo link2;
     private CMotor hang;
@@ -38,16 +33,25 @@ public class Intake extends RobotPart {
         link = create("link", ElectronicType.PSERVO_REVERSE);
         link2 = create("link2", ElectronicType.PSERVO_FORWARD);
 
+        lock = create("lock", ElectronicType.PSERVO_FORWARD);
+
+
 //        hang = create("hang", ElectronicType.CMOTOR_FORWARD);
+        lock.changePosition("purple", 0.75);
+
+        lock.changePosition("init", 0);
+        lock.changePosition("ready", 0.1);
+        lock.changePosition("open", 0.54);
+
 
         link.changePosition("init", .33);
         link.changePosition("start", .63);
-        link.changePosition("middle", .62);
+        link.changePosition("middle", .61);
         link.changePosition("middler", .53);
 
         link2.changePosition("init", .33);
         link2.changePosition("start", .62);
-        link2.changePosition("middle", .62);
+        link2.changePosition("middle", .59);
         link2.changePosition("middler", .57);
 
     }
@@ -58,6 +62,26 @@ public class Intake extends RobotPart {
 
 
     }
+
+    public void lockClose() {
+            lock.setPosition("open");
+
+
+    }
+    public void purple() {
+        lock.setPosition("purple");
+
+
+    }
+    public void lockInit() {
+        lock.setPosition("init");
+
+
+    }
+    public void lockReady(){
+        lock.setPosition("ready");
+    }
+
 
     public void moveStart() {
         link.setPosition("start");
@@ -144,6 +168,12 @@ public class Intake extends RobotPart {
         return super.customExit(p, colorSensorsNew.exitExtake());
 
     }
+
+    public Stage stageLockInit(double t){ return super.customTime(this::lockInit, t); }
+    public Stage stageLockReady(double t){ return super.customTime(this::lockReady, t); }
+    public Stage stageLockClose(double t){ return super.customTime(this::lockClose, t); }
+
+
 
     public Stage stageStart(double t){ return super.customTime(this::moveStart, t); }
     public Stage stageInit(double t){ return super.customTime(this::moveInit, t); }

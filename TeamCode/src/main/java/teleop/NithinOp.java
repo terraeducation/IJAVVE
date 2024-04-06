@@ -2,17 +2,13 @@ package teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import static autoutil.vision.PixelScannerIntegrate.locations;
 import static global.General.gph1;
 import static global.General.gph2;
 import static global.General.log;
 import static global.General.voltageScale;
-import static global.Modes.Drive.FAST;
 import static global.Modes.Drive.SLOW;
 import static global.Modes.Drive.SUPERSLOW;
-import static global.Modes.Height.currentHeight;
 import static global.Modes.OuttakeStatus.DRIVING;
-import static global.Modes.OuttakeStatus.INTAKING;
 import static global.Modes.OuttakeStatus.PLACING;
 import static global.Modes.OuttakeStatus.PLACING2;
 import static teleutil.button.Button.*;
@@ -27,21 +23,33 @@ public class NithinOp extends Tele {
         gph1.link(LEFT_BUMPER, R_BUMPER);
         gph1.link(RIGHT_BUMPER, L_BUMPER);
         gph1.linkWithCancel(RIGHT_TRIGGER, outtakeStatus.isMode(DRIVING), X_BUTTON, L_TRIGGER);
-        gph1.linkWithCancel(LEFT_TRIGGER, driveMode.isMode(SLOW), R_TRIGGER, CancelIntake);
-        gph1.linkWithCancel(LEFT_STICK_BUTTON,  driveMode.isMode(SLOW), IntakeMid, CancelIntake);
+        gph1.linkWithCancel(LEFT_TRIGGER, driveMode.isMode(SLOW), R_TRIGGER, driveMode.isMode(SUPERSLOW), CancelIntake, levelsix);
+//        gph1.linkWithCancel(LEFT_STICK_BUTTON,  driveMode.isMode(SLOW), IntakeMid, CancelIntake);
 
         gph1.link(DPAD_RIGHT,  outtakeStatus.isMode(DRIVING), chubramani, RIGHT_DPAD );
         gph1.link(DPAD_LEFT, outtakeStatus.isMode(DRIVING), HangStart, LEFT_DPAD);
         gph1.link(DPAD_UP, outtakeStatus.isMode(DRIVING), HangReady,  UP_DPAD);
         gph1.link(DPAD_DOWN, driveMode.isMode(SLOW), Hang,  DOWN_DPAD );
         gph1.link(RIGHT_STICK_BUTTON, joyoi);
+        gph1.link(LEFT_STICK_BUTTON, IntakeMider);
 
 
 
-        gph1.link(X, outtakeStatus.isMode(PLACING), outtakeStatus.isMode(PLACING2), levelone, leveltwo);
-        gph1.link(A, outtakeStatus.isMode(PLACING), outtakeStatus.isMode(PLACING2), levelthree, levelfour);
-        gph1.link(B, outtakeStatus.isMode(PLACING), outtakeStatus.isMode(PLACING2), levelfive, levelsix);
-        gph1.link(Y, outtakeStatus.isMode(PLACING), outtakeStatus.isMode(PLACING2), levelseven, levelseven);
+        gph1.link(B, ()->{
+           lift.liftyuppy(5);
+        });
+        gph1.link(A, ()->{
+            lift.liftyuppy(-5);
+        });
+
+
+        gph1.link(X, outtakeStatus.isMode(PLACING), outtakeStatus.isMode(PLACING2), leveltwo, levelfour);
+        gph1.link(Y, outtakeStatus.isMode(PLACING), outtakeStatus.isMode(PLACING2), levelfive, levelseven);
+
+        gph2.link(X, intake::lockClose);
+        gph2.link(A, intake::lockReady);
+        gph2.link(B, intake::lockInit);
+        gph2.link(Y, intake::moveMiddle);
 
 
 
@@ -73,6 +81,7 @@ public class NithinOp extends Tele {
         outtake.openClaw();
         outtake.moveStartPivot();
         intake.moveInit();
+        intake.lockInit();
         driveMode.set(SLOW);
         outtakeStatus.set(DRIVING);
 

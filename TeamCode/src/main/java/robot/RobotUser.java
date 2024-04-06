@@ -10,7 +10,7 @@ import robotparts.hardware.Lift;
 import robotparts.hardware.Outtake;
 import robotparts.sensors.Cameras;
 import robotparts.sensors.GyroSensors;
-import robotparts.unused.DistanceSensorsOld;
+//import robotparts.unused.DistanceSensorsOld;
 import robotparts.unused.CustomTestPart;
 import robotparts.unused.TouchSensors;
 
@@ -28,7 +28,7 @@ public interface RobotUser {
     Lift lift = new Lift();
     Outtake outtake = new Outtake();
 //    Leds leds = new Leds();
-    DistanceSensorsOld distanceSensors = new DistanceSensorsOld();
+//    DistanceSensorsOld distanceSensors = new DistanceSensorsOld();
     GyroSensors gyro = new GyroSensors();
     Cameras camera = new Cameras();
     DistanceSensors distanceSensorsNew = new DistanceSensors();

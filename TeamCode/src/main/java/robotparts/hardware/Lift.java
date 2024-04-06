@@ -87,6 +87,14 @@ public class Lift extends RobotPart {
         motorLeft.setPositionHolderTarget(target);
     }
 
+    public void liftyuppy(double delta){
+        motorRight.holdPositionExact();
+        motorLeft.holdPositionExact();
+        motorRight.setPositionHolderTarget(motorRight.getPositionHolder().getTarget() + delta);
+        motorLeft.setPositionHolderTarget(motorLeft.getPositionHolder().getTarget() + delta);
+    }
+
+
     @Override
     public Stage moveTime(double p, double t) {
         return super.moveTime(p, t).combine(new Initial(() -> currentCutoffPosition = p > 0 ? 0 : defaultCutoffPosition));

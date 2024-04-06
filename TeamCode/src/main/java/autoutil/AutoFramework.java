@@ -309,7 +309,7 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 
     @Override
     public void stopAuto() {
-        if(scanning && !haltCameraAfterInit){ camera.halt(); }
+//        if(scanning && !haltCameraAfterInit){ camera.halt(); }
     }
 
 

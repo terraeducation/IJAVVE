@@ -73,10 +73,10 @@ public class Cameras extends RobotPart {
 //                log.show("CAN'T BE OPENED");
 //            }
 //        });
-        camera1.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
-        @Override
-        public void onClose() {}
-    });
+//        camera1.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
+//        @Override
+//        public void onClose() {}
+//    });
 }
     public double getFPS(){ return cam.getFramesPerSecond(); }
 

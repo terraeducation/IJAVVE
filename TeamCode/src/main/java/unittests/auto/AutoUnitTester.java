@@ -17,7 +17,7 @@ import unittests.auto.framework.calibration.OdometryCalib;
 import unittests.auto.framework.calibration.OdometryCalib2;
 import unittests.auto.framework.calibration.RestPowerCalib;
 import unittests.auto.framework.calibration.VoltageScaleCalib;
-import unittests.auto.framework.movement.DistanceSensorStraightenTest;
+//import unittests.auto.framework.movement.DistanceSensorStraightenTest;
 import unittests.auto.framework.movement.OdometryTest;
 import util.condition.Status;
 

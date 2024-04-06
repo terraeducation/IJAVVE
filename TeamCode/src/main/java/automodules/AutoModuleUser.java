@@ -72,7 +72,7 @@ public interface AutoModuleUser extends RobotUser {
                 outtake.stageOpen(.4),
                 outtake.stageLock(.5).attach(outtake.stageDownPivot(.5)),
                 intake.stageStart(.4),
-                intake.moveSmart2(-.53),
+                intake.moveSmart2(-1),
 
                 intake.moveTime(-.35,.5),
                 outtake.stageClose(.1).attach(outtake.stageBetterLock(.2)),
@@ -112,8 +112,8 @@ public interface AutoModuleUser extends RobotUser {
 
     AutoModule IntakeMider = new AutoModule(
             outtake.stageLock(.3).attach(outtake.stageDownPivot(.5)),
-            intake.stageMiddler(.2).attach(outtake.stageOpen(.1)),
-            intake.moveSmart2(-.45),
+            intake.stageMiddle(.2).attach(outtake.stageOpen(.1)),
+            intake.moveSmart2(-1),
             outtake.stageClose(.5),
             intake.moveTime(1,.2),
             intake.stageInit(.2)
@@ -262,11 +262,10 @@ public interface AutoModuleUser extends RobotUser {
 //
     });
     AutoModule levelsix = new AutoModule(
-            lift.stageLift(1, 50)
+
 //
     ).setStartCode(() ->{
-        outtakeStatus.set(PLACING);
-        heightMode.setTo(six);
+
 
 
 //
