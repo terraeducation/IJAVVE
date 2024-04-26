@@ -52,8 +52,9 @@ public class themegaweapon extends AutoFramework {
     );
     AutoModule ReadyIntake = new AutoModule(
 //            intake.stageLockReady(.1),
-            outtake.stageLock(.1).attach(outtake.stageStartPivot(.1)),
-            outtake.stageOpen(.3)
+
+            outtake.stageLock(.3).attach(outtake.stageDownPivot(.5)),
+            intake.stageMiddler(.2).attach(outtake.stageOpen(.1))
     ).setStartCode(() ->{}
     );
 
@@ -144,13 +145,22 @@ public class themegaweapon extends AutoFramework {
             drive.drivecloseSmart(-.18,0,0)
     );
     AutoModule intakee = new AutoModule(
-            outtake.stageLock(.3).attach(outtake.stageDownPivot(.5)),
-            intake.stageMiddle(.2).attach(outtake.stageOpen(.1)),
-            intake.moveSmart2(-1).attach(drive.intakeSmart(0.15,0,0)),
-            outtake.stageClose(.5)
+
+            intake.moveOneSmart(-1)
+
 
 
     );
+    AutoModule intakeepart2 = new AutoModule(
+            intake.stageMiddle(.1),
+            intake.moveSmart2(-1),
+            outtake.stageClose(.5)
+
+
+
+    );
+
+
     AutoModule intakee3 = new AutoModule(
             outtake.stageLock(.3).attach(outtake.stageDownPivot(.5)),
             intake.stageStart(.2).attach(outtake.stageOpen(.1)),
@@ -161,7 +171,7 @@ public class themegaweapon extends AutoFramework {
     );
     AutoModule intakee2 = new AutoModule(
 
-            intake.moveSmart2(-1).attach(drive.intakeSmart(0.15,0,0)),
+            intake.moveSmart2(-1).attach(drive.intakeoneSmart(.35,0,0)),
             outtake.stageClose(.5)
 
 
@@ -175,19 +185,17 @@ public class themegaweapon extends AutoFramework {
     @Override
     public void define() {
 
-            addSegment(1,DefaultWP,-30,-30,0);
-            addSegment(1,DefaultWP,-40,-60,70);
+            addSegment(1,DefaultWP,-20,-30,0);
 
         addConcurrentAutoModule(ExtakeandLift);
 
 
-            addTimedSetpoint(1.0,.5,1,-40,-60,90);
 
 
 
 
 
-        addSegment(1,DefaultWP,-70,-43,90);
+        addSegment(1,DefaultWP,-70,-62 ,100);
 
 
             addAutoModule(align);
@@ -200,11 +208,13 @@ public class themegaweapon extends AutoFramework {
 
 
 
-        addSegment(1,DefaultWP,100.5,-108,90);
+        addSegment(1,DefaultWP,100.5,-120,90);
 
 
 
-        addSegment(1,DefaultWP,154,-108,79);
+//        addSegment(1,DefaultWP,154,-108,79);
+                addSegment(1,DefaultWP,156.5,-110.5,85);
+
 
 
 
@@ -212,6 +222,9 @@ public class themegaweapon extends AutoFramework {
 
 
         addAutoModule(intakee);
+
+        addAutoModule(intakeepart2);
+
 
         addConcurrentAutoModule(intakereset);
 
@@ -222,10 +235,11 @@ public class themegaweapon extends AutoFramework {
 
         addSegment(1,DefaultWP,0,-120,90);
         addConcurrentAutoModule(PreExtend1);
-        addSegment(1,DefaultWP,-65,-88,80);
+        addSegment(1,DefaultWP,-70,-88,80);
         addAutoModule(align2);
 
         addConcurrentAutoModule(Reset);
+
         addSegment(1,DefaultWP,0,-127,90);
 
 
@@ -233,7 +247,7 @@ public class themegaweapon extends AutoFramework {
         addSegment(1,DefaultWP,30,-127,90);
 
 
-        addSegment(1,DefaultWP,154,-109,85);
+        addSegment(1,DefaultWP,135,-114,85);
         addAutoModule(intakee2);
 
         addConcurrentAutoModule(intakereset);
@@ -245,9 +259,10 @@ public class themegaweapon extends AutoFramework {
 
         addSegment(1,DefaultWP,0,-120,90);
         addConcurrentAutoModule(PreExtend1);
-        addSegment(1,DefaultWP,-65,-88,80);
+        addSegment(1,DefaultWP,-71,-88,80);
         addAutoModule(align2);
         addConcurrentAutoModule(Reset);
+
         addSegment(1,DefaultWP,0,-127,90);
 
 
@@ -270,6 +285,7 @@ public class themegaweapon extends AutoFramework {
         addSegment(1,DefaultWP,-65,-88,80);
         addAutoModule(align2);
         addConcurrentAutoModule(Reset);
+
         addSegment(1,DefaultWP,0,-127,90);
 
 
@@ -278,7 +294,7 @@ public class themegaweapon extends AutoFramework {
 
         addSegment(1,DefaultWP,154,-127,90);
 
-        addSegment(1,DefaultWP,160,-70,110);
+//        addSegment(1,DefaultWP,160,-70,110);
         addAutoModule(intakee2);
         addConcurrentAutoModule(intakereset);
 
@@ -289,9 +305,10 @@ public class themegaweapon extends AutoFramework {
 
         addSegment(1,DefaultWP,0,-120,90);
         addConcurrentAutoModule(PreExtend1);
-        addSegment(1,DefaultWP,-65,-88,80);
+        addSegment(1,DefaultWP,-67.5,-88,80);
         addAutoModule(align2);
         addConcurrentAutoModule(Reset);
+
         addSegment(1,DefaultWP,0,-127,90);
 
 
