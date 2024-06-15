@@ -72,7 +72,7 @@ public interface AutoModuleUser extends RobotUser {
                 outtake.stageOpen(.4),
                 outtake.stageLock(.5).attach(outtake.stageDownPivot(.5)),
                 intake.stageStart(.4),
-                intake.moveSmart2(-1),
+                intake.moveSmart2(-.65),
 
                 intake.moveTime(-.35,.5),
                 outtake.stageClose(.1).attach(outtake.stageBetterLock(.2)),
