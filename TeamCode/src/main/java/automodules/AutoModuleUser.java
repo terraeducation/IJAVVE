@@ -1,6 +1,5 @@
 package automodules;
 
-import automodules.stage.Stage;
 import robot.RobotUser;
 import robotparts.RobotPart;
 
@@ -11,18 +10,15 @@ import static global.Modes.Drive.SUPERSLOW;
 import static global.Modes.Height.GROUND;
 //import static global.Modes.Height.HIGH;
 //import static global.Modes.Height.LOW;
-import static global.Modes.Height.currentHeight;
 import static global.Modes.Height.five;
 import static global.Modes.Height.four;
 import static global.Modes.Height.one;
 import static global.Modes.Height.seven;
-import static global.Modes.Height.six;
 import static global.Modes.Height.three;
 import static global.Modes.Height.two;
-import static global.Modes.OuttakeStatus.DRIVING;
-import static global.Modes.OuttakeStatus.INTAKING;
-import static global.Modes.OuttakeStatus.PLACING;
-import static global.Modes.OuttakeStatus.PLACING2;
+import static global.Modes.RobotStatus.DRIVING;
+import static global.Modes.RobotStatus.PLACING;
+import static global.Modes.RobotStatus.PLACING2;
 
 
 public interface AutoModuleUser extends RobotUser {
@@ -62,7 +58,7 @@ public interface AutoModuleUser extends RobotUser {
     ).setStartCode(() ->{
         heightMode.set(GROUND);
         driveMode.set(SLOW);
-        outtakeStatus.set(DRIVING);
+        robotStatus.set(DRIVING);
 
 
     });
@@ -143,7 +139,7 @@ public interface AutoModuleUser extends RobotUser {
 
     ).setStartCode(() ->{
         heightMode.set(one);
-        outtakeStatus.set(PLACING);
+        robotStatus.set(PLACING);
         driveMode.set(SUPERSLOW);
 
     });
@@ -159,7 +155,7 @@ public interface AutoModuleUser extends RobotUser {
     ).setStartCode(() ->{
         heightMode.set(GROUND);
         driveMode.set(SLOW);
-        outtakeStatus.set(DRIVING);
+        robotStatus.set(DRIVING);
 
 
     });
@@ -212,7 +208,7 @@ public interface AutoModuleUser extends RobotUser {
                 lift.stageLift(1, 20)
 
     ).setStartCode(() ->{
-        outtakeStatus.set(PLACING2);
+        robotStatus.set(PLACING2);
         heightMode.setTo(one);
 
 
@@ -223,7 +219,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 25)
 //
     ).setStartCode(() ->{
-        outtakeStatus.set(PLACING);
+        robotStatus.set(PLACING);
         heightMode.setTo(two);
 
 
@@ -234,7 +230,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 30)
 //
     ).setStartCode(() ->{
-        outtakeStatus.set(PLACING2);
+        robotStatus.set(PLACING2);
         heightMode.setTo(three);
 
 
@@ -245,7 +241,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 37)
 //
     ).setStartCode(() ->{
-        outtakeStatus.set(PLACING);
+        robotStatus.set(PLACING);
         heightMode.setTo(four);
 
 //
@@ -255,7 +251,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 45)
 //
     ).setStartCode(() ->{
-        outtakeStatus.set(PLACING2);
+        robotStatus.set(PLACING2);
         heightMode.setTo(five);
 
 
@@ -275,7 +271,7 @@ public interface AutoModuleUser extends RobotUser {
             lift.stageLift(1, 57)
 //
     ).setStartCode(() ->{
-        outtakeStatus.set(PLACING2);
+        robotStatus.set(PLACING2);
         heightMode.setTo(seven);
 
 

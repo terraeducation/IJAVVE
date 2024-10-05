@@ -1,24 +1,7 @@
 package teleop;
 
-import static global.General.gph1;
-import static global.General.gph2;
 import static global.General.log;
 import static global.General.voltageScale;
-import static global.Modes.Drive.FAST;
-import static global.Modes.OuttakeStatus.DRIVING;
-import static global.Modes.OuttakeStatus.PLACING;
-import static teleutil.button.Button.A;
-import static teleutil.button.Button.B;
-import static teleutil.button.Button.DPAD_DOWN;
-import static teleutil.button.Button.DPAD_LEFT;
-import static teleutil.button.Button.DPAD_RIGHT;
-import static teleutil.button.Button.DPAD_UP;
-import static teleutil.button.Button.LEFT_BUMPER;
-import static teleutil.button.Button.LEFT_TRIGGER;
-import static teleutil.button.Button.RIGHT_BUMPER;
-import static teleutil.button.Button.RIGHT_TRIGGER;
-import static teleutil.button.Button.X;
-import static teleutil.button.Button.Y;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -69,7 +52,7 @@ public class TestOp extends Tele {
         /**
          * Outtake Status
          */
-        log.show("OuttakeStatus", outtakeStatus.get());
+        log.show("OuttakeStatus", robotStatus.get());
 
         /**
          * Heading
