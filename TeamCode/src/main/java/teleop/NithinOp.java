@@ -18,40 +18,40 @@ public class NithinOp extends Tele {
 
     @Override
     public void initTele() {
-        voltageScale = 1;
-
-        gph1.link(LEFT_BUMPER, R_BUMPER);
-        gph1.link(RIGHT_BUMPER, L_BUMPER);
-        gph1.linkWithCancel(RIGHT_TRIGGER, robotStatus.isMode(DRIVING), X_BUTTON, L_TRIGGER);
-        gph1.linkWithCancel(LEFT_TRIGGER, driveMode.isMode(SLOW), R_TRIGGER, driveMode.isMode(SUPERSLOW), CancelIntake, levelsix);
+//        voltageScale = 1;
+//
+//        gph1.link(LEFT_BUMPER, R_BUMPER);
+//        gph1.link(RIGHT_BUMPER, L_BUMPER);
+//        gph1.linkWithCancel(RIGHT_TRIGGER, robotStatus.isMode(DRIVING), X_BUTTON, L_TRIGGER);
+//        gph1.linkWithCancel(LEFT_TRIGGER, driveMode.isMode(SLOW), R_TRIGGER, driveMode.isMode(SUPERSLOW), CancelIntake, levelsix);
 //        gph1.linkWithCancel(LEFT_STICK_BUTTON,  driveMode.isMode(SLOW), IntakeMid, CancelIntake);
-
-        gph1.link(DPAD_RIGHT,  robotStatus.isMode(DRIVING), chubramani, RIGHT_DPAD );
-        gph1.link(DPAD_LEFT, robotStatus.isMode(DRIVING), HangStart, LEFT_DPAD);
-        gph1.link(DPAD_UP, robotStatus.isMode(DRIVING), HangReady,  UP_DPAD);
-        gph1.link(DPAD_DOWN, driveMode.isMode(SLOW), Hang,  DOWN_DPAD );
-        gph1.link(RIGHT_STICK_BUTTON, joyoi);
-        gph1.link(LEFT_STICK_BUTTON, IntakeMider);
-
-
-
-        gph1.link(B, ()->{
-           lift.liftyuppy(5);
-        });
-        gph1.link(A, ()->{
-            lift.liftyuppy(-5);
-        });
-
-
-        gph1.link(X, robotStatus.isMode(PLACING), robotStatus.isMode(PLACING2), leveltwo, levelfour);
-        gph1.link(Y, robotStatus.isMode(PLACING), robotStatus.isMode(PLACING2), levelfive, levelseven);
-
-        gph2.link(X, intake::lockClose);
-        gph2.link(A, intake::lockReady);
-        gph2.link(B, intake::lockInit);
-        gph2.link(Y, intake::moveMiddle);
-
-
+//
+//        gph1.link(DPAD_RIGHT,  robotStatus.isMode(DRIVING), chubramani, RIGHT_DPAD );
+//        gph1.link(DPAD_LEFT, robotStatus.isMode(DRIVING), HangStart, LEFT_DPAD);
+//        gph1.link(DPAD_UP, robotStatus.isMode(DRIVING), HangReady,  UP_DPAD);
+//        gph1.link(DPAD_DOWN, driveMode.isMode(SLOW), Hang,  DOWN_DPAD );
+//        gph1.link(RIGHT_STICK_BUTTON, joyoi);
+//        gph1.link(LEFT_STICK_BUTTON, IntakeMider);
+//
+//
+//
+//        gph1.link(B, ()->{
+//           lift.liftyuppy(5);
+//        });
+//        gph1.link(A, ()->{
+//            lift.liftyuppy(-5);
+//        });
+//
+//
+//        gph1.link(X, robotStatus.isMode(PLACING), robotStatus.isMode(PLACING2), leveltwo, levelfour);
+//        gph1.link(Y, robotStatus.isMode(PLACING), robotStatus.isMode(PLACING2), levelfive, levelseven);
+//
+//        gph2.link(X, intake::lockClose);
+//        gph2.link(A, intake::lockReady);
+//        gph2.link(B, intake::lockInit);
+//        gph2.link(Y, intake::moveMiddle);
+//
+//
 
 
 
@@ -76,14 +76,14 @@ public class NithinOp extends Tele {
         /**
          * Start code
          */
-        outtake.moveStart();
-        outtake.moveStartRotate();
-        outtake.openClaw();
-        outtake.moveStartPivot();
-        intake.moveInit();
-        intake.lockInit();
-        driveMode.set(SLOW);
-        robotStatus.set(DRIVING);
+//        outtake.moveStart();
+//        outtake.moveStartRotate();
+//        outtake.openClaw();
+//        outtake.moveStartPivot();
+//        intake.moveInit();
+//        intake.lockInit();
+//        driveMode.set(SLOW);
+//        robotStatus.set(DRIVING);
 
 
     }
@@ -98,7 +98,7 @@ public class NithinOp extends Tele {
     public void loopTele() {
 
         drive.newMove(gph1.ry, gph1.rx, gph1.lx);
-        lift.move(gph2.ry);
+//        lift.move(gph2.ry);
 
 
         /**
@@ -134,8 +134,8 @@ public class NithinOp extends Tele {
         /**
          * lift encoder positions
          */
-        log.show("Right", lift.motorRight.getPosition());
-        log.show("Left", lift.motorLeft.getPosition());
+//        log.show("Right", lift.motorRight.getPosition());
+//        log.show("Left", lift.motorLeft.getPosition());
 
 
         /**
