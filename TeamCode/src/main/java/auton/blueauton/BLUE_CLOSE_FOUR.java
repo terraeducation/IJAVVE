@@ -251,6 +251,8 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
             drive.drivecloseSmart(-.18,0,0)
     );
 
+
+
     @Override
     public void define() {
         time.reset();
@@ -258,6 +260,11 @@ public class BLUE_CLOSE_FOUR extends AutoFramework {
             addWaypoint(30,-30,0);
 
 //            addTimedhttps://youtube.com/clip/UgkxOwPF-u-odIgel4nU7PBMKa-V_hCwqRIu?si=S1pl8yl1YBQlfQpN(1.0,.5,1,40,-75,-90);
+
+
+            addTimedSetpoint(1,.5,1,50,-50,50);
+
+
 
 
             addAutoModule(ExtakeandLift);

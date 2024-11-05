@@ -1,7 +1,8 @@
 package robotparts.hardware;
 
-import static global.Modes.RobotStatus.DRIVING;
-import static global.Modes.robotStatus;
+import static global.Modes.OuttakeStatus.DRIVING;
+import static global.Modes.OuttakeStatus.PLACING;
+import static global.Modes.outtakeStatus;
 
 import automodules.stage.Stage;
 import robotparts.RobotPart;
@@ -88,10 +89,17 @@ public class Outtake extends RobotPart {
 
 
 
-        robotStatus.set(DRIVING);
+
+
+
+
+        outtakeStatus.set(DRIVING);
     }
 
     public void changeArmPosition(String name, double pos){ armr.changePosition(name, pos); arml.changePosition(name, pos); }
+
+
+
 
 
     public void arm(double pos){ armr.setPosition(pos); arml.setPosition(pos); }
@@ -148,6 +156,10 @@ public class Outtake extends RobotPart {
     public void moveMiddle(){ armr.setPosition("middle"); arml.setPosition("middle"); }
 
     public void moveMiddler(){ armr.setPosition("middler"); arml.setPosition("middler"); }
+
+
+
+
 
 
     public Stage stageReadyStart(double t){return super.customTime(this::readyStart, t);}

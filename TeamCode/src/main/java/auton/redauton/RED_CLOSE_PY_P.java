@@ -9,7 +9,7 @@ import autoutil.AutoFramework;
 import robotparts.RobotPart;
 
 @Autonomous(name = "REDCLOSE PY&P ", group = "auto", preselectTeleOp = "TerraOp")
-public class RED_CLOSE_PY_P extends AutoFramework {
+public class    RED_CLOSE_PY_P extends AutoFramework {
     @Override
     public void initialize() {
         this.setConfig(NonstopConfig);
