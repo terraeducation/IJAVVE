@@ -2,6 +2,7 @@ package teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import static global.General.log;
 import static global.General.voltageScale;
 import static global.Modes.TeleStatus.BLUE;
 
@@ -66,8 +67,12 @@ public class TerraOpBlue extends Tele {
          * lift encoder positions
          */
 //        log.show("Right", lift.motorRight.getPosition());
-//        log.show("Left", lift.motorLeft.getPosition());
 
+
+        /**
+         * extendo encoder positions
+         */
+//        log.show("left", extendo.motorLeft.getPosition());
 
         /**
          * drive mode

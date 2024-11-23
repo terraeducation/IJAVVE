@@ -68,9 +68,13 @@ public class TerraOpRed extends Tele {
         /**
          * lift encoder positions
          */
-        log.show("Right", lift.motorRight.getPosition());
-        log.show("Left", lift.motorLeft.getPosition());
+//        log.show("Right", lift.motorRight.getPosition());
 
+
+        /**
+         * extendo encoder positions
+         */
+//        log.show("left", extendo.motorLeft.getPosition());
 
         /**
          * drive mode
