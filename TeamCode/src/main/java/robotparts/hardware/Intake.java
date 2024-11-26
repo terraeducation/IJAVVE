@@ -22,12 +22,12 @@ public class Intake extends RobotPart {
 
     @Override
     public void init() {
-        iarmr = create("iarmr", ElectronicType.PSERVO_FORWARD);
-        iarml = create("iarml", ElectronicType.PSERVO_REVERSE);
-        ipivot = create("ipivot", ElectronicType.PSERVO_REVERSE);
-        iclaw = create("iclaw", ElectronicType.PSERVO_REVERSE);
-        linkager = create("linkager", ElectronicType.PSERVO_FORWARD);
-        linkagel = create("linkagel", ElectronicType.PSERVO_REVERSE);
+        iarmr = create("iarmr", ElectronicType.PSERVO_REVERSE);
+        iarml = create("iarml", ElectronicType.PSERVO_FORWARD);
+        ipivot = create("ipivot", ElectronicType.PSERVO_FORWARD);
+        iclaw = create("iclaw", ElectronicType.PSERVO_FORWARD);
+        linkager = create("linkager", ElectronicType.PSERVO_REVERSE);
+        linkagel = create("linkagel", ElectronicType.PSERVO_FORWARD);
 
         iarml.changePosition("start", 0);
         iarmr.changePosition("start", 0);
