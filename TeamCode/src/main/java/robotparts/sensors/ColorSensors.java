@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.SensorMRColor;
 
 import automodules.stage.Exit;
 import automodules.stage.Stage;
-import auton.redauton.RED_CLOSE_PY_P;
+//import auton.redauton.RED_CLOSE_PY_P;
 import elements.GameElement;
 import global.Modes;
 import robotparts.RobotPart;
