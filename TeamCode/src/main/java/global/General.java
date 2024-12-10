@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import debugging.Synchroniser;
 import elements.FieldPlacement;
 import elements.FieldSide;
-import robot.TerraBot;
+import robot.Bot;
 import teleutil.GamepadHandler;
 import debugging.Fault;
 import debugging.Logger;
@@ -20,7 +20,7 @@ public class General {
     /**
      *  Terrabot object, used for moving the robot, and other features related to the robot
      */
-    public static TerraBot bot;
+    public static Bot bot;
     /**
      * Hardware map object, has all of the hardware in the robot like the DcMotors and Servos
      */

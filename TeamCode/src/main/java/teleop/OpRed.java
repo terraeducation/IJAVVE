@@ -2,12 +2,13 @@ package teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import static global.General.log;
+import static global.General.gph1;
 import static global.General.voltageScale;
-import static global.Modes.TeleStatus.BLUE;
+import static global.Modes.TeleStatus.RED;
 
-@TeleOp(name = "TerraOpBlue", group = "TeleOp")
-public class TerraOpBlue extends Tele {
+
+@TeleOp(name = "TerraOpRed", group = "TeleOp")
+public class OpRed extends Tele {
 
     @Override
     public void initTele() {
@@ -15,7 +16,7 @@ public class TerraOpBlue extends Tele {
 
 
 
-        teleStatus.set(BLUE);
+        teleStatus.set(RED);
 
 
     }
@@ -32,6 +33,7 @@ public class TerraOpBlue extends Tele {
     @Override
     public void loopTele() {
 
+lift.move(gph1.ly);
 
         /**
          * Gets Distance

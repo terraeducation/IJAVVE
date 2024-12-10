@@ -3,10 +3,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import debugging.Synchroniser;
-import elements.FieldPlacement;
-import elements.FieldSide;
 import robot.RobotFramework;
-import robot.TerraBot;
+import robot.Bot;
 import robotparts.sensors.Cameras;
 import teleutil.GamepadHandler;
 import debugging.Fault;
@@ -64,7 +62,7 @@ public interface Common{
         /**
          * Create the robot, and then the modules, stages, and automodules
          */
-        bot = new TerraBot();
+        bot = new Bot();
         /**
          * Initialize the robot
          */

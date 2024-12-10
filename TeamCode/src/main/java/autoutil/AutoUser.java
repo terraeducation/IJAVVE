@@ -3,7 +3,6 @@ package autoutil;
 import autoutil.generators.Generator;
 import autoutil.generators.LineGen;
 import autoutil.generators.PoseGen;
-import autoutil.reactors.JunctionReact;
 //import autoutil.reactors.JunctionReact2;
 import autoutil.reactors.NonstopReact;
 import autoutil.reactors.NStopNewReact;

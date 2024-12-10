@@ -1,6 +1,6 @@
 package unittests.tele.framework;
 
-import robot.TerraBot;
+import robot.Bot;
 import unittests.tele.TeleUnitTest;
 import util.User;
 import util.condition.Expectation;
@@ -16,7 +16,7 @@ public class CommonTest extends TeleUnitTest {
      */
     @Override
     public void start() {
-        fault.check("robotPartsIsEmpty", Expectation.SURPRISING, Magnitude.MAJOR, TerraBot.allRobotParts.size() == 0, false);
+        fault.check("robotPartsIsEmpty", Expectation.SURPRISING, Magnitude.MAJOR, Bot.allRobotParts.size() == 0, false);
     }
 
     @Override

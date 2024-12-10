@@ -1,14 +1,8 @@
 package auton;
-import static global.General.log;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
-import automodules.AutoModule;
 import autoutil.AutoFramework;
-import elements.TeamProp;
-import robotparts.RobotPart;
 
-public class TerraAutoTestNew extends AutoFramework {
+public class AutoTestNew extends AutoFramework {
 
 
     @Override

@@ -6,10 +6,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 //import auton.AutonomousDummy;
-import autoutil.vision.Scanner;
 import geometry.position.Pose;
 import robotparts.RobotPart;
-import robotparts.electronics.ElectronicType;
 import robotparts.electronics.input.ICamera;
 //import robotparts.electronics.input.ICameraNew;
 
