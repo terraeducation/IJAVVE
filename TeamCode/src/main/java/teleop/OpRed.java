@@ -7,7 +7,7 @@ import static global.General.voltageScale;
 import static global.Modes.TeleStatus.RED;
 
 
-@TeleOp(name = "TerraOpRed", group = "TeleOp")
+@TeleOp(name = "OpRed", group = "TeleOp")
 public class OpRed extends Tele {
 
     @Override

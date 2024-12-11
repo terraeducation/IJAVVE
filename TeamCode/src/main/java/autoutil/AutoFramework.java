@@ -8,6 +8,8 @@ import static global.General.log;
 
 import androidx.annotation.NonNull;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -57,16 +59,7 @@ public abstract class AutoFramework extends Auto implements AutoUser {
     protected ArrayList<AutoSegment<?,?>> customSegments = new ArrayList<>();
     protected ArrayList<CodeSeg> breakpoints = new ArrayList<>();
 
-    protected boolean scanning = false;
-    protected boolean haltCameraAfterInit = true;
-    //    public CaseScanner caseScanner;
-    protected CaseScannerRect caseScanner;
 
-    protected PixelScannerIntegrate pixelScanner;
-//    protected TeamPropScanner teamPropScanner;
-    protected Scanner scannerAfterInit;
-    protected Case caseDetected = Case.FIRST;
-    protected TeamProp propCaseDetected = TeamProp.FIRST;
 
     private int segmentIndex = 1;
     private int pauseIndex, autoModuleIndex, customSegmentIndex, breakpointIndex = 0;
@@ -91,7 +84,6 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 
     public final void setup(){
         preProcess();
-        if(isFlipped()){ flipCases(); }
         define();
         autoPlane.addAll(poses);
         postProcess();
@@ -108,7 +100,6 @@ public abstract class AutoFramework extends Auto implements AutoUser {
 
     public static boolean isFlipped(){ return fieldSide.equals(FieldSide.RED) ^ fieldPlacement.equals(FieldPlacement.UPPER); }
     public void flip(){ autoPlane.reflectX(); autoPlane.reflectPoses(); }
-    public void flipCases(){ if(caseDetected.equals(Case.FIRST)){ caseDetected = Case.THIRD; }else if(caseDetected.equals(Case.THIRD)){ caseDetected = Case.FIRST; }}
 
     public void addDecision(DecisionList decisionList){ decisionList.check(); }
     public void addAutomodule(DecisionList decisionList){ addAutoModule(new AutoModule(new Stage(new Main(decisionList::check), RobotPart.exitAlways()))); }
@@ -116,64 +107,14 @@ public abstract class AutoFramework extends Auto implements AutoUser {
     public void customFlipped(CodeSeg one, CodeSeg two){ if(!isFlipped()){ one.run();}else{two.run();}}
     public void customPlacement(CodeSeg one, CodeSeg two){ addDecision(new DecisionList(() -> fieldPlacement).addOption(FieldPlacement.LOWER, one).addOption(FieldPlacement.UPPER, two)); }
     public void customSidePlacement(CodeSeg one, CodeSeg two, CodeSeg three, CodeSeg four){customSide(() -> customPlacement(one, two), () -> customPlacement(three, four));}
-    public void customCase(CodeSeg first, CodeSeg second, CodeSeg third){ addDecision(new DecisionList(() -> propCaseDetected).addOption(TeamProp.FIRST, first).addOption(TeamProp.SECOND, second).addOption(TeamProp.THIRD, third)); }
     public void customNumber(int num, ParameterCodeSeg<Integer> one){ for (int i = 0; i < num; i++) { one.run(i); } }
     public void customIf(boolean value, CodeSeg ifTrue, CodeSeg ifFalse){ if(value){ifTrue.run();}else{ifFalse.run();} }
-
-    public void setScannerAfterInit(Scanner scanner){
-        haltCameraAfterInit = false;
-        scannerAfterInit = scanner;
-    }
-
-    public void scan(boolean view, String color, String side){
-        scanning = true;
-        caseScanner = new CaseScannerRect();
-        camera.start(true);
-        camera.setScanner(caseScanner);
-        caseScanner.setColor(color);
-        caseScanner.setSide(side);
-        caseScanner.start();
-    }
-
-    public String getPixelPose(){
-        if(scanning) {
-            while (!isStopRequested()) {
-                location = pixelScanner.getLocation();
-                pixelScanner.log();
-                log.showTelemetry();
-            }
-        }
-//        location = pixelScanner.getLocation();
-        return location;
-    }
-    public void scanPixel(boolean view, String color){
-        scanning = true;
-        pixelScanner = new PixelScannerIntegrate();
-        camera.start(true);
-        camera.setScanner(pixelScanner);
-//        pix.setColor(color);
-        pixelScanner.start();
-    }
-
-//    public void propScanner(boolean view) {
-//        scanning = true;
-//        teamPropScanner = new TeamPropScanner();
-//        camera.setScanner(teamPropScanner);
-//        camera.start(view);
-//    }
 
 
     @Override
     public final void initAuto() {
-//        distanceSensorsNew.start();
         initialize();
-        if(scanning){
-//            log.show("yeet");
-//            while (!isStarted() && !isStopRequested()){ propCaseDetected = teamPropScanner.getCase(); teamPropScanner.log(); log.showTelemetry(); }
-            while (!isStarted() && !isStopRequested()){ propCaseDetected = caseScanner.getCase(); caseScanner.log(); log.showTelemetry(); }
 
-//            if(haltCameraAfterInit) {camera.halt();} else{ camera.setScanner(scannerAfterInit); }
-        }
         setup();
         createSegments();
     }
@@ -321,12 +262,7 @@ public abstract class AutoFramework extends Auto implements AutoUser {
         times = new ArrayList<>();
         customSegments = new ArrayList<>();
         breakpoints = new ArrayList<>();
-        scanning = false;
-        haltCameraAfterInit = true;
-        caseScanner = null;
-        scannerAfterInit = null;
-        caseDetected = Case.FIRST;
-        propCaseDetected = TeamProp.FIRST;
+
         segmentIndex = 1;
         pauseIndex = 0;
         autoModuleIndex = 0;

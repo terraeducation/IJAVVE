@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import static global.General.voltageScale;
 import static global.Modes.TeleStatus.BLUE;
 
-@TeleOp(name = "TerraOpBlue", group = "TeleOp")
+@TeleOp(name = "OpBlue", group = "TeleOp")
 public class OpBlue extends Tele {
 
     @Override

@@ -2,7 +2,7 @@ package autoutil;
 
 public class AutoConfig {
     private final AutoSegment<?,?> getWaypointSegment, getSetpointSegment;
-    public <T extends CaseScanner> AutoConfig(AutoSegment<?,?> set, AutoSegment<?,?> way){
+    public AutoConfig(AutoSegment<?,?> set, AutoSegment<?,?> way){
         this.getWaypointSegment = way; this.getSetpointSegment = set;
     }
 

@@ -22,8 +22,6 @@ public interface AutoUser {
 
     ReturnCodeSeg<autoutil.reactors.PIDReact> PIDReact = reactor(autoutil.reactors.PIDReact.class);
     ReturnCodeSeg<autoutil.reactors.PPReact> PPReact = reactor(autoutil.reactors.PPReact.class);
-    ReturnCodeSeg<JunctionReact> mecJunctionReact = reactor(JunctionReact.class);
-//    ReturnCodeSeg<JunctionReact2> mecJunctionReact2 = reactor(JunctionReact2.class);
     ReturnCodeSeg<NonstopReact> mecNonstopReact = reactor(NonstopReact.class);
     ReturnCodeSeg<NonstopReact.NonstopReactSP> mecNonstopReactSP = reactor(NonstopReact.NonstopReactSP.class);
     ReturnCodeSeg<NonstopReact.NonstopReactTurnSP> turnReactSP = reactor(NonstopReact.NonstopReactTurnSP.class);
@@ -34,17 +32,10 @@ public interface AutoUser {
     ReturnCodeSeg<NonstopReact.NonstopReactSPslow> slow = reactor(NonstopReact.NonstopReactSPslow.class);
 
     AutoSegment<?, ?> DefaultSP = new AutoSegment<>(PIDReact, poseGen);
-    AutoSegment<?, ?> JunctionSP = new AutoSegment<>(mecJunctionReact, poseGen);
-//    AutoSegment<?, ?> JunctionSP2 = new AutoSegment<>(mecJunctionReact2, poseGen);
     AutoSegment<?, ?> DefaultWP = new AutoSegment<>(PPReact, lineGen);
     AutoSegment<?, ?> NonstopWP = new AutoSegment<>(mecNonstopReact, lineGen);
     AutoSegment<?, ?> NonstopSP = new AutoSegment<>(mecNonstopReactSP, lineGen);
-    AutoSegment<?, ?> turnSP = new AutoSegment<>(turnReactSP, lineGen);
     AutoSegment<?, ?> nStopNewSP = new AutoSegment<>(nStopNewReact, lineGen);
-    AutoSegment<?, ?> nStopNewHaltSP = new AutoSegment<>(nStopNewReactHalt, lineGen);
-    AutoSegment<?, ?> nStopNewNHeadingSP = new AutoSegment<>(nStopNewReactNHeading, lineGen);
-    AutoSegment<?, ?> sloDownStopSP = new AutoSegment<>(sloDownStopReact, lineGen);
-    AutoSegment<?, ?> sloSP = new AutoSegment<>(slow, lineGen);
 
     AutoConfig DefaultConfig = new AutoConfig(DefaultSP, DefaultWP);
     AutoConfig NonstopConfig = new AutoConfig(NonstopSP, NonstopWP);
