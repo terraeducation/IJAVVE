@@ -10,20 +10,19 @@ import robotparts.electronics.positional.PServo;
 
 public class Outtake extends RobotPart {
 
-    public PServo armr, arml, claw, pivot;
+    public PServo armr, arml, claw;
 
 
     @Override
     public void init() {
-        armr = create("armr", ElectronicType.PSERVO_FORWARD);
-        arml = create("arml", ElectronicType.PSERVO_REVERSE);
-        pivot = create("pivot", ElectronicType.PSERVO_FORWARD);
-        claw = create("claw", ElectronicType.PSERVO_FORWARD);
+        armr = create("oarmr", ElectronicType.PSERVO_FORWARD);
+        arml = create("oarml", ElectronicType.PSERVO_REVERSE);
+//        pivot = create("pivot", ElectronicType.PSERVO_FORWARD);
+        claw = create("oclaw", ElectronicType.PSERVO_FORWARD);
 
         arml.changePosition("start", 0);
         armr.changePosition("start", 0);
 
-        pivot.changePosition("start", 0);
 
         claw.changePosition("start", 0);
 
@@ -34,7 +33,7 @@ public class Outtake extends RobotPart {
 
 
 
-    public void moveStart(){ armr.setPosition("start"); arml.setPosition("start");}
+    public void moveStart(){ armr.setPosition("start"); arml.setPosition("start"); claw.setPosition("start");}
 
 
 

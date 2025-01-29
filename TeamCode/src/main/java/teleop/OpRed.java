@@ -5,16 +5,19 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import static global.General.gph1;
 import static global.General.voltageScale;
 import static global.Modes.TeleStatus.RED;
+import static teleutil.button.Button.LEFT_TRIGGER;
+import static teleutil.button.Button.RIGHT_TRIGGER;
 
 
-@TeleOp(name = "OpRed", group = "TeleOp")
+@TeleOp(name = "TeleOp", group = "TeleOp")
 public class OpRed extends Tele {
 
     @Override
     public void initTele() {
         voltageScale = 1;
 
-
+gph1.link(RIGHT_TRIGGER, Grab);
+gph1.link(LEFT_TRIGGER, Intake);
 
         teleStatus.set(RED);
 
@@ -26,6 +29,9 @@ public class OpRed extends Tele {
         /**
          * Start code
          */
+       intake.moveStartArm();
+       intake.moveLinkStart();
+       intake.moveOpen();
 
 
     }
@@ -33,7 +39,6 @@ public class OpRed extends Tele {
     @Override
     public void loopTele() {
 
-lift.move(gph1.ly);
 
         /**
          * Gets Distance

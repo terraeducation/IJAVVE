@@ -16,7 +16,7 @@ public class Intake extends RobotPart {
 
 
 
-    private PServo iarmr, iarml, ipivot, iturret, iclaw, linkager, linkagel;
+    private PServo linkager, linkagel, iarmr, iarml, iclaw;
 
 
 
@@ -24,20 +24,30 @@ public class Intake extends RobotPart {
     public void init() {
         iarmr = create("iarmr", ElectronicType.PSERVO_REVERSE);
         iarml = create("iarml", ElectronicType.PSERVO_FORWARD);
-        ipivot = create("ipivot", ElectronicType.PSERVO_FORWARD);
+//        ipivot = create("ipivot", ElectronicType.PSERVO_FORWARD);
         iclaw = create("iclaw", ElectronicType.PSERVO_FORWARD);
-        linkager = create("linkager", ElectronicType.PSERVO_REVERSE);
-        linkagel = create("linkagel", ElectronicType.PSERVO_FORWARD);
+        linkager = create("linkr", ElectronicType.PSERVO_REVERSE);
+        linkagel = create("linkl", ElectronicType.PSERVO_FORWARD);
 
-        iarml.changePosition("start", 0);
-        iarmr.changePosition("start", 0);
+        iarml.changePosition("start", 0.58);
+        iarmr.changePosition("start", 0.7);
 
-        ipivot.changePosition("start", 0);
+        iarml.changePosition("end", 0.35);
+        iarmr.changePosition("end", 0.37);
 
+        iarml.changePosition("end2", 0.1);
+        iarmr.changePosition("end2", 0.12);
+//
+//        ipivot.changePosition("start", 0);
+//
         iclaw.changePosition("start", 0);
+        iclaw.changePosition("end", 0.2);
 
-        linkager.changePosition("start", 0);
-        linkagel.changePosition("start", 0);
+//
+        linkager.changePosition("start", 0.0);
+        linkagel.changePosition("start", 0.0);
+        linkager.changePosition("end", 0.29);
+        linkagel.changePosition("end", 0.29);
 
 
 
@@ -47,25 +57,26 @@ public class Intake extends RobotPart {
 
     }
 
+    public void moveStart(){ iclaw.setPosition("start"); iarml.setPosition("start");iarmr.setPosition("start");linkager.setPosition("start"); linkagel.setPosition("start");}
 
+    public void moveStartArm(){iarml.setPosition("start");iarmr.setPosition("start");}
 
-    public Stage moveRedSample(double p){
-        return super.customExit(p,colorSensorsNew.exitRed());
-    }
+    public void moveEnd2(){iarml.setPosition("end2"); iarmr.setPosition("end2");}
 
-    public Stage moveBlueSample(double p){
-        return super.customExit(p,colorSensorsNew.exitBlue());
-    }
+    public void moveEnd(){iarml.setPosition("end");iarmr.setPosition("end");iclaw.setPosition("start");}
+    public void moveClose(){iclaw.setPosition("end");}
+    public void moveOpen(){iclaw.setPosition("start");}
+    public void moveLinkEnd(){linkagel.setPosition("end");linkager.setPosition("end");}
+    public void moveLinkStart(){linkagel.setPosition("start");linkager.setPosition("start");}
 
-    public Stage moveYellowSample(double p){
-        return super.customExit(p,colorSensorsNew.exitYellow());
-    }
-
-    public Stage moveSampleIn(double p){
-        return super.customExit(p,colorSensorsNew.exitSample());
-    }
-
-
+    public Stage stageStart(double t){return super.customTime(this::moveStart, t);}
+    public Stage stageEnd(double t){return super.customTime(this::moveEnd, t);}
+    public Stage stageClose(double t){return super.customTime(this::moveClose, t);}
+    public Stage stageOpen(double t){return super.customTime(this::moveOpen, t);}
+    public Stage stageLinkEnd(double t){return super.customTime(this::moveLinkEnd, t);}
+    public Stage stageLinkStart(double t){return super.customTime(this::moveLinkStart, t);}
+    public Stage stageEnd2(double t){return super.customTime(this::moveEnd2,t);}
+    public Stage stageStartArm(double t){return super.customTime(this::moveStartArm,t);}
 
     @Override
     public Stage moveTime(double p, ReturnCodeSeg<Double> t) { return super.moveTime(p, t); }

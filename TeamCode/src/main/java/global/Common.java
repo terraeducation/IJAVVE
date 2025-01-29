@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import debugging.Synchroniser;
 import robot.RobotFramework;
 import robot.Bot;
-import robotparts.sensors.Cameras;
 import teleutil.GamepadHandler;
 import debugging.Fault;
 import debugging.Logger;
@@ -50,7 +49,6 @@ public interface Common{
         /**
          * Set the view ID
          */
-        cameraMonitorViewId = Cameras.getCameraMonitorViewId();
         /**
          * Set the voltage scale
          */

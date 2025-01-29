@@ -94,7 +94,6 @@ public class ICamera extends Electronic {
      * Set the scanner for the camera
      * @param scanner
      */
-    public void setScanner(Scanner scanner){ camera.setPipeline(scanner); }
 
     /**
      * Start the camera (with true for viewing)

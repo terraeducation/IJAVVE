@@ -1,6 +1,5 @@
 package robot;
 
-import robotparts.hardware.Extendo;
 import robotparts.sensors.ColorSensors;
 import robotparts.sensors.DistanceSensors;
 import robotparts.sensors.odometry.NewOdometry;
@@ -9,7 +8,6 @@ import robotparts.hardware.Drive;
 import robotparts.hardware.Intake;
 import robotparts.hardware.Lift;
 import robotparts.hardware.Outtake;
-import robotparts.sensors.Cameras;
 import robotparts.sensors.GyroSensors;
 //import robotparts.unused.DistanceSensorsOld;
 import robotparts.unused.CustomTestPart;
@@ -31,7 +29,6 @@ public interface RobotUser {
 //    Leds leds = new Leds();
 //    DistanceSensorsOld distanceSensors = new DistanceSensorsOld();
     GyroSensors gyro = new GyroSensors();
-    Cameras camera = new Cameras();
     DistanceSensors distanceSensorsNew = new DistanceSensors();
     ColorSensors colorSensorsNew = new ColorSensors();
 
@@ -43,7 +40,6 @@ public interface RobotUser {
      */
 
     Intake intake = new Intake();
-    Extendo extendo = new Extendo();
 
     TouchSensors touchSensors = new TouchSensors();
 
