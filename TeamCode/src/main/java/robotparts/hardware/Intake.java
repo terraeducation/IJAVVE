@@ -29,23 +29,28 @@ public class Intake extends RobotPart {
         linkager = create("linkr", ElectronicType.PSERVO_REVERSE);
         linkagel = create("linkl", ElectronicType.PSERVO_FORWARD);
 
-        iarml.changePosition("start", 0.58);
-        iarmr.changePosition("start", 0.7);
+        iarml.changePosition("start", 0.78);
+        iarmr.changePosition("start", 0.8);
 
-        iarml.changePosition("end", 0.35);
-        iarmr.changePosition("end", 0.37);
+        iarml.changePosition("end", 0.25);
+        iarmr.changePosition("end", 0.27);
 
-        iarml.changePosition("end2", 0.1);
-        iarmr.changePosition("end2", 0.12);
+        iarml.changePosition("end2", 0.15);
+        iarmr.changePosition("end2", 0.17);
 //
 //        ipivot.changePosition("start", 0);
 //
-        iclaw.changePosition("start", 0);
+        iclaw.changePosition("start", 0.01);
+        iclaw.changePosition("adjust", 0.12);
         iclaw.changePosition("end", 0.2);
 
 //
         linkager.changePosition("start", 0.0);
         linkagel.changePosition("start", 0.0);
+        linkager.changePosition("start1", 0.1);
+        linkagel.changePosition("start1", 0.1);
+        linkager.changePosition("start2", 0.2);
+        linkagel.changePosition("start2", 0.2);
         linkager.changePosition("end", 0.29);
         linkagel.changePosition("end", 0.29);
 
@@ -56,19 +61,23 @@ public class Intake extends RobotPart {
 
 
     }
+    public void moveStart1(){linkager.setPosition("start1");linkagel.setPosition("start1");}
+    public void moveStart2(){linkager.setPosition("start2");linkagel.setPosition("start2");}
+    public void moveStart3(){linkager.setPosition("end");linkagel.setPosition("end");}
 
     public void moveStart(){ iclaw.setPosition("start"); iarml.setPosition("start");iarmr.setPosition("start");linkager.setPosition("start"); linkagel.setPosition("start");}
-
+    public void moveAdjust(){iclaw.setPosition("adjust");}
     public void moveStartArm(){iarml.setPosition("start");iarmr.setPosition("start");}
 
     public void moveEnd2(){iarml.setPosition("end2"); iarmr.setPosition("end2");}
 
-    public void moveEnd(){iarml.setPosition("end");iarmr.setPosition("end");iclaw.setPosition("start");}
+    public void moveEnd(){iarml.setPosition("end");iarmr.setPosition("end");}
     public void moveClose(){iclaw.setPosition("end");}
     public void moveOpen(){iclaw.setPosition("start");}
     public void moveLinkEnd(){linkagel.setPosition("end");linkager.setPosition("end");}
     public void moveLinkStart(){linkagel.setPosition("start");linkager.setPosition("start");}
 
+    public Stage stageAdjust(double t){return super.customTime(this::moveAdjust, t);}
     public Stage stageStart(double t){return super.customTime(this::moveStart, t);}
     public Stage stageEnd(double t){return super.customTime(this::moveEnd, t);}
     public Stage stageClose(double t){return super.customTime(this::moveClose, t);}

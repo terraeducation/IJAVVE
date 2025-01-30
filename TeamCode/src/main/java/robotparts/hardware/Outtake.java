@@ -20,11 +20,19 @@ public class Outtake extends RobotPart {
 //        pivot = create("pivot", ElectronicType.PSERVO_FORWARD);
         claw = create("oclaw", ElectronicType.PSERVO_FORWARD);
 
-        arml.changePosition("start", 0);
-        armr.changePosition("start", 0);
+        arml.changePosition("start", 0.15);
+        armr.changePosition("start", 0.15);
+        arml.changePosition("transfer", 0);
+        armr.changePosition("transfer", 0);
+        arml.changePosition("basket", 0.75);
+        armr.changePosition("basket", 0.75);
+        arml.changePosition("end", 1);
+        armr.changePosition("end", 1);
 
 
         claw.changePosition("start", 0);
+        claw.changePosition("open", 0.3);
+
 
 
 
@@ -34,12 +42,18 @@ public class Outtake extends RobotPart {
 
 
     public void moveStart(){ armr.setPosition("start"); arml.setPosition("start"); claw.setPosition("start");}
+    public void moveTransfer(){armr.setPosition("transfer");arml.setPosition("transfer");}
+    public void moveOpen(){claw.setPosition("open");}
+    public void moveClose(){claw.setPosition("start");}
+    public void moveBucket(){armr.setPosition("basket");arml.setPosition("basket");}
+    public void moveEnd(){armr.setPosition("end"); arml.setPosition("end");}
 
-
-
-
-
-
+    public Stage stageEnd(double t){ return super.customTime(this::moveEnd, t);}
+    public Stage stageStart(double t){return super.customTime(this::moveStart,t);}
+    public Stage stageBucket(double t){return super.customTime(this::moveBucket,t);}
+    public Stage stageTransfer(double t){return super.customTime(this::moveTransfer,t);}
+    public Stage stageOpen(double t){return super.customTime(this::moveOpen, t);}
+    public Stage stageClose(double t){return super.customTime(this::moveClose,t);}
 
 
 
