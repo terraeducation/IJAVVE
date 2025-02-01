@@ -34,6 +34,8 @@ public class Intake extends RobotPart {
 
         iarml.changePosition("end", 0.25);
         iarmr.changePosition("end", 0.27);
+        iarml.changePosition("leave", 0.29);
+        iarmr.changePosition("leave", 0.31);
 
         iarml.changePosition("end2", 0.15);
         iarmr.changePosition("end2", 0.17);
@@ -72,6 +74,8 @@ public class Intake extends RobotPart {
     public void moveEnd2(){iarml.setPosition("end2"); iarmr.setPosition("end2");}
 
     public void moveEnd(){iarml.setPosition("end");iarmr.setPosition("end");}
+    public void moveLeave(){iarml.setPosition("leave");iarmr.setPosition("leave");}
+
     public void moveClose(){iclaw.setPosition("end");}
     public void moveOpen(){iclaw.setPosition("start");}
     public void moveLinkEnd(){linkagel.setPosition("end");linkager.setPosition("end");}
@@ -79,6 +83,7 @@ public class Intake extends RobotPart {
 
     public Stage stageAdjust(double t){return super.customTime(this::moveAdjust, t);}
     public Stage stageStart(double t){return super.customTime(this::moveStart, t);}
+    public Stage stageLeave(double t){return super.customTime(this::moveLeave, t);}
     public Stage stageEnd(double t){return super.customTime(this::moveEnd, t);}
     public Stage stageClose(double t){return super.customTime(this::moveClose, t);}
     public Stage stageOpen(double t){return super.customTime(this::moveOpen, t);}

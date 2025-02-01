@@ -32,7 +32,7 @@ public class GyroSensors extends RobotPart {
 
 //    public void update(){ gs.update(); }
 
-    @Override
-    public void reset(){ gs.reset(); }
+//    @Override
+//    public void reset(){ gs.reset(); }
 
 }

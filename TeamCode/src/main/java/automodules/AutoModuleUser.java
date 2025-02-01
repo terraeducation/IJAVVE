@@ -27,7 +27,7 @@ AutoModule Intake = new AutoModule(
         intake.stageEnd2(.1),
         RobotPart.pause(.3),
   intake.stageClose(.3),
-  intake.stageLinkStart(.1).attach(intake.stageEnd(.1)),
+  intake.stageLinkStart(.1).attach(intake.stageLeave(.1)),
         RobotPart.pause(.6),
         intake.stageStartArm(.1)
 
@@ -40,7 +40,7 @@ AutoModule PlaceHigh = new AutoModule(
   outtake.stageTransfer(.1),
   outtake.stageClose(.1),
   intake.stageOpen(.1),
-  outtake.stageBucket(.1).attach(lift.stageLift(1,54))
+  outtake.stageBucket(.1).attach(lift.stageLift(1,60))
 ).setStartCode(
         robotStatus.setTo(PLACING)
 );
@@ -54,21 +54,26 @@ AutoModule PlaceHigh = new AutoModule(
     );
 
     AutoModule SpecimenGrab = new AutoModule(
-      outtake.stageOpen(.1),
+      outtake.stageOpen(.1).attach(lift.stageLift(.7,0)),
       outtake.stageEnd(.1)
+    ).setStartCode(
+            robotStatus.setTo(PLACING)
     );
 
     AutoModule SpecimenLift = new AutoModule(
             outtake.stageClose(.1),
             lift.stageLift(1,5)
+    ).setStartCode(
+            robotStatus.setTo(DRIVING)
     );
 
     AutoModule SpecimenUp = new AutoModule(
-            lift.stageLift(1,30).attach(outtake.stageBucket(.1))
+            lift.stageLift(1,14).attach(outtake.stageSpecimen(.1))
     ).setStartCode(
             robotStatus.setTo(PLACING)
     );
     AutoModule SpecimenDown = new AutoModule(
+            outtake.stageOpen(.1),
             outtake.stageEnd(.1),
             lift.stageLift(1,15),
             outtake.stageStart(.1).attach(lift.stageLift(.3,0))

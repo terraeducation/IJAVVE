@@ -82,6 +82,40 @@ public class Drive extends RobotPart {
 
 
 
+    @Override
+    public void move(double f, double s, double t) {
+        Vector power = new Vector(Precision.clip(s, 1), Precision.clip(f, 1));
+        power.scaleX(1.2);
+        power.limitLength(1);
+        f = power.getY(); s = power.getX(); t = Precision.clip(t, 1);
+        fr.setPower(f + s - t);
+        br.setPower(f - s - t);
+        fl.setPower(f - s + t);
+        bl.setPower(f + s + t);
+    }
+
+    public void moveWithoutVS(double f, double s, double t) {
+        Vector power = new Vector(Precision.clip(s, 1), Precision.clip(f, 1));
+        power.scaleX(1.2);
+        power.limitLength(1);
+        f = power.getY(); s = power.getX(); t = Precision.clip(t, 1);
+        fr.setPowerRaw(f - s - t);
+        br.setPowerRaw(f + s - t);
+        fl.setPowerRaw(f + s + t);
+        bl.setPowerRaw(f - s + t);
+    }
+
+    public void help(double[] power, int i, double cutoff, double accel, double decel){
+        if(Math.abs(power[i]) > cutoff){
+//            deltaPower[i] += Math.abs(accel*power[i]);
+//            currentPower[i] = Math.signum(power[i]) * (deltaPower[i] + cutoff);
+            currentPower[i] = Math.signum(power[i])*cutoff;
+        }else{
+            currentPower[i] = power[i];
+//            deltaPower[i] = Math.max(0, deltaPower[i] - decel);
+        }
+    }
+
 
 
 
@@ -95,10 +129,10 @@ public class Drive extends RobotPart {
             br.setPower(f + s - .7 * t);
 
         }else{
-            fl.setPower(.7 * f + .5 * s + .3 * t);
-            bl.setPower(.7 * f - .5 * s + .3 * t);
-            fr.setPower(.7 * f - .5 * s - .3 * t);
-            br.setPower(.7 * f + .5 * s - .3 * t);        }
+            fl.setPower(.4 * f + .3 * s + .25 * t);
+            bl.setPower(.4 * f - .3 * s + .25 * t);
+            fr.setPower(.4 * f - .3 * s - .25 * t);
+            br.setPower(.4 * f + .3 * s - .25 * t);        }
 
 
         }

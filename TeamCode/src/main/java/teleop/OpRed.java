@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import static global.General.gph1;
 import static global.General.gph2;
+import static global.General.log;
 import static global.General.voltageScale;
 import static global.Modes.TeleStatus.RED;
 import static teleutil.button.Button.A;
@@ -31,10 +32,10 @@ gph1.link(RIGHT_TRIGGER, Grab);
 gph1.link(LEFT_TRIGGER, Intake);
 gph1.link(RIGHT_BUMPER, PlaceHigh);
 gph1.link(LEFT_BUMPER, Place);
-gph1.link(X, SpecimenGrab);
-gph1.link(Y, SpecimenLift);
-gph1.link(A, SpecimenUp);
-gph1.link(B, SpecimenDown);
+//gph1.link(X, SpecimenGrab);
+//gph1.link(Y, SpecimenLift);
+//gph1.link(A, SpecimenUp);
+//gph1.link(B, SpecimenDown);
 gph1.link(DPAD_DOWN, ()-> intake.moveStart1());
         gph1.link(DPAD_RIGHT, ()-> intake.moveStart2());
         gph1.link(DPAD_UP, ()-> intake.moveStart3());
@@ -81,7 +82,7 @@ lift.move(gph2.ry);
         /**
          * odo pose
          */
-//        log.show("pose", odometry.getPose());
+        log.show("pose", odometry.getPose());
 
         /**
          * Outtake Status
